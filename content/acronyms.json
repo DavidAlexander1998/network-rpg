@@ -1,0 +1,702 @@
+[
+  {
+    "acronym": "OSI",
+    "full_name": "Open Systems Interconnection",
+    "definition": "7-layer reference model: Physical, Data Link, Network, Transport, Session, Presentation, Application. Mnemonic: Please Do Not Throw Sausage Pizza Away."
+  },
+  {
+    "acronym": "TCP",
+    "full_name": "Transmission Control Protocol",
+    "definition": "Connection-oriented Layer 4 protocol. Uses 3-way handshake (SYN, SYN-ACK, ACK). Guarantees delivery via acknowledgements and retransmission."
+  },
+  {
+    "acronym": "UDP",
+    "full_name": "User Datagram Protocol",
+    "definition": "Connectionless Layer 4 protocol. No handshake, no guaranteed delivery. Used for DNS, DHCP, VoIP, streaming — where speed > reliability."
+  },
+  {
+    "acronym": "IP",
+    "full_name": "Internet Protocol",
+    "definition": "Layer 3 connectionless protocol responsible for logical addressing and routing packets between networks. IPv4 (32-bit) and IPv6 (128-bit)."
+  },
+  {
+    "acronym": "HTTP",
+    "full_name": "HyperText Transfer Protocol",
+    "definition": "Application layer protocol for web traffic. Port 80. Cleartext — all data visible in transit. Replaced by HTTPS for secure communication."
+  },
+  {
+    "acronym": "HTTPS",
+    "full_name": "HyperText Transfer Protocol Secure",
+    "definition": "HTTP over TLS/SSL. Port 443. Encrypts web traffic using certificates. Standard for all modern web communication."
+  },
+  {
+    "acronym": "FTP",
+    "full_name": "File Transfer Protocol",
+    "definition": "Ports 20 (data) and 21 (control). Cleartext file transfer. Active mode: server initiates data connection back to client. Passive mode: client initiates both connections."
+  },
+  {
+    "acronym": "SFTP",
+    "full_name": "SSH File Transfer Protocol",
+    "definition": "Secure file transfer over SSH. Port 22. Encrypts both commands and data. Replaces FTP and FTPS for secure file transfers."
+  },
+  {
+    "acronym": "FTPS",
+    "full_name": "File Transfer Protocol Secure",
+    "definition": "FTP over SSL/TLS. Uses ports 989/990. Different from SFTP (which uses SSH/port 22). Adds encryption to standard FTP."
+  },
+  {
+    "acronym": "SSH",
+    "full_name": "Secure Shell",
+    "definition": "Port 22. Encrypted remote CLI access. Replaces Telnet. Uses asymmetric encryption for key exchange, symmetric for session. Also tunnels SFTP and SCP."
+  },
+  {
+    "acronym": "SMTP",
+    "full_name": "Simple Mail Transfer Protocol",
+    "definition": "Port 25 (server-to-server), 587 (submission with auth). Sends email outbound. Does not retrieve email — use POP3 or IMAP for that."
+  },
+  {
+    "acronym": "DNS",
+    "full_name": "Domain Name System",
+    "definition": "Port 53 (UDP for queries, TCP for zone transfers). Resolves hostnames to IP addresses. NXDOMAIN = name doesn't exist. Poisoning mitigated by DNSSEC."
+  },
+  {
+    "acronym": "DHCP",
+    "full_name": "Dynamic Host Configuration Protocol",
+    "definition": "Ports 67 (server) / 68 (client). UDP. Assigns IP, subnet mask, gateway, DNS via DORA (Discover, Offer, Request, Acknowledge). Option 3 = gateway, Option 6 = DNS."
+  },
+  {
+    "acronym": "TFTP",
+    "full_name": "Trivial File Transfer Protocol",
+    "definition": "Port 69. UDP. Stripped-down FTP with no authentication. Used for network booting (PXE), IOS image transfers, config backups on trusted networks."
+  },
+  {
+    "acronym": "POP3",
+    "full_name": "Post Office Protocol version 3",
+    "definition": "Port 110 (995 for SSL). Downloads email from server to client and typically deletes from server. Single-device access. IMAP preferred for multi-device."
+  },
+  {
+    "acronym": "IMAP",
+    "full_name": "Internet Message Access Protocol",
+    "definition": "Port 143 (993 for SSL). Keeps email on server, syncs across multiple devices. Better than POP3 for modern multi-device access."
+  },
+  {
+    "acronym": "SNMP",
+    "full_name": "Simple Network Management Protocol",
+    "definition": "Port 161 (polling) / 162 (traps). UDP. Monitors network devices. v1/v2c use cleartext community strings. v3 adds authentication and AES encryption (AuthPriv). MIB stores OIDs."
+  },
+  {
+    "acronym": "LDAP",
+    "full_name": "Lightweight Directory Access Protocol",
+    "definition": "Port 389. Used to query and modify directory services (Active Directory). Cleartext. LDAPS (port 636) adds SSL/TLS encryption."
+  },
+  {
+    "acronym": "SMB",
+    "full_name": "Server Message Block",
+    "definition": "Port 445. Windows file and printer sharing protocol. SMBv1 vulnerable to EternalBlue/WannaCry. Disable SMBv1, use v2/v3."
+  },
+  {
+    "acronym": "RDP",
+    "full_name": "Remote Desktop Protocol",
+    "definition": "Port 3389. TCP. Microsoft remote desktop access. High-value attack target — restrict with firewall rules, use MFA, avoid exposing to internet."
+  },
+  {
+    "acronym": "NTP",
+    "full_name": "Network Time Protocol",
+    "definition": "Port 123. UDP. Synchronizes clocks across network devices. Critical for Kerberos auth — clock skew > 5 min breaks AD authentication. Uses stratum levels."
+  },
+  {
+    "acronym": "BGP",
+    "full_name": "Border Gateway Protocol",
+    "definition": "Port 179. TCP. Exterior Gateway Protocol (EGP) — routes between autonomous systems on the internet. Path-vector protocol. AD = 20 (eBGP), 200 (iBGP)."
+  },
+  {
+    "acronym": "SIP",
+    "full_name": "Session Initiation Protocol",
+    "definition": "Ports 5060 (UDP/TCP) / 5061 (TLS). Sets up, manages, and tears down VoIP and multimedia sessions. Signaling only — RTP carries the actual audio."
+  },
+  {
+    "acronym": "RTP",
+    "full_name": "Real-time Transport Protocol",
+    "definition": "UDP ports 16384–32767 (typically). Carries actual voice/video data in VoIP. Works with SIP. Requires QoS: latency <150ms, jitter <30ms, packet loss <1%."
+  },
+  {
+    "acronym": "OSPF",
+    "full_name": "Open Shortest Path First",
+    "definition": "Link-state routing protocol. AD = 110. Uses Dijkstra's SPF algorithm. Scales with areas (Area 0 = backbone). Multicast 224.0.0.5/224.0.0.6. Classless, fast convergence."
+  },
+  {
+    "acronym": "EIGRP",
+    "full_name": "Enhanced Interior Gateway Routing Protocol",
+    "definition": "Cisco hybrid (distance-vector + link-state) routing protocol. AD = 90 (internal), 170 (external). Uses DUAL algorithm. Classless, fast convergence, multicast 224.0.0.10."
+  },
+  {
+    "acronym": "RIP",
+    "full_name": "Routing Information Protocol",
+    "definition": "Distance-vector routing protocol. AD = 120. Max 15 hops (16 = unreachable). Slow convergence. RIPv2 supports CIDR and authentication. Largely obsolete."
+  },
+  {
+    "acronym": "NAT",
+    "full_name": "Network Address Translation",
+    "definition": "Translates private IP addresses to public. Types: Static (1-to-1), Dynamic (pool), PAT/Overloaded (many-to-1 using ports). Extends IPv4 address space."
+  },
+  {
+    "acronym": "PAT",
+    "full_name": "Port Address Translation",
+    "definition": "NAT overload — maps many private IPs to one public IP using unique source port numbers. Most common home/small office setup. Also called NAT overloading."
+  },
+  {
+    "acronym": "FHRP",
+    "full_name": "First Hop Redundancy Protocol",
+    "definition": "Category of protocols providing redundant default gateways. Includes HSRP (Cisco), VRRP (open standard), and GLBP (Cisco, load balancing). Virtual IP shared between routers."
+  },
+  {
+    "acronym": "HSRP",
+    "full_name": "Hot Standby Router Protocol",
+    "definition": "Cisco proprietary FHRP. Active/Standby model — only Active forwards traffic. UDP 1985. Virtual IP and MAC shared. Higher priority = Active. Preemption optional."
+  },
+  {
+    "acronym": "VRRP",
+    "full_name": "Virtual Router Redundancy Protocol",
+    "definition": "Open-standard FHRP (RFC 5798). Master/Backup model. IP protocol 112. Highest priority = Master. Preemption enabled by default. Non-Cisco alternative to HSRP."
+  },
+  {
+    "acronym": "GLBP",
+    "full_name": "Gateway Load Balancing Protocol",
+    "definition": "Cisco proprietary FHRP. Active Virtual Gateway (AVG) assigns virtual MACs to Active Virtual Forwarders (AVFs). True load balancing across multiple gateways simultaneously."
+  },
+  {
+    "acronym": "STP",
+    "full_name": "Spanning Tree Protocol",
+    "definition": "IEEE 802.1D. Prevents Layer 2 loops by blocking redundant paths. States: Blocking → Listening → Learning → Forwarding (30-50 sec). Root bridge = lowest Bridge ID."
+  },
+  {
+    "acronym": "RSTP",
+    "full_name": "Rapid Spanning Tree Protocol",
+    "definition": "IEEE 802.1w. Converges in <1 second vs STP's 30-50 sec. Backward compatible with STP. Uses Discarding/Learning/Forwarding states. Edge ports (PortFast equivalent) immediate forwarding."
+  },
+  {
+    "acronym": "VLAN",
+    "full_name": "Virtual Local Area Network",
+    "definition": "Logical segmentation of a switch at Layer 2. Isolates broadcast domains without physical separation. Tagged with 802.1Q on trunk ports. Native VLAN = untagged on trunk."
+  },
+  {
+    "acronym": "VTP",
+    "full_name": "VLAN Trunking Protocol",
+    "definition": "Cisco proprietary — propagates VLAN database across switches. Modes: Server, Client, Transparent. Dangerous: a new server with higher revision number can wipe all VLANs. Often disabled."
+  },
+  {
+    "acronym": "DTP",
+    "full_name": "Dynamic Trunking Protocol",
+    "definition": "Cisco proprietary — auto-negotiates trunk links between switches. Security risk: attackers can send DTP frames to become a trunk (VLAN hopping). Best practice: disable DTP, set ports manually."
+  },
+  {
+    "acronym": "LACP",
+    "full_name": "Link Aggregation Control Protocol",
+    "definition": "IEEE 802.3ad. Bundles multiple physical links into one logical EtherChannel. Modes: Active (sends LACP) / Passive (waits). Active+Active or Active+Passive = channel forms. Passive+Passive = no channel."
+  },
+  {
+    "acronym": "LLDP",
+    "full_name": "Link Layer Discovery Protocol",
+    "definition": "IEEE 802.1AB. Open-standard Layer 2 neighbor discovery. Devices advertise identity, capabilities, and neighbors. Vendor-neutral alternative to Cisco's CDP."
+  },
+  {
+    "acronym": "CDP",
+    "full_name": "Cisco Discovery Protocol",
+    "definition": "Cisco proprietary Layer 2 neighbor discovery. Advertises device type, IOS version, IP, port, capabilities. Security risk: disable on untrusted ports as it reveals device info."
+  },
+  {
+    "acronym": "ARP",
+    "full_name": "Address Resolution Protocol",
+    "definition": "Resolves IP addresses to MAC addresses on a local network. Broadcast request, unicast reply. ARP cache stores mappings. Vulnerable to ARP poisoning — mitigated by DAI."
+  },
+  {
+    "acronym": "MAC",
+    "full_name": "Media Access Control",
+    "definition": "48-bit Layer 2 hardware address burned into NIC (BIA). Format: XX:XX:XX:XX:XX:XX. First 3 octets = OUI (manufacturer). Used for local delivery within a network segment."
+  },
+  {
+    "acronym": "SSID",
+    "full_name": "Service Set Identifier",
+    "definition": "Wireless network name broadcast by an AP. Hiding SSID provides minimal security (still discoverable via probe requests). Up to 32 characters. BSSID = AP's MAC address."
+  },
+  {
+    "acronym": "WPA2",
+    "full_name": "Wi-Fi Protected Access 2",
+    "definition": "IEEE 802.11i. Personal (PSK) or Enterprise (802.1X/RADIUS). Uses AES-CCMP encryption. Vulnerable to PMKID/dictionary attacks on PSK. Superseded by WPA3 but still widely deployed."
+  },
+  {
+    "acronym": "WPA3",
+    "full_name": "Wi-Fi Protected Access 3",
+    "definition": "Latest Wi-Fi security standard. Replaces PSK with SAE (Simultaneous Authentication of Equals) — protects against offline dictionary attacks. Mandatory for Wi-Fi 6 (802.11ax) devices."
+  },
+  {
+    "acronym": "SAE",
+    "full_name": "Simultaneous Authentication of Equals",
+    "definition": "WPA3 replacement for PSK. Dragonfly key exchange — provides forward secrecy and protects against offline brute-force attacks even if attacker captures the handshake."
+  },
+  {
+    "acronym": "TKIP",
+    "full_name": "Temporal Key Integrity Protocol",
+    "definition": "WPA1 encryption — RC4 with per-packet key mixing. Deprecated and broken. Never use. WPA2 with AES-CCMP is minimum; WPA3 preferred."
+  },
+  {
+    "acronym": "CCMP",
+    "full_name": "Counter Mode with Cipher Block Chaining Message Authentication Code Protocol",
+    "definition": "Encryption protocol used in WPA2. Based on AES-128. Provides both confidentiality and integrity. Replaced TKIP. Required for WPA2 certification."
+  },
+  {
+    "acronym": "CAPWAP",
+    "full_name": "Control And Provisioning of Wireless Access Points",
+    "definition": "Protocol between lightweight APs (LWAP) and Wireless LAN Controllers (WLC). UDP 5246 (control) / 5247 (data). LWAP tunnels all traffic to WLC for central management."
+  },
+  {
+    "acronym": "WLC",
+    "full_name": "Wireless LAN Controller",
+    "definition": "Centralized controller for lightweight APs (LWAP) in enterprise Wi-Fi. Manages config, roaming, RF, security policy via CAPWAP. APs are thin — all intelligence at WLC."
+  },
+  {
+    "acronym": "CIDR",
+    "full_name": "Classless Inter-Domain Routing",
+    "definition": "Notation for representing IP addresses with variable-length subnet masks (e.g., 192.168.1.0/24). Replaced classful addressing. Enables route summarization and efficient IP allocation."
+  },
+  {
+    "acronym": "APIPA",
+    "full_name": "Automatic Private IP Addressing",
+    "definition": "Range 169.254.0.0/16. Self-assigned when DHCP fails. Indicates DHCP server unreachable or scope exhausted. Only provides local link connectivity — no routing."
+  },
+  {
+    "acronym": "SLAAC",
+    "full_name": "Stateless Address Autoconfiguration",
+    "definition": "IPv6 mechanism for self-configuration without DHCPv6. Client uses router advertisement (RA) prefix + EUI-64 (derived from MAC) or random suffix. RFC 4862."
+  },
+  {
+    "acronym": "EUI",
+    "full_name": "Extended Unique Identifier",
+    "definition": "EUI-64: 64-bit interface ID used in IPv6 SLAAC, derived from 48-bit MAC by inserting FFFE in the middle and flipping the universal/local bit."
+  },
+  {
+    "acronym": "MTU",
+    "full_name": "Maximum Transmission Unit",
+    "definition": "Largest Layer 3 packet size a link can carry. Ethernet default = 1500 bytes. Jumbo frames = 9000 bytes. MTU mismatch causes fragmentation or black-holing with PMTUD."
+  },
+  {
+    "acronym": "TTL",
+    "full_name": "Time to Live",
+    "definition": "IP header field decremented by 1 at each router hop. Prevents infinite routing loops. Packet dropped (ICMP Time Exceeded sent) when TTL = 0. Used by traceroute."
+  },
+  {
+    "acronym": "QoS",
+    "full_name": "Quality of Service",
+    "definition": "Mechanisms to prioritize traffic types. VoIP needs: latency <150ms, jitter <30ms, loss <1%. Tools: DSCP marking, CoS, LLQ (strict priority), shaping, policing."
+  },
+  {
+    "acronym": "DSCP",
+    "full_name": "Differentiated Services Code Point",
+    "definition": "6-bit field in IP header for Layer 3 QoS marking. EF (Expedited Forwarding) = 46 for VoIP. BE (Best Effort) = 0 default. Enables per-hop behavior (PHB) at each router."
+  },
+  {
+    "acronym": "CoS",
+    "full_name": "Class of Service",
+    "definition": "3-bit PCP field in 802.1Q VLAN tag (values 0-7). Layer 2 QoS marking. Lost when traffic leaves the VLAN trunk — must map to DSCP for end-to-end QoS."
+  },
+  {
+    "acronym": "ACL",
+    "full_name": "Access Control List",
+    "definition": "Ordered list of permit/deny rules. Standard ACL: source IP only, place near destination. Extended ACL: source+dest+port+protocol, place near source. Implicit deny all at end."
+  },
+  {
+    "acronym": "IDS",
+    "full_name": "Intrusion Detection System",
+    "definition": "Passive — monitors copy of traffic (SPAN/TAP), alerts on threats but cannot block. Signature-based (known threats) or anomaly-based (behavioral). Generates alerts for SOC review."
+  },
+  {
+    "acronym": "IPS",
+    "full_name": "Intrusion Prevention System",
+    "definition": "Inline — sits in traffic path, can block/drop malicious traffic in real time. Adds latency. False positives drop legitimate traffic. Can be signature or anomaly-based."
+  },
+  {
+    "acronym": "NGFW",
+    "full_name": "Next-Generation Firewall",
+    "definition": "Deep packet inspection beyond port/protocol. Features: App-ID (application awareness), user identity, SSL inspection, IPS, threat intelligence feeds. Examples: Palo Alto, Fortinet."
+  },
+  {
+    "acronym": "WAF",
+    "full_name": "Web Application Firewall",
+    "definition": "Filters HTTP/HTTPS traffic, protects web apps against OWASP Top 10 (SQLi, XSS, CSRF). Sits in front of web server. Application-layer protection standard firewall can't provide."
+  },
+  {
+    "acronym": "UTM",
+    "full_name": "Unified Threat Management",
+    "definition": "All-in-one security appliance combining firewall, IPS, antivirus, URL filtering, VPN, DLP. Simpler management for SMBs but single point of failure. Replaced by NGFW in enterprise."
+  },
+  {
+    "acronym": "DMZ",
+    "full_name": "Demilitarized Zone",
+    "definition": "Network segment between two firewalls hosting public-facing servers (web, email, DNS). Internet can reach DMZ. DMZ cannot initiate connections to internal network. Defense in depth."
+  },
+  {
+    "acronym": "VPN",
+    "full_name": "Virtual Private Network",
+    "definition": "Encrypted tunnel over public network. Types: Site-to-site (IPsec, connects networks), Remote access (SSL/TLS port 443 or IPsec). Split tunneling: only corp traffic through VPN."
+  },
+  {
+    "acronym": "IPsec",
+    "full_name": "Internet Protocol Security",
+    "definition": "Suite for encrypting/authenticating IP traffic. Protocols: ESP (50, encrypt+auth) and AH (51, auth only). Modes: Transport (host-to-host) and Tunnel (network-to-network). Uses IKE for key exchange."
+  },
+  {
+    "acronym": "IKE",
+    "full_name": "Internet Key Exchange",
+    "definition": "IPsec key negotiation. Phase 1: ISAKMP SA (management tunnel, DH key exchange). Phase 2: IPsec SA (data tunnel). UDP 500 (IKE), UDP 4500 (NAT-T). IKEv2 is current standard."
+  },
+  {
+    "acronym": "ESP",
+    "full_name": "Encapsulating Security Payload",
+    "definition": "IPsec protocol 50. Provides encryption, authentication, and anti-replay. Can be used alone (preferred) — encrypts payload and authenticates. Used in both Transport and Tunnel modes."
+  },
+  {
+    "acronym": "AH",
+    "full_name": "Authentication Header",
+    "definition": "IPsec protocol 51. Authentication and integrity only — no encryption. Incompatible with NAT (covers IP headers). Rarely used alone; ESP preferred. Provides anti-replay protection."
+  },
+  {
+    "acronym": "SSL",
+    "full_name": "Secure Sockets Layer",
+    "definition": "Predecessor to TLS. All versions (1.0, 2.0, 3.0) are deprecated and broken (POODLE, DROWN). Must not be used. TLS 1.2+ required; TLS 1.3 preferred."
+  },
+  {
+    "acronym": "TLS",
+    "full_name": "Transport Layer Security",
+    "definition": "Successor to SSL. TLS 1.2 minimum; TLS 1.3 preferred. Used by HTTPS (443), SMTPS, LDAPS, etc. Handshake negotiates cipher suite; asymmetric for key exchange, symmetric for data."
+  },
+  {
+    "acronym": "PKI",
+    "full_name": "Public Key Infrastructure",
+    "definition": "System for managing digital certificates and asymmetric keys. CA issues/signs certificates. CRL lists revoked certs. OCSP provides real-time per-cert revocation check."
+  },
+  {
+    "acronym": "CA",
+    "full_name": "Certificate Authority",
+    "definition": "Trusted entity that signs and issues digital certificates. Root CA → Intermediate CA → End-entity cert (chain of trust). Self-signed certs have no trusted CA — browsers warn users."
+  },
+  {
+    "acronym": "CRL",
+    "full_name": "Certificate Revocation List",
+    "definition": "List of certificates revoked before expiry. Published by CA. Client downloads and checks. Can be stale (published periodically). OCSP is preferred for real-time revocation checking."
+  },
+  {
+    "acronym": "OCSP",
+    "full_name": "Online Certificate Status Protocol",
+    "definition": "Real-time certificate revocation check. Client queries OCSP responder with certificate serial number, gets Good/Revoked/Unknown response. Faster and more current than CRL."
+  },
+  {
+    "acronym": "PFS",
+    "full_name": "Perfect Forward Secrecy",
+    "definition": "Uses ephemeral DH keys per session. Even if long-term private key is compromised, past sessions remain encrypted. Implemented via DHE or ECDHE cipher suites. Best practice for TLS and IPsec."
+  },
+  {
+    "acronym": "AAA",
+    "full_name": "Authentication, Authorization, and Accounting",
+    "definition": "Security framework: Authentication (who are you — identity), Authorization (what can you do — permissions), Accounting (what did you do — logging). Implemented via RADIUS or TACACS+."
+  },
+  {
+    "acronym": "RADIUS",
+    "full_name": "Remote Authentication Dial-In User Service",
+    "definition": "AAA protocol. UDP 1812 (auth) / 1813 (accounting). Encrypts only password in packet. Used for network access control (Wi-Fi 802.1X, VPN). Open standard."
+  },
+  {
+    "acronym": "TACACS+",
+    "full_name": "Terminal Access Controller Access Control System Plus",
+    "definition": "Cisco AAA protocol. TCP 49. Encrypts entire payload (not just password). Separates A/A/A functions independently. Used for device administration. More secure and flexible than RADIUS."
+  },
+  {
+    "acronym": "DAI",
+    "full_name": "Dynamic ARP Inspection",
+    "definition": "Layer 2 security — validates ARP packets against DHCP snooping binding table. Drops ARP replies with MAC/IP pairs not in the binding table. Prevents ARP poisoning/MITM attacks."
+  },
+  {
+    "acronym": "DNSSEC",
+    "full_name": "Domain Name System Security Extensions",
+    "definition": "Adds digital signatures to DNS records. Validates DNS responses to prevent DNS cache poisoning (Kaminsky attack). Provides data origin authentication and integrity, not confidentiality."
+  },
+  {
+    "acronym": "MIB",
+    "full_name": "Management Information Base",
+    "definition": "SNMP database structure. Hierarchical tree of OIDs (Object Identifiers) each representing a manageable object on a device (e.g., interface stats, CPU usage). Defined in RFC/vendor MIBs."
+  },
+  {
+    "acronym": "OID",
+    "full_name": "Object Identifier",
+    "definition": "Unique numeric path in the SNMP MIB tree identifying a specific managed object. Example: 1.3.6.1.2.1.1.1 = sysDescr. SNMP manager polls OIDs to get device metrics."
+  },
+  {
+    "acronym": "IPFIX",
+    "full_name": "IP Flow Information Export",
+    "definition": "IETF standard (RFC 7011) for exporting IP flow data. Successor to Cisco NetFlow v9. Sends flow records to a collector on UDP 4739 (or 2055 for NetFlow compatibility)."
+  },
+  {
+    "acronym": "SPAN",
+    "full_name": "Switched Port Analyzer",
+    "definition": "Port mirroring — copies traffic from source port(s) or VLAN to a monitor port for analysis (IDS/packet capture). Local to one switch. RSPAN extends mirroring across multiple switches."
+  },
+  {
+    "acronym": "RSPAN",
+    "full_name": "Remote Switched Port Analyzer",
+    "definition": "Extends SPAN across multiple switches using a dedicated RSPAN VLAN. Traffic mirrored to a remote analyzer port on a different switch. Requires all transit switches to support RSPAN VLAN."
+  },
+  {
+    "acronym": "SLA",
+    "full_name": "Service Level Agreement",
+    "definition": "Contract defining minimum service standards. Common metric: uptime percentage. 99.9% = 8.76 hr/yr downtime. 99.99% = 52.6 min/yr. 99.999% (five nines) = 5.26 min/yr."
+  },
+  {
+    "acronym": "RTO",
+    "full_name": "Recovery Time Objective",
+    "definition": "Maximum acceptable downtime after a disaster — how quickly must systems be restored? Business defines this. Drives DR site type: hot (minutes), warm (hours), cold (days/weeks)."
+  },
+  {
+    "acronym": "RPO",
+    "full_name": "Recovery Point Objective",
+    "definition": "Maximum acceptable data loss measured in time — how old can the recovered data be? RPO of 1hr means backups every hour. Drives backup frequency and replication strategy."
+  },
+  {
+    "acronym": "MTBF",
+    "full_name": "Mean Time Between Failures",
+    "definition": "Average time between hardware failures. Higher = more reliable. Used to calculate availability: MTBF / (MTBF + MTTR). Key metric for hardware procurement and HA design."
+  },
+  {
+    "acronym": "MTTR",
+    "full_name": "Mean Time To Repair",
+    "definition": "Average time to restore a failed component. Lower = faster recovery. Availability = MTBF / (MTBF + MTTR). Drives sparing strategy and support contract SLAs."
+  },
+  {
+    "acronym": "RAID",
+    "full_name": "Redundant Array of Independent Disks",
+    "definition": "Disk redundancy/performance technology. RAID 0: no redundancy. RAID 1: mirror. RAID 5: single parity (1 failure). RAID 6: dual parity (2 failures). RAID 10: mirror+stripe. NOT a backup."
+  },
+  {
+    "acronym": "UTP",
+    "full_name": "Unshielded Twisted Pair",
+    "definition": "Most common LAN cabling. Cat5e (1 Gbps/100m), Cat6 (1 Gbps/100m or 10 Gbps/55m), Cat6A (10 Gbps/100m), Cat8 (40 Gbps/30m). TIA-568: max 90m horizontal + 10m patch = 100m total."
+  },
+  {
+    "acronym": "MMF",
+    "full_name": "Multi-Mode Fiber",
+    "definition": "Fiber with larger core (50 or 62.5 micron). Uses LED or VCSEL light source. Shorter distances (up to ~550m at 10G). Less expensive than SMF. OM1/OM2/OM3/OM4/OM5 grades."
+  },
+  {
+    "acronym": "SMF",
+    "full_name": "Single-Mode Fiber",
+    "definition": "Fiber with small core (9 micron). Uses laser light source. Long distances (up to 100km+). Used for WAN/backbone/service provider links. More expensive than MMF. OS1/OS2 grades."
+  },
+  {
+    "acronym": "SFP",
+    "full_name": "Small Form-factor Pluggable",
+    "definition": "Hot-swappable transceiver module for fiber or copper interfaces. SFP = 1 Gbps. SFP+ = 10 Gbps. QSFP = 40 Gbps. QSFP28 = 100 Gbps. Allows flexible media type selection."
+  },
+  {
+    "acronym": "OTDR",
+    "full_name": "Optical Time Domain Reflectometer",
+    "definition": "Fiber optic test tool. Sends light pulse, measures reflections to locate breaks, splices, connectors. Measures distance to fault and measures insertion loss. Essential for fiber troubleshooting."
+  },
+  {
+    "acronym": "TDR",
+    "full_name": "Time Domain Reflectometer",
+    "definition": "Copper cable test tool. Sends signal pulse, measures reflections to locate opens, shorts, and impedance mismatches. Reports distance to fault. Some cable certifiers include TDR functionality."
+  },
+  {
+    "acronym": "PoE",
+    "full_name": "Power over Ethernet",
+    "definition": "IEEE 802.3af (15.4W), 802.3at/PoE+ (30W), 802.3bt/PoE++ (60-100W). Delivers power over UTP to APs, IP phones, cameras. PSE (switch) provides power; PD (device) receives it."
+  },
+  {
+    "acronym": "MDF",
+    "full_name": "Main Distribution Frame",
+    "definition": "Core network room — primary termination point for building cabling. Houses core switches, routers, servers, and WAN connections. IDFs connect back to MDF via vertical/backbone cabling."
+  },
+  {
+    "acronym": "IDF",
+    "full_name": "Intermediate Distribution Frame",
+    "definition": "Floor-level wiring closet. Houses access layer switches. Connects to MDF via backbone cabling. Horizontal runs from IDF to workstation outlets max 90m (TIA-568)."
+  },
+  {
+    "acronym": "UPS",
+    "full_name": "Uninterruptible Power Supply",
+    "definition": "Battery backup for power outages. Types: Offline/standby (5-25ms switchover), Line-interactive (AVR, <4ms), Online/Double-conversion (0ms, cleanest power). Sized by VA/watts and runtime."
+  },
+  {
+    "acronym": "GRE",
+    "full_name": "Generic Routing Encapsulation",
+    "definition": "Tunneling protocol (IP protocol 47). Encapsulates any Layer 3 protocol. No encryption (often combined with IPsec). Used for site-to-site VPN and multicast/routing-over-VPN scenarios."
+  },
+  {
+    "acronym": "MPLS",
+    "full_name": "Multiprotocol Label Switching",
+    "definition": "WAN technology using labels (not IP lookups) for fast packet forwarding. Provider assigns labels at ingress (LER), core routers (LSR) forward by label. Supports VPNs and traffic engineering."
+  },
+  {
+    "acronym": "VXLAN",
+    "full_name": "Virtual Extensible LAN",
+    "definition": "Layer 2 overlay over Layer 3 network. Uses UDP 4789. Extends VLANs across routed networks (data centers, cloud). Supports 16 million VNIs vs 4094 VLAN limit. Used in SDN/overlay networks."
+  },
+  {
+    "acronym": "SDN",
+    "full_name": "Software-Defined Networking",
+    "definition": "Decouples control plane from data plane. Centralized controller (northbound API to apps, southbound to devices via OpenFlow). Enables programmable, automated network management."
+  },
+  {
+    "acronym": "NFV",
+    "full_name": "Network Functions Virtualization",
+    "definition": "Virtualizes network appliances (firewalls, load balancers, routers) as software on commodity hardware. Reduces physical appliance costs. Often paired with SDN in modern data centers."
+  },
+  {
+    "acronym": "SD-WAN",
+    "full_name": "Software-Defined Wide Area Network",
+    "definition": "Abstracts WAN connectivity — routes traffic across multiple links (MPLS, broadband, LTE) based on policy. Centralized management, application-aware routing, reduced MPLS dependence."
+  },
+  {
+    "acronym": "API",
+    "full_name": "Application Programming Interface",
+    "definition": "Interface for software components to communicate. REST APIs (HTTP/JSON) used for network automation and SDN. Enables programmatic device configuration vs manual CLI."
+  },
+  {
+    "acronym": "RFC",
+    "full_name": "Request for Comments",
+    "definition": "IETF publication defining Internet standards and protocols. Normative language: MUST (required), SHOULD (recommended), MAY (optional). Examples: RFC 791 (IPv4), RFC 2460 (IPv6)."
+  },
+  {
+    "acronym": "PPPoE",
+    "full_name": "Point-to-Point Protocol over Ethernet",
+    "definition": "Encapsulates PPP frames in Ethernet. Common for DSL broadband connections — ISP authenticates subscriber over PPP using CHAP/PAP. Adds 8-byte overhead, reducing MTU to 1492."
+  },
+  {
+    "acronym": "ICMP",
+    "full_name": "Internet Control Message Protocol",
+    "definition": "Layer 3 protocol for error reporting and diagnostics. Used by ping (echo request/reply) and traceroute (TTL exceeded). Not for data transfer. ICMP redirect, unreachable, time exceeded messages."
+  },
+  {
+    "acronym": "AUP",
+    "full_name": "Acceptable Use Policy",
+    "definition": "Document defining permitted and prohibited use of company network/systems. Users must acknowledge and sign. Basis for disciplinary action when violated. Covers internet, email, device use."
+  },
+  {
+    "acronym": "BYOD",
+    "full_name": "Bring Your Own Device",
+    "definition": "Policy allowing employees to use personal devices for work. Requires MDM/MAM for policy enforcement, certificate-based auth, NAC to segment personal vs corporate traffic."
+  },
+  {
+    "acronym": "MDM",
+    "full_name": "Mobile Device Management",
+    "definition": "Platform for enforcing policies on mobile devices. Can remotely wipe, enforce encryption, require PINs, restrict apps. Key control for BYOD programs. Examples: Intune, JAMF, AirWatch."
+  },
+  {
+    "acronym": "DLP",
+    "full_name": "Data Loss Prevention",
+    "definition": "Technology/policy preventing sensitive data from leaving the organization. Inspects email, web, USB transfers for PII, credit cards, IP. Alerts or blocks based on content classification rules."
+  },
+  {
+    "acronym": "NAC",
+    "full_name": "Network Access Control",
+    "definition": "Controls which devices can connect to the network based on posture (patch level, AV status, certificates). Uses 802.1X, RADIUS, and agents to enforce health checks before granting access."
+  },
+  {
+    "acronym": "APT",
+    "full_name": "Advanced Persistent Threat",
+    "definition": "Sophisticated, long-term targeted attack, typically nation-state sponsored. Stealth over speed — establish foothold, maintain persistence, exfiltrate data over months/years. Hard to detect."
+  },
+  {
+    "acronym": "DoS",
+    "full_name": "Denial of Service",
+    "definition": "Attack overwhelming a target to make it unavailable. Single attacker. Types: volumetric (bandwidth), protocol (SYN flood), application (HTTP flood). DDoS = distributed (botnet)."
+  },
+  {
+    "acronym": "DDoS",
+    "full_name": "Distributed Denial of Service",
+    "definition": "DoS using many compromised systems (botnet). Categories: Volumetric (DNS amplification), Protocol (SYN flood), Application (HTTP flood). Mitigated by scrubbing centers and rate limiting."
+  },
+  {
+    "acronym": "MITM",
+    "full_name": "Man-in-the-Middle",
+    "definition": "Attacker intercepts communication between two parties. Methods: ARP poisoning, rogue AP, DNS spoofing. Mitigated by encryption (TLS), certificate pinning, DAI, and 802.1X."
+  },
+  {
+    "acronym": "MFA",
+    "full_name": "Multi-Factor Authentication",
+    "definition": "Authentication using 2+ factors: something you know (password), something you have (token/phone), something you are (biometric). Significantly reduces credential-based attack success."
+  },
+  {
+    "acronym": "VLAN hopping",
+    "full_name": "VLAN Hopping Attack",
+    "definition": "Attacker gains access to traffic on other VLANs. Methods: switch spoofing (DTP) or double-tagging (native VLAN). Mitigated by disabling DTP, changing native VLAN to unused VLAN."
+  },
+  {
+    "acronym": "HA",
+    "full_name": "High Availability",
+    "definition": "Design goal minimizing downtime through redundancy. Components: redundant hardware, failover clustering, load balancing, FHRP. Availability = MTBF / (MTBF + MTTR)."
+  },
+  {
+    "acronym": "NMS",
+    "full_name": "Network Management System",
+    "definition": "Platform for monitoring and managing network devices. Collects data via SNMP, NetFlow, syslog. Provides dashboards, alerts, trending. Examples: SolarWinds, PRTG, Nagios, Zabbix."
+  },
+  {
+    "acronym": "CLI",
+    "full_name": "Command Line Interface",
+    "definition": "Text-based interface for device management. Used in routers, switches, firewalls. Key commands: show ip route, show interfaces, show vlan, debug, ping, traceroute. Faster than GUI for experts."
+  },
+  {
+    "acronym": "DORA",
+    "full_name": "Discover, Offer, Request, Acknowledge",
+    "definition": "DHCP lease process mnemonic. Client broadcasts Discover → server unicasts/broadcasts Offer → client broadcasts Request → server broadcasts Acknowledge. All initial messages use broadcasts."
+  },
+  {
+    "acronym": "NAT64",
+    "full_name": "Network Address Translation 64",
+    "definition": "Translates IPv6 addresses to IPv4 for communication between IPv6-only and IPv4-only networks. Enables IPv6 clients to reach IPv4 servers during IPv4-to-IPv6 transition."
+  },
+  {
+    "acronym": "OSPFv3",
+    "full_name": "Open Shortest Path First version 3",
+    "definition": "OSPF adapted for IPv6. Uses link-local addresses for neighbor adjacencies. Runs over IPv6. Supports multiple address families. Otherwise same SPF algorithm and area concept as OSPFv2."
+  },
+  {
+    "acronym": "CHAP",
+    "full_name": "Challenge Handshake Authentication Protocol",
+    "definition": "PPP authentication method. Three-way handshake using MD5 hash of shared secret. Never sends password in cleartext. Periodically re-authenticates. More secure than PAP."
+  },
+  {
+    "acronym": "PAP",
+    "full_name": "Password Authentication Protocol",
+    "definition": "Simple PPP authentication. Sends username and password in cleartext. Insecure — avoid unless on encrypted link. Superseded by CHAP and EAP."
+  },
+  {
+    "acronym": "EAP",
+    "full_name": "Extensible Authentication Protocol",
+    "definition": "Authentication framework used with 802.1X. Multiple methods: EAP-TLS (certificate-based, most secure), PEAP (password in TLS tunnel), EAP-TTLS. Transported over RADIUS."
+  },
+  {
+    "acronym": "PEAP",
+    "full_name": "Protected Extensible Authentication Protocol",
+    "definition": "EAP method that creates a TLS tunnel for inner authentication (usually MSCHAPv2). Requires only server-side certificate. Widely used for 802.1X Wi-Fi enterprise authentication."
+  },
+  {
+    "acronym": "AD",
+    "full_name": "Administrative Distance",
+    "definition": "Router's trust ranking for routing protocol sources. Lower = more trusted. Connected=0, Static=1, eBGP=20, EIGRP=90, OSPF=110, RIP=120, iBGP=200. Used when multiple protocols know same route."
+  },
+  {
+    "acronym": "SPF",
+    "full_name": "Shortest Path First",
+    "definition": "Dijkstra's algorithm used by OSPF to calculate loop-free paths. Each router builds complete topology map (LSDB) and independently calculates shortest path tree to all destinations."
+  },
+  {
+    "acronym": "LSDB",
+    "full_name": "Link State Database",
+    "definition": "OSPF's topology table — contains all LSAs (Link State Advertisements) collected from all routers in the area. All routers in same area have identical LSDB. SPF runs against LSDB."
+  },
+  {
+    "acronym": "PDU",
+    "full_name": "Protocol Data Unit",
+    "definition": "Generic term for data at each OSI layer. Layer 7-5: Data, Layer 4: Segment (TCP) / Datagram (UDP), Layer 3: Packet, Layer 2: Frame, Layer 1: Bit/Symbol."
+  }
+]

@@ -151,6 +151,13 @@ def _play_zone(player: Player, zone_num: int) -> None:
 
         node = next((n for n in zone.nodes if n.id == node_choice), None)
         if node:
+            # Study gate: offer study guide before quiz
+            menu_choice = screens.show_study_menu(node)
+            if menu_choice == "back":
+                continue
+            if menu_choice == "study":
+                screens.show_study_mode(node)
+            # "quiz" or after finishing study cards → run encounters
             _run_encounter_session(player, zone, node)
 
 

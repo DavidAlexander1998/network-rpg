@@ -10,11 +10,34 @@ NODE_PASS_RATE = 0.70
 
 
 @dataclass
+class StudyCard:
+    """A single study/reference card shown before quiz mode."""
+    title: str
+    card_type: str          # "table" | "concept" | "mnemonic" | "list"
+    body: str = ""
+    key_points: List[str] = field(default_factory=list)
+    headers: List[str] = field(default_factory=list)
+    rows: List[List[str]] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "StudyCard":
+        return cls(
+            title=data.get("title", ""),
+            card_type=data.get("type", "concept"),
+            body=data.get("body", ""),
+            key_points=data.get("key_points", []),
+            headers=data.get("headers", []),
+            rows=data.get("rows", []),
+        )
+
+
+@dataclass
 class Node:
     id: float
     name: str
     description: str
     encounters: List[Encounter] = field(default_factory=list)
+    study_cards: List[StudyCard] = field(default_factory=list)
 
     def is_node_completed(self, player: Player) -> bool:
         if not self.encounters:
@@ -77,10 +100,31 @@ class ZoneManager:
                     self._encounter_index[enc.id] = enc
             for enc in zone.guardian_encounters:
                 self._encounter_index[enc.id] = enc
+            # Load companion study file if present (content/study-N.json)
+            self._load_study_cards(zone, zone_number)
             return zone
         except (json.JSONDecodeError, KeyError, TypeError) as e:
             print(f"Error loading zone {zone_number}: {e}")
             return None
+
+    def _load_study_cards(self, zone: Zone, zone_number: int) -> None:
+        """Merge study cards from study-N.json into zone nodes (optional companion file)."""
+        study_file = self.content_dir / f"study-{zone_number}.json"
+        if not study_file.exists():
+            return
+        try:
+            with open(study_file, "r", encoding="utf-8") as f:
+                raw = json.load(f)
+            # Keys are node IDs as strings e.g. "1.1", "2.3"
+            study_map: Dict[float, List[StudyCard]] = {
+                float(k): [StudyCard.from_dict(c) for c in cards]
+                for k, cards in raw.items()
+            }
+            for node in zone.nodes:
+                if node.id in study_map:
+                    node.study_cards = study_map[node.id]
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
+            print(f"Warning: could not load study file for zone {zone_number}: {e}")
 
     def _parse_zone(self, data: Dict[str, Any]) -> Zone:
         nodes = []
@@ -91,11 +135,16 @@ class ZoneManager:
                     encounters.append(Encounter.from_dict(enc_data))
                 except (KeyError, ValueError) as e:
                     print(f"Warning: skipping encounter: {e}")
+            study_cards = [
+                StudyCard.from_dict(c)
+                for c in node_data.get("study_cards", [])
+            ]
             node = Node(
                 id=float(node_data["id"]),
                 name=node_data["name"],
                 description=node_data.get("description", ""),
                 encounters=encounters,
+                study_cards=study_cards,
             )
             nodes.append(node)
         nodes.sort(key=lambda n: n.id)

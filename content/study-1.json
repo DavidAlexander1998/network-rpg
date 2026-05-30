@@ -1,0 +1,413 @@
+{
+  "1.1": [
+    {
+      "title": "OSI Model — All 7 Layers",
+      "type": "table",
+      "headers": ["Layer #", "Name", "PDU", "Key Protocols / Devices"],
+      "rows": [
+        ["7", "Application", "Data", "HTTP, HTTPS, FTP, SSH, DNS, SMTP, SNMP, Telnet"],
+        ["6", "Presentation", "Data", "TLS/SSL, JPEG, MPEG, ASCII — encryption & formatting"],
+        ["5", "Session", "Data", "NetBIOS, RPC, PPTP — session establish/maintain/terminate"],
+        ["4", "Transport", "Segment / Datagram", "TCP (reliable), UDP (fast) — port numbers live here"],
+        ["3", "Network", "Packet", "IP, ICMP, OSPF, BGP — Router operates here"],
+        ["2", "Data Link", "Frame", "Ethernet, 802.11 Wi-Fi, ARP — Switch / MAC addresses"],
+        ["1", "Physical", "Bit", "Hubs, cables, repeaters, NICs — raw electrical/optical signals"]
+      ],
+      "key_points": [
+        "Router = Layer 3.  Switch = Layer 2.  Hub = Layer 1.",
+        "TCP/UDP port numbers live at Layer 4.",
+        "TLS/SSL encryption happens at Layer 6 (Presentation).",
+        "Encapsulation adds headers going DOWN (7→1); decapsulation strips them going UP."
+      ]
+    },
+    {
+      "title": "OSI Mnemonic",
+      "type": "mnemonic",
+      "body": "Please  Do  Not  Throw  Sausage  Pizza  Away\n  7        6     5      4       3         2        1\n\n(Reversed — bottom to top: All People Seem To Need Data Processing)",
+      "key_points": [
+        "Top-down (app to wire): Please Do Not Throw Sausage Pizza Away",
+        "Bottom-up (wire to app): All People Seem To Need Data Processing",
+        "Exam questions often use BOTH directions — know both."
+      ]
+    },
+    {
+      "title": "Encapsulation & PDU Names",
+      "type": "concept",
+      "body": "When data travels DOWN the OSI stack, each layer ADDS a header (and sometimes a trailer). This is encapsulation.\n\nLayer 7/6/5: Data\nLayer 4 adds port numbers → Segment (TCP) or Datagram (UDP)\nLayer 3 adds IP header → Packet\nLayer 2 adds MAC header + FCS trailer → Frame\nLayer 1 converts to bits → Bits on the wire",
+      "key_points": [
+        "Data → Segment → Packet → Frame → Bits  (DSPFB)",
+        "De-encapsulation: reverse process on the receiving end.",
+        "The Frame Check Sequence (FCS) at Layer 2 detects corruption.",
+        "Exam tip: 'What PDU is used at Layer X?' — know DSPFB cold."
+      ]
+    }
+  ],
+  "1.2": [
+    {
+      "title": "Networking Devices — Layer & Function",
+      "type": "table",
+      "headers": ["Device", "OSI Layer", "Key Function", "Notes"],
+      "rows": [
+        ["Hub", "Layer 1", "Repeats all traffic to all ports", "Creates one collision domain — avoid in modern nets"],
+        ["Switch", "Layer 2", "Forwards frames by MAC address (CAM table)", "Each port = separate collision domain"],
+        ["Layer 3 Switch", "Layer 3", "Switches + routes between VLANs", "Faster than router for inter-VLAN — no separate router needed"],
+        ["Router", "Layer 3", "Routes packets between networks using IP", "Maintains routing table; connects different network segments"],
+        ["Firewall", "Layer 3–7", "Filters traffic based on rules/policy", "Stateful = tracks connection state; NGFW = Layer 7 inspection"],
+        ["IDS", "Passive monitor", "Detects and ALERTS on suspicious traffic", "Does NOT block — out-of-band or tap mode"],
+        ["IPS", "Inline monitor", "Detects and BLOCKS threats in real time", "Sits inline — adds latency; can cause false-positive drops"],
+        ["Load Balancer", "Layer 4–7", "Distributes traffic across server pool", "Improves availability + performance"],
+        ["Proxy Server", "Layer 7", "Intermediary between client and internet", "Caches content, filters URLs, can anonymise client IP"],
+        ["Media Converter", "Layer 1", "Converts between media types (copper↔fiber)", "Extends distance beyond copper's 100m limit"],
+        ["UTM", "Layer 3–7", "All-in-one: FW + IPS + AV + Web Filter + VPN", "Unified Threat Management — single appliance for SMBs"]
+      ],
+      "key_points": [
+        "Hub = Layer 1 (dumb repeater).  Switch = Layer 2 (MAC-aware).  Router = Layer 3 (IP-aware).",
+        "IDS = detect only.  IPS = detect + block (inline).",
+        "UTM = one box does everything — firewalling, IPS, antivirus, web filter, VPN.",
+        "NGFW adds deep packet inspection and App-ID on top of standard firewall capabilities."
+      ]
+    },
+    {
+      "title": "Firewall Types Compared",
+      "type": "table",
+      "headers": ["Type", "What it inspects", "State awareness", "Key limitation"],
+      "rows": [
+        ["Packet filter (stateless)", "Src/Dst IP, Port, Protocol per-packet", "No — each packet evaluated alone", "Cannot validate returning traffic; easy to spoof"],
+        ["Stateful firewall", "Connection state table + packet headers", "Yes — tracks TCP sessions", "Cannot inspect application payload content"],
+        ["Application-layer (proxy) FW", "Full application data (Layer 7)", "Yes", "Slower; application-specific proxies needed"],
+        ["Next-Gen Firewall (NGFW)", "App ID, User ID, SSL/TLS decryption, IPS", "Yes + deep inspection", "Higher cost; SSL inspection causes latency"],
+        ["WAF (Web App Firewall)", "HTTP/HTTPS traffic, OWASP Top 10 attacks", "Yes + app aware", "Web traffic only — not a general-purpose firewall"]
+      ],
+      "key_points": [
+        "Stateful FW is the baseline — used everywhere.  Know how it tracks TCP state.",
+        "NGFW = stateful + application awareness + SSL inspection + integrated IPS.",
+        "WAF specifically protects web apps (SQL injection, XSS, etc.).",
+        "The exam may refer to 'stateful packet inspection' — that's a stateful firewall."
+      ]
+    },
+    {
+      "title": "IDS vs IPS — Know the Difference",
+      "type": "concept",
+      "body": "IDS (Intrusion Detection System):\n  • Passive — sits on a SPAN port or network tap\n  • Sees a copy of traffic (out-of-band)\n  • Detects anomalies and sends ALERTS\n  • Cannot block traffic — just watches\n\nIPS (Intrusion Prevention System):\n  • Active — sits INLINE in the traffic path\n  • Processes actual traffic (not a copy)\n  • Detects and BLOCKS threats in real time\n  • Adds latency; false positives can drop legitimate traffic\n\nHIDS / HIPS = host-based versions running on an endpoint.",
+      "key_points": [
+        "IDS = out-of-band (copy of traffic).  IPS = inline (actual traffic).",
+        "IPS can block; IDS cannot — IDS only alerts.",
+        "False positive on an IPS = legitimate traffic gets dropped.",
+        "HIDS = host-based IDS.  NIDS = network-based IDS."
+      ]
+    }
+  ],
+  "1.3": [
+    {
+      "title": "Cloud Service Models (IaaS / PaaS / SaaS)",
+      "type": "table",
+      "headers": ["Model", "What provider manages", "What YOU manage", "Examples"],
+      "rows": [
+        ["IaaS", "Physical hardware, hypervisor, data center", "OS, middleware, runtime, apps, data", "AWS EC2, Azure VMs, Google Compute Engine"],
+        ["PaaS", "Everything IaaS + OS + runtime + middleware", "Applications and data only", "AWS Elastic Beanstalk, Google App Engine, Heroku"],
+        ["SaaS", "Everything — infra + platform + application", "Just your data and user access", "Office 365, Gmail, Salesforce, Dropbox"]
+      ],
+      "key_points": [
+        "Pizza-as-a-Service analogy: IaaS = you cook it; PaaS = restaurant kitchen; SaaS = delivered pizza.",
+        "More 'as a Service' = less you manage = less control = less customization.",
+        "IaaS gives max control but max responsibility.",
+        "SaaS = zero infrastructure concern; just use the app."
+      ]
+    },
+    {
+      "title": "Cloud Deployment Models",
+      "type": "table",
+      "headers": ["Model", "Who uses it", "Infrastructure", "Key trait"],
+      "rows": [
+        ["Public", "Anyone — open to all", "Owned by cloud provider (AWS, Azure, GCP)", "Low cost, shared resources, least control"],
+        ["Private", "Single organization only", "Dedicated (on-prem or hosted)", "Max control, max security, highest cost"],
+        ["Hybrid", "Organization + public cloud together", "Mix of private + public", "Flexible: burst to public, keep sensitive data private"],
+        ["Community", "Multiple orgs with shared compliance needs", "Shared among the group", "e.g., Government agencies sharing FISMA infra"]
+      ],
+      "key_points": [
+        "Private cloud = most control + most secure (but costly).",
+        "Public cloud = cheapest, least control.",
+        "Hybrid = private for sensitive workloads, public for elastic bursting.",
+        "Community cloud is often tested as the 'unusual' option — know it."
+      ]
+    },
+    {
+      "title": "NIST 5 Cloud Characteristics",
+      "type": "list",
+      "key_points": [
+        "1. On-demand self-service — provision resources without human interaction with provider",
+        "2. Broad network access — available over the network via standard mechanisms (phone, laptop)",
+        "3. Resource pooling — provider serves multiple consumers from shared resources (multi-tenancy)",
+        "4. Rapid elasticity — scale up/down quickly; appears unlimited to consumer",
+        "5. Measured service — resource use is monitored, controlled, reported (pay-per-use)"
+      ],
+      "body": "NIST SP 800-145 defines cloud computing with these 5 essential characteristics. The exam tests whether you can recognize them.\n\nElasticity = scale resources fast.\nMeasured service = metered billing.\nOn-demand = no need to call the provider."
+    }
+  ],
+  "1.4": [
+    {
+      "title": "Critical Ports — Must Know Cold",
+      "type": "table",
+      "headers": ["Port", "Protocol", "Transport", "Notes"],
+      "rows": [
+        ["20", "FTP (data)", "TCP", "Active mode data transfer"],
+        ["21", "FTP (control)", "TCP", "Commands — login, directory listing"],
+        ["22", "SSH / SFTP / SCP", "TCP", "Encrypted remote access + secure file transfer"],
+        ["23", "Telnet", "TCP", "Unencrypted remote access — deprecated, avoid"],
+        ["25", "SMTP", "TCP", "Server-to-server email relay"],
+        ["53", "DNS", "UDP (queries) / TCP (zone xfer)", "UDP for normal queries; TCP for large/zone transfer"],
+        ["67", "DHCP Server", "UDP", "Server listens here — clients broadcast to 255.255.255.255:67"],
+        ["68", "DHCP Client", "UDP", "Client receives reply here"],
+        ["69", "TFTP", "UDP", "Trivial FTP — unencrypted, used for booting/config files"],
+        ["80", "HTTP", "TCP", "Unencrypted web traffic"],
+        ["110", "POP3", "TCP", "Email retrieval — downloads and deletes from server"],
+        ["143", "IMAP", "TCP", "Email retrieval — syncs, keeps on server"],
+        ["161", "SNMP (agent poll)", "UDP", "Manager → Agent: GET, GETNEXT, SET requests"],
+        ["162", "SNMP (traps)", "UDP", "Agent → Manager: unsolicited TRAP notifications"],
+        ["389", "LDAP", "TCP", "Directory services — unencrypted"],
+        ["443", "HTTPS", "TCP", "Encrypted web (HTTP over TLS)"],
+        ["445", "SMB", "TCP", "Windows file sharing, Active Directory"],
+        ["514", "Syslog", "UDP", "Log forwarding to SIEM/log server"],
+        ["587", "SMTP (submission)", "TCP", "Client-to-server email with authentication"],
+        ["636", "LDAPS", "TCP", "LDAP over TLS — encrypted directory"],
+        ["3389", "RDP", "TCP", "Windows Remote Desktop Protocol"],
+        ["5900", "VNC", "TCP", "Virtual Network Computing — cross-platform remote desktop"]
+      ],
+      "key_points": [
+        "FTP = 20 (data) + 21 (control). Both unencrypted.",
+        "SSH = 22. SFTP and SCP both tunnel over SSH port 22.",
+        "DHCP: server=67, client=68. Both UDP (client has no IP yet → broadcast).",
+        "SNMP: polling=161, traps=162. Syslog=514. Know these for monitoring questions.",
+        "LDAP=389 (plain), LDAPS=636 (encrypted). Always prefer LDAPS in secure environments."
+      ]
+    },
+    {
+      "title": "Port Memory Tricks",
+      "type": "concept",
+      "body": "Group ports by function to memorize faster:\n\nSECURE vs INSECURE pairs (know both):\n  Telnet 23  →  SSH 22 (replacement)\n  HTTP 80   →  HTTPS 443 (encrypted)\n  LDAP 389  →  LDAPS 636 (encrypted)\n  FTP 21    →  SFTP/SCP 22 (over SSH)\n\nEMAIL ports:\n  Send: SMTP 25 (server-server), SMTP 587 (client-server w/ auth)\n  Receive: POP3 110 (download+delete), IMAP 143 (sync+keep)\n\nNETWORK SERVICES:\n  DNS 53 | DHCP 67/68 | TFTP 69\n\nMONITORING:\n  SNMP 161/162 | Syslog 514",
+      "key_points": [
+        "When asked about 'secure file transfer' → SFTP (port 22), not FTP (port 21).",
+        "When asked about 'unencrypted remote access' → Telnet (23).",
+        "Port 587 = SMTP with authentication (for email clients, not relay).",
+        "IMAP keeps email on server (sync), POP3 downloads and deletes."
+      ]
+    }
+  ],
+  "1.5": [
+    {
+      "title": "Copper Cabling Standards",
+      "type": "table",
+      "headers": ["Standard", "Max Speed", "Max Distance", "Notes"],
+      "rows": [
+        ["Cat5", "100 Mbps", "100m", "Obsolete — rarely seen"],
+        ["Cat5e", "1 Gbps", "100m", "Enhanced Cat5 — reduced crosstalk; most common legacy cable"],
+        ["Cat6", "1 Gbps (full 100m) / 10 Gbps (55m)", "100m @ 1G, 55m @ 10G", "More twisted pairs — reduced interference"],
+        ["Cat6a", "10 Gbps", "100m", "Augmented Cat6 — supports 10G at full 100m run"],
+        ["Cat7", "10 Gbps", "100m", "Shielded — better EMI protection; not TIA-recognised standard"],
+        ["Cat8", "25/40 Gbps", "30m", "Data center use — very short runs, server-to-ToR switch"]
+      ],
+      "key_points": [
+        "Cat5e = 1 Gbps at 100m.  Cat6 = 10 Gbps but only 55m.  Cat6a = 10 Gbps at full 100m.",
+        "All copper Ethernet is limited to 100 meters maximum segment length.",
+        "Cat6a required for 10GBase-T at full 100m — important for structured wiring installs.",
+        "Cat8 = data center only (server to Top-of-Rack switch, 30m max)."
+      ]
+    },
+    {
+      "title": "Fiber Optic — SMF vs MMF",
+      "type": "table",
+      "headers": ["Property", "Single-Mode (SMF)", "Multi-Mode (MMF)"],
+      "rows": [
+        ["Core size", "8–10 microns", "50–62.5 microns"],
+        ["Light source", "Laser (coherent light)", "LED or VCSEL"],
+        ["Distance", "Up to 100km+ (WAN/metro)", "Up to 550m (OM4) in data centers"],
+        ["Bandwidth", "Extremely high", "High (lower than SMF)"],
+        ["Cable jacket colour", "Yellow (OS1/OS2)", "Orange (OM1/OM2) or Aqua (OM3/OM4)"],
+        ["Cost", "Higher — laser transceivers", "Lower — LED transceivers cheaper"],
+        ["Use case", "WAN, ISP backbone, building-to-building long runs", "Within a building, data center, campus short runs"]
+      ],
+      "key_points": [
+        "SMF = long distance, laser, yellow jacket.  MMF = short distance, LED, orange/aqua.",
+        "OM3 supports 10 Gbps at 300m.  OM4 supports 10 Gbps at 550m.",
+        "SMF supports 10 Gbps and beyond at 10km, 40km, 80km+ depending on transceiver.",
+        "Exam: 'connects two buildings 300m apart at 10 Gbps' → OM3/OM4 MMF or SMF."
+      ]
+    },
+    {
+      "title": "Connectors & Transceivers",
+      "type": "table",
+      "headers": ["Connector / Device", "Type", "Use"],
+      "rows": [
+        ["RJ-45", "Copper — 8-pin", "Ethernet (Cat5e/Cat6/Cat6a) — standard Ethernet jack"],
+        ["RJ-11", "Copper — 6-pin", "Telephone landline — NOT Ethernet"],
+        ["LC (Lucent)", "Fiber — small form-factor", "Data centers, patch panels — push-pull latch, common in modern installs"],
+        ["SC (Subscriber)", "Fiber — square, push-pull", "Older ISP/telecom installs — larger than LC"],
+        ["ST (Straight Tip)", "Fiber — bayonet twist-lock", "Legacy enterprise — rarely new installs"],
+        ["FC", "Fiber — threaded screw", "High-vibration environments, test equipment"],
+        ["SFP", "Transceiver module", "1 Gbps — hot-swappable, supports fiber or copper via DAC"],
+        ["SFP+", "Transceiver module", "10 Gbps — same form factor as SFP"],
+        ["QSFP / QSFP+", "Transceiver module", "40 Gbps / 100 Gbps — data center spine links"],
+        ["Auto-MDIX", "Switch NIC feature", "Automatically detects crossover vs straight-through — no manual cable choice needed"]
+      ],
+      "key_points": [
+        "LC = most common modern fiber connector (small, data center friendly).",
+        "RJ-45 for copper Ethernet.  RJ-11 for phone.  Don't confuse them.",
+        "SFP = 1G, SFP+ = 10G, QSFP = 40G/100G.  All hot-swappable.",
+        "Auto-MDIX makes the straight-through/crossover distinction mostly irrelevant now."
+      ]
+    }
+  ],
+  "1.6": [
+    {
+      "title": "Network Topologies Compared",
+      "type": "table",
+      "headers": ["Topology", "Description", "Pros", "Cons / Single point of failure?"],
+      "rows": [
+        ["Bus", "All devices on one shared cable segment", "Simple, cheap", "One break = total failure. High collisions. SPOF: the bus cable"],
+        ["Ring", "Each device connects to two others — forms a loop", "Predictable latency (token passing)", "One failure takes down ring unless dual-ring. SPOF: any node/link"],
+        ["Star", "All devices connect to central hub/switch", "Easy troubleshoot, isolate faults per-port", "SPOF: the central switch (mitigated by redundant switches)"],
+        ["Full Mesh", "Every device connects to every other", "Max redundancy, no SPOF", "Expensive: n*(n-1)/2 connections. Hard to scale"],
+        ["Partial Mesh", "Some redundant paths — not all-to-all", "Balance of cost and redundancy", "Some SPOFs remain"],
+        ["Hybrid", "Combination of topologies", "Flexible — mix star+mesh for key nodes", "Complexity increases troubleshooting"],
+        ["Point-to-Point", "Direct link between exactly two nodes", "Simple, dedicated bandwidth", "Only connects two endpoints — not scalable"]
+      ],
+      "key_points": [
+        "Star = most common LAN topology today (switch at center).",
+        "Full mesh = max redundancy, max cost.  Used in WAN/SP core networks.",
+        "Bus topology = obsolete.  Ring = used in SONET/SDH (dual-ring).",
+        "The internet is a partial mesh — not all routers connect to all routers."
+      ]
+    },
+    {
+      "title": "Data Center: Three-Tier vs Spine-and-Leaf",
+      "type": "table",
+      "headers": ["Property", "Three-Tier (Core/Dist/Access)", "Spine-and-Leaf"],
+      "rows": [
+        ["Layers", "Core → Distribution → Access", "Spine switches + Leaf switches (2 layers only)"],
+        ["Traffic pattern", "North-South dominant (client→server)", "East-West dominant (server→server)"],
+        ["Hops any-to-any", "Variable (3–6+ hops)", "Always exactly 2 hops (leaf→spine→leaf)"],
+        ["Latency", "Variable — depends on path", "Consistent and predictable"],
+        ["Scaling", "Complex — upgrade core is disruptive", "Add a leaf switch = linear scale-out"],
+        ["Spanning Tree", "Required — loop prevention", "Avoided — uses ECMP and BGP/EVPN instead"],
+        ["Use case", "Enterprise campus networks", "Modern data centers with heavy VM/container traffic"]
+      ],
+      "key_points": [
+        "Three-tier = Core/Distribution/Access.  Collapsed core = Distribution merged into Core.",
+        "Spine-and-leaf = any two servers always 2 hops apart.  Predictable latency.",
+        "East-West traffic (server↔server) drove adoption of spine-and-leaf in DCs.",
+        "North-South = traffic in/out of the DC.  East-West = traffic within the DC."
+      ]
+    },
+    {
+      "title": "Traffic Patterns — North-South vs East-West",
+      "type": "concept",
+      "body": "NORTH-SOUTH traffic:\n  Direction: Between external users/internet and servers inside the data center.\n  Think of it as traffic crossing the perimeter firewall.\n  Example: A user in London browsing a website hosted in AWS.\n  Traditional three-tier architecture was designed for this.\n\nEAST-WEST traffic:\n  Direction: Between servers WITHIN the same data center.\n  Example: Web server → App server → Database server (same DC).\n  With virtualization and microservices, this is now the dominant traffic pattern.\n  Spine-and-leaf is designed specifically for high east-west volumes.",
+      "key_points": [
+        "East-west traffic dominates modern DCs — it grew with virtualization/microservices.",
+        "Spine-and-leaf was invented to handle east-west efficiently.",
+        "North-south crosses the perimeter (external ↔ internal).",
+        "Exam question: 'server-to-server traffic within a DC' = east-west."
+      ]
+    }
+  ],
+  "1.7": [
+    {
+      "title": "IPv4 Address Classes & Special Ranges",
+      "type": "table",
+      "headers": ["Range / Class", "CIDR", "Description"],
+      "rows": [
+        ["10.0.0.0 – 10.255.255.255", "10.0.0.0/8", "RFC 1918 Private — Class A private"],
+        ["172.16.0.0 – 172.31.255.255", "172.16.0.0/12", "RFC 1918 Private — Class B private (172.32+ is PUBLIC)"],
+        ["192.168.0.0 – 192.168.255.255", "192.168.0.0/16", "RFC 1918 Private — Class C private"],
+        ["127.0.0.0 – 127.255.255.255", "127.0.0.0/8", "Loopback — 127.0.0.1 = local host test"],
+        ["169.254.0.0 – 169.254.255.255", "169.254.0.0/16", "APIPA — auto-assigned when DHCP fails; link-local only"],
+        ["0.0.0.0", "—", "Unspecified / default route (all networks)"],
+        ["255.255.255.255", "—", "Limited broadcast — all hosts on local segment"]
+      ],
+      "key_points": [
+        "172.16–172.31 is private.  172.32.0.0+ is PUBLIC.  This is a common exam trap.",
+        "APIPA = 169.254.x.x.  Host with APIPA has no DHCP — cannot reach other networks.",
+        "Loopback = 127.0.0.1.  The whole 127.0.0.0/8 is reserved for loopback.",
+        "Private addresses are NOT routed on the internet — NAT translates them."
+      ]
+    },
+    {
+      "title": "CIDR Subnet Quick Reference",
+      "type": "table",
+      "headers": ["CIDR", "Subnet Mask", "Total Addresses", "Usable Hosts", "Subnets per /24"],
+      "rows": [
+        ["/24", "255.255.255.0", "256", "254", "1"],
+        ["/25", "255.255.255.128", "128", "126", "2"],
+        ["/26", "255.255.255.192", "64", "62", "4"],
+        ["/27", "255.255.255.224", "32", "30", "8"],
+        ["/28", "255.255.255.240", "16", "14", "16"],
+        ["/29", "255.255.255.248", "8", "6", "32"],
+        ["/30", "255.255.255.252", "4", "2", "64  — point-to-point links"],
+        ["/31", "255.255.255.254", "2", "2 (special — RFC 3021)", "P2P only — no broadcast"],
+        ["/32", "255.255.255.255", "1", "1 (host route)", "Specific host or loopback"]
+      ],
+      "key_points": [
+        "Usable hosts = 2^(host bits) − 2.  Subtract network address and broadcast.",
+        "/30 = 2 usable hosts.  Perfect for router-to-router point-to-point links.",
+        "/26 = 64 addresses, 62 usable.  Important — appears in subnet calculation questions.",
+        "Each time you borrow 1 bit: address space halves, number of subnets doubles."
+      ]
+    },
+    {
+      "title": "Subnetting: How to Calculate Fast",
+      "type": "concept",
+      "body": "Given: 192.168.10.75/27 — find the subnet.\n\nStep 1: /27 has 5 host bits → 2^5 = 32 addresses per subnet.\n\nStep 2: Subnet boundaries increment by 32:\n  192.168.10.0  (network)  → .31 (broadcast)\n  192.168.10.32 (network)  → .63 (broadcast)\n  192.168.10.64 (network)  → .95 (broadcast)  ← .75 is in THIS one\n  192.168.10.96 (network)  → .127 (broadcast)\n\nAnswer: subnet = 192.168.10.64/27\n\nKey formula: Block size = 256 − last octet of subnet mask.\n  /27 mask last octet = 224 → Block = 256−224 = 32.",
+      "key_points": [
+        "Block size = 256 − last non-255 octet of subnet mask.",
+        "/26 block = 64, /27 block = 32, /28 block = 16, /29 block = 8, /30 block = 4.",
+        "Find which block the IP falls in by dividing: 75÷32 = 2 remainder 11 → subnet starts at 64.",
+        "First address = network, last address = broadcast.  Both are unusable as host addresses."
+      ]
+    }
+  ],
+  "1.8": [
+    {
+      "title": "IPv6 Address Types",
+      "type": "table",
+      "headers": ["Type", "Prefix / Range", "Description"],
+      "rows": [
+        ["Loopback", "::1/128", "Equivalent to 127.0.0.1 in IPv4 — local host"],
+        ["Unspecified", "::/128", "All zeros — equivalent to 0.0.0.0 in IPv4"],
+        ["Link-Local", "FE80::/10", "Auto-configured on every IPv6 interface; not routable — local segment only"],
+        ["Unique Local", "FC00::/7 (FC00–FDFF)", "Private IPv6 — roughly equivalent to RFC 1918; not globally routed"],
+        ["Global Unicast", "2000::/3", "Publicly routable IPv6 — assigned by IANA/RIRs"],
+        ["Multicast", "FF00::/8", "Replaces broadcast in IPv6 (no broadcast in IPv6)"],
+        ["Anycast", "Same as unicast — no special range", "Single address assigned to multiple interfaces; packet delivered to nearest"]
+      ],
+      "key_points": [
+        "IPv6 has NO broadcast — multicast replaces it (e.g., FF02::1 = all nodes on link).",
+        "FE80::/10 = link-local. Every interface gets one automatically. NOT routable.",
+        "FC00::/7 = unique local (private). Functionally like RFC 1918 for IPv4.",
+        "IPv6 loopback = ::1.  IPv4 loopback = 127.0.0.1.  Know both."
+      ]
+    },
+    {
+      "title": "SDN — Control Plane vs Data Plane",
+      "type": "concept",
+      "body": "Traditional Networking:\n  Control plane AND data plane run ON the same physical device (router/switch).\n  Each device makes its own routing/forwarding decisions independently.\n\nSDN (Software-Defined Networking):\n  CONTROL PLANE → centralized controller (software)\n    • Makes all routing/policy decisions\n    • Has a global view of the entire network\n    • Communicates with switches via OpenFlow or NETCONF\n\n  DATA PLANE → remains on the physical switch\n    • Just forwards packets per instructions from controller\n    • Dumb hardware — faster forwarding\n\nBenefit: Centralized management, programmable network, faster provisioning.\nUse cases: Cloud DCs, SD-WAN, network slicing (5G).",
+      "key_points": [
+        "Control plane = where to send traffic (routing decisions).",
+        "Data plane = actually forwarding the packets.",
+        "SDN separates them: controller handles control, switches handle forwarding.",
+        "OpenFlow = protocol between SDN controller and switches."
+      ]
+    },
+    {
+      "title": "Zero Trust, SASE, and SD-WAN",
+      "type": "concept",
+      "body": "ZERO TRUST ARCHITECTURE (ZTA):\n  Core principle: 'Never trust, always verify.'\n  • No implicit trust based on network location (inside ≠ trusted).\n  • Every request must be authenticated, authorised, and encrypted.\n  • Micro-segmentation: fine-grained per-workload security zones.\n  • Least-privilege access: users/devices get minimum access needed.\n\nSASE (Secure Access Service Edge):\n  Gartner-coined term combining:\n    • SD-WAN (network performance)\n    • Cloud security (SWG, CASB, ZTNA, FWaaS)\n  Delivered as a cloud service — security enforced at the edge.\n\nSD-WAN:\n  Intelligently routes traffic across multiple WAN links (MPLS + broadband + LTE)\n  based on real-time performance metrics (latency, jitter, packet loss).\n  Reduces dependency on expensive MPLS circuits.",
+      "key_points": [
+        "Zero Trust: verify everything, trust nothing by default — even internal traffic.",
+        "SASE = SD-WAN + cloud security services in one cloud-delivered package.",
+        "SD-WAN optimises WAN by using multiple link types intelligently.",
+        "Micro-segmentation = Zero Trust applied inside the data center (stops lateral movement).",
+        "ZTNA (Zero Trust Network Access) replaces traditional VPN in SASE architecture."
+      ]
+    }
+  ]
+}

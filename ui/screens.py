@@ -13,7 +13,7 @@ from rich.columns import Columns
 
 from game.player import Player, XP_THRESHOLDS
 from game.encounter import Encounter
-from game.zone_manager import Zone, Node, ZoneManager
+from game.zone_manager import Zone, Node, ZoneManager, StudyCard
 from game.combat import CombatResult
 from ui.themes import GameTheme, Symbols, Styles, get_hp_color
 
@@ -447,6 +447,112 @@ def show_study_report(player: Player, zone_manager: ZoneManager) -> None:
 
     console.print()
     input("  Press Enter to continue...")
+
+
+def show_study_menu(node: Node) -> str:
+    """Return 'study' | 'quiz' | 'back'."""
+    clear()
+    card_count = len(node.study_cards)
+    console.print()
+    console.print(Rule(f"[bold bright_cyan]Node {node.id}: {node.name}[/]", style="bright_blue"))
+    console.print()
+    console.print(f"  [dim]{node.description}[/]")
+    console.print()
+
+    choices = []
+    if card_count:
+        choices.append(questionary.Choice(
+            f"📖  Study Guide  ({card_count} reference cards — read before quiz)",
+            value="study",
+        ))
+    choices += [
+        questionary.Choice("⚔   Start Quiz  (go straight to encounters)", value="quiz"),
+        questionary.Choice("←   Back", value="back"),
+    ]
+
+    result = questionary.select("Choose:", choices=choices, style=_QSTYLE).ask()
+    return result or "back"
+
+
+def _render_study_card(card: StudyCard, idx: int, total: int) -> None:
+    """Render a single study card using Rich."""
+    clear()
+    console.print()
+    console.print(Rule(
+        f"[bold bright_cyan]{card.title}[/]  [dim]({idx}/{total})[/]",
+        style="bright_blue",
+    ))
+    console.print()
+
+    if card.card_type == "table" and card.headers and card.rows:
+        t = Table(
+            border_style="bright_blue",
+            header_style="bold bright_cyan",
+            show_lines=True,
+            expand=False,
+        )
+        for h in card.headers:
+            t.add_column(h, style="white")
+        for row in card.rows:
+            t.add_row(*row)
+        console.print(t)
+
+    elif card.card_type == "mnemonic":
+        console.print(Panel(
+            f"[bold bright_yellow]{card.body}[/]",
+            border_style="bright_yellow",
+            title="[bright_yellow]MNEMONIC[/]",
+            padding=(1, 3),
+        ))
+
+    else:
+        if card.body:
+            console.print(Panel(
+                f"[bright_white]{card.body}[/]",
+                border_style="bright_cyan",
+                padding=(1, 2),
+            ))
+
+    if card.key_points:
+        console.print()
+        console.print("  [bold bright_green]Key Points:[/]")
+        for pt in card.key_points:
+            console.print(f"  [bright_green]▶[/] [white]{pt}[/]")
+
+    console.print()
+
+
+def show_study_mode(node: Node) -> None:
+    """Page through all study cards for a node. Returns when done or skipped."""
+    cards = node.study_cards
+    if not cards:
+        return
+
+    idx = 0
+    while True:
+        card = cards[idx]
+        _render_study_card(card, idx + 1, len(cards))
+
+        nav_choices = []
+        if idx > 0:
+            nav_choices.append(questionary.Choice("← Previous", value="prev"))
+        if idx < len(cards) - 1:
+            nav_choices.append(questionary.Choice("Next →", value="next"))
+        nav_choices.append(questionary.Choice("✓  Done — start quiz", value="done"))
+        nav_choices.append(questionary.Choice("↩  Back to node menu", value="back"))
+
+        action = questionary.select(
+            f"Card {idx + 1}/{len(cards)}:",
+            choices=nav_choices,
+            style=_QSTYLE,
+        ).ask()
+
+        if action == "next":
+            idx = min(idx + 1, len(cards) - 1)
+        elif action == "prev":
+            idx = max(idx - 1, 0)
+        elif action in ("done", "back", None):
+            break
 
 
 def show_acronym_drill_entry(acronym: str, hint: str = "") -> str:

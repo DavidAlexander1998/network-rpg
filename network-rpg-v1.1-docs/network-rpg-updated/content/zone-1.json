@@ -1,0 +1,288 @@
+{
+  "zone_metadata": {
+    "zone_number": 1,
+    "zone_name": "The Plains of Concepts",
+    "domain": "1.0 Networking Concepts",
+    "exam_weight": "23%",
+    "description": "Master the fundamentals: OSI Model, protocols, media types, and network architectures.",
+    "guardian_name": "The OSI Overlord",
+    "total_encounters": 50
+  },
+  "nodes": [
+    {
+      "node_id": 1.1,
+      "name": "The Seven Layers",
+      "objective": "1.1 - Explain concepts related to the Open Systems Interconnection (OSI) reference model",
+      "encounters": [
+        {
+          "id": "z1-n1-001",
+          "node": 1.1,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Which layer of the OSI model is responsible for routing packets between different networks?",
+          "options": [
+            "Layer 2 - Data Link",
+            "Layer 3 - Network",
+            "Layer 4 - Transport",
+            "Layer 7 - Application"
+          ],
+          "correct_index": 1,
+          "explanation": "Layer 3 (Network) handles logical addressing and routing using IP addresses. Layer 2 uses MAC addresses for local delivery, Layer 4 manages TCP/UDP connections, and Layer 7 is the application interface.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["OSI", "Layer 3", "Routing"]
+        },
+        {
+          "id": "z1-n1-002",
+          "node": 1.1,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "At which OSI layer do hubs operate?",
+          "options": [
+            "Layer 1 - Physical",
+            "Layer 2 - Data Link",
+            "Layer 3 - Network",
+            "Layer 4 - Transport"
+          ],
+          "correct_index": 0,
+          "explanation": "Hubs operate at Layer 1 (Physical). They simply repeat electrical signals to all ports without any intelligence. Switches operate at Layer 2, routers at Layer 3.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["OSI", "Layer 1", "Hubs"]
+        },
+        {
+          "id": "z1-n1-003",
+          "node": 1.1,
+          "difficulty": "medium",
+          "type": "mob",
+          "question": "Which OSI layer is responsible for establishing, maintaining, and terminating sessions between applications?",
+          "options": [
+            "Layer 5 - Session",
+            "Layer 4 - Transport",
+            "Layer 6 - Presentation",
+            "Layer 7 - Application"
+          ],
+          "correct_index": 0,
+          "explanation": "Layer 5 (Session) manages sessions. Layer 4 (Transport) handles TCP/UDP, Layer 6 handles encryption/encoding, and Layer 7 is the application itself.",
+          "xp_reward": 30,
+          "bits_reward": 15,
+          "tags": ["OSI", "Layer 5", "Session"]
+        },
+        {
+          "id": "z1-n1-004",
+          "node": 1.1,
+          "difficulty": "hard",
+          "type": "mob",
+          "question": "Which OSI layer handles data compression and encryption?",
+          "options": [
+            "Layer 4 - Transport",
+            "Layer 5 - Session",
+            "Layer 6 - Presentation",
+            "Layer 7 - Application"
+          ],
+          "correct_index": 2,
+          "explanation": "Layer 6 (Presentation) handles data formatting, compression, and encryption (like SSL/TLS). It's the 'translator' between application and network formats.",
+          "xp_reward": 40,
+          "bits_reward": 20,
+          "tags": ["OSI", "Layer 6", "Encryption"]
+        }
+      ]
+    },
+    {
+      "node_id": 1.2,
+      "name": "The Toolbox",
+      "objective": "1.2 - Compare and contrast networking appliances, applications, and functions",
+      "encounters": [
+        {
+          "id": "z1-n2-001",
+          "node": 1.2,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Which device makes forwarding decisions based on IP addresses?",
+          "options": [
+            "Switch",
+            "Hub",
+            "Router",
+            "Bridge"
+          ],
+          "correct_index": 2,
+          "explanation": "Routers operate at Layer 3 and use IP addresses to route packets between networks. Switches use MAC addresses (Layer 2), hubs are Layer 1.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["Devices", "Router", "Layer 3"]
+        },
+        {
+          "id": "z1-n2-002",
+          "node": 1.2,
+          "difficulty": "medium",
+          "type": "mob",
+          "question": "What is the primary purpose of a load balancer?",
+          "options": [
+            "To encrypt all network traffic",
+            "To distribute traffic across multiple servers",
+            "To block unauthorized access",
+            "To connect different network types"
+          ],
+          "correct_index": 1,
+          "explanation": "Load balancers distribute incoming network/application traffic across multiple servers to prevent any single server from becoming a bottleneck.",
+          "xp_reward": 30,
+          "bits_reward": 15,
+          "tags": ["Devices", "Load Balancer", "High Availability"]
+        },
+        {
+          "id": "z1-n2-003",
+          "node": 1.2,
+          "difficulty": "medium",
+          "type": "mob",
+          "question": "What is the difference between an IDS and an IPS?",
+          "options": [
+            "IDS blocks traffic, IPS only logs",
+            "IDS detects threats, IPS detects AND blocks threats",
+            "IDS is hardware, IPS is software",
+            "There is no difference"
+          ],
+          "correct_index": 1,
+          "explanation": "IDS (Intrusion Detection System) alerts on suspicious activity. IPS (Intrusion Prevention System) detects and automatically takes action to block threats.",
+          "xp_reward": 35,
+          "bits_reward": 18,
+          "tags": ["Security", "IDS", "IPS", "Devices"]
+        }
+      ]
+    },
+    {
+      "node_id": 1.4,
+      "name": "The Secret Codes",
+      "objective": "1.4 - Explain common networking ports, protocols, services, and traffic types",
+      "encounters": [
+        {
+          "id": "z1-n4-001",
+          "node": 1.4,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Which port does HTTP use by default?",
+          "options": [
+            "21",
+            "25",
+            "80",
+            "443"
+          ],
+          "correct_index": 2,
+          "explanation": "HTTP uses port 80. Port 21 is FTP, 25 is SMTP, and 443 is HTTPS.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["Ports", "HTTP", "TCP/IP"]
+        },
+        {
+          "id": "z1-n4-002",
+          "node": 1.4,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Which protocol uses port 22?",
+          "options": [
+            "FTP",
+            "SSH",
+            "Telnet",
+            "SMTP"
+          ],
+          "correct_index": 1,
+          "explanation": "SSH (Secure Shell) uses port 22 for encrypted remote access. SFTP also uses port 22. Telnet (unencrypted) uses port 23.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["Ports", "SSH", "Security"]
+        },
+        {
+          "id": "z1-n4-003",
+          "node": 1.4,
+          "difficulty": "medium",
+          "type": "mob",
+          "question": "What is the main difference between TCP and UDP?",
+          "options": [
+            "TCP is faster than UDP",
+            "TCP is connection-oriented, UDP is connectionless",
+            "UDP is more secure than TCP",
+            "TCP only works on wireless networks"
+          ],
+          "correct_index": 1,
+          "explanation": "TCP is connection-oriented with guaranteed delivery, acknowledgments, and error checking. UDP is connectionless - it sends packets without waiting for confirmation, making it faster but less reliable.",
+          "xp_reward": 35,
+          "bits_reward": 18,
+          "tags": ["Protocols", "TCP", "UDP", "Transport"]
+        },
+        {
+          "id": "z1-n4-004",
+          "node": 1.4,
+          "difficulty": "hard",
+          "type": "mob",
+          "question": "Which port range defines 'well-known ports'?",
+          "options": [
+            "0-255",
+            "0-1023",
+            "1024-49151",
+            "49152-65535"
+          ],
+          "correct_index": 1,
+          "explanation": "Well-known ports are 0-1023 (assigned by IANA for standard services). Registered ports are 1024-49151. Dynamic/private ports are 49152-65535.",
+          "xp_reward": 45,
+          "bits_reward": 22,
+          "tags": ["Ports", "TCP/IP", "Networking"]
+        }
+      ]
+    },
+    {
+      "node_id": 1.7,
+      "name": "The Address Book",
+      "objective": "1.7 - Given a scenario, use appropriate IPv4 network addressing",
+      "encounters": [
+        {
+          "id": "z1-n7-001",
+          "node": 1.7,
+          "difficulty": "medium",
+          "type": "mob",
+          "question": "Which IP address range is reserved for private networks in Class A?",
+          "options": [
+            "192.168.0.0 - 192.168.255.255",
+            "172.16.0.0 - 172.31.255.255",
+            "10.0.0.0 - 10.255.255.255",
+            "169.254.0.0 - 169.254.255.255"
+          ],
+          "correct_index": 2,
+          "explanation": "Class A private range is 10.0.0.0/8 (10.0.0.0 - 10.255.255.255). 172.16.0.0/12 is Class B, 192.168.0.0/16 is Class C. 169.254.x.x is APIPA.",
+          "xp_reward": 40,
+          "bits_reward": 20,
+          "tags": ["IPv4", "Subnetting", "Private IPs", "RFC1918"]
+        }
+      ]
+    }
+  ],
+  "guardian_exam": {
+    "name": "The OSI Overlord",
+    "description": "You face the towering construct of the 7 layers. Only those who truly understand network fundamentals may pass.",
+    "time_limit_minutes": 25,
+    "pass_percentage": 75,
+    "questions": [
+      {
+        "question": "Which device operates at Layer 2 of the OSI model?",
+        "options": ["Router", "Switch", "Hub", "Firewall"],
+        "correct_index": 1,
+        "explanation": "Switches operate at Layer 2 using MAC addresses."
+      },
+      {
+        "question": "What is the primary function of a proxy server?",
+        "options": [
+          "Route packets between networks",
+          "Act as an intermediary between clients and servers",
+          "Block all incoming traffic",
+          "Assign IP addresses to devices"
+        ],
+        "correct_index": 1,
+        "explanation": "Proxy servers act as intermediaries, enhancing security and privacy."
+      },
+      {
+        "question": "Which port does DNS use?",
+        "options": ["53", "80", "443", "25"],
+        "correct_index": 0,
+        "explanation": "DNS uses port 53 (both TCP and UDP)."
+      }
+    ]
+  }
+}

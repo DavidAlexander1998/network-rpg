@@ -1,0 +1,29 @@
+# OpenClaw local state
+.openclaw/
+
+# Player saves
+saves/
+saves/*.yaml
+saves/*.bak
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

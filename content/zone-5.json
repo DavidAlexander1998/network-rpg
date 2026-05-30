@@ -1,0 +1,724 @@
+{
+  "zone": 5,
+  "name": "The Troubleshooter's Gauntlet",
+  "description": "Network troubleshooting — methodology, tools, commands, wireless, and service issues.",
+  "nodes": [
+    {
+      "id": 5.1,
+      "name": "The Methodology",
+      "description": "CompTIA's 7-step troubleshooting process, OSI layer approaches, and problem documentation.",
+      "encounters": [
+        {
+          "id": "z5-n1-001", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
+          "question": "What is the FIRST step in CompTIA's network troubleshooting methodology?",
+          "options": ["Test a theory", "Establish a plan of action", "Identify the problem", "Document the findings"],
+          "correct_index": 2,
+          "explanation": "Step 1 is to identify the problem — gather information from users, identify symptoms, reproduce the issue, check recent changes, and review logs. You must understand the problem before theorising about the cause.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Troubleshooting", "Methodology", "Step 1"]
+        },
+        {
+          "id": "z5-n1-002", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
+          "question": "After implementing a fix, what is the NEXT step in CompTIA's troubleshooting methodology?",
+          "options": ["Document the findings", "Identify the problem again", "Verify full system functionality and no side effects", "Escalate to the next tier"],
+          "correct_index": 2,
+          "explanation": "Step 6 is to verify full system functionality after implementing the solution. Check that the original problem is resolved AND that the fix didn't break anything else. Only then proceed to Step 7 (documentation).",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Troubleshooting", "Methodology", "Verify"]
+        },
+        {
+          "id": "z5-n1-003", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
+          "question": "Documentation (Step 7 in troubleshooting) is important because:",
+          "options": ["It is only required for compliance reasons", "It creates a knowledge base for future troubleshooting and records what changed in the environment", "It satisfies the change management requirement for the CAB", "It is only done when escalating"],
+          "correct_index": 1,
+          "explanation": "Documentation records the problem, root cause, steps taken, and resolution — creating institutional knowledge. Future engineers (or your future self) can resolve similar issues faster. It also tracks all changes made to the environment.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Documentation", "Troubleshooting", "Step 7"]
+        },
+        {
+          "id": "z5-n1-004", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
+          "question": "The 'divide and conquer' troubleshooting approach typically starts at which OSI layer?",
+          "options": ["Layer 1 (Physical)", "Layer 7 (Application)", "Layer 3 (Network) — test IP connectivity first to split the problem", "Layer 2 (Data Link)"],
+          "correct_index": 2,
+          "explanation": "Divide and conquer starts at Layer 3 — can you ping the gateway? If yes, the issue is above Layer 3. If no, focus below. This quickly narrows the problem scope without testing every layer sequentially.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Divide and Conquer", "Troubleshooting", "Layer 3"]
+        },
+        {
+          "id": "z5-n1-005", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
+          "question": "A user reports their internet is not working. The FIRST question you should ask is:",
+          "options": ["What browser are you using?", "What has changed recently on your computer or network?", "Have you tried restarting your computer?", "What is your IP address?"],
+          "correct_index": 1,
+          "explanation": "The most valuable first question in troubleshooting: 'What changed?' Most problems follow a change — a software update, a new cable, a configuration edit, a new device. Identifying the change often leads directly to the root cause.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Troubleshooting", "Identify Problem", "What Changed"]
+        },
+        {
+          "id": "z5-n1-006", "zone": 5, "node": 5.1, "difficulty": "medium", "type": "mob",
+          "question": "You test your theory at Step 3 and the fix doesn't resolve the issue. What should you do?",
+          "options": ["Proceed to Step 4 and implement a different fix anyway", "Return to Step 2 and establish a new theory of probable cause", "Escalate immediately to Tier 2", "Skip to Step 7 and document the failure"],
+          "correct_index": 1,
+          "explanation": "If your theory is proven wrong, go back to Step 2 — establish a new theory. Never implement a fix based on a disproven theory. The methodology is iterative: 1→2→3, if wrong: 2→3, until theory is confirmed, then 4→5→6→7.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Troubleshooting", "Methodology", "Iteration"]
+        },
+        {
+          "id": "z5-n1-007", "zone": 5, "node": 5.1, "difficulty": "medium", "type": "mob",
+          "question": "Bottom-up troubleshooting starts at Layer 1. What is the correct order?",
+          "options": ["Application → Presentation → Session → Transport → Network → Data Link → Physical", "Physical → Data Link → Network → Transport → Session → Presentation → Application", "Network → Physical → Application → Transport", "Transport → Network → Physical → Application"],
+          "correct_index": 1,
+          "explanation": "Bottom-up follows the OSI model from Physical (Layer 1) up to Application (Layer 7): Physical → Data Link → Network → Transport → Session → Presentation → Application. Fix the lowest layer issue first — upper layers often fix themselves.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Bottom-Up", "OSI", "Troubleshooting"]
+        },
+        {
+          "id": "z5-n1-008", "zone": 5, "node": 5.1, "difficulty": "medium", "type": "mob",
+          "question": "When should a technician ESCALATE a problem rather than implement a fix?",
+          "options": ["After documenting the issue", "When the fix is beyond their skill level, access rights, or authority to implement", "After the first failed theory", "Only when the problem affects more than 10 users"],
+          "correct_index": 1,
+          "explanation": "Escalation happens at Step 5 when: the technician lacks the technical skill, doesn't have the required system access, or is not authorised to make the change (e.g., needs CAB approval for a production firewall change). Escalation is not failure — it's the right process.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Escalation", "Troubleshooting", "Step 5"]
+        },
+        {
+          "id": "z5-n1-009", "zone": 5, "node": 5.1, "difficulty": "medium", "type": "mob",
+          "question": "A user can ping their default gateway but cannot reach internet sites by IP address. Which OSI layer has the problem?",
+          "options": ["Layer 1 or 2 — physical/link issue", "Layer 3 — routing issue between the LAN and the internet", "Layer 7 — application issue", "Layer 4 — TCP port blocked"],
+          "correct_index": 1,
+          "explanation": "Pinging the gateway confirms Layer 1, 2, and local Layer 3 work. Failing to reach internet IPs (not just names) = routing problem — traffic isn't being forwarded correctly beyond the local gateway. Check the router's default route and upstream connectivity.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Routing", "Layer 3", "Troubleshooting"]
+        },
+        {
+          "id": "z5-n1-010", "zone": 5, "node": 5.1, "difficulty": "medium", "type": "mob",
+          "question": "A user can ping internet IPs but cannot browse websites by name. Which layer/service has the problem?",
+          "options": ["Layer 1 — physical cable disconnected", "Layer 3 — IP routing broken", "DNS — name resolution failure (Layer 7 / service)", "Layer 4 — TCP handshake failing"],
+          "correct_index": 2,
+          "explanation": "If ping by IP works but ping/browse by hostname fails — DNS is the problem. IP routing works fine (Layer 3 up to 7 is functional for IP). The host cannot resolve hostnames to IPs. Use nslookup to diagnose DNS.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["DNS", "Troubleshooting", "Ping vs Name"]
+        },
+        {
+          "id": "z5-n1-011", "zone": 5, "node": 5.1, "difficulty": "hard", "type": "mob",
+          "question": "A switch port shows 'line protocol down' but 'line up'. What does this indicate?",
+          "options": ["Layer 1 physical connection is fine, but Layer 2 is failing (possibly duplex mismatch or keepalive issue)", "Physical cable is disconnected", "The VLAN is misconfigured", "The spanning tree has blocked this port"],
+          "correct_index": 0,
+          "explanation": "'Line up' = physical signal detected (Layer 1 OK). 'Protocol down' = Layer 2 failing — keepalive packets not received, duplex mismatch, encapsulation mismatch, or the remote end has a shutdown. This is a classic Cisco IOS show interface output pattern.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Cisco IOS", "Line Protocol", "Layer 2"]
+        },
+        {
+          "id": "z5-n1-012", "zone": 5, "node": 5.1, "difficulty": "hard", "type": "mob",
+          "question": "You're troubleshooting a connectivity issue. Ping to local hosts works. Ping to gateway fails. What is the MOST likely cause?",
+          "options": ["DNS server is down", "IP address, subnet mask, or default gateway misconfiguration on the host", "The ISP link is down", "A firewall is blocking ICMP"],
+          "correct_index": 1,
+          "explanation": "Ping to local hosts works = Layer 1/2 and local Layer 3 are functional. Ping to gateway fails = the host likely has the wrong gateway IP, wrong subnet mask (placing gateway in different subnet), or the gateway IP is not configured. Check ipconfig /all.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Gateway", "IP Config", "Troubleshooting"]
+        }
+      ]
+    },
+    {
+      "id": 5.2,
+      "name": "The Cable Lab",
+      "description": "Physical layer faults, cable types, connectors, and troubleshooting tools.",
+      "encounters": [
+        {
+          "id": "z5-n2-001", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
+          "question": "Which tool is used to locate the far end of an unknown cable by injecting an audio tone and tracing it?",
+          "options": ["OTDR", "Cable certifier", "Toner generator and probe (fox and hound)", "Loopback adapter"],
+          "correct_index": 2,
+          "explanation": "A toner generator and probe (fox and hound): the generator injects an audio tone at one end; the probe detects the tone at the other end — allowing you to trace unlabelled cables through walls, ceilings, and cable bundles.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Toner Probe", "Cable Tracing", "Tools"]
+        },
+        {
+          "id": "z5-n2-002", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
+          "question": "An OTDR is used primarily for troubleshooting:",
+          "options": ["Copper Ethernet cable faults", "Wi-Fi channel interference", "Fiber optic cables — locating breaks and measuring loss", "Power supply issues in network equipment"],
+          "correct_index": 2,
+          "explanation": "OTDR (Optical Time Domain Reflectometer) sends a light pulse into fiber and measures backscattered/reflected light to locate faults, breaks, and splices — reporting the exact distance to each event. Essential for fiber troubleshooting.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["OTDR", "Fiber", "Tools"]
+        },
+        {
+          "id": "z5-n2-003", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
+          "question": "A straight-through Ethernet cable is used to connect:",
+          "options": ["Switch to switch (same device type)", "PC to PC directly", "PC to switch (different device types)", "Router console port to laptop"],
+          "correct_index": 2,
+          "explanation": "Straight-through cable: same pinout (T568B or T568A) on both ends — used to connect DIFFERENT device types (PC → switch, switch → router). Crossover cable: different standards on each end — used to connect SAME device types (PC → PC, switch → switch). MDI/MDIX on modern equipment auto-corrects this.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Straight-Through Cable", "Cable Types"]
+        },
+        {
+          "id": "z5-n2-004", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
+          "question": "T568A and T568B wiring standards differ in which way?",
+          "options": ["They use completely different pin assignments", "Orange and green pairs are swapped between the two standards", "T568A uses Cat5e; T568B uses Cat6", "They use different connector types"],
+          "correct_index": 1,
+          "explanation": "T568A and T568B differ only in that the orange pair (pins 1,2) and green pair (pins 3,6) are swapped. Both are valid — but you must use the SAME standard on both ends of a straight-through cable. A crossover cable uses T568A on one end and T568B on the other.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["T568A", "T568B", "Pinout"]
+        },
+        {
+          "id": "z5-n2-005", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
+          "question": "A loopback adapter is used to:",
+          "options": ["Bridge two network segments", "Test a port by connecting TX to RX — verifies the port's send and receive hardware", "Convert between fiber and copper", "Capture traffic on a port for analysis"],
+          "correct_index": 1,
+          "explanation": "A loopback adapter connects the transmit pin to the receive pin on a port. Traffic sent by the port is immediately received back. If the loopback test passes, the port hardware is functional — isolating the issue to the cable or remote device.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Loopback Adapter", "Port Testing", "Tools"]
+        },
+        {
+          "id": "z5-n2-006", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "A cable passes a basic continuity test but shows excessive errors at Gigabit speeds. What fault is most likely?",
+          "options": ["Open circuit on one pair", "Split pair — wires from different pairs crossed — passes continuity but causes crosstalk", "Cable too short", "Wrong connector type"],
+          "correct_index": 1,
+          "explanation": "Split pairs: a wire from pair 2 and a wire from pair 3 are used together instead of the correct pair. The basic continuity test (all 8 pins connected) passes, but the untwisted wires generate high crosstalk (NEXT) at Gigabit speeds. A wire map tester with pair identification catches this.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Split Pair", "Crosstalk", "Cable Fault"]
+        },
+        {
+          "id": "z5-n2-007", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "CRC errors are increasing on a switch interface after a new cable was installed. What should you check FIRST?",
+          "options": ["VLAN configuration", "The new cable and its connectors — bad crimping or damaged cable causes CRC errors", "Spanning tree topology", "DHCP lease table"],
+          "correct_index": 1,
+          "explanation": "CRC errors indicate corrupt frames — most commonly caused by physical layer issues: bad cable, loose connector, poor crimping, damaged SFP transceiver, or EMI interference. New cable + new CRC errors = strong indicator to replace/re-crimp the cable first.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["CRC Errors", "Physical Layer", "Cable"]
+        },
+        {
+          "id": "z5-n2-008", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "What is attenuation in a cable, and when does it become a problem?",
+          "options": ["Voltage fluctuations caused by power surges — only a problem near generators", "Signal loss as it travels along the cable — becomes a problem beyond the cable's rated distance", "Interference between cables — only occurs in unshielded cables", "Incorrect impedance matching — only relevant for coaxial cable"],
+          "correct_index": 1,
+          "explanation": "Attenuation is the weakening of signal over distance. For copper Ethernet (Cat5e/6), the limit is 100m total channel. Beyond that, signal degrades below usable levels — errors increase, speed drops, link may fail. Fiber has much lower attenuation and can run kilometres.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Attenuation", "Signal Loss", "Distance"]
+        },
+        {
+          "id": "z5-n2-009", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "A rollover cable (console cable) connects which two things?",
+          "options": ["Two switches for inter-VLAN routing", "PC/laptop serial/USB port to router or switch console port for management", "Two patch panels in the same rack", "Fiber equipment to copper Ethernet"],
+          "correct_index": 1,
+          "explanation": "Rollover cables (Cisco console cables) have pins completely reversed (pin 1↔8, 2↔7, etc.) — they look like a flat grey cable. Used ONLY for out-of-band management access to the router/switch console port. Not used for data connectivity.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Rollover Cable", "Console Cable", "Management"]
+        },
+        {
+          "id": "z5-n2-010", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "Which tool would best identify whether an existing fiber cable run meets the loss budget for 10GbE at 300m?",
+          "options": ["Cable continuity tester", "Toner probe", "Optical power meter and light source (or OTDR)", "Spectrum analyser"],
+          "correct_index": 2,
+          "explanation": "An optical power meter measures the actual optical signal strength (dBm) at the far end of the fiber. Compare received power against the transmitter's output power — the difference is the insertion loss. If within budget, the link will work. OTDR provides a detailed loss profile including splice and connector losses.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Optical Power Meter", "Fiber", "Loss Budget"]
+        },
+        {
+          "id": "z5-n2-011", "zone": 5, "node": 5.2, "difficulty": "hard", "type": "mob",
+          "question": "A switch port shows high input errors and runts. The remote device is a server with a NIC set to full-duplex 1Gbps. The switch port is set to auto-negotiate. What is the most likely cause?",
+          "options": ["The cable is too long", "Duplex mismatch — auto-negotiate may settle at half-duplex if the NIC forces full-duplex without advertising", "The server NIC is faulty", "The switch VLAN configuration is wrong"],
+          "correct_index": 1,
+          "explanation": "When one side forces full-duplex and the other auto-negotiates: the auto-negotiating switch port may fall back to half-duplex (no duplex info received). Result: server sends full-duplex, switch expects half-duplex CSMA/CD — collisions, runts, CRC errors on the switch side. Fix: set both sides explicitly to the same duplex and speed.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Duplex Mismatch", "Auto-Negotiate", "Runts"]
+        },
+        {
+          "id": "z5-n2-012", "zone": 5, "node": 5.2, "difficulty": "hard", "type": "mob",
+          "question": "EMI (Electromagnetic Interference) on a copper cable run can be mitigated by:",
+          "options": ["Increasing cable bandwidth category (Cat5e to Cat6)", "Running the cable parallel to power cables for maximum proximity", "Using shielded cable (STP/FTP) and routing away from high-EMI sources; crossing power cables at 90 degrees", "Reducing cable length to under 50m"],
+          "correct_index": 2,
+          "explanation": "EMI mitigation for copper cable: (1) use shielded cable (STP/FTP) near motors, fluorescent lights, power cables — shield must be properly grounded; (2) route data cables away from power cables; (3) where crossing is unavoidable, cross at 90 degrees to minimise coupling; (4) use fiber optic cable (immune to EMI) in high-interference environments.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["EMI", "Shielded Cable", "STP", "Interference"]
+        },
+        {
+          "id": "z5-n2-013", "zone": 5, "node": 5.2, "difficulty": "medium", "type": "mob",
+          "question": "A punch-down tool is used when:",
+          "options": ["Testing cable continuity", "Terminating copper cable into a patch panel or keystone jack (110 block / 66 block)", "Tracing cables through walls", "Measuring optical signal strength"],
+          "correct_index": 1,
+          "explanation": "A punch-down tool seats individual wires into IDC (Insulation Displacement Connector) slots on 110-type patch panels and keystone jacks. It simultaneously inserts the wire and cuts off the excess — correct seating is critical for cable performance.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Punch-Down Tool", "Patch Panel", "Termination"]
+        },
+        {
+          "id": "z5-n2-014", "zone": 5, "node": 5.2, "difficulty": "hard", "type": "mob",
+          "question": "A fiber link passes an optical power meter test (loss within budget) but the interface still doesn't come up. What should you check next?",
+          "options": ["Replace the fiber with copper", "Check TX/RX polarity — fiber has separate transmit and receive strands that may be swapped", "The cable is too short", "Replace the entire patch panel"],
+          "correct_index": 1,
+          "explanation": "Fiber links use separate strands for TX and RX. If TX on one end connects to TX on the other (instead of RX), the link cannot come up regardless of optical power. Check that the patch cable and cassette are wired TX→RX on both ends (straight-through vs crossover polarity). This is a common installation mistake.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Fiber Polarity", "TX/RX", "Fiber Troubleshooting"]
+        }
+      ]
+    },
+    {
+      "id": 5.3,
+      "name": "The Command Post",
+      "description": "Network troubleshooting commands — ping, traceroute, nslookup, nmap, netstat, arp, ipconfig.",
+      "encounters": [
+        {
+          "id": "z5-n3-001", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
+          "question": "What does a 169.254.x.x IP address in ipconfig output indicate?",
+          "options": ["A valid static IP assigned by the admin", "A public IP assigned by the ISP", "APIPA — the host failed to obtain a DHCP address and self-assigned a link-local address", "An IPv6 link-local address"],
+          "correct_index": 2,
+          "explanation": "169.254.x.x is APIPA (Automatic Private IP Addressing) — assigned by Windows/macOS when DHCP fails. The host cannot reach other networks with this address (link-local only). Fix: resolve the DHCP issue (server down, scope exhausted, cable unplugged).",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["APIPA", "169.254", "DHCP Failure"]
+        },
+        {
+          "id": "z5-n3-002", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
+          "question": "The traceroute / tracert command is used to:",
+          "options": ["Test if a remote host is reachable", "Show the hop-by-hop path packets take to a destination and the RTT at each hop", "Display the local routing table", "Scan open ports on a remote host"],
+          "correct_index": 1,
+          "explanation": "Traceroute/tracert uses incrementing TTL values to discover each router hop between source and destination. It shows RTT at each hop and where packets stop — useful for identifying where connectivity fails or latency is introduced.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Traceroute", "Tracert", "Path Discovery"]
+        },
+        {
+          "id": "z5-n3-003", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
+          "question": "What command would you use to test DNS resolution on a Windows machine?",
+          "options": ["ping", "tracert", "nslookup", "netstat"],
+          "correct_index": 2,
+          "explanation": "nslookup (or dig on Linux/macOS) queries DNS servers and displays the results — showing which DNS server responded, the resolved IP, and any errors (NXDOMAIN = name not found). Essential for DNS troubleshooting.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["nslookup", "DNS", "Commands"]
+        },
+        {
+          "id": "z5-n3-004", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
+          "question": "What does 'ping 127.0.0.1' test?",
+          "options": ["Connectivity to the default gateway", "Connectivity to the DNS server", "The local TCP/IP stack — loopback address", "Whether the NIC has a cable connected"],
+          "correct_index": 2,
+          "explanation": "127.0.0.1 is the loopback address — it tests the local TCP/IP stack without requiring a network interface or cable. If this fails, the TCP/IP stack itself is broken (reinstall TCP/IP stack). If this passes but other pings fail, the issue is external to the host.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Ping", "Loopback", "127.0.0.1"]
+        },
+        {
+          "id": "z5-n3-005", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
+          "question": "The arp -a command displays:",
+          "options": ["The local routing table", "The DNS cache", "The ARP cache — IP-to-MAC address mappings learned by the local host", "Open network ports and connections"],
+          "correct_index": 2,
+          "explanation": "arp -a shows the ARP cache — the local table mapping IP addresses to MAC addresses. Useful for detecting ARP poisoning (same IP mapped to two different MACs), duplicate IPs, or confirming the gateway resolves to the correct MAC.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["arp -a", "ARP Cache", "Commands"]
+        },
+        {
+          "id": "z5-n3-006", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "traceroute shows '* * *' at a particular hop. What does this mean?",
+          "options": ["The link at that hop is down", "That router does not respond to ICMP TTL-exceeded messages — but traffic may still be forwarded", "The destination is unreachable", "Packet loss is 100% at that hop"],
+          "correct_index": 1,
+          "explanation": "'* * *' means no ICMP TTL-exceeded response was received from that hop. Many routers are configured not to respond to ICMP messages (rate limiting or ACL). This does NOT necessarily mean the link is broken — if subsequent hops respond, traffic is still flowing through it.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Traceroute", "ICMP Blocked", "Asterisks"]
+        },
+        {
+          "id": "z5-n3-007", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "pathping (Windows) is more useful than tracert because it:",
+          "options": ["Uses TCP instead of ICMP", "Combines tracert path discovery with per-hop packet loss statistics over multiple samples", "Resolves hostnames faster", "Can bypass firewall restrictions"],
+          "correct_index": 1,
+          "explanation": "pathping sends multiple packets to each hop and calculates packet loss percentage per hop — identifying exactly which hop is dropping packets. tracert shows RTT only for a single sample. pathping takes longer but provides more diagnostic information for intermittent issues.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["pathping", "Packet Loss", "Commands"]
+        },
+        {
+          "id": "z5-n3-008", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "nmap is used for which troubleshooting/security task?",
+          "options": ["Capturing full packet payloads", "Network discovery and port scanning — identifying live hosts and open ports/services", "Displaying local ARP cache", "Measuring optical fiber signal loss"],
+          "correct_index": 1,
+          "explanation": "nmap (Network Mapper) performs host discovery (which hosts are alive) and port scanning (which ports are open/filtered/closed) and service/OS detection. Used for network inventory, vulnerability assessment, and confirming firewall rules are working.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["nmap", "Port Scanning", "Network Discovery"]
+        },
+        {
+          "id": "z5-n3-009", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "On a Cisco switch, 'show interface Gi0/1' shows 'input errors: 1240, CRC: 1240'. What should you investigate?",
+          "options": ["VLAN configuration on the port", "The physical cable and connector between this port and the connected device", "The spanning tree state of the port", "The DHCP lease table"],
+          "correct_index": 1,
+          "explanation": "Input CRC errors on a Cisco interface = corrupt frames arriving — physical layer problem. Check: the cable (replace it), the patch panel termination, the connector crimping, and the SFP/transceiver. Also check for duplex mismatch (late collisions often accompany CRC in that case).",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["show interface", "CRC Errors", "Cisco IOS"]
+        },
+        {
+          "id": "z5-n3-010", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "What does 'netstat -an' display?",
+          "options": ["The ARP cache with MAC addresses", "All active TCP/UDP connections and listening ports with numeric addresses (no DNS resolution)", "The local routing table", "Interface IP configuration"],
+          "correct_index": 1,
+          "explanation": "netstat -an shows all active connections (ESTABLISHED) and listening ports (LISTENING) in numeric format (-n skips DNS reverse lookup for speed). Useful for identifying which services are listening, detecting unexpected connections, and confirming a service started on the correct port.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["netstat", "Open Ports", "Commands"]
+        },
+        {
+          "id": "z5-n3-011", "zone": 5, "node": 5.3, "difficulty": "hard", "type": "mob",
+          "question": "ipconfig /flushdns clears the local DNS resolver cache. When should you use this?",
+          "options": ["After changing a NIC driver", "When a DNS record has been updated but the host still resolves the old IP (stale cache)", "After changing the default gateway", "When APIPA is assigned"],
+          "correct_index": 1,
+          "explanation": "Windows caches DNS responses for their TTL. If a DNS record is updated (server IP changed, domain moved), clients still resolve the old IP until their cache expires. ipconfig /flushdns forces immediate re-query of DNS for all names.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["ipconfig /flushdns", "DNS Cache", "Commands"]
+        },
+        {
+          "id": "z5-n3-012", "zone": 5, "node": 5.3, "difficulty": "hard", "type": "mob",
+          "question": "On a router, 'show ip route' shows no default route (0.0.0.0/0). What connectivity impact does this have?",
+          "options": ["No impact — directly connected routes still work", "Only traffic to directly connected networks will be routed — all other traffic is dropped (no internet)", "Only OSPF routes will fail", "DNS queries will fail"],
+          "correct_index": 1,
+          "explanation": "Without a default route (gateway of last resort), the router drops any packet destined for a network not in its routing table. For internet access, a default route pointing to the ISP is essential. Hosts behind this router lose all non-local connectivity.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Default Route", "show ip route", "Routing"]
+        },
+        {
+          "id": "z5-n3-013", "zone": 5, "node": 5.3, "difficulty": "medium", "type": "mob",
+          "question": "Which command on a Windows host would show the local IP address, subnet mask, default gateway, and DNS server addresses?",
+          "options": ["netstat", "arp -a", "ipconfig /all", "route print"],
+          "correct_index": 2,
+          "explanation": "ipconfig /all shows complete NIC configuration: IP address, subnet mask, default gateway, DNS server addresses, MAC address, DHCP lease information, and whether DHCP or static IP is used. The '/all' flag is essential — plain 'ipconfig' omits DNS and MAC.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["ipconfig /all", "NIC Config", "Commands"]
+        },
+        {
+          "id": "z5-n3-014", "zone": 5, "node": 5.3, "difficulty": "hard", "type": "mob",
+          "question": "A user can ping 8.8.8.8 but not www.google.com. nslookup www.google.com returns 'DNS request timed out'. What is the problem?",
+          "options": ["The IP route to Google is broken", "The DNS server configured on the host is unreachable or not responding", "The TLS certificate for Google is expired", "The default gateway is wrong"],
+          "correct_index": 1,
+          "explanation": "Ping to 8.8.8.8 works = IP routing fine. nslookup timeout = the DNS server (not 8.8.8.8 apparently — or 8.8.8.8 is unreachable via UDP 53) is not responding. Check: ipconfig /all to see which DNS server is configured, then ping that server. If that DNS server is unreachable, fix DNS server config or firewall rules for UDP 53.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["DNS Timeout", "nslookup", "DNS Troubleshooting"]
+        }
+      ]
+    },
+    {
+      "id": 5.4,
+      "name": "The Signal Tower",
+      "description": "Wireless troubleshooting — interference, coverage, authentication failures, and APIPA.",
+      "encounters": [
+        {
+          "id": "z5-n4-001", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
+          "question": "A laptop connected to Wi-Fi shows IP address 169.254.47.12. What does this indicate?",
+          "options": ["Excellent Wi-Fi signal — the AP assigned a link-local address", "Successful WPA3 authentication", "DHCP failure — Wi-Fi connected but could not obtain a DHCP address", "The MAC address was blocked by wireless ACL"],
+          "correct_index": 2,
+          "explanation": "169.254.x.x (APIPA) means the device connected to the Wi-Fi network successfully at Layer 2 but failed to get a DHCP address (DHCP server down, scope exhausted, or DHCP relay misconfigured). The Wi-Fi association itself worked — this is a DHCP/Layer 3 issue.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["APIPA", "Wireless", "DHCP Failure"]
+        },
+        {
+          "id": "z5-n4-002", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
+          "question": "A user's Wi-Fi disconnects every time the office microwave is used. What is the cause?",
+          "options": ["The AP needs a firmware update", "Microwave interference — microwave ovens emit 2.4 GHz RF in the same band as 802.11b/g/n", "The user's Wi-Fi password is being reset", "Co-channel interference from a neighbouring AP"],
+          "correct_index": 1,
+          "explanation": "Microwave ovens emit wideband RF energy in the 2.4 GHz ISM band — overlapping with 802.11b/g/n Wi-Fi. When the microwave runs, it raises the noise floor and causes disconnections. Fix: connect the client to a 5 GHz SSID (802.11ac or 5GHz 802.11n), which is unaffected by microwave ovens.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Microwave Interference", "2.4GHz", "Wireless"]
+        },
+        {
+          "id": "z5-n4-003", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
+          "question": "A user cannot find their corporate Wi-Fi SSID even though other users nearby can. What is the most likely cause?",
+          "options": ["The user's device is banned from the wireless network", "The user's device only supports 5 GHz but the SSID is broadcast on 2.4 GHz only, or the device is too far from the AP", "The AP has been deauthenticated", "The SSID uses WPA3 which the device doesn't support"],
+          "correct_index": 1,
+          "explanation": "If others can see the SSID but one user cannot: (1) device may only support one band and the SSID is on the other band, (2) device is at the edge of coverage range while others are closer, (3) device's Wi-Fi adapter is disabled, or (4) the device driver has a compatibility issue.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["SSID Not Found", "Band Compatibility", "Coverage"]
+        },
+        {
+          "id": "z5-n4-004", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
+          "question": "An office has three APs all on channel 6 of the 2.4 GHz band. Users experience slow speeds. What is the problem?",
+          "options": ["The gateway is overloaded", "Co-channel interference — all APs sharing channel 6 compete for airtime", "The SSIDs are broadcasting on different channels", "WPA2 authentication is too slow"],
+          "correct_index": 1,
+          "explanation": "Co-channel interference: multiple APs on the same channel must take turns transmitting (CSMA/CA). The more APs on a channel, the more contention — resulting in lower throughput per client. Fix: assign APs to non-overlapping channels (1, 6, 11) so each AP has its own channel.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Co-Channel Interference", "2.4GHz", "Channel Planning"]
+        },
+        {
+          "id": "z5-n4-005", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
+          "question": "A new employee cannot connect to the corporate Wi-Fi. They receive an 'Authentication Failed' error. What should you check first?",
+          "options": ["The AP firmware version", "Whether the passphrase (PSK) entered is correct and that WPA2 vs WPA3 client settings match the AP", "The DHCP scope", "Whether the corporate switch has the correct VLAN"],
+          "correct_index": 1,
+          "explanation": "Authentication failed = credentials problem. First check: correct PSK (case-sensitive), correct security type (WPA2-PSK vs WPA3-SAE vs WPA2-Enterprise). If Enterprise: check RADIUS reachability, correct username/password, valid certificate.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Authentication Failure", "PSK", "Wireless"]
+        },
+        {
+          "id": "z5-n4-006", "zone": 5, "node": 5.4, "difficulty": "medium", "type": "mob",
+          "question": "Users in a conference room far from the nearest AP complain of poor Wi-Fi performance despite showing 'connected'. What is the issue?",
+          "options": ["The SSID password is wrong for that room", "Weak signal / low RSSI — AP too far away; client transmits at low MCS rate to compensate for weak signal", "The AP is overheating", "Co-channel interference is too high"],
+          "correct_index": 1,
+          "explanation": "802.11 rate adaptation: as signal weakens (distance increases), the client/AP automatically uses lower, more robust modulation rates (e.g., drops from 802.11ac 433Mbps to 802.11n 54Mbps or lower). User stays 'connected' but at a fraction of the potential speed. Fix: add an AP or extend coverage.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["RSSI", "Rate Adaptation", "Coverage"]
+        },
+        {
+          "id": "z5-n4-007", "zone": 5, "node": 5.4, "difficulty": "medium", "type": "mob",
+          "question": "A user on WPA2 Enterprise fails to authenticate. They receive a certificate error. What is most likely wrong?",
+          "options": ["Wrong PSK entered", "RADIUS server certificate is expired, untrusted, or the client is not configured to trust the CA that signed the RADIUS cert", "The DHCP scope is exhausted", "The AP's channel is congested"],
+          "correct_index": 1,
+          "explanation": "WPA2 Enterprise with PEAP or EAP-TLS: the client validates the RADIUS server's certificate. If the cert is expired, self-signed and untrusted, or the CA is not in the device's trust store — authentication fails with a certificate error. Fix: renew cert, install CA cert on clients, or update client EAP profile.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["WPA2 Enterprise", "Certificate", "EAP", "RADIUS"]
+        },
+        {
+          "id": "z5-n4-008", "zone": 5, "node": 5.4, "difficulty": "medium", "type": "mob",
+          "question": "After deploying a new LWAP, it won't appear in the WLC. What should you check?",
+          "options": ["Whether the AP is within range of other APs", "Whether the AP received an IP from DHCP and whether it can reach the WLC on UDP 5246/5247 (CAPWAP)", "Whether the AP's channel is set correctly", "Whether the AP's SSID password is configured"],
+          "correct_index": 1,
+          "explanation": "LWAP boot process: (1) gets DHCP address (option 43 may provide WLC IP), (2) discovers WLC via CAPWAP on UDP 5246/5247, (3) downloads config from WLC. If AP doesn't appear in WLC: check DHCP (has the AP got an IP?), check CAPWAP reachability (firewall blocking?), check WLC AP licence.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["LWAP", "WLC", "CAPWAP", "Troubleshooting"]
+        },
+        {
+          "id": "z5-n4-009", "zone": 5, "node": 5.4, "difficulty": "medium", "type": "mob",
+          "question": "A spectrum analyser shows a constant wide-band noise source at 2.4 GHz that isn't a Wi-Fi signal. What is a likely source?",
+          "options": ["A misconfigured SSID", "A malfunctioning or leaking microwave oven, or a cordless phone operating in the 2.4 GHz band", "A rogue access point on channel 6", "Bluetooth pairing traffic"],
+          "correct_index": 1,
+          "explanation": "Non-802.11 interference appears on a spectrum analyser as non-channel-shaped noise. Wide-band continuous 2.4 GHz interference = microwave oven (when cooking). Pulsed 2.4 GHz = cordless phones. Frequency-hopping = Bluetooth or ZigBee. A rogue AP would look like a proper 802.11 signal.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Spectrum Analyser", "Interference", "Non-WiFi"]
+        },
+        {
+          "id": "z5-n4-010", "zone": 5, "node": 5.4, "difficulty": "hard", "type": "mob",
+          "question": "A user connects to Wi-Fi but can only reach local network resources — not the internet. Other users on the same AP have internet access. What is the most likely cause specific to this user's device?",
+          "options": ["The AP DHCP scope is exhausted", "The user's device has a manually configured incorrect default gateway or DNS server", "The AP is overloaded with too many clients", "The 5 GHz band is saturated"],
+          "correct_index": 1,
+          "explanation": "If other users on the same AP have internet access, the AP/DHCP/routing are all working. The problem is specific to this device: likely a manually configured wrong default gateway or wrong DNS server (overriding DHCP-provided settings). Check: ipconfig /all — is the gateway correct? Is DNS correct?",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Default Gateway", "Manual IP Config", "Wireless Troubleshooting"]
+        },
+        {
+          "id": "z5-n4-011", "zone": 5, "node": 5.4, "difficulty": "hard", "type": "mob",
+          "question": "During a VoIP call, a user walks between two APs and the call drops. Coverage overlap was measured at 10%. What is wrong?",
+          "options": ["The user's device does not support 802.11r", "Insufficient cell overlap — 10% is too low for seamless roaming. Minimum ~15-20% overlap required for clients to associate with the new AP before losing the old one", "The user's device is on the wrong VLAN", "WPA3 SAE takes too long to re-authenticate"],
+          "correct_index": 1,
+          "explanation": "Wireless roaming requires sufficient cell overlap (~15-20%) so the client can discover and pre-authenticate with the new AP before the old AP signal drops too low. With 10% overlap, the client loses the first AP before associating with the second — causing the call drop. Fix: increase AP power or add an AP.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Roaming", "Cell Overlap", "VoIP Wireless"]
+        },
+        {
+          "id": "z5-n4-012", "zone": 5, "node": 5.4, "difficulty": "medium", "type": "mob",
+          "question": "Hidden SSID (not broadcasting the network name) is considered weak security because:",
+          "options": ["It prevents devices from connecting at all", "Clients must broadcast probe requests for the hidden SSID — attackers can see the network name in these probe frames", "Hidden SSIDs cannot use WPA2 encryption", "The AP becomes visible to all devices when broadcasting"],
+          "correct_index": 1,
+          "explanation": "Hiding the SSID only removes it from beacon frames. Clients that know the SSID actively probe for it — sending the SSID name in clear text in probe request frames. Any passive RF monitor can capture these and learn the hidden SSID. It provides no meaningful security benefit and causes connection issues.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Hidden SSID", "Wireless Security", "Probe Requests"]
+        },
+        {
+          "id": "z5-n4-013", "zone": 5, "node": 5.4, "difficulty": "hard", "type": "mob",
+          "question": "A network admin notices multiple clients rapidly disconnecting and reconnecting to the corporate AP. What attack is most likely occurring?",
+          "options": ["ARP poisoning attack on the LAN", "Deauthentication (deauth) flood attack — attacker sends spoofed deauth frames forcing clients off the AP", "DHCP starvation — client IPs are being stolen", "STP topology change causing MAC table flush"],
+          "correct_index": 1,
+          "explanation": "Deauth flood: attacker sends a continuous stream of spoofed 802.11 deauthentication management frames (no auth required in WPA2 without 802.11w) — clients continuously disconnect. Mitigation: enable 802.11w (Management Frame Protection) which requires management frames to be cryptographically authenticated.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Deauth Attack", "802.11w", "Wireless Security"]
+        }
+      ]
+    },
+    {
+      "id": 5.5,
+      "name": "The Service Desk",
+      "description": "DHCP, DNS, NTP, routing, duplicate IP, and IP addressing service troubleshooting.",
+      "encounters": [
+        {
+          "id": "z5-n5-001", "zone": 5, "node": 5.5, "difficulty": "easy", "type": "mob",
+          "question": "New devices on the network are failing to get IP addresses. Existing devices work fine. What is the most likely DHCP cause?",
+          "options": ["DHCP is disabled", "DNS is down", "DHCP scope exhaustion — all available IPs in the pool are already assigned", "The default gateway is unreachable"],
+          "correct_index": 2,
+          "explanation": "When existing devices work (they already have leases) but new devices cannot get IPs, the DHCP scope is typically exhausted — all available addresses are leased. Fix: expand the scope, reduce lease time, or clean up stale leases from disconnected devices.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["DHCP", "Scope Exhaustion", "New Devices"]
+        },
+        {
+          "id": "z5-n5-002", "zone": 5, "node": 5.5, "difficulty": "easy", "type": "mob",
+          "question": "A user can ping IPs but cannot reach websites by name. ipconfig /all shows DNS: 192.168.1.50 but that server is offline. What is the fix?",
+          "options": ["Replace the network cable", "Correct the DNS server address — point to a working DNS server (either manually or via DHCP option 6)", "Enable DHCP on the interface", "Renew the IP address with ipconfig /release /renew"],
+          "correct_index": 1,
+          "explanation": "IP works but DNS fails = wrong or unreachable DNS server. The quickest fix: update the DHCP scope's DNS option (option 6) to point to a working DNS server, then renew client leases. Or manually set a working DNS server (8.8.8.8 temporarily for testing).",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["DNS", "Wrong DNS Server", "DHCP Option 6"]
+        },
+        {
+          "id": "z5-n5-003", "zone": 5, "node": 5.5, "difficulty": "easy", "type": "mob",
+          "question": "Two workstations have been manually configured with the same IP address. What symptom will users experience?",
+          "options": ["Both machines have double the network speed", "Neither machine may function reliably on the network — ARP conflicts cause intermittent connectivity", "Only one machine works; the other is blocked", "The switch disables both ports for security"],
+          "correct_index": 1,
+          "explanation": "Duplicate IP addresses cause ARP conflicts — both machines respond to ARP requests for that IP. Traffic destined for that IP gets routed to whichever machine responded last, causing intermittent failures for both. Some operating systems also display a duplicate IP warning. Fix: assign unique static IPs or use DHCP.",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Duplicate IP", "ARP Conflict", "IP Addressing"]
+        },
+        {
+          "id": "z5-n5-004", "zone": 5, "node": 5.5, "difficulty": "easy", "type": "mob",
+          "question": "A host can reach other devices on its local subnet but cannot reach any remote networks. The default gateway is set to 0.0.0.0. What is wrong?",
+          "options": ["The DNS server is unreachable", "No default gateway configured — without a gateway, the host cannot send traffic off the local subnet", "The subnet mask is wrong", "The NIC driver needs updating"],
+          "correct_index": 1,
+          "explanation": "The default gateway tells the host where to send packets destined for networks it doesn't have a direct route to. Without it (0.0.0.0 or blank), traffic to remote networks is dropped locally. Fix: configure the correct default gateway (usually the router's LAN interface IP).",
+          "xp_reward": 20, "bits_reward": 10, "tags": ["Default Gateway", "Missing Gateway", "Routing"]
+        },
+        {
+          "id": "z5-n5-005", "zone": 5, "node": 5.5, "difficulty": "medium", "type": "mob",
+          "question": "NTP (Network Time Protocol) time synchronisation failure can cause which serious problem?",
+          "options": ["Slower internet speeds", "Kerberos authentication failures — Active Directory requires clocks within 5 minutes of each other", "DHCP scope exhaustion", "DNS NXDOMAIN errors"],
+          "correct_index": 1,
+          "explanation": "Kerberos (used in Active Directory/Windows authentication) requires all clocks to be within 5 minutes of each other. If time skew exceeds this, authentication fails — users cannot log in, access shares, or authenticate to domain resources. NTP uses UDP port 123.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["NTP", "Kerberos", "Time Sync", "UDP 123"]
+        },
+        {
+          "id": "z5-n5-006", "zone": 5, "node": 5.5, "difficulty": "medium", "type": "mob",
+          "question": "A host at 192.168.1.10/24 cannot communicate with another host at 192.168.1.200/25. The admin claims they're on the same network. What is the problem?",
+          "options": ["The hosts need static routes to each other", "Subnet mask mismatch — one host uses /24, the other /25. They calculate different network ranges and cannot communicate directly", "The switch needs VLANs configured", "DNS is resolving to incorrect IPs"],
+          "correct_index": 1,
+          "explanation": "/24 = network 192.168.1.0 with range .1–.254. /25 = network 192.168.1.128 with range .129–.254. The /25 host calculates that the /24 host (192.168.1.10) is on a DIFFERENT network and sends it to the default gateway instead of direct ARP. The /24 host does the opposite — sends direct. This asymmetric routing breaks communication.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["Subnet Mask Mismatch", "IP Addressing", "Routing"]
+        },
+        {
+          "id": "z5-n5-007", "zone": 5, "node": 5.5, "difficulty": "medium", "type": "mob",
+          "question": "nslookup returns 'NXDOMAIN' for a new server hostname. What does this mean?",
+          "options": ["The DNS server is offline", "The hostname does not exist in DNS — the DNS record was not created", "The hostname resolves to the wrong IP", "The DNS cache needs flushing"],
+          "correct_index": 1,
+          "explanation": "NXDOMAIN (Non-Existent Domain) means the queried hostname doesn't exist in DNS at all — no A/AAAA record found. The DNS server responded but couldn't find the record. Fix: create the missing DNS record for the new server. Different from a timeout (server unreachable) or wrong IP (wrong record value).",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["NXDOMAIN", "DNS", "Missing Record"]
+        },
+        {
+          "id": "z5-n5-008", "zone": 5, "node": 5.5, "difficulty": "medium", "type": "mob",
+          "question": "A DHCP server is configured with option 3 set to 192.168.1.1, but the actual router's LAN IP is 192.168.1.254. Users cannot reach the internet. What is the root cause?",
+          "options": ["The DHCP scope has no available addresses", "DHCP option 3 (default gateway) is wrong — clients receive the incorrect gateway IP and cannot route off-subnet", "DNS option 6 is not configured", "The DHCP server lease time is too short"],
+          "correct_index": 1,
+          "explanation": "DHCP option 3 is the default gateway distributed to clients. If misconfigured (points to non-existent 192.168.1.1 instead of actual gateway 192.168.1.254), clients try to send off-subnet traffic to 192.168.1.1 — which doesn't exist or isn't a router. Fix: correct option 3 in the DHCP scope.",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["DHCP Option 3", "Default Gateway", "DHCP"]
+        },
+        {
+          "id": "z5-n5-009", "zone": 5, "node": 5.5, "difficulty": "hard", "type": "mob",
+          "question": "A server has a static IP 192.168.1.50 configured. The DHCP scope also includes 192.168.1.50 in its range. After adding a new workstation, connectivity issues occur. What is happening?",
+          "options": ["The DHCP scope is exhausted", "The DHCP server assigns 192.168.1.50 to the new workstation — duplicate IP with the server causes ARP conflicts", "The new workstation's NIC is faulty", "The default VLAN is misconfigured"],
+          "correct_index": 1,
+          "explanation": "Static IPs within a DHCP range cause IP conflicts — the DHCP server doesn't know about the static assignment and may lease the same IP. Fix: (1) exclude all static IPs from the DHCP scope using DHCP exclusion ranges, or (2) use DHCP reservations (bind IP to MAC). Always exclude static IPs from DHCP pools.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Duplicate IP", "DHCP Exclusion", "Static IP Conflict"]
+        },
+        {
+          "id": "z5-n5-010", "zone": 5, "node": 5.5, "difficulty": "hard", "type": "mob",
+          "question": "After moving a server to a new subnet, internal users cannot reach it by name even though they can ping the server's new IP directly. What is most likely the problem?",
+          "options": ["The server's NIC failed during the move", "The DNS A record for the server still points to the old IP — update the DNS record to the new IP", "The server's default gateway needs updating", "The DHCP lease for the server has expired"],
+          "correct_index": 1,
+          "explanation": "Ping by IP works = Layer 3 routing correct. Name fails = DNS stale record. The DNS server still has the old IP for the server's hostname. Fix: update the DNS A record to the new IP, then flush DNS cache on clients (ipconfig /flushdns) if the old record is still cached.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["Stale DNS Record", "DNS", "Server Move"]
+        },
+        {
+          "id": "z5-n5-011", "zone": 5, "node": 5.5, "difficulty": "medium", "type": "mob",
+          "question": "ipconfig /release followed by ipconfig /renew fails to get a new IP address. The user gets 169.254.x.x. What should you investigate?",
+          "options": ["Whether the user typed the commands correctly", "DHCP server availability — is it running? Can the client reach it? Is the scope exhausted?", "Whether TLS 1.3 is enabled", "Whether 802.1X is configured on the switch port"],
+          "correct_index": 1,
+          "explanation": "APIPA after manual release/renew = the DHCP DISCOVER broadcast from the client got no response. Investigate: (1) Is the DHCP server running? (2) Is there a DHCP relay if the server is on a different subnet? (3) Is the scope exhausted? (4) Is the switch port in the correct VLAN?",
+          "xp_reward": 30, "bits_reward": 12, "tags": ["DHCP", "APIPA", "ipconfig /renew"]
+        },
+        {
+          "id": "z5-n5-012", "zone": 5, "node": 5.5, "difficulty": "hard", "type": "mob",
+          "question": "Certificate errors start appearing on all domain-joined Windows computers exactly 12 hours after an NTP server went offline. Why?",
+          "options": ["NTP outage caused the firewall rules to expire", "Clock skew exceeded 5 minutes — Kerberos authentication is failing, causing certificate validation to fail as domain auth is required", "The CA certificate expired simultaneously", "DNS stopped resolving the certificate server"],
+          "correct_index": 1,
+          "explanation": "Without NTP, Windows clocks drift. After sufficient drift (>5 minutes from domain time), Kerberos authentication fails — domain computers cannot authenticate to domain controllers. Many certificate operations (OCSP, CRL, TLS auth) depend on successful domain authentication. Fixing NTP and resyncing time resolves the cascade.",
+          "xp_reward": 40, "bits_reward": 15, "tags": ["NTP", "Kerberos", "Clock Skew", "Certificate Errors"]
+        }
+      ]
+    }
+  ],
+  "guardian_encounters": [
+    {
+      "id": "z5-g-001", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "What is Step 1 of CompTIA's troubleshooting methodology?",
+      "options": ["Implement the solution", "Document findings", "Identify the problem", "Test the theory"],
+      "correct_index": 2,
+      "explanation": "Step 1: Identify the problem — gather info, identify symptoms, reproduce the issue, ask what changed. Never skip this: understanding the problem before theorising prevents wasted effort.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Troubleshooting Methodology", "Step 1"]
+    },
+    {
+      "id": "z5-g-002", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "A host shows IP 169.254.12.5. What does this mean and what should you check first?",
+      "options": ["Valid static IP — check routing table", "APIPA — DHCP failed. Check DHCP server status and scope availability.", "IPv6 link-local — check IPv6 config", "Subnet is exhausted — check all addresses"],
+      "correct_index": 1,
+      "explanation": "169.254.x.x = APIPA. The host connected to the network but received no DHCP response. Check: DHCP server running? Scope has addresses? Relay configured if server is on another subnet? Switch VLAN correct?",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["APIPA", "169.254", "DHCP"]
+    },
+    {
+      "id": "z5-g-003", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "An OTDR is the correct tool for which task?",
+      "options": ["Testing copper patch cable continuity", "Locating a break in a fiber optic cable and measuring distance to the fault", "Tracing an unlabelled cable through a wall", "Scanning for open ports on a server"],
+      "correct_index": 1,
+      "explanation": "OTDR sends a light pulse into fiber, measures backscattered reflections, and reports: exact distance to breaks, splice quality, connector loss, and total end-to-end loss. Essential for fiber troubleshooting.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["OTDR", "Fiber", "Tools"]
+    },
+    {
+      "id": "z5-g-004", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "A user can ping 8.8.8.8 but cannot browse websites. nslookup returns NXDOMAIN for all queries. What is the problem?",
+      "options": ["Default gateway is wrong", "DNS — the hostname being looked up doesn't exist in DNS (or wrong DNS server configured)", "IP routing is broken", "TLS certificate error"],
+      "correct_index": 1,
+      "explanation": "Ping 8.8.8.8 works = IP routing fine. NXDOMAIN from nslookup = DNS can reach the server but no record exists for that name, OR the wrong DNS server is queried. Check: ipconfig /all to see DNS server, verify it's correct, check the DNS record exists.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["DNS", "NXDOMAIN", "Ping vs Name"]
+    },
+    {
+      "id": "z5-g-005", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "Traceroute shows * * * at hop 5 but hop 6 responds normally. What does this mean?",
+      "options": ["Hop 5 is down — traffic is being rerouted around it", "Hop 5 does not respond to ICMP TTL-exceeded messages — traffic is still flowing through it", "Hop 5 has packet loss", "There is a routing loop at hop 5"],
+      "correct_index": 1,
+      "explanation": "* * * = no ICMP TTL-exceeded response received — the router likely rate-limits or drops these messages. Since hop 6 responds, traffic IS passing through hop 5 — it's not down. This is normal for many ISP routers.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Traceroute", "Asterisks", "ICMP"]
+    },
+    {
+      "id": "z5-g-006", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "After implementing a fix, what MUST you do before documenting?",
+      "options": ["Escalate to confirm the fix is approved", "Verify full system functionality AND check for side effects from the change", "Restart all affected services", "Notify the CAB of the change"],
+      "correct_index": 1,
+      "explanation": "Step 6: Verify full system functionality. Confirm the original problem is resolved AND that the fix didn't break anything else. Only after successful verification should you proceed to Step 7 (documentation).",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Verify", "Troubleshooting Methodology", "Step 6"]
+    },
+    {
+      "id": "z5-g-007", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "T568A and T568B differ because:",
+      "options": ["They use different cable categories (Cat5e vs Cat6)", "The orange and green wire pairs are swapped between the two standards", "T568A uses 4 pairs; T568B uses 2 pairs", "They specify different maximum cable lengths"],
+      "correct_index": 1,
+      "explanation": "T568A and T568B only differ in that orange (pins 1,2) and green (pins 3,6) pairs are swapped. Both are valid EIA/TIA standards. A cable with T568A on one end and T568B on the other = crossover cable.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["T568A", "T568B", "Pinout"]
+    },
+    {
+      "id": "z5-g-008", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "NTP failure causes Kerberos authentication to fail. Why?",
+      "options": ["NTP is required for DHCP leases to remain valid", "Kerberos requires all domain clocks to be within 5 minutes of each other — time skew beyond that causes authentication rejection", "NTP provides the encryption keys for Kerberos tickets", "NTP failure causes DNS records to expire"],
+      "correct_index": 1,
+      "explanation": "Kerberos tickets include timestamps and have a 5-minute clock skew tolerance (configurable but default is 5 min). If a client's clock drifts more than 5 minutes from the KDC (domain controller), ticket validation fails — authentication rejected. NTP keeps all clocks synchronised. NTP uses UDP 123.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["NTP", "Kerberos", "Clock Skew", "UDP 123"]
+    },
+    {
+      "id": "z5-g-009", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "A cable passes continuity testing but has high errors at Gigabit speed. The most likely cause is:",
+      "options": ["Cable too long for Cat6", "Split pair — wires from different pairs twisted together cause crosstalk that passes continuity but fails at high speeds", "Open circuit on pair 4", "Wrong connector type (RJ45 vs RJ11)"],
+      "correct_index": 1,
+      "explanation": "Split pairs pass a basic continuity test (all 8 pins connected) but fail performance tests. Untwisted wires from mismatched pairs create high NEXT (Near-End CrossTalk) that corrupts Gigabit signals. Only a proper wire map tester with pair identification catches this.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Split Pair", "Crosstalk", "Cable Fault"]
+    },
+    {
+      "id": "z5-g-010", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "Two hosts on the same subnet have the same static IP. What symptom will be observed?",
+      "options": ["The switch disables both ports", "Intermittent connectivity for both hosts — ARP replies from both confuse other devices about which MAC owns that IP", "One host takes priority and the other is completely blocked", "Both hosts share the same MAC address"],
+      "correct_index": 1,
+      "explanation": "Duplicate IP → ARP conflict: both machines respond to ARP requests for the same IP. Other hosts' ARP caches flip between both MACs. Traffic intended for the IP gets delivered to whichever machine won the last ARP race — intermittent for both. OS-level ARP conflict warnings may appear.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Duplicate IP", "ARP Conflict"]
+    },
+    {
+      "id": "z5-g-011", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "Which Windows command clears the local DNS resolver cache?",
+      "options": ["arp -d", "netstat -f", "ipconfig /flushdns", "route delete"],
+      "correct_index": 2,
+      "explanation": "ipconfig /flushdns clears the Windows DNS resolver cache — forces the host to re-query DNS for all future hostname lookups. Use when: DNS records have been updated but the host still resolves the old IP; stale cache entries causing wrong connections.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["ipconfig /flushdns", "DNS Cache"]
+    },
+    {
+      "id": "z5-g-012", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "A Cisco switch port shows 'FastEthernet0/1 is up, line protocol is down'. What does this indicate?",
+      "options": ["Physical cable is disconnected", "Physical signal detected (Layer 1 up) but Layer 2 protocol not establishing — likely duplex mismatch, encapsulation mismatch, or remote end issue", "The port is in spanning tree blocking state", "VLAN is not configured on the port"],
+      "correct_index": 1,
+      "explanation": "'Line up' = carrier detected on the wire (Layer 1 working). 'Protocol down' = Layer 2 keepalives failing. Common causes: duplex mismatch (FD vs HD), encapsulation mismatch on WAN links, remote device with 'shutdown' command, or keepalive timer mismatch.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Cisco IOS", "Line Protocol Down", "Layer 2"]
+    },
+    {
+      "id": "z5-g-013", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "Wi-Fi disconnects whenever a microwave is used nearby. The permanent fix is:",
+      "options": ["Reboot the AP when it happens", "Replace the microwave", "Move the client to a 5 GHz SSID — 5 GHz is not affected by 2.4 GHz microwave interference", "Set the AP channel to 14"],
+      "correct_index": 2,
+      "explanation": "5 GHz (802.11ac/n) is completely outside the microwave oven's 2.4 GHz interference band. Moving clients to 5 GHz permanently solves this. Channel 14 is illegal in most countries and doesn't solve the interference.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Microwave Interference", "2.4GHz", "5GHz Fix"]
+    },
+    {
+      "id": "z5-g-014", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "A user can reach local hosts but nothing beyond the gateway. show ip route on the gateway router shows no default route. What is the fix?",
+      "options": ["Add a DNS server entry", "Add a default route (0.0.0.0/0) pointing to the ISP router", "Enable NAT on the router", "Expand the DHCP scope"],
+      "correct_index": 1,
+      "explanation": "Without a default route (0.0.0.0/0), the router drops all packets destined for unknown networks. 'ip route 0.0.0.0 0.0.0.0 [ISP-gateway-IP]' adds the default route — all non-local traffic is forwarded to the ISP for internet routing.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Default Route", "show ip route", "Routing"]
+    },
+    {
+      "id": "z5-g-015", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "DHCP scope exhaustion occurs when:",
+      "options": ["The DHCP server's disk is full", "All IP addresses in the DHCP pool are currently leased — no IPs available for new devices", "The DHCP relay agent is unreachable", "The default gateway IP is wrong"],
+      "correct_index": 1,
+      "explanation": "DHCP scope exhaustion: every address in the configured range is assigned to a current or stale lease. New devices send DHCPDISCOVER but receive no DHCPOFFER. Fix: expand the scope, reduce lease duration, remove stale leases, or add address exclusions for static devices.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["DHCP", "Scope Exhaustion"]
+    },
+    {
+      "id": "z5-g-016", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "netstat -an on a server shows port 443 NOT in the LISTENING state. Users cannot reach the HTTPS website hosted on this server. What does this tell you?",
+      "options": ["The firewall is blocking port 443 inbound", "The web server process is not running — it has not bound to port 443", "The SSL certificate is expired", "The DNS record points to the wrong IP"],
+      "correct_index": 1,
+      "explanation": "If port 443 is not in LISTENING state, the web server software is not running or failed to bind to the port. The service must be started first. A firewall block would show the port listening on the server but not reachable from outside — very different from no listener at all.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["netstat", "Listening Port", "Service Not Running"]
+    },
+    {
+      "id": "z5-g-017", "zone": 5, "node": 0, "difficulty": "medium", "type": "boss",
+      "question": "The toner probe (fox and hound) is used to:",
+      "options": ["Measure optical signal loss in fiber", "Inject an audio tone and trace an unlabelled cable through walls and bundles", "Test a switch port's send/receive hardware", "Certify Cat6A cable to 10GbE standards"],
+      "correct_index": 1,
+      "explanation": "Fox and hound: tone generator at one end injects an audible signal; the probe detects it at the other end. Used to identify and trace unlabelled cables through walls, ceilings, conduits, and patch panel bundles without disrupting service.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Toner Probe", "Cable Tracing", "Tools"]
+    },
+    {
+      "id": "z5-g-018", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "A user has a static IP configured but it's within the DHCP range. Another device gets assigned the same IP. What is the correct fix?",
+      "options": ["Delete the static IP from the workstation", "Exclude the static IP from the DHCP scope using a DHCP exclusion range", "Change the DHCP scope to a different subnet", "Enable DHCP snooping on the switch"],
+      "correct_index": 1,
+      "explanation": "The DHCP server is unaware of manual static assignments. Configure a DHCP exclusion range to exclude all static IPs from the DHCP pool — the server will never assign those addresses dynamically. Best practice: reserve a block (e.g., .1–.20) for static assignments and start DHCP scope at .21.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["DHCP Exclusion", "Static IP", "Duplicate IP"]
+    },
+    {
+      "id": "z5-g-019", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "In the bottom-up OSI troubleshooting approach, you confirm Layer 1 (cable connected, link lights on) and Layer 2 (switch shows port up, MAC learned). Ping to gateway fails. Which layer is suspect?",
+      "options": ["Layer 1 — check cable again", "Layer 2 — check MAC table", "Layer 3 — check IP address, subnet mask, default gateway configuration", "Layer 7 — check application firewall"],
+      "correct_index": 2,
+      "explanation": "Layer 1 and 2 confirmed OK. Ping to gateway fails = Layer 3 issue. Most likely: wrong IP address, wrong subnet mask (places gateway in different network), or wrong default gateway IP configured on the host. Run ipconfig /all and verify each value.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["Bottom-Up", "Layer 3", "IP Config"]
+    },
+    {
+      "id": "z5-g-020", "zone": 5, "node": 0, "difficulty": "hard", "type": "boss",
+      "question": "A LWAP stops working after a WLC failover. The backup WLC has a different IP. What must be configured for the APs to find the backup WLC?",
+      "options": ["Update the AP firmware manually", "Configure DHCP option 43 with the backup WLC IP, or configure the AP with the backup WLC IP directly — APs need to know where to find the WLC", "Add the AP SSID to the backup WLC manually", "Reconfigure all 802.1X certificates"],
+      "correct_index": 1,
+      "explanation": "LWAPs discover the WLC via: DHCP option 43 (WLC IP), DNS lookup (CISCO-CAPWAP-CONTROLLER), or direct configuration. After WLC failover to a different IP, APs need to find the new WLC. Configure DHCP option 43 to list the backup WLC IP, or use WLC HA to maintain the same management IP.",
+      "xp_reward": 50, "bits_reward": 20, "tags": ["LWAP", "WLC Failover", "DHCP Option 43", "CAPWAP"]
+    }
+  ]
+}

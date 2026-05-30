@@ -1,0 +1,208 @@
+{
+  "5.1": [
+    {
+      "title": "CompTIA 7-Step Troubleshooting Methodology",
+      "type": "table",
+      "headers": ["Step", "Action", "Key Detail"],
+      "rows": [
+        ["1", "Identify the problem", "Gather info from user, identify symptoms, duplicate the problem, question obvious changes, check logs"],
+        ["2", "Establish a theory of probable cause", "Consider obvious causes first (OSI bottom-up or top-down, or divide & conquer)"],
+        ["3", "Test the theory", "Confirm or deny the theory with specific tests. If confirmed → step 4. If wrong → back to step 2."],
+        ["4", "Establish a plan of action", "Document the fix, consider impact, identify side effects, get approval if needed"],
+        ["5", "Implement the solution (or escalate)", "Apply the fix. Escalate if beyond skill level or authority."],
+        ["6", "Verify full system functionality", "Test that the reported problem is resolved AND that nothing else broke"],
+        ["7", "Document findings, actions, and outcomes", "Record: problem, root cause, fix applied, lessons learned. Update documentation."]
+      ],
+      "key_points": [
+        "MEMORISE the 7 steps in order — exam questions often ask what comes next.",
+        "Step 1: ALWAYS question what has changed recently — most problems follow a change.",
+        "Step 3: if theory is wrong, go back to step 2 — do NOT skip straight to implementing a fix.",
+        "Step 6: verify the fix AND check for side effects (fixing one thing can break another).",
+        "Step 7: documentation is mandatory — not optional. Records help future troubleshooting.",
+        "Escalation happens at step 5 if the technician lacks authority or expertise to fix it."
+      ]
+    },
+    {
+      "title": "Troubleshooting Approaches",
+      "type": "table",
+      "headers": ["Approach", "Start point", "Works best when"],
+      "rows": [
+        ["Bottom-up (OSI Layer 1→7)", "Start at Physical layer — check cables, NIC, power", "Physical symptoms obvious: cable unplugged, link light off, interface errors"],
+        ["Top-down (OSI Layer 7→1)", "Start at Application layer — can the app connect?", "Application-specific problem: one app broken, others work fine"],
+        ["Divide & conquer", "Start at Layer 3 (ping gateway, ping DNS) — split the problem", "Problem location unknown — rapidly narrow scope by testing mid-stack first"],
+        ["Follow the path", "Trace the traffic path from source to destination step by step", "Intermittent issues, routing problems, asymmetric paths"],
+        ["Compare against baseline", "Compare current metrics against known-good baseline", "Degraded performance (not total failure) — spot what changed"],
+        ["Swap components", "Replace suspect component with known-good spare", "Hardware suspected — quickest way to isolate NIC, cable, SFP"]
+      ],
+      "key_points": [
+        "Bottom-up: most systematic. Good for physical issues. Can be slow if problem is at Layer 7.",
+        "Divide and conquer: most efficient in practice — ping the gateway first to establish Layer 3 works.",
+        "Ping test sequence: loopback (127.0.0.1) → own IP → gateway → remote IP → DNS name.",
+        "If ping IP works but DNS name fails → DNS problem, not network connectivity.",
+        "If ping gateway fails but ping own IP works → local config issue (wrong mask, wrong gateway).",
+        "Document the approach used — helps next engineer start where you left off."
+      ]
+    }
+  ],
+  "5.2": [
+    {
+      "title": "Cable Types & Pinouts",
+      "type": "table",
+      "headers": ["Cable Type", "Pinout", "Use Case"],
+      "rows": [
+        ["Straight-through", "Same standard (T568B or T568A) on BOTH ends", "PC → switch, switch → router (different device types)"],
+        ["Crossover", "T568A on one end, T568B on other end", "PC → PC, switch → switch direct (same device types). MDI/MDIX auto-negates this on modern equipment."],
+        ["Rollover / Console", "Pins reversed (pin 1↔8, 2↔7, etc.) — flat ribbon cable", "Laptop serial/USB → router/switch console port for CLI management"],
+        ["T568A pinout", "W/G, G, W/Or, Bl, W/Bl, Or, W/Br, Br", "Used in government buildings, some home installations"],
+        ["T568B pinout", "W/Or, Or, W/G, Bl, W/Bl, G, W/Br, Br", "Most common in commercial/enterprise wiring in North America"]
+      ],
+      "key_points": [
+        "T568B is the dominant standard in enterprise — most patch panels and wall jacks use T568B.",
+        "T568A vs T568B: only orange and green pairs swap. Both are valid — just must be consistent.",
+        "Split pair: wires from different pairs twisted together — looks correct on continuity test but fails due to crosstalk. Requires proper wire map tester to detect.",
+        "MDI/MDIX auto-sensing: modern switches auto-detect cable type — crossover cables rarely needed today.",
+        "Rollover cable: pins completely reversed (1↔8). Used ONLY for console/management access, not data.",
+        "Open circuit: wire broken — no connectivity. Short circuit: two wires touching — both fail."
+      ]
+    },
+    {
+      "title": "Physical Layer Troubleshooting Tools",
+      "type": "table",
+      "headers": ["Tool", "What it does", "Use case"],
+      "rows": [
+        ["Cable tester (continuity)", "Verifies all 8 wires are connected and in correct order (wire map)", "Quickly validate a patch cable or horizontal run — finds opens, shorts, reversed pairs"],
+        ["Tone generator + probe (fox & hound)", "Toner injects audio tone; probe detects tone to trace cable through walls/bundles", "Locate which cable in a bundle goes where; trace cables with no labels"],
+        ["OTDR (Optical Time Domain Reflectometer)", "Sends light pulse into fiber; measures reflections to locate breaks/faults and measure distance", "Fiber troubleshooting — exact location of a break, splice quality, end-to-end loss mapping"],
+        ["Optical light meter / power meter", "Measures optical power (dBm) at the end of a fiber run", "Verify fiber meets loss budget; confirm signal strong enough for the transceiver"],
+        ["Visual fault locator (VFL)", "Injects visible red light into fiber — light visible at break point or bend", "Quickly find breaks, tight bends, or bad connectors on short fiber runs"],
+        ["Multimeter", "Measures AC/DC voltage, resistance, continuity", "Test power supplies, verify cable continuity, check for opens/shorts on copper"],
+        ["Loopback adapter", "Connects TX to RX on a port — tests the port's ability to send and receive", "Verify NIC/switch port hardware works; isolate port vs cable vs device issue"],
+        ["Punch-down tool (110 block)", "Seats wire into IDC (Insulation Displacement Connector) on patch panels/keystones", "Terminating horizontal cable runs at patch panels and wall jacks"],
+        ["Spectrum analyser", "Shows RF energy across frequency bands — identifies interference sources", "Wireless troubleshooting — find rogue APs, microwave interference, baby monitors on 2.4GHz"]
+      ],
+      "key_points": [
+        "OTDR is the key fiber tool — finds exact location of a break (reports distance in meters/feet).",
+        "Toner probe (fox and hound): toner at one end, probe at other — traces unknown cables through walls.",
+        "Optical power meter: measures dBm. Know expected loss values for the fiber type/length.",
+        "Loopback test: if loopback passes but cable fails → cable is the problem. If loopback fails → port/NIC is the problem.",
+        "Spectrum analyser for wireless: identifies non-Wi-Fi interference (microwave = 2.4GHz broadband noise).",
+        "Cable certifier (high-end tester): not just continuity — measures attenuation, crosstalk, return loss to certify Cat6A 10GbE compliance."
+      ]
+    },
+    {
+      "title": "Common Cable Faults",
+      "type": "table",
+      "headers": ["Fault", "Cause", "Symptom", "Detection"],
+      "rows": [
+        ["Open circuit", "Broken conductor inside the cable or at a connector", "No connectivity — link light off", "Continuity tester — fail on affected pair"],
+        ["Short circuit", "Two conductors touching (damaged jacket, over-crimped)", "No connectivity or erratic behaviour", "Continuity tester — continuity between wrong pins"],
+        ["Crossed/reversed pairs", "Incorrect wiring — T568A one end, B other when straight needed", "No link (if MDIX not supported) or works on modern switches with MDIX", "Wire map tester"],
+        ["Split pair", "Wires from different pairs twisted together (e.g., pin 1 from pair 2)", "Passes continuity test but high crosstalk — data errors at speed", "Wire map tester with pair identification"],
+        ["Attenuation", "Signal weakens over distance — exceeding 100m or poor quality cable", "Intermittent errors, reduced speed, link may drop", "Cable certifier measures insertion loss"],
+        ["Crosstalk (NEXT/FEXT)", "Interference between adjacent pairs in same cable", "High error rates, especially at Gigabit speeds", "Cable certifier measures Near-End CrossTalk"],
+        ["EMI / RFI interference", "External electromagnetic or radio interference (motors, fluorescent lights)", "CRC errors, increased collisions, intermittent outages", "Move cable away from power lines; use STP (shielded)"]
+      ],
+      "key_points": [
+        "Split pairs PASS a simple continuity test (all 8 wires connected) but FAIL a wire map test — critical difference.",
+        "Attenuation: worst on long runs. Keep horizontal cable ≤90m (100m total with patch cables).",
+        "Crosstalk: reduces with proper twist density. Untwisting more than 0.5 inches at termination causes NEXT.",
+        "EMI: run data cables perpendicular to power cables when crossing; avoid running parallel and close.",
+        "Shielded cable (STP/FTP): required near high-EMI sources — requires proper grounding to be effective."
+      ]
+    }
+  ],
+  "5.3": [
+    {
+      "title": "Troubleshooting Commands — Quick Reference",
+      "type": "table",
+      "headers": ["Command", "OS", "What it does", "Key output to look for"],
+      "rows": [
+        ["ping", "All", "Tests ICMP reachability to a host; measures RTT", "Reply vs Request timeout (no route/blocked/down); TTL value; RTT ms"],
+        ["traceroute / tracert", "Linux/macOS / Windows", "Shows hop-by-hop path to destination with RTT at each hop", "Where * * * appear (timeout/blocked); high RTT at specific hop; last hop before failure"],
+        ["pathping", "Windows", "Combines ping + traceroute — shows packet loss % at each hop", "Loss% column — identifies which hop drops packets"],
+        ["ipconfig / ifconfig", "Windows / Linux", "Shows NIC IP address, subnet mask, default gateway, MAC, DNS", "169.254.x.x = APIPA (no DHCP); wrong mask; missing gateway"],
+        ["nslookup / dig", "All / Linux+Mac", "Queries DNS — resolves hostnames to IPs or looks up records", "NXDOMAIN = name not found; wrong IP returned = DNS issue; which server answered"],
+        ["arp -a", "All", "Shows ARP cache — IP-to-MAC mappings learned by the local host", "Duplicate IP: two entries with same IP different MACs; wrong gateway MAC"],
+        ["netstat", "All", "Shows active network connections, listening ports, routing table", "netstat -an: open ports/connections; netstat -r: routing table"],
+        ["nmap", "All", "Network discovery and port scanning — finds open ports, OS fingerprinting", "Open/closed/filtered ports; host discovery on subnet"],
+        ["route print / ip route", "Windows / Linux", "Displays routing table — shows all routes the OS knows", "Missing default gateway; wrong next-hop; unreachable network"],
+        ["show interface", "Cisco IOS", "Shows interface status, speed/duplex, error counters", "Input errors, CRC, runts, giants; line up/protocol down vs both down"],
+        ["show ip route", "Cisco IOS", "Shows routing table — connected, static, and dynamic routes", "Missing network; wrong AD; default route (0.0.0.0/0) present or absent"],
+        ["show arp", "Cisco IOS", "Shows ARP table on router/switch — IP-to-MAC mappings", "Incomplete ARP entry; wrong MAC for a gateway IP"]
+      ],
+      "key_points": [
+        "169.254.x.x in ipconfig/ifconfig = APIPA — host failed to get a DHCP address.",
+        "ping 127.0.0.1 = loopback test. If this fails → TCP/IP stack broken on the local machine.",
+        "traceroute: * * * at a hop = that router blocks ICMP TTL-exceeded. Not always a problem — check if NEXT hop responds.",
+        "nslookup: always check which DNS server responded — client may be pointing at wrong DNS.",
+        "arp -a: if gateway MAC resolves to attacker's MAC → ARP poisoning. If incomplete → ARP failing (Layer 2 issue).",
+        "netstat -rn: routing table without DNS resolution — faster. Shows if default route (0.0.0.0) is present."
+      ]
+    }
+  ],
+  "5.4": [
+    {
+      "title": "Wireless Troubleshooting Scenarios",
+      "type": "table",
+      "headers": ["Symptom", "Likely Cause", "Fix"],
+      "rows": [
+        ["Cannot see the SSID", "AP too far away; SSID broadcasting disabled; wrong frequency band (5GHz device looking for 2.4GHz)", "Move closer; enable SSID broadcast; check band compatibility"],
+        ["Connected but no internet (169.254.x.x)", "DHCP failure — AP DHCP scope exhausted or DHCP server unreachable", "Renew DHCP (ipconfig /release /renew); check DHCP server; check DHCP scope"],
+        ["Intermittent drops when microwave runs", "2.4GHz interference — microwave operates in 2.4GHz ISM band", "Move client to 5GHz band (SSID); change AP channel to 1, 6, or 11"],
+        ["Low speed despite strong signal", "Co-channel interference (nearby APs on same channel); high client count; background noise", "Change channel; reduce AP transmit power for smaller cells; add APs"],
+        ["Authentication failure (wrong password)", "PSK mismatch; case-sensitive passphrase error", "Re-enter passphrase carefully; check WPA2/WPA3 mode matches"],
+        ["WPA2 Enterprise auth failure", "RADIUS server unreachable; wrong certificate; client EAP type mismatch", "Verify RADIUS reachability; check cert validity; match EAP profile on client and server"],
+        ["One AP works, others don't", "CAPWAP tunnel to WLC broken; AP not getting IP from DHCP; AP not provisioned in WLC", "Check WLC CAPWAP connectivity; verify AP gets DHCP; check WLC AP whitelist"],
+        ["Roaming drops call mid-walk", "AP cells not overlapping adequately (coverage gap)", "Increase transmit power or add AP; ensure 15-20% cell overlap for roaming"]
+      ],
+      "key_points": [
+        "169.254.x.x (APIPA) on wireless = DHCP problem, not wireless problem. The wireless connected successfully.",
+        "2.4GHz interference sources: microwave ovens, Bluetooth, baby monitors, cordless phones, ZigBee devices.",
+        "Co-channel interference worse than adjacent-channel. Always use channels 1, 6, 11 on 2.4GHz.",
+        "Signal strength (dBm) vs signal quality: strong signal with high noise floor = still poor quality.",
+        "Hidden SSID: client must manually enter SSID name — provides minimal security benefit, causes connection issues.",
+        "Band steering: AP can push capable clients to 5GHz to reduce 2.4GHz congestion."
+      ]
+    }
+  ],
+  "5.5": [
+    {
+      "title": "Common Network Service Issues",
+      "type": "table",
+      "headers": ["Issue", "Symptom", "Cause", "Fix"],
+      "rows": [
+        ["APIPA address (169.254.x.x)", "Host gets 169.254.x.x IP — cannot reach network", "DHCP server unreachable, scope exhausted, or DHCP disabled", "ipconfig /release /renew; check DHCP server; expand scope"],
+        ["DHCP scope exhaustion", "New devices cannot get IP addresses", "All IPs in DHCP scope assigned; stale leases not released", "Expand scope; reduce lease time; clean stale leases"],
+        ["Wrong DHCP option (gateway)", "Host gets IP but cannot route outside local subnet", "DHCP option 3 (default gateway) misconfigured in scope", "Correct gateway IP in DHCP scope options"],
+        ["Wrong DHCP option (DNS)", "Host gets IP and can ping IPs but cannot resolve names", "DHCP option 6 (DNS server) misconfigured", "Correct DNS server IP in DHCP scope options"],
+        ["DNS NXDOMAIN", "Hostname lookup fails — NXDOMAIN error in nslookup", "DNS record doesn't exist; wrong DNS server queried; split-brain DNS issue", "Add missing DNS record; verify client is querying correct DNS server"],
+        ["DNS resolves wrong IP", "Browser goes to wrong site; ping resolves wrong address", "Stale DNS cache; DNS poisoning; wrong A record in DNS", "ipconfig /flushdns; check DNS record; verify DNSSEC"],
+        ["Duplicate IP address", "Intermittent connectivity for one or both hosts; ARP conflicts", "Two devices configured with same static IP; static IP in DHCP pool", "Find and fix duplicate; exclude static IPs from DHCP pool"],
+        ["Wrong default gateway", "Can ping local hosts but cannot reach internet or other subnets", "Default gateway IP wrong or missing in host config or DHCP scope", "Fix gateway IP in host config or DHCP scope"],
+        ["Wrong subnet mask", "Can only reach some hosts on what appears to be the same LAN", "Subnet mask set too large or too small — host computes wrong network range", "Correct subnet mask; check DHCP scope mask option"],
+        ["NTP time sync failure", "Kerberos auth failures; certificate errors; log timestamp mismatch", "NTP server unreachable; wrong NTP server IP; firewall blocks UDP 123", "Fix NTP server address; open UDP 123; verify NTP hierarchy"]
+      ],
+      "key_points": [
+        "APIPA 169.254.x.x: Windows/macOS assign this when DHCP fails — means DHCP is broken, not the NIC.",
+        "ipconfig /release then /renew: forces DHCP rebind — quick fix for lease issues.",
+        "ipconfig /flushdns: clears local DNS cache — fixes stale or poisoned cached entries.",
+        "Duplicate IP: ARP conflict causes both hosts to drop off the network intermittently.",
+        "NTP failure causes Kerberos auth to fail (5-minute clock skew tolerance in Active Directory).",
+        "Wrong subnet mask: host A at 192.168.1.1/24 and host B at 192.168.1.1/25 may not communicate if mask mismatches cause incorrect network calculations."
+      ]
+    },
+    {
+      "title": "IP Addressing Diagnostic Flow",
+      "type": "concept",
+      "body": "SYSTEMATIC PING TEST SEQUENCE:\n  Step 1: ping 127.0.0.1 (loopback)\n    FAIL → TCP/IP stack is broken on local machine\n\n  Step 2: ping <own IP address>\n    FAIL → NIC driver issue or duplicate IP conflict\n\n  Step 3: ping <default gateway>\n    FAIL → check IP/mask/gateway config; check cable/switch; ARP cache\n    → 'ping works but traceroute fails' often = ICMP blocked by firewall\n\n  Step 4: ping <remote IP address>\n    FAIL → routing issue between networks; check routing table (route print)\n\n  Step 5: ping <hostname / FQDN>\n    FAIL but Step 4 WORKS → DNS issue (nslookup to diagnose)\n    FAIL and Step 4 FAILS → network connectivity issue\n\nCOMMON WRONG MASK SYMPTOMS:\n  /24 instead of /25 → host thinks it's on a larger subnet, tries to ARP for hosts that are actually on another subnet\n  /25 instead of /24 → host thinks some same-LAN hosts are remote, sends to gateway instead of direct\n\nROUTING TABLE CHECK:\n  Missing default route (0.0.0.0/0) → can reach local subnet, nothing else\n  Correct route present but wrong next-hop → traffic goes to wrong place",
+      "key_points": [
+        "Loopback (127.0.0.1) ALWAYS responds if TCP/IP stack works — doesn't need a NIC.",
+        "APIPA means DHCP failed — not a DNS or firewall issue. Renew DHCP first.",
+        "Ping IP works, ping hostname fails → pure DNS issue. Check nslookup output.",
+        "Ping gateway fails → check: Is IP in same subnet as gateway? Is cable connected? ARP resolve?",
+        "route print (Windows) / ip route (Linux): default route shows as 0.0.0.0 0.0.0.0.",
+        "ipconfig /all: shows ALL NIC info including DNS servers, DHCP lease time, MAC address."
+      ]
+    }
+  ]
+}

@@ -20,12 +20,12 @@ from ui.themes import GameTheme, Symbols, Styles, get_hp_color
 console = Console()
 
 _QSTYLE = QStyle([
-    ("qmark", "fg:bright_cyan bold"),
+    ("qmark", "fg:#00ffff bold"),
     ("question", "fg:white bold"),
-    ("selected", "fg:bright_cyan bold"),
-    ("pointer", "fg:bright_cyan bold"),
-    ("answer", "fg:bright_green bold"),
-    ("highlighted", "fg:bright_cyan"),
+    ("selected", "fg:#00ffff bold"),
+    ("pointer", "fg:#00ffff bold"),
+    ("answer", "fg:#00ff00 bold"),
+    ("highlighted", "fg:#00ffff"),
 ])
 
 ZONE_NAMES = {

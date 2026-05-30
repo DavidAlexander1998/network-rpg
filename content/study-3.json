@@ -1,0 +1,282 @@
+{
+  "3.1": [
+    {
+      "title": "SNMP Versions — v1 vs v2c vs v3",
+      "type": "table",
+      "headers": ["Version", "Security", "Community Strings", "Key Features", "Use Today?"],
+      "rows": [
+        ["SNMPv1", "None — plaintext", "Yes (public/private)", "Original standard; GetRequest, SetRequest, GetNextRequest, Trap", "Legacy only — insecure"],
+        ["SNMPv2c", "None — plaintext", "Yes (same as v1)", "GetBulkRequest (efficient bulk queries), Inform (acknowledged traps)", "Common but insecure — community strings cleartext"],
+        ["SNMPv3", "Full security model", "No — uses users/groups", "AuthNoPriv (auth+no encrypt), AuthPriv (auth+encrypt with AES/DES), NoAuthNoPriv", "Recommended — only secure version"]
+      ],
+      "key_points": [
+        "SNMPv1/v2c: community string 'public' = read-only, 'private' = read-write. Both cleartext — sniffable.",
+        "SNMPv3 AuthPriv mode: authentication (MD5/SHA) + encryption (AES/DES). Use this for production.",
+        "SNMP uses UDP 161 for queries (manager → agent), UDP 162 for traps/informs (agent → manager).",
+        "Trap = unreliable (fire-and-forget). Inform = reliable (agent retransmits until ACK).",
+        "MIB (Management Information Base): database of manageable objects on a device.",
+        "OID (Object Identifier): unique numeric address for each MIB object (e.g., 1.3.6.1.2.1.1.1 = sysDescr)."
+      ]
+    },
+    {
+      "title": "Syslog Severity Levels",
+      "type": "table",
+      "headers": ["Level", "Name", "Meaning", "Example"],
+      "rows": [
+        ["0", "Emergency (emerg)", "System is unusable", "Kernel panic, complete failure"],
+        ["1", "Alert", "Immediate action required", "Database corruption, loss of backup primary"],
+        ["2", "Critical", "Critical conditions", "Hardware failure, temperature critical"],
+        ["3", "Error", "Error conditions", "Interface down, BGP neighbor lost"],
+        ["4", "Warning", "Warning conditions", "Disk space low, config change warning"],
+        ["5", "Notice", "Normal but significant", "Interface bounced, routing table changed"],
+        ["6", "Informational", "Informational messages", "User login, config saved, service started"],
+        ["7", "Debug", "Debug-level messages", "Packet-by-packet trace, protocol state machine"]
+      ],
+      "key_points": [
+        "Mnemonic: Every Awesome Cisco Engineer Will Need Daily Biscuits (0-7).",
+        "Lower number = higher severity. 0 is worst, 7 is most verbose.",
+        "Syslog uses UDP 514 (default) or TCP 514/6514 (TLS-secured).",
+        "Syslog server (collector): centralised log aggregation — Graylog, Splunk, syslog-ng.",
+        "Severity 0-3: critical/alerts requiring immediate attention.",
+        "Production devices usually set to level 5 (Notice) or 6 (Info) — level 7 (Debug) floods logs."
+      ]
+    },
+    {
+      "title": "Network Monitoring Tools Comparison",
+      "type": "table",
+      "headers": ["Tool / Protocol", "What it monitors", "Port/Protocol", "Direction", "Use Case"],
+      "rows": [
+        ["SNMP", "Device health: CPU, memory, interface counters, config", "UDP 161/162", "Poll (manager→agent) or Trap (agent→manager)", "Device performance monitoring, alerting"],
+        ["Syslog", "Event messages, logs from devices", "UDP 514", "One-way (device → syslog server)", "Centralised log management, security auditing"],
+        ["NetFlow / IPFIX", "Traffic flows: src/dst IP, port, protocol, bytes", "UDP 2055 (NetFlow)", "One-way (router → collector)", "Bandwidth analysis, traffic patterns, anomaly detection"],
+        ["ICMP Ping", "Reachability and round-trip latency", "ICMP", "Request/Reply", "Basic up/down monitoring, latency measurement"],
+        ["RMON", "Network traffic stats captured at remote devices", "SNMP MIB extension", "Agent-based", "Detailed traffic analysis without centralised polling"],
+        ["Port Mirroring (SPAN)", "Full packet capture from a switch port", "Ethernet (mirrored)", "Copy to monitor port", "Packet analysis with Wireshark; IDS sensors"]
+      ],
+      "key_points": [
+        "NetFlow = flow-level visibility (who talked to whom, how much). SNMP = device-level stats.",
+        "SPAN (Switched Port Analyzer) / port mirroring: copies traffic from source port to monitor port for analysis.",
+        "RSPAN (Remote SPAN): mirrors traffic across the network to a remote switch port.",
+        "Baseline: record normal performance metrics to compare against anomalies later.",
+        "NMS (Network Management System): software platform that uses SNMP to monitor/manage all devices.",
+        "Nagios, PRTG, SolarWinds, Zabbix — common NMS platforms."
+      ]
+    }
+  ],
+  "3.2": [
+    {
+      "title": "Network Performance Metrics",
+      "type": "table",
+      "headers": ["Metric", "Definition", "Unit", "Impact when bad"],
+      "rows": [
+        ["Bandwidth", "Maximum data transfer capacity of a link", "Mbps / Gbps", "Congestion, slow transfers"],
+        ["Throughput", "Actual data rate achieved (always ≤ bandwidth)", "Mbps / Gbps", "Lower than expected = overhead, errors, congestion"],
+        ["Latency", "Time for a packet to travel from source to destination", "Milliseconds (ms)", "Slow response, poor VoIP/gaming quality"],
+        ["Jitter", "Variation in latency between consecutive packets", "Milliseconds (ms)", "VoIP/video choppy, packet reordering"],
+        ["Packet loss", "Percentage of packets that fail to reach destination", "Percentage (%)", "Retransmissions, poor quality, TCP slowdown"],
+        ["Error rate", "Percentage of corrupt/errored frames", "Percentage (%)", "CRC errors → retransmits → degraded performance"]
+      ],
+      "key_points": [
+        "VoIP quality thresholds: latency <150ms, jitter <30ms, packet loss <1%.",
+        "Bandwidth ≠ throughput. Bandwidth is the pipe size; throughput is actual water flowing.",
+        "Jitter buffer: VoIP devices use a small buffer to smooth out jitter — too large = latency, too small = choppy.",
+        "Packet loss causes TCP to trigger congestion control (slow start) — dramatically reduces throughput.",
+        "Establish a BASELINE of normal metrics — anomaly detection compares current vs baseline."
+      ]
+    },
+    {
+      "title": "QoS — Differentiated Services & Queuing",
+      "type": "table",
+      "headers": ["QoS Component", "Layer", "Value Range", "Purpose / Notes"],
+      "rows": [
+        ["DSCP (Differentiated Services Code Point)", "Layer 3 (IP header)", "0–63 (6 bits)", "Marks IP packets for priority treatment. EF=46 (VoIP), AF classes, CS classes, BE=0 (default)"],
+        ["CoS (Class of Service / 802.1p)", "Layer 2 (802.1Q tag)", "0–7 (3 bits)", "VLAN-tagged frames only. 7=highest priority. Mapped to DSCP at L3 boundary."],
+        ["Traffic Shaping", "Outbound", "Rate limiting (token bucket)", "Buffers excess traffic — introduces delay but avoids drops"],
+        ["Traffic Policing", "Inbound or outbound", "Rate limiting (drop excess)", "Drops or re-marks excess traffic immediately — no buffering"],
+        ["LLQ (Low Latency Queuing)", "N/A", "Strict priority queue", "Guarantees VoIP/real-time traffic is always served first"],
+        ["CBWFQ (Class-Based WFQ)", "N/A", "Bandwidth %", "Assigns minimum bandwidth guarantee per traffic class"]
+      ],
+      "key_points": [
+        "DSCP EF (Expedited Forwarding) = 46 — used for VoIP/real-time traffic (strict priority).",
+        "DSCP BE (Best Effort) = 0 — default, no special treatment.",
+        "Shaping vs Policing: shaping queues excess (smooth, adds delay). Policing drops excess (harsh, immediate).",
+        "QoS must be configured end-to-end — a single device without QoS breaks the chain.",
+        "Voice traffic: mark at ingress (access port), trust DSCP at core, use LLQ for guaranteed forwarding."
+      ]
+    },
+    {
+      "title": "Interface Errors & Diagnostics",
+      "type": "table",
+      "headers": ["Error Type", "Cause", "Fix"],
+      "rows": [
+        ["Runts", "Frames < 64 bytes — collision or malformed frames", "Check for collisions, duplex mismatch, or faulty NIC"],
+        ["Giants", "Frames > 1518 bytes (or 1522 with 802.1Q)", "Check for jumbo frame misconfiguration or MTU mismatch"],
+        ["CRC errors", "Corrupt frames — bad cable, connector, or interference", "Replace cable, check SFP/connector, test cable with tester"],
+        ["Input/Output errors", "Drops due to buffer overflow or hardware issues", "Check interface utilisation — possible upgrade needed"],
+        ["Duplex mismatch", "One end full-duplex, other half-duplex → collisions and errors", "Set both ends to same duplex explicitly — disable auto-negotiate"],
+        ["Flapping interface", "Interface repeatedly going up/down", "Check cable, SFP, remote port, or spanning tree issue"]
+      ],
+      "key_points": [
+        "Duplex mismatch: most common cause of CRC errors + late collisions on Ethernet links.",
+        "Auto-negotiate: can fail — best practice is explicit speed/duplex on server and uplink ports.",
+        "Late collisions (detected >512 bits into frame) = strong indicator of duplex mismatch.",
+        "show interface: key command to see all error counters on Cisco devices.",
+        "Runts + collisions together = typical half-duplex or duplex mismatch scenario."
+      ]
+    }
+  ],
+  "3.3": [
+    {
+      "title": "Network Diagram Types",
+      "type": "table",
+      "headers": ["Diagram Type", "What it shows", "Includes", "Used for"],
+      "rows": [
+        ["Logical diagram", "Network topology, IP addressing, VLANs, routing", "IP subnets, routers, switches, VLANs, cloud symbols", "Troubleshooting, capacity planning, understanding traffic flow"],
+        ["Physical diagram", "Actual physical layout of equipment and connections", "Exact device locations, cable types, port numbers", "Installation, physical troubleshooting, site audits"],
+        ["Wiring / cabling diagram", "Cable runs, patch panel mappings, port-to-port", "Cable IDs, patch panel labels, wall jack locations", "Physical cable management, moves/adds/changes"],
+        ["Rack diagram", "Rack unit layout — what's installed where in each rack", "Device model, U position, PDU, cable management", "Data center documentation, power planning"],
+        ["Network baseline diagram", "Traffic flows, bandwidth utilization at normal operation", "Utilization percentages, top talkers", "Anomaly detection, capacity planning"]
+      ],
+      "key_points": [
+        "Logical ≠ Physical: two devices can be adjacent logically but floors apart physically.",
+        "Documentation is a living document — update after every change.",
+        "IP address management (IPAM): software or spreadsheet tracking all assigned IPs, subnets, DNS.",
+        "Out-of-date documentation is worse than no documentation — it misleads troubleshooting.",
+        "Rack diagram should include power draw (W per device) to prevent PDU/UPS overload."
+      ]
+    },
+    {
+      "title": "Change Management Process",
+      "type": "concept",
+      "body": "Change management ensures network changes are planned, reviewed, and reversible — reducing outages from uncontrolled changes.\n\nKEY STEPS:\n  1. RFC (Request for Change): document the change, reason, scope, schedule, rollback plan\n  2. CAB (Change Advisory Board): reviews and approves/rejects the RFC\n  3. Change window: scheduled maintenance period (often low-traffic hours)\n  4. Implementation: execute the change following the documented procedure\n  5. Testing: verify the change works as expected\n  6. Rollback: revert using the documented rollback plan if something breaks\n  7. Documentation update: update diagrams, IP docs, configs after successful change\n\nCHANGE TYPES:\n  • Standard change: pre-approved, low risk, recurring (e.g., adding a user)\n  • Normal change: requires RFC + CAB approval\n  • Emergency change: expedited process for critical issues (post-change documentation still required)",
+      "key_points": [
+        "Every change needs a rollback plan — know how to undo it before you start.",
+        "Change window: schedule during low-impact hours (nights/weekends for business networks).",
+        "CAB (Change Advisory Board): committee that evaluates risk and approves changes.",
+        "Emergency changes: still document after the fact — 'fix first, document second'.",
+        "Configuration backups: always back up device config BEFORE making changes.",
+        "RFC must include: reason, scope, risk assessment, test plan, rollback plan, schedule."
+      ]
+    },
+    {
+      "title": "Policies and Agreements",
+      "type": "table",
+      "headers": ["Policy / Agreement", "Purpose", "Key Points"],
+      "rows": [
+        ["AUP (Acceptable Use Policy)", "Defines permitted use of org network/systems", "Users must sign; covers internet use, prohibited content, personal device use"],
+        ["BYOD Policy", "Rules for personal devices on corp network", "MDM enrollment, network segmentation (guest VLAN), data containerisation"],
+        ["NDA (Non-Disclosure Agreement)", "Protects confidential info shared with third parties", "Vendors, contractors, employees — legal agreement before access"],
+        ["SLA (Service Level Agreement)", "Defines service expectations between provider and customer", "Uptime % (e.g., 99.9%), response time, MTTR, remedies for breach"],
+        ["DLP (Data Loss Prevention)", "Prevents unauthorised data exfiltration", "Monitors email, USB, cloud upload for sensitive data (PII, PCI, PHI)"],
+        ["MOU (Memorandum of Understanding)", "Informal agreement defining roles/responsibilities", "Less binding than SLA — used between internal departments or partners"]
+      ],
+      "key_points": [
+        "SLA 99.9% uptime = ~8.76 hours downtime/year. 99.99% = ~52.6 min/year. 99.999% = ~5.26 min/year.",
+        "BYOD risk: personal devices may lack corporate security controls — use network segmentation.",
+        "MDM (Mobile Device Management): enforce policies, remote wipe, containerise corp data on personal devices.",
+        "PII = Personally Identifiable Information. PHI = Protected Health Information (HIPAA). PCI = Payment Card data.",
+        "DLP can be endpoint-based (agent) or network-based (proxy/CASB)."
+      ]
+    }
+  ],
+  "3.4": [
+    {
+      "title": "RAID Levels — Quick Reference",
+      "type": "table",
+      "headers": ["RAID Level", "Method", "Min Disks", "Fault Tolerance", "Read Perf", "Write Perf", "Notes"],
+      "rows": [
+        ["RAID 0", "Striping only", "2", "None — any disk failure = total loss", "Excellent", "Excellent", "Fastest but zero redundancy. Not for important data."],
+        ["RAID 1", "Mirroring only", "2", "1 disk failure", "Good", "Moderate", "Exact copy on second disk. Usable capacity = 50%."],
+        ["RAID 5", "Striping + single distributed parity", "3", "1 disk failure", "Good", "Moderate (parity calc)", "Most common. Usable = N-1 disks. Slow rebuild."],
+        ["RAID 6", "Striping + double distributed parity", "4", "2 disk failures", "Good", "Lower (2x parity)", "Safer than RAID 5 for large arrays. Usable = N-2 disks."],
+        ["RAID 10 (1+0)", "Mirroring + Striping", "4", "1 disk per mirrored pair", "Excellent", "Good", "Best performance + redundancy. Usable = 50%."]
+      ],
+      "key_points": [
+        "RAID 5: most common for file servers — balance of performance, capacity, fault tolerance. CANNOT survive 2 disk failures.",
+        "RAID 6: preferred for large drives (>2TB) where rebuild time increases second failure risk.",
+        "RAID 10: best for databases/high I/O — can lose one disk per mirrored pair (possibly multiple).",
+        "RAID 0: NEVER for production data — zero fault tolerance.",
+        "RAID is NOT a backup — it protects against drive failure, not accidental deletion, ransomware, or site disaster.",
+        "Hot spare: idle disk automatically rebuilds when a RAID member fails."
+      ]
+    },
+    {
+      "title": "High Availability Concepts",
+      "type": "table",
+      "headers": ["HA Concept", "Description", "Example"],
+      "rows": [
+        ["Active-Active clustering", "All nodes actively process traffic simultaneously — load balanced", "Two web servers both serving requests; traffic split between them"],
+        ["Active-Passive (failover) clustering", "One node active, one on standby — standby takes over on failure", "Primary DB server + standby DB; standby activates only on failure"],
+        ["NIC Teaming (bonding)", "Multiple NICs aggregated into one logical interface", "Two 1Gbps NICs bonded = 2Gbps + redundancy; one NIC fails → other carries on"],
+        ["Multipathing", "Multiple physical paths to a storage device (SAN)", "iSCSI with two HBAs — if one path fails, traffic uses alternate path automatically"],
+        ["Diverse path / redundant links", "Multiple physical routes between locations", "Two ISP connections via different paths — if one fails, other carries traffic"],
+        ["Graceful degradation", "System continues at reduced capacity after partial failure", "RAID 5 array after 1 disk failure — still operates (degraded) until disk replaced"]
+      ],
+      "key_points": [
+        "Active-Active: all nodes share load → better performance AND redundancy.",
+        "Active-Passive: standby wastes resources when idle, but simpler to configure.",
+        "NIC teaming modes: Active-Backup (failover only), LACP 802.3ad (active-active + bonding), Round-Robin.",
+        "Single point of failure (SPOF): any component whose failure takes down the system — eliminate via redundancy.",
+        "Five 9s (99.999%) availability = ~5 minutes downtime/year — requires HA at every layer.",
+        "Load balancer: distributes requests to server pool — can do health checks and remove failed servers."
+      ]
+    }
+  ],
+  "3.5": [
+    {
+      "title": "Disaster Recovery Site Types",
+      "type": "table",
+      "headers": ["Site Type", "Equipment", "Data Currency", "Activation Time", "Cost"],
+      "rows": [
+        ["Cold site", "Just space, power, cooling — NO equipment", "None until restored from backup", "Days to weeks", "Lowest"],
+        ["Warm site", "Partially equipped — servers present but not fully configured", "Backup tapes/cloud restore needed", "Hours to days", "Medium"],
+        ["Hot site", "Fully operational mirror — identical equipment, live data sync", "Near real-time / current", "Minutes to hours (or immediate)", "Highest"]
+      ],
+      "key_points": [
+        "Hot site: most expensive but fastest failover — data is always current (continuous replication).",
+        "Cold site: cheapest — just floor space and power. Requires shipping equipment and full restore.",
+        "Warm site: middle ground — hardware present but needs config + data restore.",
+        "Cloud DR / DRaaS (Disaster Recovery as a Service): spin up virtual infrastructure in cloud on demand.",
+        "Geographic diversity: DR site should be far enough to avoid same regional disaster (hurricane, earthquake).",
+        "Test your DR plan regularly — an untested DR plan may fail when needed."
+      ]
+    },
+    {
+      "title": "Backup Types Comparison",
+      "type": "table",
+      "headers": ["Backup Type", "What it backs up", "Speed (backup)", "Speed (restore)", "Media needed for restore"],
+      "rows": [
+        ["Full backup", "ALL data regardless of change flag", "Slowest (backs up everything)", "Fastest (single backup set)", "Just the full backup"],
+        ["Incremental backup", "Only data changed since LAST backup (full OR incremental)", "Fastest (only changes)", "Slowest (need full + all incrementals in sequence)", "Full backup + ALL incrementals since full"],
+        ["Differential backup", "All data changed since last FULL backup", "Moderate (grows each day)", "Fast (full + one differential)", "Full backup + latest differential only"]
+      ],
+      "key_points": [
+        "Incremental: fast to back up, slow to restore (need full + every incremental in order).",
+        "Differential: slower to back up each day (grows), but only need last full + last diff to restore.",
+        "3-2-1 rule: 3 copies of data, on 2 different media types, with 1 copy offsite.",
+        "Backup window: time allowed for backup operation — incrementals fit tighter windows.",
+        "Backup rotation schemes: GFS (Grandfather-Father-Son) — daily/weekly/monthly retention tiers.",
+        "Test restores regularly — backup files that cannot be restored are worthless."
+      ]
+    },
+    {
+      "title": "RTO, RPO, MTTR, MTBF",
+      "type": "table",
+      "headers": ["Metric", "Full Name", "Definition", "Who sets it", "Lower = ?"],
+      "rows": [
+        ["RTO", "Recovery Time Objective", "Maximum acceptable time to restore service after a disaster", "Business (SLA/BCP)", "More expensive HA required"],
+        ["RPO", "Recovery Point Objective", "Maximum acceptable data loss measured in time (how old can the backup be?)", "Business (risk tolerance)", "More frequent backups / replication needed"],
+        ["MTTR", "Mean Time To Repair", "Average time to repair/restore a failed component", "Operations team", "Faster repairs — better SLA compliance"],
+        ["MTBF", "Mean Time Between Failures", "Average time between failures of a component or system", "Manufacturer / history", "More reliable hardware/design"]
+      ],
+      "key_points": [
+        "RTO: 'How long can we be down?' — drives DR site choice. RTO=0 → hot site. RTO=days → cold site.",
+        "RPO: 'How much data can we lose?' — drives backup frequency. RPO=1hr → backup every hour.",
+        "RPO 4 hours + incremental every 4 hours: if disaster strikes, worst case = 4 hours of data lost.",
+        "MTBF: used to predict reliability. Higher MTBF = more reliable. Used for redundancy planning.",
+        "MTTR: drives support contract choices (4-hour hardware replacement SLA = MTTR ≤ 4 hours).",
+        "Availability = MTBF / (MTBF + MTTR) — increasing MTBF or decreasing MTTR improves availability."
+      ]
+    }
+  ]
+}

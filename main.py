@@ -39,6 +39,7 @@ def _run_encounter_session(player: Player, zone: Zone, node: Node) -> bool:
     """Run all encounters in a node. Returns True if node was completed."""
     encounters = list(node.encounters)
     old_level = player.level
+    current_streak = 0
 
     for idx, encounter in enumerate(encounters):
         if not player.is_alive():
@@ -73,8 +74,11 @@ def _run_encounter_session(player: Player, zone: Zone, node: Node) -> bool:
 
         if result.is_correct:
             _sr.record_success(encounter.id)
+            current_streak += 1
+            player.record_node_streak(str(node.id), current_streak)
         else:
             _sr.add_failed(encounter.id)
+            current_streak = 0
 
         screens.show_combat_result(result, player)
 
@@ -232,6 +236,14 @@ def _main_loop(player: Player) -> None:
             _story_mode(player)
         elif choice == "free":
             _free_study_mode(player)
+        elif choice == "drill":
+            _weak_spot_drill(player)
+        elif choice == "subnet":
+            _subnetting_trainer(player)
+        elif choice == "exam":
+            _exam_simulator(player)
+        elif choice == "plan":
+            screens.show_study_plan(player)
         elif choice == "acronym":
             _acronym_drill(player)
         elif choice == "report":
@@ -242,6 +254,119 @@ def _main_loop(player: Player) -> None:
         elif choice == "quit":
             _save_and_exit()
             break
+
+
+def _weak_spot_drill(player: Player) -> None:
+    """Adaptive drill — serves the questions the player most needs right now."""
+    from game import mastery
+
+    DRILL_SIZE = 15
+    queue = mastery.build_drill_queue(player, _zone_manager, limit=DRILL_SIZE)
+
+    if not queue:
+        screens.show_drill_empty(player, _zone_manager)
+        return
+
+    screens.show_drill_intro(player, _zone_manager, len(queue))
+
+    # Drilling is low-stakes study: no HP damage on misses.
+    prev_free = player.free_study_mode
+    player.free_study_mode = True
+    correct = 0
+    old_level = player.level
+    try:
+        for idx, encounter in enumerate(queue):
+            selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(queue))
+            if selected is None:
+                break
+            result = Combat(player, encounter).process_answer(selected)
+            if result.is_correct:
+                correct += 1
+                _sr.record_success(encounter.id)
+            else:
+                _sr.add_failed(encounter.id)
+            screens.show_combat_result(result, player)
+            if player.level > old_level:
+                screens.show_level_up(player, old_level)
+                old_level = player.level
+    finally:
+        player.free_study_mode = prev_free
+
+    if _current_slot:
+        _save_manager.save(player, _current_slot)
+
+    screens.show_drill_summary(correct, len(queue), player, _zone_manager)
+
+
+def _subnetting_trainer(player: Player) -> None:
+    """Endless generated subnetting problems until the player quits."""
+    from game import subnetting
+
+    count = screens.show_subnet_intro()
+    if not count:
+        return
+
+    correct = 0
+    answered = 0
+    prev_free = player.free_study_mode
+    player.free_study_mode = True
+    try:
+        for i in range(count):
+            problem = subnetting.generate_problem()
+            selected = screens.show_encounter(problem, player, question_num=i + 1, total=count)
+            if selected is None:
+                break
+            answered += 1
+            result = Combat(player, problem).process_answer(selected)
+            if result.is_correct:
+                correct += 1
+            screens.show_combat_result(result, player)
+    finally:
+        player.free_study_mode = prev_free
+
+    screens.show_subnet_summary(correct, answered)
+
+
+def _exam_simulator(player: Player) -> None:
+    """Timed, domain-weighted 90-question mock exam scored on the 100-900 scale."""
+    from game import exam
+
+    if not screens.show_exam_intro():
+        return
+
+    questions = exam.build_exam(_zone_manager)
+    session = exam.ExamSession(questions)
+    session.start()
+
+    answered = 0
+    prev_free = player.free_study_mode
+    player.free_study_mode = True
+    try:
+        for idx, encounter in enumerate(questions):
+            if session.time_up():
+                screens.console.print("\n  [bright_red]⏰ Time's up![/]\n")
+                break
+            selected = screens.show_exam_question(
+                encounter, player, idx + 1, len(questions), session.seconds_remaining()
+            )
+            if selected is None:
+                break
+            answered += 1
+            result = Combat(player, encounter).process_answer(selected)
+            session.record(encounter, result.is_correct)
+            # Real practice → feed the adaptive engine, but no answer/explanation
+            # shown mid-exam (just like the real test).
+            if result.is_correct:
+                _sr.record_success(encounter.id)
+            else:
+                _sr.add_failed(encounter.id)
+    finally:
+        player.free_study_mode = prev_free
+
+    if _current_slot:
+        _save_manager.save(player, _current_slot)
+
+    screens.show_exam_result(session.result(answered), _zone_manager)
 
 
 def _acronym_drill(player: Player) -> None:

@@ -1,4 +1,5 @@
-from typing import List, Dict
+from datetime import date
+from typing import List, Dict, Optional
 
 XP_THRESHOLDS = [500, 700, 1300, 2000, 3000]
 HP_PER_LEVEL = 20
@@ -24,6 +25,16 @@ class Player:
         self.guardian_defeated: List[bool] = [False] * 5
         self.wrong_answer_ids: List[str] = []
         self.encounter_results: Dict[str, bool] = {}
+        # Best consecutive-correct streak achieved per node (keyed by str(node.id)).
+        # Used alongside the 70% pass rate to gate node completion, so a node
+        # can't be cleared by guessing one question at a time across replays.
+        self.node_streaks: Dict[str, int] = {}
+        # Full per-question attempt history (keyed by encounter id) — the raw
+        # signal the adaptive engine uses to find weak spots and schedule
+        # spaced-repetition reviews. Newest attempt is last.
+        self.attempts: Dict[str, List[bool]] = {}
+        # ISO date (YYYY-MM-DD) the player started — anchors the 30-day study plan.
+        self.start_date: Optional[str] = date.today().isoformat()
         self.free_study_mode: bool = False
 
     def _xp_for_next_level(self) -> int:
@@ -72,12 +83,17 @@ class Player:
 
     def record_encounter(self, encounter_id: str, is_correct: bool) -> None:
         self.encounter_results[encounter_id] = is_correct
+        self.attempts.setdefault(encounter_id, []).append(is_correct)
         if not is_correct:
             if encounter_id not in self.wrong_answer_ids:
                 self.wrong_answer_ids.append(encounter_id)
         else:
             if encounter_id in self.wrong_answer_ids:
                 self.wrong_answer_ids.remove(encounter_id)
+
+    def record_node_streak(self, node_id: str, streak: int) -> None:
+        if streak > self.node_streaks.get(node_id, 0):
+            self.node_streaks[node_id] = streak
 
     def is_alive(self) -> bool:
         return self.hp > 0

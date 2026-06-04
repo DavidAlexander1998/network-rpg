@@ -7,6 +7,7 @@ from game.player import Player
 from game.encounter import Encounter
 
 NODE_PASS_RATE = 0.70
+STREAK_REQUIRED = 3
 
 
 @dataclass
@@ -47,7 +48,9 @@ class Node:
             1 for enc in self.encounters
             if player.encounter_results.get(enc.id) is True
         )
-        return (correct / total) >= NODE_PASS_RATE
+        pass_rate_ok = (correct / total) >= NODE_PASS_RATE
+        streak_ok = player.node_streaks.get(str(self.id), 0) >= STREAK_REQUIRED
+        return pass_rate_ok and streak_ok
 
     def get_completion_stats(self, player: Player) -> Tuple[int, int]:
         total = len(self.encounters)

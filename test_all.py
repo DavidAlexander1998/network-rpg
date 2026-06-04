@@ -403,4 +403,62 @@ n51 = next(n for n in zm4.get_zone(5).nodes if str(n.id) == "5.1")
 assert any(c.card_type == "mnemonic" and "Troubleshooting" in c.title for c in n51.study_cards)
 print(f"[OK] Study content integrity ({total_cards} cards across all study files)")
 
+print("\n=== TEST 22: Subnetting free-entry checking ===")
+from game import subnetting as _sub
+# IP answers: tolerant of surrounding text, exact IP match required
+assert _sub.check_free_answer("192.168.10.64", "192.168.10.64") is True
+assert _sub.check_free_answer("192.168.10.64", " the network is 192.168.10.64 ") is True
+assert _sub.check_free_answer("192.168.10.64", "192.168.10.65") is False
+# range answers (two IPs, order matters)
+assert _sub.check_free_answer("10.0.0.1 – 10.0.0.62", "10.0.0.1 - 10.0.0.62") is True
+assert _sub.check_free_answer("10.0.0.1 – 10.0.0.62", "10.0.0.62 - 10.0.0.1") is False
+# CIDR: accept with or without slash
+assert _sub.check_free_answer("/26", "26") is True and _sub.check_free_answer("/26", "/26") is True
+# host counts: ignore commas
+assert _sub.check_free_answer("62", "62") is True and _sub.check_free_answer("16382", "16,382") is True
+assert _sub.check_free_answer("62", "63") is False
+assert _sub.check_free_answer("62", "") is False and _sub.check_free_answer("62", None) is False
+# generated problems are answerable by their own correct text
+for _ in range(200):
+    pr = _sub.generate_problem(_random.Random())
+    assert _sub.check_free_answer(pr.get_correct_answer(), pr.get_correct_answer()) is True
+    assert _sub.answer_hint(pr.get_correct_answer())  # non-empty hint
+print("[OK] Subnetting free-entry checking")
+
+print("\n=== TEST 23: Command Lab scenarios ===")
+from game import command_lab
+assert len(command_lab.SCENARIOS) >= 3
+for s in command_lab.SCENARIOS:
+    assert 0 <= s.answer_index < len(s.options)
+    assert s.brief and s.question and s.explanation
+    # every advertised command (canonical, ignoring args note) returns real output
+    for c in s.commands:
+        assert s.run_command(c) == s.commands[c]
+    # whitespace/case tolerance
+    any_cmd = next(iter(s.commands))
+    assert s.run_command("  " + any_cmd.upper() + " ") == s.commands[any_cmd]
+    # unknown command gives guidance, not a crash
+    assert "not recognized" in s.run_command("frobnicate the router").lower()
+# alias resolves
+dns = command_lab.get_scenario("dns")
+assert dns.run_command("nslookup") == dns.commands["nslookup google.com"]
+print(f"[OK] Command Lab ({len(command_lab.SCENARIOS)} scenarios)")
+
+print("\n=== TEST 24: PBQ ordering/matching tasks ===")
+from game import tasks_pbq
+assert tasks_pbq.ORDERING_TASKS and tasks_pbq.MATCHING_TASKS
+for t in tasks_pbq.ORDERING_TASKS:
+    assert len(t.ordered) == len(set(t.ordered)) >= 3   # unique, non-trivial
+    assert t.prompt and t.explanation
+for t in tasks_pbq.MATCHING_TASKS:
+    lefts = [l for l, r in t.pairs]
+    rights = [r for l, r in t.pairs]
+    assert len(lefts) == len(set(lefts))      # unique left keys
+    assert len(rights) == len(set(rights))    # unique right answers (matchable)
+    assert t.prompt and t.explanation
+# 7-step troubleshooting task is present and correctly ordered
+ts = tasks_pbq.get_ordering("troubleshoot-steps")
+assert ts.ordered[0].startswith("Identify") and ts.ordered[-1].startswith("Document")
+print(f"[OK] PBQ tasks ({len(tasks_pbq.ORDERING_TASKS)} ordering, {len(tasks_pbq.MATCHING_TASKS)} matching)")
+
 print("\n=== ALL TESTS PASSED ===")

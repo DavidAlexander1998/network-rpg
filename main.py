@@ -242,6 +242,8 @@ def _main_loop(player: Player) -> None:
             _subnetting_trainer(player)
         elif choice == "exam":
             _exam_simulator(player)
+        elif choice == "labs":
+            _hands_on_labs(player)
         elif choice == "plan":
             screens.show_study_plan(player)
         elif choice == "acronym":
@@ -299,12 +301,13 @@ def _weak_spot_drill(player: Player) -> None:
 
 
 def _subnetting_trainer(player: Player) -> None:
-    """Endless generated subnetting problems until the player quits."""
+    """Generated subnetting problems — multiple-choice or type-the-answer."""
     from game import subnetting
 
-    count = screens.show_subnet_intro()
-    if not count:
+    intro = screens.show_subnet_intro()
+    if not intro:
         return
+    count, mode = intro
 
     correct = 0
     answered = 0
@@ -313,14 +316,26 @@ def _subnetting_trainer(player: Player) -> None:
     try:
         for i in range(count):
             problem = subnetting.generate_problem()
-            selected = screens.show_encounter(problem, player, question_num=i + 1, total=count)
-            if selected is None:
-                break
-            answered += 1
-            result = Combat(player, problem).process_answer(selected)
-            if result.is_correct:
-                correct += 1
-            screens.show_combat_result(result, player)
+            if mode == "type":
+                expected = problem.get_correct_answer()
+                ans = screens.show_subnet_free(
+                    problem, i + 1, count, subnetting.answer_hint(expected))
+                if ans is None:
+                    break
+                answered += 1
+                is_correct = subnetting.check_free_answer(expected, ans)
+                if is_correct:
+                    correct += 1
+                screens.show_subnet_free_result(is_correct, expected, problem.explanation)
+            else:
+                selected = screens.show_encounter(problem, player, question_num=i + 1, total=count)
+                if selected is None:
+                    break
+                answered += 1
+                result = Combat(player, problem).process_answer(selected)
+                if result.is_correct:
+                    correct += 1
+                screens.show_combat_result(result, player)
     finally:
         player.free_study_mode = prev_free
 
@@ -367,6 +382,77 @@ def _exam_simulator(player: Player) -> None:
         _save_manager.save(player, _current_slot)
 
     screens.show_exam_result(session.result(answered), _zone_manager)
+
+
+def _hands_on_labs(player: Player) -> None:
+    while True:
+        choice = screens.show_labs_menu()
+        if choice in (None, "back"):
+            return
+        if choice == "command":
+            _command_lab(player)
+        elif choice == "pbq":
+            _pbq_drill(player)
+
+
+def _command_lab(player: Player) -> None:
+    """Simulated terminal: run diagnostic commands, then commit to a diagnosis."""
+    from game import command_lab
+
+    scenario = screens.show_command_lab_select(command_lab.SCENARIOS)
+    if scenario is None:
+        return
+
+    screens.show_command_lab_brief(scenario)
+    # Command loop
+    while True:
+        raw = screens.command_lab_prompt(scenario)
+        if raw is None:
+            return
+        cmd = raw.strip().lower()
+        if cmd in ("quit", "exit"):
+            return
+        if cmd in ("solve", "answer", "diagnose"):
+            break
+        if cmd in ("help", "?", ""):
+            screens.show_command_lab_help(scenario)
+            continue
+        screens.show_command_output(raw, scenario.run_command(raw))
+
+    # Diagnosis question
+    selected = screens.show_lab_question(scenario.question, scenario.options)
+    if selected is None:
+        return
+    is_correct = (selected == scenario.answer_index)
+    screens.show_lab_answer(is_correct, scenario.options[scenario.answer_index], scenario.explanation)
+
+
+def _pbq_drill(player: Player) -> None:
+    """Ordering and matching performance-based-style tasks."""
+    from game import tasks_pbq
+
+    kind = screens.show_pbq_menu()
+    if kind in (None, "back"):
+        return
+
+    if kind == "order":
+        task = screens.pick_pbq(tasks_pbq.ORDERING_TASKS, "Pick an ordering task:")
+        if task is None:
+            return
+        user_order = screens.run_ordering_task(task)
+        if user_order is None:
+            return
+        correct = (user_order == task.ordered)
+        screens.show_pbq_result(correct, task.ordered, task.explanation)
+    elif kind == "match":
+        task = screens.pick_pbq(tasks_pbq.MATCHING_TASKS, "Pick a matching task:")
+        if task is None:
+            return
+        result = screens.run_matching_task(task)
+        if result is None:
+            return
+        correct, n_right, n_total = result
+        screens.show_pbq_match_result(correct, n_right, n_total, task.pairs, task.explanation)
 
 
 def _acronym_drill(player: Player) -> None:

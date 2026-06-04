@@ -14,6 +14,7 @@ are intentionally *not* recorded into mastery/SR (they're ephemeral by design).
 
 import ipaddress
 import random
+import re
 from typing import List, Tuple, Optional
 
 from game.encounter import Encounter
@@ -230,3 +231,40 @@ def generate_problem(rng: Optional[random.Random] = None) -> Encounter:
 
 def generate_set(n: int, rng: Optional[random.Random] = None) -> List[Encounter]:
     return [generate_problem(rng) for _ in range(n)]
+
+
+# ---------------------------------------------------------------------------
+# Free-entry (type-the-answer) support — turns recognition into real calculation
+# ---------------------------------------------------------------------------
+
+_IP_RE = re.compile(r"\d{1,3}(?:\.\d{1,3}){3}")
+
+
+def check_free_answer(expected: str, user: str) -> bool:
+    """Tolerant comparison of a typed subnetting answer against the expected one.
+
+    Handles the three answer shapes the generator produces:
+      - IP address(es): network/broadcast/mask, or a range (two IPs)
+      - CIDR prefix like "/26" (accepts "26" or "/26")
+      - a host count like "62" (ignores commas/whitespace)
+    """
+    if user is None:
+        return False
+    exp_ips = _IP_RE.findall(expected)
+    if exp_ips:
+        # Compare the ordered IPs found in each (1 for single answers, 2 for a range).
+        return _IP_RE.findall(user) == exp_ips
+    exp_digits = re.sub(r"\D", "", expected)
+    user_digits = re.sub(r"\D", "", user)
+    return exp_digits != "" and exp_digits == user_digits
+
+
+def answer_hint(expected: str) -> str:
+    """Short hint about the expected answer format, for the input prompt."""
+    if " - " in expected or "–" in expected or len(_IP_RE.findall(expected)) >= 2:
+        return "enter a range, e.g. 10.0.0.1 - 10.0.0.62"
+    if _IP_RE.findall(expected):
+        return "enter an IP address, e.g. 192.168.1.0"
+    if expected.strip().startswith("/"):
+        return "enter a CIDR prefix, e.g. /26"
+    return "enter a number"

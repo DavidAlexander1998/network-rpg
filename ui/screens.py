@@ -1,4 +1,5 @@
 import os
+import random
 import time
 from typing import List, Optional, Dict, Any
 
@@ -98,6 +99,7 @@ def show_main_menu(player: Player) -> str:
             questionary.Choice("📚  Free Study      (all zones open — pick any node)", value="free"),
             questionary.Choice("🎯  Weak Spot Drill (auto-targets your worst objectives)", value="drill"),
             questionary.Choice("🧮  Subnetting Trainer (unlimited generated problems)", value="subnet"),
+            questionary.Choice("🧪  Hands-On Labs    (command terminal + drag-style PBQs)", value="labs"),
             questionary.Choice("📝  Exam Simulator   (timed 90Q mock, scored 100-900)", value="exam"),
             questionary.Choice("🗓   30-Day Plan     (what should I do today?)", value="plan"),
             questionary.Choice("🔤  Acronym Drill", value="acronym"),
@@ -395,7 +397,8 @@ def show_new_game_prompt() -> Optional[str]:
 # Subnetting Trainer
 # ---------------------------------------------------------------------------
 
-def show_subnet_intro() -> Optional[int]:
+def show_subnet_intro():
+    """Returns (count, mode) where mode is 'mc' or 'type', or None to cancel."""
     clear()
     console.print()
     console.print(Rule("[bold bright_cyan]🧮 SUBNETTING TRAINER[/]", style="bright_blue"))
@@ -403,7 +406,18 @@ def show_subnet_intro() -> Optional[int]:
     console.print("  [dim]Fresh randomized problems every time — network/broadcast addresses,[/]")
     console.print("  [dim]usable hosts, masks, ranges. No HP risk. Build muscle memory.[/]")
     console.print()
-    choice = questionary.select(
+    mode = questionary.select(
+        "Answer format?",
+        choices=[
+            questionary.Choice("⌨   Type the answer  (real calculation — recommended)", value="type"),
+            questionary.Choice("☰   Multiple choice  (recognition)", value="mc"),
+            questionary.Choice("← Back", value=None),
+        ],
+        style=_QSTYLE,
+    ).ask()
+    if mode is None:
+        return None
+    count = questionary.select(
         "How many problems?",
         choices=[
             questionary.Choice("10 — quick warm-up", value=10),
@@ -413,7 +427,219 @@ def show_subnet_intro() -> Optional[int]:
         ],
         style=_QSTYLE,
     ).ask()
-    return choice
+    if count is None:
+        return None
+    return (count, mode)
+
+
+def show_subnet_free(problem, num: int, total: int, hint: str) -> Optional[str]:
+    """Free-entry subnetting question. Returns the typed answer, or None to quit."""
+    clear()
+    console.print()
+    console.print(f"  [dim]Problem {num}/{total}[/]   [dim]({hint})[/]")
+    console.print()
+    console.print(Panel(
+        f"[bold bright_white]{problem.question}[/]",
+        border_style="bright_cyan", title="[bright_cyan]SUBNETTING[/]", padding=(1, 2),
+    ))
+    console.print()
+    ans = questionary.text("Your answer (or 'q' to stop):", style=_QSTYLE).ask()
+    if ans is None or ans.strip().lower() in ("q", "quit", "exit"):
+        return None
+    return ans
+
+
+def show_subnet_free_result(is_correct: bool, expected: str, explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ CORRECT[/]", border_style="green", title="[green]HIT[/]"))
+    else:
+        console.print(Panel(
+            f"[bold red]✗ NOT QUITE[/]\n\n[bright_white]Correct answer: {expected}[/]",
+            border_style="red", title="[red]MISS[/]",
+        ))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+# ---------------------------------------------------------------------------
+# Hands-On Labs: Command Lab (simulated terminal) + PBQ ordering/matching
+# ---------------------------------------------------------------------------
+
+def show_labs_menu() -> Optional[str]:
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]🧪 HANDS-ON LABS[/]", style="bright_magenta"))
+    console.print()
+    console.print("  [dim]Do the task instead of recognizing an answer — closest thing to the[/]")
+    console.print("  [dim]exam's performance-based questions (PBQs).[/]")
+    console.print()
+    return questionary.select(
+        "Choose a lab:",
+        choices=[
+            questionary.Choice("💻  Command Lab    — diagnose a broken network in a simulated terminal", value="command"),
+            questionary.Choice("🔀  PBQ Drills     — order steps / match items (drag-style)", value="pbq"),
+            questionary.Choice("← Back", value="back"),
+        ],
+        style=_QSTYLE,
+    ).ask()
+
+
+def show_command_lab_select(scenarios):
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]💻 COMMAND LAB[/]", style="bright_magenta"))
+    console.print()
+    choices = [questionary.Choice(f"{s.title}", value=s) for s in scenarios]
+    choices.append(questionary.Choice("← Back", value=None))
+    return questionary.select("Pick a scenario to troubleshoot:", choices=choices, style=_QSTYLE).ask()
+
+
+def show_command_lab_brief(scenario) -> None:
+    clear()
+    console.print()
+    console.print(Rule(f"[bold bright_magenta]💻 {scenario.title}[/]", style="bright_magenta"))
+    console.print()
+    console.print(Panel(f"[bright_white]{scenario.brief}[/]", border_style="yellow",
+                        title="[yellow]TICKET[/]", padding=(1, 2)))
+    console.print()
+    console.print("  [dim]Type commands to investigate. 'help' lists commands, "
+                  "'solve' to diagnose, 'quit' to leave.[/]")
+    console.print()
+
+
+def show_command_lab_help(scenario) -> None:
+    console.print()
+    console.print("  [bright_cyan]Commands you can try here:[/]")
+    for c in scenario.available:
+        console.print(f"    [bright_green]$[/] {c}")
+    console.print("    [dim]help · solve · quit[/]")
+    console.print()
+
+
+def command_lab_prompt(scenario) -> Optional[str]:
+    return questionary.text(f"{scenario.id}$", qmark="", style=_QSTYLE).ask()
+
+
+def show_command_output(cmd: str, output: str) -> None:
+    console.print()
+    console.print(f"  [bright_green]$ {cmd}[/]")
+    console.print(Panel(f"[white]{output}[/]", border_style="bright_black", padding=(0, 2)))
+
+
+def show_lab_question(question: str, options: List[str]) -> Optional[int]:
+    console.print()
+    console.print(Panel(f"[bold bright_white]{question}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]DIAGNOSIS[/]", padding=(1, 2)))
+    labels = ["A", "B", "C", "D", "E"]
+    choices = [questionary.Choice(f"  [{labels[i]}]  {o}", value=i) for i, o in enumerate(options)]
+    return questionary.select("Your diagnosis:", choices=choices, style=_QSTYLE).ask()
+
+
+def show_lab_answer(is_correct: bool, correct_text: str, explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ CORRECT DIAGNOSIS[/]", border_style="green", title="[green]SOLVED[/]"))
+    else:
+        console.print(Panel(f"[bold red]✗ NOT THE ROOT CAUSE[/]\n\n[bright_white]Correct: {correct_text}[/]",
+                            border_style="red", title="[red]MISS[/]"))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_pbq_menu() -> Optional[str]:
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]🔀 PBQ DRILLS[/]", style="bright_magenta"))
+    console.print()
+    return questionary.select(
+        "Task type:",
+        choices=[
+            questionary.Choice("🔢  Ordering   — put steps/layers in the right sequence", value="order"),
+            questionary.Choice("🔗  Matching   — match items to their pair", value="match"),
+            questionary.Choice("← Back", value="back"),
+        ],
+        style=_QSTYLE,
+    ).ask()
+
+
+def pick_pbq(tasks, prompt: str):
+    choices = [questionary.Choice(t.prompt, value=t) for t in tasks]
+    choices.append(questionary.Choice("← Back", value=None))
+    return questionary.select(prompt, choices=choices, style=_QSTYLE).ask()
+
+
+def run_ordering_task(task) -> Optional[List[str]]:
+    """Build an order by picking each position from the remaining items."""
+    clear()
+    console.print()
+    console.print(Panel(f"[bold bright_white]{task.prompt}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]ORDER THE STEPS[/]", padding=(1, 2)))
+    remaining = list(task.ordered)
+    random.shuffle(remaining)
+    chosen: List[str] = []
+    for position in range(1, len(task.ordered) + 1):
+        choices = [questionary.Choice(item, value=item) for item in remaining]
+        choices.append(questionary.Choice("✗ Cancel", value=None))
+        pick = questionary.select(f"Position {position}:", choices=choices, style=_QSTYLE).ask()
+        if pick is None:
+            return None
+        chosen.append(pick)
+        remaining.remove(pick)
+    return chosen
+
+
+def show_pbq_result(is_correct: bool, correct_order: List[str], explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ PERFECT ORDER[/]", border_style="green", title="[green]CORRECT[/]"))
+    else:
+        body = "[bold red]✗ Not quite.[/] [bright_white]Correct order:[/]\n\n" + \
+            "\n".join(f"  [bright_green]{i}.[/] {s}" for i, s in enumerate(correct_order, 1))
+        console.print(Panel(body, border_style="red", title="[red]REVIEW[/]", padding=(1, 2)))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def run_matching_task(task):
+    """For each left item, pick its match from the (shuffled) right options.
+
+    Returns (all_correct, num_right, total) or None if cancelled.
+    """
+    clear()
+    console.print()
+    console.print(Panel(f"[bold bright_white]{task.prompt}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]MATCH THE PAIRS[/]", padding=(1, 2)))
+    rights = [r for _l, r in task.pairs]
+    shuffled = list(rights)
+    random.shuffle(shuffled)
+    n_right = 0
+    for left, correct_right in task.pairs:
+        choices = [questionary.Choice(r, value=r) for r in shuffled]
+        choices.append(questionary.Choice("✗ Cancel", value=None))
+        pick = questionary.select(f"{left}  →", choices=choices, style=_QSTYLE).ask()
+        if pick is None:
+            return None
+        if pick == correct_right:
+            n_right += 1
+    return (n_right == len(task.pairs), n_right, len(task.pairs))
+
+
+def show_pbq_match_result(is_correct: bool, n_right: int, total: int, pairs, explanation: str) -> None:
+    console.print()
+    color = "green" if is_correct else "red"
+    head = "✓ ALL MATCHED" if is_correct else f"✗ {n_right}/{total} correct"
+    console.print(Panel(f"[bold bright_{color}]{head}[/]", border_style=color, title=f"[{color}]RESULT[/]"))
+    if not is_correct:
+        body = "[bright_white]Correct pairs:[/]\n\n" + \
+            "\n".join(f"  [bright_green]{l}[/] → {r}" for l, r in pairs)
+        console.print(Panel(body, border_style="bright_black", padding=(1, 2)))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
 
 
 def show_subnet_summary(correct: int, total: int) -> None:

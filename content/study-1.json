@@ -3,15 +3,55 @@
     {
       "title": "OSI Model — All 7 Layers",
       "type": "table",
-      "headers": ["Layer #", "Name", "PDU", "Key Protocols / Devices"],
+      "headers": [
+        "Layer #",
+        "Name",
+        "PDU",
+        "Key Protocols / Devices"
+      ],
       "rows": [
-        ["7", "Application", "Data", "HTTP, HTTPS, FTP, SSH, DNS, SMTP, SNMP, Telnet"],
-        ["6", "Presentation", "Data", "TLS/SSL, JPEG, MPEG, ASCII — encryption & formatting"],
-        ["5", "Session", "Data", "NetBIOS, RPC, PPTP — session establish/maintain/terminate"],
-        ["4", "Transport", "Segment / Datagram", "TCP (reliable), UDP (fast) — port numbers live here"],
-        ["3", "Network", "Packet", "IP, ICMP, OSPF, BGP — Router operates here"],
-        ["2", "Data Link", "Frame", "Ethernet, 802.11 Wi-Fi, ARP — Switch / MAC addresses"],
-        ["1", "Physical", "Bit", "Hubs, cables, repeaters, NICs — raw electrical/optical signals"]
+        [
+          "7",
+          "Application",
+          "Data",
+          "HTTP, HTTPS, FTP, SSH, DNS, SMTP, SNMP, Telnet"
+        ],
+        [
+          "6",
+          "Presentation",
+          "Data",
+          "TLS/SSL, JPEG, MPEG, ASCII — encryption & formatting"
+        ],
+        [
+          "5",
+          "Session",
+          "Data",
+          "NetBIOS, RPC, PPTP — session establish/maintain/terminate"
+        ],
+        [
+          "4",
+          "Transport",
+          "Segment / Datagram",
+          "TCP (reliable), UDP (fast) — port numbers live here"
+        ],
+        [
+          "3",
+          "Network",
+          "Packet",
+          "IP, ICMP, OSPF, BGP — Router operates here"
+        ],
+        [
+          "2",
+          "Data Link",
+          "Frame",
+          "Ethernet, 802.11 Wi-Fi, ARP — Switch / MAC addresses"
+        ],
+        [
+          "1",
+          "Physical",
+          "Bit",
+          "Hubs, cables, repeaters, NICs — raw electrical/optical signals"
+        ]
       ],
       "key_points": [
         "Router = Layer 3.  Switch = Layer 2.  Hub = Layer 1.",
@@ -46,19 +86,79 @@
     {
       "title": "Networking Devices — Layer & Function",
       "type": "table",
-      "headers": ["Device", "OSI Layer", "Key Function", "Notes"],
+      "headers": [
+        "Device",
+        "OSI Layer",
+        "Key Function",
+        "Notes"
+      ],
       "rows": [
-        ["Hub", "Layer 1", "Repeats all traffic to all ports", "Creates one collision domain — avoid in modern nets"],
-        ["Switch", "Layer 2", "Forwards frames by MAC address (CAM table)", "Each port = separate collision domain"],
-        ["Layer 3 Switch", "Layer 3", "Switches + routes between VLANs", "Faster than router for inter-VLAN — no separate router needed"],
-        ["Router", "Layer 3", "Routes packets between networks using IP", "Maintains routing table; connects different network segments"],
-        ["Firewall", "Layer 3–7", "Filters traffic based on rules/policy", "Stateful = tracks connection state; NGFW = Layer 7 inspection"],
-        ["IDS", "Passive monitor", "Detects and ALERTS on suspicious traffic", "Does NOT block — out-of-band or tap mode"],
-        ["IPS", "Inline monitor", "Detects and BLOCKS threats in real time", "Sits inline — adds latency; can cause false-positive drops"],
-        ["Load Balancer", "Layer 4–7", "Distributes traffic across server pool", "Improves availability + performance"],
-        ["Proxy Server", "Layer 7", "Intermediary between client and internet", "Caches content, filters URLs, can anonymise client IP"],
-        ["Media Converter", "Layer 1", "Converts between media types (copper↔fiber)", "Extends distance beyond copper's 100m limit"],
-        ["UTM", "Layer 3–7", "All-in-one: FW + IPS + AV + Web Filter + VPN", "Unified Threat Management — single appliance for SMBs"]
+        [
+          "Hub",
+          "Layer 1",
+          "Repeats all traffic to all ports",
+          "Creates one collision domain — avoid in modern nets"
+        ],
+        [
+          "Switch",
+          "Layer 2",
+          "Forwards frames by MAC address (CAM table)",
+          "Each port = separate collision domain"
+        ],
+        [
+          "Layer 3 Switch",
+          "Layer 3",
+          "Switches + routes between VLANs",
+          "Faster than router for inter-VLAN — no separate router needed"
+        ],
+        [
+          "Router",
+          "Layer 3",
+          "Routes packets between networks using IP",
+          "Maintains routing table; connects different network segments"
+        ],
+        [
+          "Firewall",
+          "Layer 3–7",
+          "Filters traffic based on rules/policy",
+          "Stateful = tracks connection state; NGFW = Layer 7 inspection"
+        ],
+        [
+          "IDS",
+          "Passive monitor",
+          "Detects and ALERTS on suspicious traffic",
+          "Does NOT block — out-of-band or tap mode"
+        ],
+        [
+          "IPS",
+          "Inline monitor",
+          "Detects and BLOCKS threats in real time",
+          "Sits inline — adds latency; can cause false-positive drops"
+        ],
+        [
+          "Load Balancer",
+          "Layer 4–7",
+          "Distributes traffic across server pool",
+          "Improves availability + performance"
+        ],
+        [
+          "Proxy Server",
+          "Layer 7",
+          "Intermediary between client and internet",
+          "Caches content, filters URLs, can anonymise client IP"
+        ],
+        [
+          "Media Converter",
+          "Layer 1",
+          "Converts between media types (copper↔fiber)",
+          "Extends distance beyond copper's 100m limit"
+        ],
+        [
+          "UTM",
+          "Layer 3–7",
+          "All-in-one: FW + IPS + AV + Web Filter + VPN",
+          "Unified Threat Management — single appliance for SMBs"
+        ]
       ],
       "key_points": [
         "Hub = Layer 1 (dumb repeater).  Switch = Layer 2 (MAC-aware).  Router = Layer 3 (IP-aware).",
@@ -70,13 +170,43 @@
     {
       "title": "Firewall Types Compared",
       "type": "table",
-      "headers": ["Type", "What it inspects", "State awareness", "Key limitation"],
+      "headers": [
+        "Type",
+        "What it inspects",
+        "State awareness",
+        "Key limitation"
+      ],
       "rows": [
-        ["Packet filter (stateless)", "Src/Dst IP, Port, Protocol per-packet", "No — each packet evaluated alone", "Cannot validate returning traffic; easy to spoof"],
-        ["Stateful firewall", "Connection state table + packet headers", "Yes — tracks TCP sessions", "Cannot inspect application payload content"],
-        ["Application-layer (proxy) FW", "Full application data (Layer 7)", "Yes", "Slower; application-specific proxies needed"],
-        ["Next-Gen Firewall (NGFW)", "App ID, User ID, SSL/TLS decryption, IPS", "Yes + deep inspection", "Higher cost; SSL inspection causes latency"],
-        ["WAF (Web App Firewall)", "HTTP/HTTPS traffic, OWASP Top 10 attacks", "Yes + app aware", "Web traffic only — not a general-purpose firewall"]
+        [
+          "Packet filter (stateless)",
+          "Src/Dst IP, Port, Protocol per-packet",
+          "No — each packet evaluated alone",
+          "Cannot validate returning traffic; easy to spoof"
+        ],
+        [
+          "Stateful firewall",
+          "Connection state table + packet headers",
+          "Yes — tracks TCP sessions",
+          "Cannot inspect application payload content"
+        ],
+        [
+          "Application-layer (proxy) FW",
+          "Full application data (Layer 7)",
+          "Yes",
+          "Slower; application-specific proxies needed"
+        ],
+        [
+          "Next-Gen Firewall (NGFW)",
+          "App ID, User ID, SSL/TLS decryption, IPS",
+          "Yes + deep inspection",
+          "Higher cost; SSL inspection causes latency"
+        ],
+        [
+          "WAF (Web App Firewall)",
+          "HTTP/HTTPS traffic, OWASP Top 10 attacks",
+          "Yes + app aware",
+          "Web traffic only — not a general-purpose firewall"
+        ]
       ],
       "key_points": [
         "Stateful FW is the baseline — used everywhere.  Know how it tracks TCP state.",
@@ -101,11 +231,31 @@
     {
       "title": "Cloud Service Models (IaaS / PaaS / SaaS)",
       "type": "table",
-      "headers": ["Model", "What provider manages", "What YOU manage", "Examples"],
+      "headers": [
+        "Model",
+        "What provider manages",
+        "What YOU manage",
+        "Examples"
+      ],
       "rows": [
-        ["IaaS", "Physical hardware, hypervisor, data center", "OS, middleware, runtime, apps, data", "AWS EC2, Azure VMs, Google Compute Engine"],
-        ["PaaS", "Everything IaaS + OS + runtime + middleware", "Applications and data only", "AWS Elastic Beanstalk, Google App Engine, Heroku"],
-        ["SaaS", "Everything — infra + platform + application", "Just your data and user access", "Office 365, Gmail, Salesforce, Dropbox"]
+        [
+          "IaaS",
+          "Physical hardware, hypervisor, data center",
+          "OS, middleware, runtime, apps, data",
+          "AWS EC2, Azure VMs, Google Compute Engine"
+        ],
+        [
+          "PaaS",
+          "Everything IaaS + OS + runtime + middleware",
+          "Applications and data only",
+          "AWS Elastic Beanstalk, Google App Engine, Heroku"
+        ],
+        [
+          "SaaS",
+          "Everything — infra + platform + application",
+          "Just your data and user access",
+          "Office 365, Gmail, Salesforce, Dropbox"
+        ]
       ],
       "key_points": [
         "Pizza-as-a-Service analogy: IaaS = you cook it; PaaS = restaurant kitchen; SaaS = delivered pizza.",
@@ -117,12 +267,37 @@
     {
       "title": "Cloud Deployment Models",
       "type": "table",
-      "headers": ["Model", "Who uses it", "Infrastructure", "Key trait"],
+      "headers": [
+        "Model",
+        "Who uses it",
+        "Infrastructure",
+        "Key trait"
+      ],
       "rows": [
-        ["Public", "Anyone — open to all", "Owned by cloud provider (AWS, Azure, GCP)", "Low cost, shared resources, least control"],
-        ["Private", "Single organization only", "Dedicated (on-prem or hosted)", "Max control, max security, highest cost"],
-        ["Hybrid", "Organization + public cloud together", "Mix of private + public", "Flexible: burst to public, keep sensitive data private"],
-        ["Community", "Multiple orgs with shared compliance needs", "Shared among the group", "e.g., Government agencies sharing FISMA infra"]
+        [
+          "Public",
+          "Anyone — open to all",
+          "Owned by cloud provider (AWS, Azure, GCP)",
+          "Low cost, shared resources, least control"
+        ],
+        [
+          "Private",
+          "Single organization only",
+          "Dedicated (on-prem or hosted)",
+          "Max control, max security, highest cost"
+        ],
+        [
+          "Hybrid",
+          "Organization + public cloud together",
+          "Mix of private + public",
+          "Flexible: burst to public, keep sensitive data private"
+        ],
+        [
+          "Community",
+          "Multiple orgs with shared compliance needs",
+          "Shared among the group",
+          "e.g., Government agencies sharing FISMA infra"
+        ]
       ],
       "key_points": [
         "Private cloud = most control + most secure (but costly).",
@@ -133,45 +308,159 @@
     },
     {
       "title": "NIST 5 Cloud Characteristics",
-      "type": "list",
+      "type": "concept",
+      "body": "NIST SP 800-145 defines cloud computing by 5 ESSENTIAL characteristics:\n\n  1. On-demand self-service - provision resources yourself, no human interaction with the provider\n  2. Broad network access  - reachable over the network from standard devices (phone, laptop, tablet)\n  3. Resource pooling      - one provider serves many consumers from shared resources (multi-tenancy)\n  4. Rapid elasticity      - scale out/in quickly and automatically; appears unlimited to the consumer\n  5. Measured service      - usage is monitored, controlled and reported (metered, pay-per-use)\n\nThe exam tests whether you can recognize each one from its description.",
       "key_points": [
-        "1. On-demand self-service — provision resources without human interaction with provider",
-        "2. Broad network access — available over the network via standard mechanisms (phone, laptop)",
-        "3. Resource pooling — provider serves multiple consumers from shared resources (multi-tenancy)",
-        "4. Rapid elasticity — scale up/down quickly; appears unlimited to consumer",
-        "5. Measured service — resource use is monitored, controlled, reported (pay-per-use)"
-      ],
-      "body": "NIST SP 800-145 defines cloud computing with these 5 essential characteristics. The exam tests whether you can recognize them.\n\nElasticity = scale resources fast.\nMeasured service = metered billing.\nOn-demand = no need to call the provider."
+        "Rapid elasticity = scale resources fast (and automatically).",
+        "Measured service = metered/pay-per-use billing.",
+        "On-demand self-service = no need to call the provider to get resources.",
+        "Resource pooling = multi-tenancy: shared infrastructure across customers."
+      ]
     }
   ],
   "1.4": [
     {
       "title": "Critical Ports — Must Know Cold",
       "type": "table",
-      "headers": ["Port", "Protocol", "Transport", "Notes"],
+      "headers": [
+        "Port",
+        "Protocol",
+        "Transport",
+        "Notes"
+      ],
       "rows": [
-        ["20", "FTP (data)", "TCP", "Active mode data transfer"],
-        ["21", "FTP (control)", "TCP", "Commands — login, directory listing"],
-        ["22", "SSH / SFTP / SCP", "TCP", "Encrypted remote access + secure file transfer"],
-        ["23", "Telnet", "TCP", "Unencrypted remote access — deprecated, avoid"],
-        ["25", "SMTP", "TCP", "Server-to-server email relay"],
-        ["53", "DNS", "UDP (queries) / TCP (zone xfer)", "UDP for normal queries; TCP for large/zone transfer"],
-        ["67", "DHCP Server", "UDP", "Server listens here — clients broadcast to 255.255.255.255:67"],
-        ["68", "DHCP Client", "UDP", "Client receives reply here"],
-        ["69", "TFTP", "UDP", "Trivial FTP — unencrypted, used for booting/config files"],
-        ["80", "HTTP", "TCP", "Unencrypted web traffic"],
-        ["110", "POP3", "TCP", "Email retrieval — downloads and deletes from server"],
-        ["143", "IMAP", "TCP", "Email retrieval — syncs, keeps on server"],
-        ["161", "SNMP (agent poll)", "UDP", "Manager → Agent: GET, GETNEXT, SET requests"],
-        ["162", "SNMP (traps)", "UDP", "Agent → Manager: unsolicited TRAP notifications"],
-        ["389", "LDAP", "TCP", "Directory services — unencrypted"],
-        ["443", "HTTPS", "TCP", "Encrypted web (HTTP over TLS)"],
-        ["445", "SMB", "TCP", "Windows file sharing, Active Directory"],
-        ["514", "Syslog", "UDP", "Log forwarding to SIEM/log server"],
-        ["587", "SMTP (submission)", "TCP", "Client-to-server email with authentication"],
-        ["636", "LDAPS", "TCP", "LDAP over TLS — encrypted directory"],
-        ["3389", "RDP", "TCP", "Windows Remote Desktop Protocol"],
-        ["5900", "VNC", "TCP", "Virtual Network Computing — cross-platform remote desktop"]
+        [
+          "20",
+          "FTP (data)",
+          "TCP",
+          "Active mode data transfer"
+        ],
+        [
+          "21",
+          "FTP (control)",
+          "TCP",
+          "Commands — login, directory listing"
+        ],
+        [
+          "22",
+          "SSH / SFTP / SCP",
+          "TCP",
+          "Encrypted remote access + secure file transfer"
+        ],
+        [
+          "23",
+          "Telnet",
+          "TCP",
+          "Unencrypted remote access — deprecated, avoid"
+        ],
+        [
+          "25",
+          "SMTP",
+          "TCP",
+          "Server-to-server email relay"
+        ],
+        [
+          "53",
+          "DNS",
+          "UDP (queries) / TCP (zone xfer)",
+          "UDP for normal queries; TCP for large/zone transfer"
+        ],
+        [
+          "67",
+          "DHCP Server",
+          "UDP",
+          "Server listens here — clients broadcast to 255.255.255.255:67"
+        ],
+        [
+          "68",
+          "DHCP Client",
+          "UDP",
+          "Client receives reply here"
+        ],
+        [
+          "69",
+          "TFTP",
+          "UDP",
+          "Trivial FTP — unencrypted, used for booting/config files"
+        ],
+        [
+          "80",
+          "HTTP",
+          "TCP",
+          "Unencrypted web traffic"
+        ],
+        [
+          "110",
+          "POP3",
+          "TCP",
+          "Email retrieval — downloads and deletes from server"
+        ],
+        [
+          "143",
+          "IMAP",
+          "TCP",
+          "Email retrieval — syncs, keeps on server"
+        ],
+        [
+          "161",
+          "SNMP (agent poll)",
+          "UDP",
+          "Manager → Agent: GET, GETNEXT, SET requests"
+        ],
+        [
+          "162",
+          "SNMP (traps)",
+          "UDP",
+          "Agent → Manager: unsolicited TRAP notifications"
+        ],
+        [
+          "389",
+          "LDAP",
+          "TCP",
+          "Directory services — unencrypted"
+        ],
+        [
+          "443",
+          "HTTPS",
+          "TCP",
+          "Encrypted web (HTTP over TLS)"
+        ],
+        [
+          "445",
+          "SMB",
+          "TCP",
+          "Windows file sharing, Active Directory"
+        ],
+        [
+          "514",
+          "Syslog",
+          "UDP",
+          "Log forwarding to SIEM/log server"
+        ],
+        [
+          "587",
+          "SMTP (submission)",
+          "TCP",
+          "Client-to-server email with authentication"
+        ],
+        [
+          "636",
+          "LDAPS",
+          "TCP",
+          "LDAP over TLS — encrypted directory"
+        ],
+        [
+          "3389",
+          "RDP",
+          "TCP",
+          "Windows Remote Desktop Protocol"
+        ],
+        [
+          "5900",
+          "VNC",
+          "TCP",
+          "Virtual Network Computing — cross-platform remote desktop"
+        ]
       ],
       "key_points": [
         "FTP = 20 (data) + 21 (control). Both unencrypted.",
@@ -191,20 +480,66 @@
         "Port 587 = SMTP with authentication (for email clients, not relay).",
         "IMAP keeps email on server (sync), POP3 downloads and deletes."
       ]
+    },
+    {
+      "title": "Essential Port Numbers (memorize cold)",
+      "type": "mnemonic",
+      "body": "Guaranteed exam points — drill until automatic:\n\n  20/21 FTP    22 SSH/SFTP/SCP   23 Telnet    25 SMTP\n  53 DNS       67/68 DHCP        69 TFTP      80 HTTP\n  110 POP3     123 NTP           143 IMAP     161/162 SNMP\n  389 LDAP     443 HTTPS         445 SMB      636 LDAPS\n  514 Syslog   3389 RDP          1433 MS-SQL  3306 MySQL",
+      "key_points": [
+        "SSH=22 — SFTP and SCP ride on 22 too. Telnet=23 is its insecure twin.",
+        "Secure swaps: HTTP 80->HTTPS 443, LDAP 389->LDAPS 636, FTP->FTPS 990.",
+        "DHCP: 67 server / 68 client.  SNMP: 161 queries / 162 traps.",
+        "RDP=3389 (Microsoft).  Syslog=UDP 514.  NTP=123."
+      ]
     }
   ],
   "1.5": [
     {
       "title": "Copper Cabling Standards",
       "type": "table",
-      "headers": ["Standard", "Max Speed", "Max Distance", "Notes"],
+      "headers": [
+        "Standard",
+        "Max Speed",
+        "Max Distance",
+        "Notes"
+      ],
       "rows": [
-        ["Cat5", "100 Mbps", "100m", "Obsolete — rarely seen"],
-        ["Cat5e", "1 Gbps", "100m", "Enhanced Cat5 — reduced crosstalk; most common legacy cable"],
-        ["Cat6", "1 Gbps (full 100m) / 10 Gbps (55m)", "100m @ 1G, 55m @ 10G", "More twisted pairs — reduced interference"],
-        ["Cat6a", "10 Gbps", "100m", "Augmented Cat6 — supports 10G at full 100m run"],
-        ["Cat7", "10 Gbps", "100m", "Shielded — better EMI protection; not TIA-recognised standard"],
-        ["Cat8", "25/40 Gbps", "30m", "Data center use — very short runs, server-to-ToR switch"]
+        [
+          "Cat5",
+          "100 Mbps",
+          "100m",
+          "Obsolete — rarely seen"
+        ],
+        [
+          "Cat5e",
+          "1 Gbps",
+          "100m",
+          "Enhanced Cat5 — reduced crosstalk; most common legacy cable"
+        ],
+        [
+          "Cat6",
+          "1 Gbps (full 100m) / 10 Gbps (55m)",
+          "100m @ 1G, 55m @ 10G",
+          "More twisted pairs — reduced interference"
+        ],
+        [
+          "Cat6a",
+          "10 Gbps",
+          "100m",
+          "Augmented Cat6 — supports 10G at full 100m run"
+        ],
+        [
+          "Cat7",
+          "10 Gbps",
+          "100m",
+          "Shielded — better EMI protection; not TIA-recognised standard"
+        ],
+        [
+          "Cat8",
+          "25/40 Gbps",
+          "30m",
+          "Data center use — very short runs, server-to-ToR switch"
+        ]
       ],
       "key_points": [
         "Cat5e = 1 Gbps at 100m.  Cat6 = 10 Gbps but only 55m.  Cat6a = 10 Gbps at full 100m.",
@@ -216,15 +551,47 @@
     {
       "title": "Fiber Optic — SMF vs MMF",
       "type": "table",
-      "headers": ["Property", "Single-Mode (SMF)", "Multi-Mode (MMF)"],
+      "headers": [
+        "Property",
+        "Single-Mode (SMF)",
+        "Multi-Mode (MMF)"
+      ],
       "rows": [
-        ["Core size", "8–10 microns", "50–62.5 microns"],
-        ["Light source", "Laser (coherent light)", "LED or VCSEL"],
-        ["Distance", "Up to 100km+ (WAN/metro)", "Up to 550m (OM4) in data centers"],
-        ["Bandwidth", "Extremely high", "High (lower than SMF)"],
-        ["Cable jacket colour", "Yellow (OS1/OS2)", "Orange (OM1/OM2) or Aqua (OM3/OM4)"],
-        ["Cost", "Higher — laser transceivers", "Lower — LED transceivers cheaper"],
-        ["Use case", "WAN, ISP backbone, building-to-building long runs", "Within a building, data center, campus short runs"]
+        [
+          "Core size",
+          "8–10 microns",
+          "50–62.5 microns"
+        ],
+        [
+          "Light source",
+          "Laser (coherent light)",
+          "LED or VCSEL"
+        ],
+        [
+          "Distance",
+          "Up to 100km+ (WAN/metro)",
+          "Up to 550m (OM4) in data centers"
+        ],
+        [
+          "Bandwidth",
+          "Extremely high",
+          "High (lower than SMF)"
+        ],
+        [
+          "Cable jacket colour",
+          "Yellow (OS1/OS2)",
+          "Orange (OM1/OM2) or Aqua (OM3/OM4)"
+        ],
+        [
+          "Cost",
+          "Higher — laser transceivers",
+          "Lower — LED transceivers cheaper"
+        ],
+        [
+          "Use case",
+          "WAN, ISP backbone, building-to-building long runs",
+          "Within a building, data center, campus short runs"
+        ]
       ],
       "key_points": [
         "SMF = long distance, laser, yellow jacket.  MMF = short distance, LED, orange/aqua.",
@@ -236,18 +603,62 @@
     {
       "title": "Connectors & Transceivers",
       "type": "table",
-      "headers": ["Connector / Device", "Type", "Use"],
+      "headers": [
+        "Connector / Device",
+        "Type",
+        "Use"
+      ],
       "rows": [
-        ["RJ-45", "Copper — 8-pin", "Ethernet (Cat5e/Cat6/Cat6a) — standard Ethernet jack"],
-        ["RJ-11", "Copper — 6-pin", "Telephone landline — NOT Ethernet"],
-        ["LC (Lucent)", "Fiber — small form-factor", "Data centers, patch panels — push-pull latch, common in modern installs"],
-        ["SC (Subscriber)", "Fiber — square, push-pull", "Older ISP/telecom installs — larger than LC"],
-        ["ST (Straight Tip)", "Fiber — bayonet twist-lock", "Legacy enterprise — rarely new installs"],
-        ["FC", "Fiber — threaded screw", "High-vibration environments, test equipment"],
-        ["SFP", "Transceiver module", "1 Gbps — hot-swappable, supports fiber or copper via DAC"],
-        ["SFP+", "Transceiver module", "10 Gbps — same form factor as SFP"],
-        ["QSFP / QSFP+", "Transceiver module", "40 Gbps / 100 Gbps — data center spine links"],
-        ["Auto-MDIX", "Switch NIC feature", "Automatically detects crossover vs straight-through — no manual cable choice needed"]
+        [
+          "RJ-45",
+          "Copper — 8-pin",
+          "Ethernet (Cat5e/Cat6/Cat6a) — standard Ethernet jack"
+        ],
+        [
+          "RJ-11",
+          "Copper — 6-pin",
+          "Telephone landline — NOT Ethernet"
+        ],
+        [
+          "LC (Lucent)",
+          "Fiber — small form-factor",
+          "Data centers, patch panels — push-pull latch, common in modern installs"
+        ],
+        [
+          "SC (Subscriber)",
+          "Fiber — square, push-pull",
+          "Older ISP/telecom installs — larger than LC"
+        ],
+        [
+          "ST (Straight Tip)",
+          "Fiber — bayonet twist-lock",
+          "Legacy enterprise — rarely new installs"
+        ],
+        [
+          "FC",
+          "Fiber — threaded screw",
+          "High-vibration environments, test equipment"
+        ],
+        [
+          "SFP",
+          "Transceiver module",
+          "1 Gbps — hot-swappable, supports fiber or copper via DAC"
+        ],
+        [
+          "SFP+",
+          "Transceiver module",
+          "10 Gbps — same form factor as SFP"
+        ],
+        [
+          "QSFP / QSFP+",
+          "Transceiver module",
+          "40 Gbps / 100 Gbps — data center spine links"
+        ],
+        [
+          "Auto-MDIX",
+          "Switch NIC feature",
+          "Automatically detects crossover vs straight-through — no manual cable choice needed"
+        ]
       ],
       "key_points": [
         "LC = most common modern fiber connector (small, data center friendly).",
@@ -261,15 +672,55 @@
     {
       "title": "Network Topologies Compared",
       "type": "table",
-      "headers": ["Topology", "Description", "Pros", "Cons / Single point of failure?"],
+      "headers": [
+        "Topology",
+        "Description",
+        "Pros",
+        "Cons / Single point of failure?"
+      ],
       "rows": [
-        ["Bus", "All devices on one shared cable segment", "Simple, cheap", "One break = total failure. High collisions. SPOF: the bus cable"],
-        ["Ring", "Each device connects to two others — forms a loop", "Predictable latency (token passing)", "One failure takes down ring unless dual-ring. SPOF: any node/link"],
-        ["Star", "All devices connect to central hub/switch", "Easy troubleshoot, isolate faults per-port", "SPOF: the central switch (mitigated by redundant switches)"],
-        ["Full Mesh", "Every device connects to every other", "Max redundancy, no SPOF", "Expensive: n*(n-1)/2 connections. Hard to scale"],
-        ["Partial Mesh", "Some redundant paths — not all-to-all", "Balance of cost and redundancy", "Some SPOFs remain"],
-        ["Hybrid", "Combination of topologies", "Flexible — mix star+mesh for key nodes", "Complexity increases troubleshooting"],
-        ["Point-to-Point", "Direct link between exactly two nodes", "Simple, dedicated bandwidth", "Only connects two endpoints — not scalable"]
+        [
+          "Bus",
+          "All devices on one shared cable segment",
+          "Simple, cheap",
+          "One break = total failure. High collisions. SPOF: the bus cable"
+        ],
+        [
+          "Ring",
+          "Each device connects to two others — forms a loop",
+          "Predictable latency (token passing)",
+          "One failure takes down ring unless dual-ring. SPOF: any node/link"
+        ],
+        [
+          "Star",
+          "All devices connect to central hub/switch",
+          "Easy troubleshoot, isolate faults per-port",
+          "SPOF: the central switch (mitigated by redundant switches)"
+        ],
+        [
+          "Full Mesh",
+          "Every device connects to every other",
+          "Max redundancy, no SPOF",
+          "Expensive: n*(n-1)/2 connections. Hard to scale"
+        ],
+        [
+          "Partial Mesh",
+          "Some redundant paths — not all-to-all",
+          "Balance of cost and redundancy",
+          "Some SPOFs remain"
+        ],
+        [
+          "Hybrid",
+          "Combination of topologies",
+          "Flexible — mix star+mesh for key nodes",
+          "Complexity increases troubleshooting"
+        ],
+        [
+          "Point-to-Point",
+          "Direct link between exactly two nodes",
+          "Simple, dedicated bandwidth",
+          "Only connects two endpoints — not scalable"
+        ]
       ],
       "key_points": [
         "Star = most common LAN topology today (switch at center).",
@@ -281,15 +732,47 @@
     {
       "title": "Data Center: Three-Tier vs Spine-and-Leaf",
       "type": "table",
-      "headers": ["Property", "Three-Tier (Core/Dist/Access)", "Spine-and-Leaf"],
+      "headers": [
+        "Property",
+        "Three-Tier (Core/Dist/Access)",
+        "Spine-and-Leaf"
+      ],
       "rows": [
-        ["Layers", "Core → Distribution → Access", "Spine switches + Leaf switches (2 layers only)"],
-        ["Traffic pattern", "North-South dominant (client→server)", "East-West dominant (server→server)"],
-        ["Hops any-to-any", "Variable (3–6+ hops)", "Always exactly 2 hops (leaf→spine→leaf)"],
-        ["Latency", "Variable — depends on path", "Consistent and predictable"],
-        ["Scaling", "Complex — upgrade core is disruptive", "Add a leaf switch = linear scale-out"],
-        ["Spanning Tree", "Required — loop prevention", "Avoided — uses ECMP and BGP/EVPN instead"],
-        ["Use case", "Enterprise campus networks", "Modern data centers with heavy VM/container traffic"]
+        [
+          "Layers",
+          "Core → Distribution → Access",
+          "Spine switches + Leaf switches (2 layers only)"
+        ],
+        [
+          "Traffic pattern",
+          "North-South dominant (client→server)",
+          "East-West dominant (server→server)"
+        ],
+        [
+          "Hops any-to-any",
+          "Variable (3–6+ hops)",
+          "Always exactly 2 hops (leaf→spine→leaf)"
+        ],
+        [
+          "Latency",
+          "Variable — depends on path",
+          "Consistent and predictable"
+        ],
+        [
+          "Scaling",
+          "Complex — upgrade core is disruptive",
+          "Add a leaf switch = linear scale-out"
+        ],
+        [
+          "Spanning Tree",
+          "Required — loop prevention",
+          "Avoided — uses ECMP and BGP/EVPN instead"
+        ],
+        [
+          "Use case",
+          "Enterprise campus networks",
+          "Modern data centers with heavy VM/container traffic"
+        ]
       ],
       "key_points": [
         "Three-tier = Core/Distribution/Access.  Collapsed core = Distribution merged into Core.",
@@ -314,15 +797,47 @@
     {
       "title": "IPv4 Address Classes & Special Ranges",
       "type": "table",
-      "headers": ["Range / Class", "CIDR", "Description"],
+      "headers": [
+        "Range / Class",
+        "CIDR",
+        "Description"
+      ],
       "rows": [
-        ["10.0.0.0 – 10.255.255.255", "10.0.0.0/8", "RFC 1918 Private — Class A private"],
-        ["172.16.0.0 – 172.31.255.255", "172.16.0.0/12", "RFC 1918 Private — Class B private (172.32+ is PUBLIC)"],
-        ["192.168.0.0 – 192.168.255.255", "192.168.0.0/16", "RFC 1918 Private — Class C private"],
-        ["127.0.0.0 – 127.255.255.255", "127.0.0.0/8", "Loopback — 127.0.0.1 = local host test"],
-        ["169.254.0.0 – 169.254.255.255", "169.254.0.0/16", "APIPA — auto-assigned when DHCP fails; link-local only"],
-        ["0.0.0.0", "—", "Unspecified / default route (all networks)"],
-        ["255.255.255.255", "—", "Limited broadcast — all hosts on local segment"]
+        [
+          "10.0.0.0 – 10.255.255.255",
+          "10.0.0.0/8",
+          "RFC 1918 Private — Class A private"
+        ],
+        [
+          "172.16.0.0 – 172.31.255.255",
+          "172.16.0.0/12",
+          "RFC 1918 Private — Class B private (172.32+ is PUBLIC)"
+        ],
+        [
+          "192.168.0.0 – 192.168.255.255",
+          "192.168.0.0/16",
+          "RFC 1918 Private — Class C private"
+        ],
+        [
+          "127.0.0.0 – 127.255.255.255",
+          "127.0.0.0/8",
+          "Loopback — 127.0.0.1 = local host test"
+        ],
+        [
+          "169.254.0.0 – 169.254.255.255",
+          "169.254.0.0/16",
+          "APIPA — auto-assigned when DHCP fails; link-local only"
+        ],
+        [
+          "0.0.0.0",
+          "—",
+          "Unspecified / default route (all networks)"
+        ],
+        [
+          "255.255.255.255",
+          "—",
+          "Limited broadcast — all hosts on local segment"
+        ]
       ],
       "key_points": [
         "172.16–172.31 is private.  172.32.0.0+ is PUBLIC.  This is a common exam trap.",
@@ -334,17 +849,77 @@
     {
       "title": "CIDR Subnet Quick Reference",
       "type": "table",
-      "headers": ["CIDR", "Subnet Mask", "Total Addresses", "Usable Hosts", "Subnets per /24"],
+      "headers": [
+        "CIDR",
+        "Subnet Mask",
+        "Total Addresses",
+        "Usable Hosts",
+        "Subnets per /24"
+      ],
       "rows": [
-        ["/24", "255.255.255.0", "256", "254", "1"],
-        ["/25", "255.255.255.128", "128", "126", "2"],
-        ["/26", "255.255.255.192", "64", "62", "4"],
-        ["/27", "255.255.255.224", "32", "30", "8"],
-        ["/28", "255.255.255.240", "16", "14", "16"],
-        ["/29", "255.255.255.248", "8", "6", "32"],
-        ["/30", "255.255.255.252", "4", "2", "64  — point-to-point links"],
-        ["/31", "255.255.255.254", "2", "2 (special — RFC 3021)", "P2P only — no broadcast"],
-        ["/32", "255.255.255.255", "1", "1 (host route)", "Specific host or loopback"]
+        [
+          "/24",
+          "255.255.255.0",
+          "256",
+          "254",
+          "1"
+        ],
+        [
+          "/25",
+          "255.255.255.128",
+          "128",
+          "126",
+          "2"
+        ],
+        [
+          "/26",
+          "255.255.255.192",
+          "64",
+          "62",
+          "4"
+        ],
+        [
+          "/27",
+          "255.255.255.224",
+          "32",
+          "30",
+          "8"
+        ],
+        [
+          "/28",
+          "255.255.255.240",
+          "16",
+          "14",
+          "16"
+        ],
+        [
+          "/29",
+          "255.255.255.248",
+          "8",
+          "6",
+          "32"
+        ],
+        [
+          "/30",
+          "255.255.255.252",
+          "4",
+          "2",
+          "64  — point-to-point links"
+        ],
+        [
+          "/31",
+          "255.255.255.254",
+          "2",
+          "2 (special — RFC 3021)",
+          "P2P only — no broadcast"
+        ],
+        [
+          "/32",
+          "255.255.255.255",
+          "1",
+          "1 (host route)",
+          "Specific host or loopback"
+        ]
       ],
       "key_points": [
         "Usable hosts = 2^(host bits) − 2.  Subtract network address and broadcast.",
@@ -369,15 +944,47 @@
     {
       "title": "IPv6 Address Types",
       "type": "table",
-      "headers": ["Type", "Prefix / Range", "Description"],
+      "headers": [
+        "Type",
+        "Prefix / Range",
+        "Description"
+      ],
       "rows": [
-        ["Loopback", "::1/128", "Equivalent to 127.0.0.1 in IPv4 — local host"],
-        ["Unspecified", "::/128", "All zeros — equivalent to 0.0.0.0 in IPv4"],
-        ["Link-Local", "FE80::/10", "Auto-configured on every IPv6 interface; not routable — local segment only"],
-        ["Unique Local", "FC00::/7 (FC00–FDFF)", "Private IPv6 — roughly equivalent to RFC 1918; not globally routed"],
-        ["Global Unicast", "2000::/3", "Publicly routable IPv6 — assigned by IANA/RIRs"],
-        ["Multicast", "FF00::/8", "Replaces broadcast in IPv6 (no broadcast in IPv6)"],
-        ["Anycast", "Same as unicast — no special range", "Single address assigned to multiple interfaces; packet delivered to nearest"]
+        [
+          "Loopback",
+          "::1/128",
+          "Equivalent to 127.0.0.1 in IPv4 — local host"
+        ],
+        [
+          "Unspecified",
+          "::/128",
+          "All zeros — equivalent to 0.0.0.0 in IPv4"
+        ],
+        [
+          "Link-Local",
+          "FE80::/10",
+          "Auto-configured on every IPv6 interface; not routable — local segment only"
+        ],
+        [
+          "Unique Local",
+          "FC00::/7 (FC00–FDFF)",
+          "Private IPv6 — roughly equivalent to RFC 1918; not globally routed"
+        ],
+        [
+          "Global Unicast",
+          "2000::/3",
+          "Publicly routable IPv6 — assigned by IANA/RIRs"
+        ],
+        [
+          "Multicast",
+          "FF00::/8",
+          "Replaces broadcast in IPv6 (no broadcast in IPv6)"
+        ],
+        [
+          "Anycast",
+          "Same as unicast — no special range",
+          "Single address assigned to multiple interfaces; packet delivered to nearest"
+        ]
       ],
       "key_points": [
         "IPv6 has NO broadcast — multicast replaces it (e.g., FF02::1 = all nodes on link).",

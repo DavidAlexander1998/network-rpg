@@ -1,3 +1,4 @@
+import random
 from typing import List, Dict, Any, Optional
 
 
@@ -24,7 +25,7 @@ class Encounter:
 
         self.id: str = id
         self.question: str = question
-        self.options: List[str] = options
+        self.options: List[str] = list(options)
         self.correct_index: int = correct_index
         self.explanation: str = explanation
         self.xp_reward: int = xp_reward
@@ -35,6 +36,18 @@ class Encounter:
         self.node: float = node
         self.tags: List[str] = tags or []
 
+    def shuffle_options(self) -> None:
+        """Randomize option order and re-point correct_index.
+
+        The source content has a heavy answer-position bias (~73% of correct
+        answers sit at index 1). Shuffling at load time forces the player to
+        read every option instead of pattern-matching a position, which is how
+        the real exam presents answers.
+        """
+        correct_answer = self.options[self.correct_index]
+        random.shuffle(self.options)
+        self.correct_index = self.options.index(correct_answer)
+
     def check_answer(self, selected_index: int) -> bool:
         if not (0 <= selected_index < len(self.options)):
             raise ValueError(f"selected_index {selected_index} out of range")
@@ -44,12 +57,12 @@ class Encounter:
         return self.options[self.correct_index]
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "Encounter":
+    def from_dict(cls, data: Dict[str, Any], shuffle: bool = True) -> "Encounter":
         required = ["id", "question", "options", "correct_index", "explanation"]
         for key in required:
             if key not in data:
                 raise KeyError(f"Missing required key: {key}")
-        return cls(
+        enc = cls(
             id=data["id"],
             question=data["question"],
             options=data["options"],
@@ -63,6 +76,9 @@ class Encounter:
             node=data.get("node", 0.0),
             tags=data.get("tags", []),
         )
+        if shuffle:
+            enc.shuffle_options()
+        return enc
 
     def to_dict(self) -> Dict[str, Any]:
         return {

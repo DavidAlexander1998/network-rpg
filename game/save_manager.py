@@ -109,6 +109,9 @@ class SaveManager:
             "guardian_defeated": player.guardian_defeated,
             "wrong_answer_ids": player.wrong_answer_ids,
             "encounter_results": player.encounter_results,
+            "node_streaks": player.node_streaks,
+            "attempts": player.attempts,
+            "start_date": player.start_date,
             "free_study_mode": player.free_study_mode,
         }
 
@@ -125,5 +128,8 @@ class SaveManager:
         player.guardian_defeated = data.get("guardian_defeated", [False] * 5)
         player.wrong_answer_ids = data.get("wrong_answer_ids", [])
         player.encounter_results = data.get("encounter_results", {})
+        player.node_streaks = data.get("node_streaks", {})
+        player.attempts = data.get("attempts", {})
+        player.start_date = data.get("start_date", player.start_date)
         player.free_study_mode = data.get("free_study_mode", False)
         return player

@@ -698,5 +698,500 @@
     "acronym": "PDU",
     "full_name": "Protocol Data Unit",
     "definition": "Generic term for data at each OSI layer. Layer 7-5: Data, Layer 4: Segment (TCP) / Datagram (UDP), Layer 3: Packet, Layer 2: Frame, Layer 1: Bit/Symbol."
+  },
+  {
+    "acronym": "CRC",
+    "full_name": "Cyclic Redundancy Check",
+    "definition": "Error-detection checksum appended to frames. CRC errors on a switch interface mean corrupted frames arriving — usually bad cabling, EMI, or a duplex mismatch."
+  },
+  {
+    "acronym": "IEEE",
+    "full_name": "Institute of Electrical and Electronics Engineers",
+    "definition": "Standards body behind the 802.x families: 802.3 (Ethernet), 802.1Q (VLAN tagging), 802.1X (port-based NAC), 802.11 (Wi-Fi), 802.1w (RSTP)."
+  },
+  {
+    "acronym": "TIA",
+    "full_name": "Telecommunications Industry Association",
+    "definition": "Publishes structured-cabling standards. TIA-568 defines horizontal cabling (90m permanent link + 10m patch = 100m) and the T568A/T568B pinouts."
+  },
+  {
+    "acronym": "NIC",
+    "full_name": "Network Interface Card",
+    "definition": "Hardware that connects a host to the network; carries the burned-in MAC address. NIC teaming bonds multiple NICs for redundancy and/or more throughput."
+  },
+  {
+    "acronym": "SYN",
+    "full_name": "Synchronize",
+    "definition": "TCP flag that starts the 3-way handshake (SYN, SYN-ACK, ACK). A SYN flood sends many SYNs without completing the handshake to exhaust the server's connection table (DoS)."
+  },
+  {
+    "acronym": "T568A",
+    "full_name": "TIA-568 Wiring Standard A",
+    "definition": "One of two RJ45 pin/pair layouts. Differs from T568B only by swapping the orange and green pairs. Same standard on both ends = straight-through cable."
+  },
+  {
+    "acronym": "T568B",
+    "full_name": "TIA-568 Wiring Standard B",
+    "definition": "The more common RJ45 pinout. Differs from T568A by the orange/green pair swap. A-to-B on the two ends makes a crossover cable."
+  },
+  {
+    "acronym": "LWAP",
+    "full_name": "Lightweight Access Point",
+    "definition": "A 'thin' AP managed centrally by a Wireless LAN Controller (WLC). It must register with the WLC (often via CAPWAP) to download its configuration."
+  },
+  {
+    "acronym": "NXDOMAIN",
+    "full_name": "Non-Existent Domain",
+    "definition": "DNS reply meaning the queried name has no record. Seen in nslookup/dig from typos, a missing DNS entry, or propagation delay."
+  },
+  {
+    "acronym": "AWS",
+    "full_name": "Amazon Web Services",
+    "definition": "Amazon's public cloud. Examples: EC2 (IaaS), Elastic Beanstalk (PaaS). Common public-cloud / service-model example on the exam."
+  },
+  {
+    "acronym": "HIPAA",
+    "full_name": "Health Insurance Portability and Accountability Act",
+    "definition": "US law protecting healthcare data (PHI). Drives compliance needs — e.g., a community cloud shared by orgs with common HIPAA obligations."
+  },
+  {
+    "acronym": "BPDU",
+    "full_name": "Bridge Protocol Data Unit",
+    "definition": "Spanning Tree messages switches exchange to build a loop-free topology. BPDU Guard shuts down a PortFast port that receives a BPDU (blocks rogue switches/loops)."
+  },
+  {
+    "acronym": "WEP",
+    "full_name": "Wired Equivalent Privacy",
+    "definition": "Obsolete Wi-Fi encryption, deprecated due to a weak/short IV that makes its RC4 key easily cracked. Replaced by WPA/WPA2/WPA3."
+  },
+  {
+    "acronym": "MIMO",
+    "full_name": "Multiple Input Multiple Output",
+    "definition": "Uses multiple antennas to send several spatial streams at once for higher throughput. Introduced with 802.11n; MU-MIMO (802.11ac/ax) serves multiple clients at once."
+  },
+  {
+    "acronym": "PSK",
+    "full_name": "Pre-Shared Key",
+    "definition": "Wi-Fi auth with a shared passphrase (WPA2-Personal). WPA3 replaces PSK with SAE (Simultaneous Authentication of Equals) to defeat offline dictionary attacks."
+  },
+  {
+    "acronym": "BSS",
+    "full_name": "Basic Service Set",
+    "definition": "A single AP plus its associated clients, identified by a BSSID (the AP's MAC). BSS Coloring (Wi-Fi 6) tags transmissions to cut co-channel interference."
+  },
+  {
+    "acronym": "ESD",
+    "full_name": "Electrostatic Discharge",
+    "definition": "Static that can destroy components. Mitigated with anti-static straps/mats and proper humidity (~40-60%); air that is too dry raises ESD risk."
+  },
+  {
+    "acronym": "ISP",
+    "full_name": "Internet Service Provider",
+    "definition": "Company providing internet connectivity. The demarcation point (demarc) marks where ISP responsibility ends and the customer's begins."
+  },
+  {
+    "acronym": "KVM",
+    "full_name": "Keyboard, Video, Mouse",
+    "definition": "A KVM switch lets one keyboard/monitor/mouse control many servers — common in data centers to avoid per-server peripherals."
+  },
+  {
+    "acronym": "OFDMA",
+    "full_name": "Orthogonal Frequency-Division Multiple Access",
+    "definition": "Wi-Fi 6 (802.11ax) feature that splits a channel into resource units so multiple clients share it simultaneously, lowering latency in dense areas."
+  },
+  {
+    "acronym": "IPAM",
+    "full_name": "IP Address Management",
+    "definition": "Tools/processes to plan, track, and manage IP space and the associated DNS/DHCP, preventing address conflicts and exhaustion."
+  },
+  {
+    "acronym": "SPOF",
+    "full_name": "Single Point of Failure",
+    "definition": "Any component whose failure takes down the whole system. Removed via redundancy — HA pairs, dual power/links, clustering."
+  },
+  {
+    "acronym": "AES",
+    "full_name": "Advanced Encryption Standard",
+    "definition": "Symmetric block cipher (128/192/256-bit keys). Fast and strong; used in WPA2/WPA3, IPsec, TLS, and disk encryption."
+  },
+  {
+    "acronym": "RSA",
+    "full_name": "Rivest-Shamir-Adleman",
+    "definition": "Asymmetric algorithm using public/private key pairs, used mainly for key exchange and digital signatures — not bulk data encryption."
+  },
+  {
+    "acronym": "A",
+    "full_name": "Address",
+    "definition": "DNS record that maps a hostname to an IPv4 address (AAAA maps to IPv6)."
+  },
+  {
+    "acronym": "AP",
+    "full_name": "Access Point",
+    "definition": "Layer 2 device bridging wireless clients to the wired network; broadcasts an SSID."
+  },
+  {
+    "acronym": "BNC",
+    "full_name": "Bayonet Neill-Concelman",
+    "definition": "Bayonet twist-lock coaxial connector (legacy 10BASE2 and some video)."
+  },
+  {
+    "acronym": "BSSID",
+    "full_name": "Basic Service Set Identifier",
+    "definition": "The MAC address of an access point's radio; uniquely identifies one BSS."
+  },
+  {
+    "acronym": "CAM",
+    "full_name": "Content-addressable Memory",
+    "definition": "Switch memory holding the MAC address table. A MAC-flood attack overflows it to make the switch fail-open like a hub."
+  },
+  {
+    "acronym": "CDN",
+    "full_name": "Content Delivery Network",
+    "definition": "Geographically distributed caching servers that serve content from near the user to cut latency."
+  },
+  {
+    "acronym": "CIA",
+    "full_name": "Confidentiality, Integrity, and Availability",
+    "definition": "The three core security goals: Confidentiality, Integrity, Availability (the CIA triad)."
+  },
+  {
+    "acronym": "CNAME",
+    "full_name": "Canonical Name",
+    "definition": "DNS record that aliases one hostname to another (e.g., www -> example.com)."
+  },
+  {
+    "acronym": "CPU",
+    "full_name": "Central Processing Unit",
+    "definition": "The processor; sustained high CPU on a network device causes dropped packets and latency."
+  },
+  {
+    "acronym": "DAC",
+    "full_name": "Direct Attach Copper",
+    "definition": "A fixed copper cable with transceivers built into both ends, for short switch/server links."
+  },
+  {
+    "acronym": "DAS",
+    "full_name": "Direct-attached Storage",
+    "definition": "Storage attached directly to one host (internal disks, USB/SAS), not shared over the network."
+  },
+  {
+    "acronym": "DCI",
+    "full_name": "Data Center Interconnect",
+    "definition": "Links/technologies connecting multiple data centers (often VXLAN/MPLS) for replication or failover."
+  },
+  {
+    "acronym": "DoH",
+    "full_name": "DNS over HTTPS",
+    "definition": "Encrypts DNS queries inside HTTPS (TCP 443) for privacy and tamper resistance."
+  },
+  {
+    "acronym": "DoT",
+    "full_name": "DNS over TLS",
+    "definition": "Encrypts DNS queries using TLS (TCP 853)."
+  },
+  {
+    "acronym": "DR",
+    "full_name": "Disaster Recovery",
+    "definition": "Plans/processes to restore IT operations after a major outage; uses RPO/RTO and hot/warm/cold sites."
+  },
+  {
+    "acronym": "EAPoL",
+    "full_name": "Extensible Authentication Protocol over LAN",
+    "definition": "Carries EAP authentication frames over a LAN; used by 802.1X port-based network access control."
+  },
+  {
+    "acronym": "EOL",
+    "full_name": "End-of-life",
+    "definition": "The point when a vendor stops selling/producing a product."
+  },
+  {
+    "acronym": "EOS",
+    "full_name": "End-of-support",
+    "definition": "The point when a vendor stops patches/support — a security risk if the device is still in use."
+  },
+  {
+    "acronym": "ESSID",
+    "full_name": "Extended Service Set Identifier",
+    "definition": "The network name (SSID) shared by multiple APs in an extended service set, enabling roaming."
+  },
+  {
+    "acronym": "EULA",
+    "full_name": "End User License Agreement",
+    "definition": "Legal contract governing how software may be used."
+  },
+  {
+    "acronym": "FC",
+    "full_name": "Fibre Channel",
+    "definition": "High-speed network technology used primarily for storage area networks (SANs)."
+  },
+  {
+    "acronym": "GDPR",
+    "full_name": "General Data Protection Regulation",
+    "definition": "EU regulation protecting personal data and privacy."
+  },
+  {
+    "acronym": "GUI",
+    "full_name": "Graphical User Interface",
+    "definition": "Visual point-and-click interface (contrast with the CLI)."
+  },
+  {
+    "acronym": "IaaS",
+    "full_name": "Infrastructure as a Service",
+    "definition": "Cloud model providing virtual compute/storage/network; customer manages the OS and up (e.g., AWS EC2)."
+  },
+  {
+    "acronym": "IaC",
+    "full_name": "Infrastructure as Code",
+    "definition": "Managing and provisioning infrastructure through code/definition files (e.g., Terraform, Ansible)."
+  },
+  {
+    "acronym": "IAM",
+    "full_name": "Identity and Access Management",
+    "definition": "Framework and policies for managing user identities and their access rights."
+  },
+  {
+    "acronym": "ICS",
+    "full_name": "Industrial Control System",
+    "definition": "Systems that control industrial processes (includes SCADA); usually segmented for security."
+  },
+  {
+    "acronym": "IoT",
+    "full_name": "Internet of Things",
+    "definition": "Network-connected smart devices (sensors, cameras, appliances); often isolated on their own VLAN."
+  },
+  {
+    "acronym": "IIoT",
+    "full_name": "Industrial Internet of Things",
+    "definition": "IoT applied to industrial equipment and operational technology."
+  },
+  {
+    "acronym": "IS-IS",
+    "full_name": "Intermediate System to Intermediate System",
+    "definition": "Link-state interior gateway routing protocol; an alternative to OSPF, common in large ISP cores."
+  },
+  {
+    "acronym": "LAN",
+    "full_name": "Local Area Network",
+    "definition": "A network confined to a limited area such as a building or campus."
+  },
+  {
+    "acronym": "LC",
+    "full_name": "Local Connector",
+    "definition": "Small push-pull fiber connector; very common on SFP modules ('little connector')."
+  },
+  {
+    "acronym": "LDAPS",
+    "full_name": "Lightweight Directory Access Protocol over SSL",
+    "definition": "LDAP encrypted with SSL/TLS, on TCP 636."
+  },
+  {
+    "acronym": "MDIX",
+    "full_name": "Medium Dependent Interface Crossover",
+    "definition": "Port crossover mode; Auto-MDIX auto-detects and corrects straight-through vs crossover cabling."
+  },
+  {
+    "acronym": "MPO",
+    "full_name": "Multifiber Push On",
+    "definition": "Multi-strand fiber connector used for high-density 40G/100G breakout links."
+  },
+  {
+    "acronym": "MX",
+    "full_name": "Mail Exchange",
+    "definition": "DNS record specifying the mail server(s) responsible for a domain."
+  },
+  {
+    "acronym": "NAS",
+    "full_name": "Network-attached Storage",
+    "definition": "File-level storage shared over the network (via SMB/NFS)."
+  },
+  {
+    "acronym": "NS",
+    "full_name": "Name Server",
+    "definition": "DNS record identifying the authoritative name server(s) for a zone."
+  },
+  {
+    "acronym": "NTS",
+    "full_name": "Network Time Security",
+    "definition": "Security extension that authenticates NTP to prevent time-spoofing."
+  },
+  {
+    "acronym": "OS",
+    "full_name": "Operating System",
+    "definition": "System software that manages hardware and runs applications."
+  },
+  {
+    "acronym": "OT",
+    "full_name": "Operational Technology",
+    "definition": "Hardware/software that monitors or controls physical devices and industrial processes."
+  },
+  {
+    "acronym": "PaaS",
+    "full_name": "Platform as a Service",
+    "definition": "Cloud model providing a managed platform/runtime for app development (e.g., App Engine); no OS to manage."
+  },
+  {
+    "acronym": "PCI DSS",
+    "full_name": "Payment Card Industry Data Security Standards",
+    "definition": "Security standard for any organization that stores, processes, or transmits credit-card data."
+  },
+  {
+    "acronym": "PTP",
+    "full_name": "Precision Time Protocol",
+    "definition": "Sub-microsecond time synchronization (IEEE 1588); far more precise than NTP."
+  },
+  {
+    "acronym": "PTR",
+    "full_name": "Pointer",
+    "definition": "DNS record for reverse lookups, mapping an IP address back to a hostname."
+  },
+  {
+    "acronym": "QSFP",
+    "full_name": "Quad Small Form-factor Pluggable",
+    "definition": "Transceiver supporting four channels for 40G+ (QSFP28 = 100G)."
+  },
+  {
+    "acronym": "RFID",
+    "full_name": "Radio Frequency Identifier",
+    "definition": "Wireless radio tags used for asset tracking and access badges."
+  },
+  {
+    "acronym": "RJ",
+    "full_name": "Registered Jack",
+    "definition": "Standard jack connector family; RJ45 (8P8C) for Ethernet, RJ11 for telephone."
+  },
+  {
+    "acronym": "RX",
+    "full_name": "Receiver",
+    "definition": "The receive side of a transceiver/fiber pair; swapped TX/RX is a common fiber link fault."
+  },
+  {
+    "acronym": "SaaS",
+    "full_name": "Software as a Service",
+    "definition": "Cloud model delivering ready-to-use applications over the web (e.g., Microsoft 365); provider manages all layers."
+  },
+  {
+    "acronym": "SAML",
+    "full_name": "Security Assertion Markup Language",
+    "definition": "XML standard for exchanging authentication/authorization data; enables SSO and federation."
+  },
+  {
+    "acronym": "SAN",
+    "full_name": "Storage Area Network",
+    "definition": "High-speed block-level storage network (Fibre Channel/iSCSI) that appears as local disk to servers."
+  },
+  {
+    "acronym": "SASE",
+    "full_name": "Secure Access Service Edge",
+    "definition": "Cloud model combining SD-WAN networking with edge-delivered security (SSE)."
+  },
+  {
+    "acronym": "SC",
+    "full_name": "Subscriber Connector",
+    "definition": "Square push-pull fiber connector ('stick and click')."
+  },
+  {
+    "acronym": "SCADA",
+    "full_name": "Supervisory Control and Data Acquisition",
+    "definition": "Control system for monitoring/controlling industrial infrastructure across wide areas."
+  },
+  {
+    "acronym": "SIEM",
+    "full_name": "Security Information and Event Management",
+    "definition": "Aggregates and correlates logs/events for real-time security monitoring and alerting."
+  },
+  {
+    "acronym": "SMTPS",
+    "full_name": "Simple Mail Transfer Protocol Secure",
+    "definition": "SMTP encrypted with SSL/TLS (port 465)."
+  },
+  {
+    "acronym": "SOA",
+    "full_name": "Start of Authority",
+    "definition": "DNS record holding zone authority data: primary NS, serial number, and refresh timers."
+  },
+  {
+    "acronym": "SQL",
+    "full_name": "Structured Query Language",
+    "definition": "Database query language; SQL injection is a common web-application attack."
+  },
+  {
+    "acronym": "SSE",
+    "full_name": "Security Service Edge",
+    "definition": "Cloud-delivered security stack (SWG, CASB, ZTNA) — the security half of SASE."
+  },
+  {
+    "acronym": "SSO",
+    "full_name": "Single Sign-on",
+    "definition": "One authentication that grants access to multiple systems."
+  },
+  {
+    "acronym": "ST",
+    "full_name": "Straight Tip",
+    "definition": "Bayonet twist-lock fiber connector ('stick and twist')."
+  },
+  {
+    "acronym": "SVI",
+    "full_name": "Switch Virtual Interface",
+    "definition": "A logical Layer 3 interface on a switch for a VLAN; enables inter-VLAN routing."
+  },
+  {
+    "acronym": "TX",
+    "full_name": "Transmitter",
+    "definition": "The transmit side of a transceiver/fiber pair."
+  },
+  {
+    "acronym": "TXT",
+    "full_name": "Text",
+    "definition": "DNS record holding free text; used for SPF, DKIM, and domain ownership verification."
+  },
+  {
+    "acronym": "URL",
+    "full_name": "Uniform Resource Locator",
+    "definition": "The address used to locate a resource on the web."
+  },
+  {
+    "acronym": "USB",
+    "full_name": "Universal Serial Bus",
+    "definition": "Standard peripheral connector; also used for console access via a USB-to-serial adapter."
+  },
+  {
+    "acronym": "VIP",
+    "full_name": "Virtual IP",
+    "definition": "A single IP shared or floated among devices (load balancers, FHRP) so it isn't tied to one physical host."
+  },
+  {
+    "acronym": "VLSM",
+    "full_name": "Variable Length Subnet Mask",
+    "definition": "Using different subnet mask lengths within one network to size subnets efficiently."
+  },
+  {
+    "acronym": "VoIP",
+    "full_name": "Voice over IP",
+    "definition": "Carrying voice calls over IP; latency/jitter-sensitive, usually prioritized with QoS."
+  },
+  {
+    "acronym": "VPC",
+    "full_name": "Virtual Private Cloud",
+    "definition": "An isolated, private virtual network inside a public cloud provider."
+  },
+  {
+    "acronym": "WAN",
+    "full_name": "Wide Area Network",
+    "definition": "A network spanning large geographic areas, linking sites or cities."
+  },
+  {
+    "acronym": "WPA",
+    "full_name": "Wi-Fi Protected Access",
+    "definition": "Wi-Fi security standard; WPA2 uses AES-CCMP, WPA3 adds SAE to resist offline cracking."
+  },
+  {
+    "acronym": "WPS",
+    "full_name": "Wi-Fi Protected Setup",
+    "definition": "Simplified Wi-Fi pairing (PIN/button); insecure due to PIN brute-forcing — disable it."
+  },
+  {
+    "acronym": "ZTA",
+    "full_name": "Zero Trust Architecture",
+    "definition": "Security model of 'never trust, always verify' — every request is authenticated/authorized regardless of location."
   }
 ]

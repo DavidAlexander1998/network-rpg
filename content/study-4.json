@@ -3,21 +3,77 @@
     {
       "title": "Attack Types — Identification & Mitigation",
       "type": "table",
-      "headers": ["Attack", "How it works", "Mitigation"],
+      "headers": [
+        "Attack",
+        "How it works",
+        "Mitigation"
+      ],
       "rows": [
-        ["DoS (Denial of Service)", "Single attacker floods target with traffic or exploits vulnerability to exhaust resources", "Rate limiting, firewall ACLs, null routing attack source"],
-        ["DDoS (Distributed DoS)", "Botnet of thousands of compromised hosts floods target simultaneously", "Anti-DDoS scrubbing service (Cloudflare, AWS Shield), upstream filtering"],
-        ["On-path / MITM", "Attacker positions between two hosts — intercepts and optionally modifies traffic", "Encrypt all traffic (TLS/IPsec), certificate pinning, mutual authentication"],
-        ["ARP Poisoning", "Attacker sends gratuitous ARPs to map victim IPs to attacker's MAC — intercepts LAN traffic", "Dynamic ARP Inspection (DAI), static ARP entries for critical hosts"],
-        ["DNS Poisoning / Hijacking", "Corrupt DNS cache or intercept DNS responses — redirect users to malicious sites", "DNSSEC, encrypted DNS (DoH/DoT), use trusted resolvers"],
-        ["Rogue DHCP", "Attacker runs unauthorised DHCP server — assigns malicious default gateway/DNS", "DHCP snooping — designate trusted DHCP ports only"],
-        ["Rogue AP / Evil Twin", "Attacker sets up fake AP with same SSID — users connect, traffic intercepted", "802.1X Enterprise auth (rogue can't replicate), wireless IDS, RF monitoring"],
-        ["Deauthentication attack", "Attacker sends spoofed deauth frames to disconnect clients from legitimate AP", "802.11w (Management Frame Protection), WPA3"],
-        ["VLAN Hopping", "Double-tagging or DTP exploit to jump to another VLAN", "Change native VLAN, disable DTP, use dedicated unused native VLAN"],
-        ["Replay attack", "Attacker captures and retransmits valid authentication traffic", "Session tokens, timestamps, nonces in authentication protocols"],
-        ["Password Spraying", "Try a few common passwords against many accounts — avoids lockout thresholds", "Account lockout after N attempts, MFA, strong password policy"],
-        ["Brute Force", "Systematically try all possible passwords against one account", "Account lockout, MFA, long complex passwords, rate limiting"],
-        ["Rainbow Table", "Pre-computed hash-to-plaintext lookup table for cracking password hashes", "Salt passwords before hashing — salting defeats rainbow tables entirely"]
+        [
+          "DoS (Denial of Service)",
+          "Single attacker floods target with traffic or exploits vulnerability to exhaust resources",
+          "Rate limiting, firewall ACLs, null routing attack source"
+        ],
+        [
+          "DDoS (Distributed DoS)",
+          "Botnet of thousands of compromised hosts floods target simultaneously",
+          "Anti-DDoS scrubbing service (Cloudflare, AWS Shield), upstream filtering"
+        ],
+        [
+          "On-path / MITM",
+          "Attacker positions between two hosts — intercepts and optionally modifies traffic",
+          "Encrypt all traffic (TLS/IPsec), certificate pinning, mutual authentication"
+        ],
+        [
+          "ARP Poisoning",
+          "Attacker sends gratuitous ARPs to map victim IPs to attacker's MAC — intercepts LAN traffic",
+          "Dynamic ARP Inspection (DAI), static ARP entries for critical hosts"
+        ],
+        [
+          "DNS Poisoning / Hijacking",
+          "Corrupt DNS cache or intercept DNS responses — redirect users to malicious sites",
+          "DNSSEC, encrypted DNS (DoH/DoT), use trusted resolvers"
+        ],
+        [
+          "Rogue DHCP",
+          "Attacker runs unauthorised DHCP server — assigns malicious default gateway/DNS",
+          "DHCP snooping — designate trusted DHCP ports only"
+        ],
+        [
+          "Rogue AP / Evil Twin",
+          "Attacker sets up fake AP with same SSID — users connect, traffic intercepted",
+          "802.1X Enterprise auth (rogue can't replicate), wireless IDS, RF monitoring"
+        ],
+        [
+          "Deauthentication attack",
+          "Attacker sends spoofed deauth frames to disconnect clients from legitimate AP",
+          "802.11w (Management Frame Protection), WPA3"
+        ],
+        [
+          "VLAN Hopping",
+          "Double-tagging or DTP exploit to jump to another VLAN",
+          "Change native VLAN, disable DTP, use dedicated unused native VLAN"
+        ],
+        [
+          "Replay attack",
+          "Attacker captures and retransmits valid authentication traffic",
+          "Session tokens, timestamps, nonces in authentication protocols"
+        ],
+        [
+          "Password Spraying",
+          "Try a few common passwords against many accounts — avoids lockout thresholds",
+          "Account lockout after N attempts, MFA, strong password policy"
+        ],
+        [
+          "Brute Force",
+          "Systematically try all possible passwords against one account",
+          "Account lockout, MFA, long complex passwords, rate limiting"
+        ],
+        [
+          "Rainbow Table",
+          "Pre-computed hash-to-plaintext lookup table for cracking password hashes",
+          "Salt passwords before hashing — salting defeats rainbow tables entirely"
+        ]
       ],
       "key_points": [
         "ARP poisoning → On-path/MITM at Layer 2. Mitigation: DAI (Dynamic ARP Inspection).",
@@ -31,16 +87,52 @@
     {
       "title": "Social Engineering Attacks",
       "type": "table",
-      "headers": ["Attack Type", "Method", "Example"],
+      "headers": [
+        "Attack Type",
+        "Method",
+        "Example"
+      ],
       "rows": [
-        ["Phishing", "Mass email impersonating trusted entity — generic, sent to many", "Fake PayPal email asking all users to 'verify account'"],
-        ["Spear Phishing", "Targeted phishing — researched and personalised for specific victim", "Email to CFO from 'CEO' requesting urgent wire transfer"],
-        ["Whaling", "Spear phishing targeting senior executives (C-suite)", "Fake legal subpoena email sent to CEO"],
-        ["Vishing", "Voice/phone phishing — caller impersonates IT helpdesk, bank, IRS", "'This is Microsoft Support — your PC is infected, give us access'"],
-        ["Smishing", "SMS phishing — text message with malicious link or pretexting", "Text: 'Your package is held — click here to confirm delivery'"],
-        ["Pretexting", "Creating a fabricated scenario to extract information", "Attacker pretends to be an auditor needing network credentials"],
-        ["Tailgating / Piggybacking", "Following an authorised person through a secured door without authenticating", "Attacker carries boxes and walks in behind badge-access employee"],
-        ["Baiting", "Leaving infected USB drives in visible locations for victims to plug in", "USB labelled 'Payroll Q4 2024' left in company car park"]
+        [
+          "Phishing",
+          "Mass email impersonating trusted entity — generic, sent to many",
+          "Fake PayPal email asking all users to 'verify account'"
+        ],
+        [
+          "Spear Phishing",
+          "Targeted phishing — researched and personalised for specific victim",
+          "Email to CFO from 'CEO' requesting urgent wire transfer"
+        ],
+        [
+          "Whaling",
+          "Spear phishing targeting senior executives (C-suite)",
+          "Fake legal subpoena email sent to CEO"
+        ],
+        [
+          "Vishing",
+          "Voice/phone phishing — caller impersonates IT helpdesk, bank, IRS",
+          "'This is Microsoft Support — your PC is infected, give us access'"
+        ],
+        [
+          "Smishing",
+          "SMS phishing — text message with malicious link or pretexting",
+          "Text: 'Your package is held — click here to confirm delivery'"
+        ],
+        [
+          "Pretexting",
+          "Creating a fabricated scenario to extract information",
+          "Attacker pretends to be an auditor needing network credentials"
+        ],
+        [
+          "Tailgating / Piggybacking",
+          "Following an authorised person through a secured door without authenticating",
+          "Attacker carries boxes and walks in behind badge-access employee"
+        ],
+        [
+          "Baiting",
+          "Leaving infected USB drives in visible locations for victims to plug in",
+          "USB labelled 'Payroll Q4 2024' left in company car park"
+        ]
       ],
       "key_points": [
         "Phishing is generic (mass). Spear phishing is targeted. Whaling targets executives specifically.",
@@ -54,16 +146,52 @@
     {
       "title": "DDoS Attack Categories & Threat Actors",
       "type": "table",
-      "headers": ["Category", "Type / Description", "Example"],
+      "headers": [
+        "Category",
+        "Type / Description",
+        "Example"
+      ],
       "rows": [
-        ["DDoS — Volumetric", "Overwhelm bandwidth — huge traffic volume (Gbps scale)", "UDP flood, ICMP flood, DNS amplification"],
-        ["DDoS — Protocol", "Exhaust state tables on firewalls/routers — not just bandwidth", "SYN flood (half-open TCP connections), Smurf attack"],
-        ["DDoS — Application (L7)", "Exhaust server resources with seemingly valid requests", "HTTP GET flood, Slowloris (holds connections open), DNS query flood"],
-        ["Threat Actor — Nation-State", "Government-sponsored, highly skilled, long-term APT campaigns", "Sophisticated persistent access for espionage"],
-        ["Threat Actor — Hacktivist", "Ideologically motivated — embarrass or disrupt target", "Anonymous DDoS on corporate/government sites"],
-        ["Threat Actor — Insider", "Current or former employee with legitimate access", "Disgruntled employee exfiltrating data or sabotaging systems"],
-        ["Threat Actor — Script Kiddie", "Low skill — uses existing tools/exploits without understanding them", "Runs downloaded DDoS tools against targets"],
-        ["Threat Actor — Organised Crime", "Financially motivated — ransomware, data theft, fraud", "Ransomware gangs, credential theft operations"]
+        [
+          "DDoS — Volumetric",
+          "Overwhelm bandwidth — huge traffic volume (Gbps scale)",
+          "UDP flood, ICMP flood, DNS amplification"
+        ],
+        [
+          "DDoS — Protocol",
+          "Exhaust state tables on firewalls/routers — not just bandwidth",
+          "SYN flood (half-open TCP connections), Smurf attack"
+        ],
+        [
+          "DDoS — Application (L7)",
+          "Exhaust server resources with seemingly valid requests",
+          "HTTP GET flood, Slowloris (holds connections open), DNS query flood"
+        ],
+        [
+          "Threat Actor — Nation-State",
+          "Government-sponsored, highly skilled, long-term APT campaigns",
+          "Sophisticated persistent access for espionage"
+        ],
+        [
+          "Threat Actor — Hacktivist",
+          "Ideologically motivated — embarrass or disrupt target",
+          "Anonymous DDoS on corporate/government sites"
+        ],
+        [
+          "Threat Actor — Insider",
+          "Current or former employee with legitimate access",
+          "Disgruntled employee exfiltrating data or sabotaging systems"
+        ],
+        [
+          "Threat Actor — Script Kiddie",
+          "Low skill — uses existing tools/exploits without understanding them",
+          "Runs downloaded DDoS tools against targets"
+        ],
+        [
+          "Threat Actor — Organised Crime",
+          "Financially motivated — ransomware, data theft, fraud",
+          "Ransomware gangs, credential theft operations"
+        ]
       ],
       "key_points": [
         "DNS amplification: small query → large response sent to spoofed victim IP. Amplification factor up to 50x.",
@@ -73,20 +201,73 @@
         "Insider threat: hardest to detect — has legitimate credentials. Defence: least privilege, DLP, audit logs.",
         "Script kiddies: unsophisticated but can still cause damage with off-the-shelf tools."
       ]
+    },
+    {
+      "title": "CIA Triad + AAA (know both trios cold)",
+      "type": "mnemonic",
+      "body": "CIA Triad — the security goals:\n  Confidentiality - only authorized eyes (encryption)\n  Integrity       - data unaltered (hashing)\n  Availability    - reachable when needed (redundancy)\n\nAAA — access control:\n  Authentication - WHO are you?  (password, MFA)\n  Authorization  - what may you DO? (permissions)\n  Accounting     - what DID you do? (logging/audit)",
+      "key_points": [
+        "Authentication = identity; Authorization = permissions. The exam mixes these on purpose.",
+        "TACACS+ encrypts the WHOLE packet and separates AuthN/AuthZ; RADIUS encrypts only the password.",
+        "Hashing protects Integrity; Encryption protects Confidentiality.",
+        "Accounting/Auditing = the logs proving who did what."
+      ]
     }
   ],
   "4.2": [
     {
       "title": "Firewall Types — Full Comparison",
       "type": "table",
-      "headers": ["Firewall Type", "Inspects", "State Aware?", "Layer", "Weakness"],
+      "headers": [
+        "Firewall Type",
+        "Inspects",
+        "State Aware?",
+        "Layer",
+        "Weakness"
+      ],
       "rows": [
-        ["Packet filter (stateless)", "Src/Dst IP, port, protocol per packet", "No — each packet evaluated independently", "L3/L4", "Cannot validate return traffic; easily spoofed"],
-        ["Stateful firewall", "Connection state table + packet headers", "Yes — tracks TCP/UDP sessions", "L3/L4", "Cannot inspect application payload content"],
-        ["Application-layer / Proxy FW", "Full application data (URL, commands)", "Yes + application context", "L7", "Application-specific; slower; harder to scale"],
-        ["Next-Gen Firewall (NGFW)", "App ID, User ID, SSL decryption, IPS, threat intel", "Yes + deep packet inspection", "L3–L7", "Higher cost; SSL inspection adds latency; complex config"],
-        ["WAF (Web Application Firewall)", "HTTP/HTTPS — OWASP Top 10 (SQLi, XSS, CSRF)", "Yes + web-app aware", "L7 (web only)", "Web traffic only — not general purpose"],
-        ["UTM (Unified Threat Management)", "FW + IPS + AV + Web filter + VPN + DLP in one box", "Yes", "L3–L7", "Single point of failure; performance impact; SMB-focused"]
+        [
+          "Packet filter (stateless)",
+          "Src/Dst IP, port, protocol per packet",
+          "No — each packet evaluated independently",
+          "L3/L4",
+          "Cannot validate return traffic; easily spoofed"
+        ],
+        [
+          "Stateful firewall",
+          "Connection state table + packet headers",
+          "Yes — tracks TCP/UDP sessions",
+          "L3/L4",
+          "Cannot inspect application payload content"
+        ],
+        [
+          "Application-layer / Proxy FW",
+          "Full application data (URL, commands)",
+          "Yes + application context",
+          "L7",
+          "Application-specific; slower; harder to scale"
+        ],
+        [
+          "Next-Gen Firewall (NGFW)",
+          "App ID, User ID, SSL decryption, IPS, threat intel",
+          "Yes + deep packet inspection",
+          "L3–L7",
+          "Higher cost; SSL inspection adds latency; complex config"
+        ],
+        [
+          "WAF (Web Application Firewall)",
+          "HTTP/HTTPS — OWASP Top 10 (SQLi, XSS, CSRF)",
+          "Yes + web-app aware",
+          "L7 (web only)",
+          "Web traffic only — not general purpose"
+        ],
+        [
+          "UTM (Unified Threat Management)",
+          "FW + IPS + AV + Web filter + VPN + DLP in one box",
+          "Yes",
+          "L3–L7",
+          "Single point of failure; performance impact; SMB-focused"
+        ]
       ],
       "key_points": [
         "Stateless = no memory of connections. Stateful = tracks session state (syn/established/fin).",
@@ -100,16 +281,52 @@
     {
       "title": "IDS vs IPS and Network Segmentation",
       "type": "table",
-      "headers": ["Concept", "Description", "Key Detail"],
+      "headers": [
+        "Concept",
+        "Description",
+        "Key Detail"
+      ],
       "rows": [
-        ["IDS (Intrusion Detection System)", "DETECTS and ALERTS — passive, out-of-band or tap mode", "Cannot block traffic. False positive = alert on legitimate traffic. No latency added."],
-        ["IPS (Intrusion Prevention System)", "DETECTS and BLOCKS — active, inline mode", "Sits in the traffic path. False positive = drops legitimate traffic. Adds small latency."],
-        ["HIDS/HIPS", "Host-based IDS/IPS — agent installed on endpoint", "Monitors OS calls, file changes, running processes on the host itself."],
-        ["DMZ (Demilitarized Zone)", "Screened subnet between untrusted internet and trusted internal network", "Public-facing servers (web, email, DNS) placed here. Internet can reach DMZ; DMZ cannot initiate to internal."],
-        ["Screened subnet", "Synonym for DMZ — subnet accessible from both internet and internal, but restricted", "Typically between two firewalls: external FW faces internet, internal FW protects LAN."],
-        ["Honeypot", "Decoy system designed to attract attackers — logs their techniques", "No real data. Alerts admins to active intrusion attempts. Honeynets = multiple honeypots."],
-        ["Jump server / Bastion host", "Hardened, audited gateway to reach sensitive internal systems", "Admins connect to bastion first, then SSH/RDP from there to internal servers."],
-        ["Microsegmentation", "Granular network segmentation — per-workload firewall policies (East-West traffic control)", "Software-defined; used in data centres/cloud. Limits lateral movement if one host is compromised."]
+        [
+          "IDS (Intrusion Detection System)",
+          "DETECTS and ALERTS — passive, out-of-band or tap mode",
+          "Cannot block traffic. False positive = alert on legitimate traffic. No latency added."
+        ],
+        [
+          "IPS (Intrusion Prevention System)",
+          "DETECTS and BLOCKS — active, inline mode",
+          "Sits in the traffic path. False positive = drops legitimate traffic. Adds small latency."
+        ],
+        [
+          "HIDS/HIPS",
+          "Host-based IDS/IPS — agent installed on endpoint",
+          "Monitors OS calls, file changes, running processes on the host itself."
+        ],
+        [
+          "DMZ (Demilitarized Zone)",
+          "Screened subnet between untrusted internet and trusted internal network",
+          "Public-facing servers (web, email, DNS) placed here. Internet can reach DMZ; DMZ cannot initiate to internal."
+        ],
+        [
+          "Screened subnet",
+          "Synonym for DMZ — subnet accessible from both internet and internal, but restricted",
+          "Typically between two firewalls: external FW faces internet, internal FW protects LAN."
+        ],
+        [
+          "Honeypot",
+          "Decoy system designed to attract attackers — logs their techniques",
+          "No real data. Alerts admins to active intrusion attempts. Honeynets = multiple honeypots."
+        ],
+        [
+          "Jump server / Bastion host",
+          "Hardened, audited gateway to reach sensitive internal systems",
+          "Admins connect to bastion first, then SSH/RDP from there to internal servers."
+        ],
+        [
+          "Microsegmentation",
+          "Granular network segmentation — per-workload firewall policies (East-West traffic control)",
+          "Software-defined; used in data centres/cloud. Limits lateral movement if one host is compromised."
+        ]
       ],
       "key_points": [
         "IDS = detect only. IPS = detect + block. IPS must be inline; IDS can be tap/span.",
@@ -119,20 +336,66 @@
         "Zero Trust: 'never trust, always verify' — no implicit trust based on network location. Every access request authenticated/authorized.",
         "Defense in depth: multiple overlapping security layers — compromising one layer doesn't mean full compromise."
       ]
+    },
+    {
+      "title": "Attack Types — fast categorization",
+      "type": "concept",
+      "body": "Group attacks by what they abuse:\n\n  Spoofing / on-path: ARP spoofing, MAC spoofing, MITM, DNS poisoning, rogue DHCP/AP\n  Denial:             DoS, DDoS, amplification/reflection\n  Social engineering: phishing, vishing, tailgating, shoulder surfing\n  Wireless:           evil twin, deauth, jamming\n  Reconnaissance:     port scan, war-driving",
+      "key_points": [
+        "ARP spoofing maps the attacker's MAC to the gateway's IP -> on-path interception.",
+        "Evil twin = rogue AP imitating a legit SSID to harvest credentials.",
+        "Amplification (DNS/NTP) turns a tiny request into a huge response aimed at the victim.",
+        "Deauth attack kicks clients off Wi-Fi - often the setup for an evil twin."
+      ]
     }
   ],
   "4.3": [
     {
       "title": "VPN Types — Site-to-Site vs Remote Access",
       "type": "table",
-      "headers": ["VPN Type", "Use Case", "Protocol Options", "Key Details"],
+      "headers": [
+        "VPN Type",
+        "Use Case",
+        "Protocol Options",
+        "Key Details"
+      ],
       "rows": [
-        ["Site-to-Site VPN", "Permanently connect two office networks over internet", "IPsec (most common), GRE over IPsec", "Router/firewall handles VPN — transparent to end users. Always-on."],
-        ["Remote Access VPN", "Individual users connect to corporate network from anywhere", "IPsec, SSL/TLS VPN (HTTPS port 443)", "Client software on endpoint. User authenticates to connect."],
-        ["SSL/TLS VPN", "Remote access VPN over HTTPS (port 443)", "TLS 1.2/1.3", "Works through firewalls (port 443 usually open). Clientless option via browser."],
-        ["IPsec VPN", "Both site-to-site and remote access", "IKE (key exchange) + ESP/AH", "More complex setup. Better performance. Blocked by some firewalls (UDP 500/4500)."],
-        ["GRE (Generic Routing Encapsulation)", "Tunnels multicast/broadcast over point-to-point links", "IP protocol 47", "No encryption by default — combine with IPsec for security."],
-        ["Split tunneling", "Only corporate traffic goes through VPN — internet goes direct", "VPN client config", "Reduces VPN load but internet traffic bypasses corporate security controls."]
+        [
+          "Site-to-Site VPN",
+          "Permanently connect two office networks over internet",
+          "IPsec (most common), GRE over IPsec",
+          "Router/firewall handles VPN — transparent to end users. Always-on."
+        ],
+        [
+          "Remote Access VPN",
+          "Individual users connect to corporate network from anywhere",
+          "IPsec, SSL/TLS VPN (HTTPS port 443)",
+          "Client software on endpoint. User authenticates to connect."
+        ],
+        [
+          "SSL/TLS VPN",
+          "Remote access VPN over HTTPS (port 443)",
+          "TLS 1.2/1.3",
+          "Works through firewalls (port 443 usually open). Clientless option via browser."
+        ],
+        [
+          "IPsec VPN",
+          "Both site-to-site and remote access",
+          "IKE (key exchange) + ESP/AH",
+          "More complex setup. Better performance. Blocked by some firewalls (UDP 500/4500)."
+        ],
+        [
+          "GRE (Generic Routing Encapsulation)",
+          "Tunnels multicast/broadcast over point-to-point links",
+          "IP protocol 47",
+          "No encryption by default — combine with IPsec for security."
+        ],
+        [
+          "Split tunneling",
+          "Only corporate traffic goes through VPN — internet goes direct",
+          "VPN client config",
+          "Reduces VPN load but internet traffic bypasses corporate security controls."
+        ]
       ],
       "key_points": [
         "SSL/TLS VPN advantage: uses HTTPS port 443 — rarely blocked by firewalls. Easy for remote users.",
@@ -146,15 +409,47 @@
     {
       "title": "IPsec — Protocols, Modes, and Key Exchange",
       "type": "table",
-      "headers": ["Component", "Description", "Key Detail"],
+      "headers": [
+        "Component",
+        "Description",
+        "Key Detail"
+      ],
       "rows": [
-        ["AH (Authentication Header)", "Provides integrity + authentication — NO encryption", "IP protocol 51. Verifies packet was not tampered with. Does NOT hide content."],
-        ["ESP (Encapsulating Security Payload)", "Provides encryption + integrity + authentication", "IP protocol 50. Encrypts payload. Used in almost all deployments."],
-        ["Transport mode", "Encrypts payload only — original IP header preserved", "Used for host-to-host VPNs. Endpoints must be VPN endpoints."],
-        ["Tunnel mode", "Encrypts entire original packet + adds new outer IP header", "Used for network-to-network (site-to-site) VPNs. Standard for most VPNs."],
-        ["IKE Phase 1 (ISAKMP SA)", "Establishes secure channel for Phase 2 negotiation. Diffie-Hellman key exchange.", "Creates ISAKMP SA (management tunnel). Main mode (6 msgs) or Aggressive mode (3 msgs)."],
-        ["IKE Phase 2 (IPsec SA)", "Negotiates the actual IPsec tunnel parameters (encryption, hashing, lifetime)", "Creates IPsec SA (data tunnel). Uses PFS optionally."],
-        ["PFS (Perfect Forward Secrecy)", "New Diffie-Hellman exchange for each session — compromise of one key doesn't expose others", "Prevents decryption of past sessions if long-term keys are later compromised."]
+        [
+          "AH (Authentication Header)",
+          "Provides integrity + authentication — NO encryption",
+          "IP protocol 51. Verifies packet was not tampered with. Does NOT hide content."
+        ],
+        [
+          "ESP (Encapsulating Security Payload)",
+          "Provides encryption + integrity + authentication",
+          "IP protocol 50. Encrypts payload. Used in almost all deployments."
+        ],
+        [
+          "Transport mode",
+          "Encrypts payload only — original IP header preserved",
+          "Used for host-to-host VPNs. Endpoints must be VPN endpoints."
+        ],
+        [
+          "Tunnel mode",
+          "Encrypts entire original packet + adds new outer IP header",
+          "Used for network-to-network (site-to-site) VPNs. Standard for most VPNs."
+        ],
+        [
+          "IKE Phase 1 (ISAKMP SA)",
+          "Establishes secure channel for Phase 2 negotiation. Diffie-Hellman key exchange.",
+          "Creates ISAKMP SA (management tunnel). Main mode (6 msgs) or Aggressive mode (3 msgs)."
+        ],
+        [
+          "IKE Phase 2 (IPsec SA)",
+          "Negotiates the actual IPsec tunnel parameters (encryption, hashing, lifetime)",
+          "Creates IPsec SA (data tunnel). Uses PFS optionally."
+        ],
+        [
+          "PFS (Perfect Forward Secrecy)",
+          "New Diffie-Hellman exchange for each session — compromise of one key doesn't expose others",
+          "Prevents decryption of past sessions if long-term keys are later compromised."
+        ]
       ],
       "key_points": [
         "AH = integrity only (no encryption). ESP = encryption + integrity. Use ESP.",
@@ -168,17 +463,57 @@
     {
       "title": "PKI, Certificates, and Encryption",
       "type": "table",
-      "headers": ["Term", "Definition", "Key Detail"],
+      "headers": [
+        "Term",
+        "Definition",
+        "Key Detail"
+      ],
       "rows": [
-        ["PKI (Public Key Infrastructure)", "Framework for issuing, managing, and revoking digital certificates", "Enables trust in public keys via chain of trust to a trusted CA."],
-        ["CA (Certificate Authority)", "Trusted entity that signs and issues digital certificates", "Root CA → Intermediate CA → End-entity cert. Root CA self-signed."],
-        ["Certificate (X.509)", "Binds a public key to an identity, signed by CA", "Contains: subject, issuer, public key, validity period, SAN, serial number."],
-        ["CSR (Certificate Signing Request)", "Request submitted to CA containing public key + identity info", "CA signs the CSR → issues certificate. Private key never leaves the requester."],
-        ["CRL (Certificate Revocation List)", "Published list of revoked certificate serial numbers", "Checked by clients to detect revoked certs. Can be stale — updated periodically."],
-        ["OCSP (Online Certificate Status Protocol)", "Real-time certificate revocation check", "Client queries OCSP responder for cert status: good/revoked/unknown. Faster than CRL."],
-        ["Symmetric encryption", "Same key encrypts and decrypts — fast", "AES-128/256 (block cipher). Used for bulk data encryption."],
-        ["Asymmetric encryption", "Public key encrypts; private key decrypts (or vice versa for signatures)", "RSA, ECC. Slower. Used for key exchange, signatures, certificates."],
-        ["TLS (Transport Layer Security)", "Protocol securing communications — record protocol + handshake protocol", "TLS 1.3 current standard. Negotiates cipher suite, exchanges keys, authenticates server (and optionally client)."]
+        [
+          "PKI (Public Key Infrastructure)",
+          "Framework for issuing, managing, and revoking digital certificates",
+          "Enables trust in public keys via chain of trust to a trusted CA."
+        ],
+        [
+          "CA (Certificate Authority)",
+          "Trusted entity that signs and issues digital certificates",
+          "Root CA → Intermediate CA → End-entity cert. Root CA self-signed."
+        ],
+        [
+          "Certificate (X.509)",
+          "Binds a public key to an identity, signed by CA",
+          "Contains: subject, issuer, public key, validity period, SAN, serial number."
+        ],
+        [
+          "CSR (Certificate Signing Request)",
+          "Request submitted to CA containing public key + identity info",
+          "CA signs the CSR → issues certificate. Private key never leaves the requester."
+        ],
+        [
+          "CRL (Certificate Revocation List)",
+          "Published list of revoked certificate serial numbers",
+          "Checked by clients to detect revoked certs. Can be stale — updated periodically."
+        ],
+        [
+          "OCSP (Online Certificate Status Protocol)",
+          "Real-time certificate revocation check",
+          "Client queries OCSP responder for cert status: good/revoked/unknown. Faster than CRL."
+        ],
+        [
+          "Symmetric encryption",
+          "Same key encrypts and decrypts — fast",
+          "AES-128/256 (block cipher). Used for bulk data encryption."
+        ],
+        [
+          "Asymmetric encryption",
+          "Public key encrypts; private key decrypts (or vice versa for signatures)",
+          "RSA, ECC. Slower. Used for key exchange, signatures, certificates."
+        ],
+        [
+          "TLS (Transport Layer Security)",
+          "Protocol securing communications — record protocol + handshake protocol",
+          "TLS 1.3 current standard. Negotiates cipher suite, exchanges keys, authenticates server (and optionally client)."
+        ]
       ],
       "key_points": [
         "TLS handshake: client hello → server hello + cert → client verifies cert → key exchange → symmetric session key established.",
@@ -194,14 +529,42 @@
     {
       "title": "AAA — RADIUS vs TACACS+",
       "type": "table",
-      "headers": ["Feature", "RADIUS", "TACACS+"],
+      "headers": [
+        "Feature",
+        "RADIUS",
+        "TACACS+"
+      ],
       "rows": [
-        ["Standard", "Open — RFC 2865/2866", "Cisco proprietary (though widely supported)"],
-        ["Transport", "UDP 1812 (auth) + 1813 (acct) [legacy: 1645/1646]", "TCP 49 (reliable)"],
-        ["Encryption", "Encrypts password only in Access-Request", "Encrypts ENTIRE payload"],
-        ["AAA separation", "Combines Authentication + Authorization in one response", "Separates Authentication, Authorization, Accounting individually"],
-        ["Primary use", "Network access authentication (Wi-Fi 802.1X, VPN, dial-up)", "Device administration (CLI access to routers/switches)"],
-        ["Accounting", "Supported (session start/stop records)", "Supported (per-command accounting possible)"]
+        [
+          "Standard",
+          "Open — RFC 2865/2866",
+          "Cisco proprietary (though widely supported)"
+        ],
+        [
+          "Transport",
+          "UDP 1812 (auth) + 1813 (acct) [legacy: 1645/1646]",
+          "TCP 49 (reliable)"
+        ],
+        [
+          "Encryption",
+          "Encrypts password only in Access-Request",
+          "Encrypts ENTIRE payload"
+        ],
+        [
+          "AAA separation",
+          "Combines Authentication + Authorization in one response",
+          "Separates Authentication, Authorization, Accounting individually"
+        ],
+        [
+          "Primary use",
+          "Network access authentication (Wi-Fi 802.1X, VPN, dial-up)",
+          "Device administration (CLI access to routers/switches)"
+        ],
+        [
+          "Accounting",
+          "Supported (session start/stop records)",
+          "Supported (per-command accounting possible)"
+        ]
       ],
       "key_points": [
         "RADIUS = UDP, encrypts only password. TACACS+ = TCP, encrypts everything.",
@@ -215,14 +578,42 @@
     {
       "title": "Layer 2 Security — DHCP Snooping, DAI, Port Security",
       "type": "table",
-      "headers": ["Feature", "Attack it prevents", "How it works"],
+      "headers": [
+        "Feature",
+        "Attack it prevents",
+        "How it works"
+      ],
       "rows": [
-        ["DHCP Snooping", "Rogue DHCP server", "Designates switch ports as 'trusted' (uplink to real DHCP server) or 'untrusted' (access ports). DHCP offers on untrusted ports are dropped."],
-        ["Dynamic ARP Inspection (DAI)", "ARP poisoning / MITM", "Uses DHCP snooping binding table to validate ARP packets. ARP replies on untrusted ports checked — invalid = dropped."],
-        ["IP Source Guard", "IP spoofing", "Validates source IP on untrusted ports against DHCP snooping binding table. Prevents hosts from spoofing another host's IP."],
-        ["Port Security", "MAC flooding / unauthorised devices", "Limits number of MAC addresses on an access port. Violation modes: Protect (drop), Restrict (drop + log), Shutdown (err-disable port)."],
-        ["Sticky MAC", "Unauthorised device connection", "Port security variant — first learned MAC is stored in config automatically. Only that MAC allowed unless manually changed."],
-        ["Storm Control", "Broadcast/multicast storms", "Rate-limits broadcast, multicast, or unicast traffic per port. Activates when threshold exceeded (drops or shuts port)."]
+        [
+          "DHCP Snooping",
+          "Rogue DHCP server",
+          "Designates switch ports as 'trusted' (uplink to real DHCP server) or 'untrusted' (access ports). DHCP offers on untrusted ports are dropped."
+        ],
+        [
+          "Dynamic ARP Inspection (DAI)",
+          "ARP poisoning / MITM",
+          "Uses DHCP snooping binding table to validate ARP packets. ARP replies on untrusted ports checked — invalid = dropped."
+        ],
+        [
+          "IP Source Guard",
+          "IP spoofing",
+          "Validates source IP on untrusted ports against DHCP snooping binding table. Prevents hosts from spoofing another host's IP."
+        ],
+        [
+          "Port Security",
+          "MAC flooding / unauthorised devices",
+          "Limits number of MAC addresses on an access port. Violation modes: Protect (drop), Restrict (drop + log), Shutdown (err-disable port)."
+        ],
+        [
+          "Sticky MAC",
+          "Unauthorised device connection",
+          "Port security variant — first learned MAC is stored in config automatically. Only that MAC allowed unless manually changed."
+        ],
+        [
+          "Storm Control",
+          "Broadcast/multicast storms",
+          "Rate-limits broadcast, multicast, or unicast traffic per port. Activates when threshold exceeded (drops or shuts port)."
+        ]
       ],
       "key_points": [
         "DHCP snooping must be enabled BEFORE DAI — DAI relies on the DHCP snooping binding table.",

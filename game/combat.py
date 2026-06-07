@@ -22,8 +22,12 @@ class Combat:
         self.encounter = encounter
 
     def process_answer(self, selected_index: int) -> CombatResult:
-        is_correct = self.encounter.check_answer(selected_index)
+        return self._resolve(self.encounter.check_answer(selected_index))
 
+    def process_cli_answer(self, answer: str) -> CombatResult:
+        return self._resolve(self.encounter.check_cli_answer(answer))
+
+    def _resolve(self, is_correct: bool) -> CombatResult:
         if is_correct:
             xp_gained = self.encounter.xp_reward
             bits_gained = self.encounter.bits_reward

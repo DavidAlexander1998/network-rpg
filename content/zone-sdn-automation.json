@@ -1,0 +1,146 @@
+{
+  "zone": "The Control Chamber",
+  "zone_number": 1.5,
+  "name": "The Control Chamber",
+  "description": "Software-Defined Networking, Automation, and Programmability. The modern networker's arsenal.",
+  "nodes": [
+    {
+      "id": 1.5,
+      "name": "The Bifurcation Gate",
+      "description": "Understanding the separation of Control Plane and Data Plane",
+      "encounters": [
+        {
+          "id": "z15-n1-001",
+          "zone": 1.5,
+          "node": 1.1,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "scenario": "The network's central nervous system is splitting! A logic virus is trying to confuse the switches by mixing 'decision-making' instructions with 'packet-moving' instructions. You must sort the incoming streams to stabilize the architecture.",
+          "question": "Sort the following functions into their correct plane:\n1. Calculating the Spanning Tree topology\n2. Forwarding a frame from Port 1 to Port 5\n3. Building the Routing Table via OSPF\n4. Inspecting a packet header to determine destination MAC",
+          "options": [
+            "Control Plane: 1 & 2, Data Plane: 3 & 4",
+            "Control Plane: 1 & 3, Data Plane: 2 & 4",
+            "Control Plane: 2 & 4, Data Plane: 1 & 3",
+            "Control Plane: 2 & 3, Data Plane: 1 & 4"
+          ],
+          "correct_index": 1,
+          "explanation": "Control Plane: 1 & 3 (Spanning Tree calc, Routing Table building). Data Plane: 2 & 4 (Frame forwarding, MAC inspection). The Control Plane is the 'brain' that decides where traffic goes. The Data Plane is the 'muscle' that moves the bits.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": ["SDN", "Control Plane", "Data Plane", "N10-009"],
+          "practical_emulation": "Drag-and-drop: Sort functional blocks into Control Plane vs Data Plane containers"
+        }
+      ]
+    },
+    {
+      "id": 1.6,
+      "name": "The Orchestrator's Console",
+      "description": "Centralized network management via SDN Controllers",
+      "encounters": [
+        {
+          "id": "z15-n2-001",
+          "zone": 1.5,
+          "node": 1.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "scenario": "A massive VLAN reconfiguration is required across 40 access switches simultaneously. Manual CLI entry will take hours and lead to human error. You are logged into the SDN Controller.",
+          "question": "What is the most efficient SDN-based method to apply this change across the entire fabric?",
+          "options": [
+            "SSH into each switch individually and configure the VLAN",
+            "Push a centralized policy from the SDN Controller",
+            "Send a broadcast packet to all switches",
+            "Physically visit each switch with a console cable"
+          ],
+          "correct_index": 1,
+          "explanation": "The SDN Controller uses Southbound APIs (OpenFlow, NETCONF) to push configurations to all managed devices from a single point, ensuring consistency and speed.",
+          "xp_reward": 250,
+          "bits_reward": 125,
+          "tags": ["SDN", "Controller", "Orchestration", "Centralized Management"],
+          "practical_emulation": "Dashboard selection: Choose 'Centralized Policy Push' vs 'Individual Device CLI'"
+        }
+      ]
+    },
+    {
+      "id": 1.7,
+      "name": "The Syntax Void",
+      "description": "Debugging automation scripts and JSON configurations",
+      "encounters": [
+        {
+          "id": "z15-n3-001",
+          "zone": 1.5,
+          "node": 1.3,
+          "type": "cli_encounter",
+          "difficulty": "medium",
+          "scenario": "The automation script is failing! The SDN Controller returns '400 Bad Request'. You've intercepted the JSON payload but it looks corrupted.",
+          "objective": "Identify the syntax error in the JSON configuration",
+          "command_prompt": "Debug>",
+          "scenario_text": "{\n  \"interface\": \"GigabitEthernet0/1\",\n  \"description\": \"Uplink_to_Core\",\n  \"enabled\": true\n  \"mtu\": 1500\n}",
+          "correct_answers": ["missing comma", "comma after true", "enabled needs comma"],
+          "accepts_partial": true,
+          "hint": "Look at the line before 'mtu'. Does it end properly?",
+          "explanation": "Missing comma after 'true'. In JSON, key-value pairs must be separated by commas except the last one.",
+          "xp_reward": 300,
+          "bits_reward": 150,
+          "tags": ["JSON", "Automation", "Debugging", "Data Formats"],
+          "practical_emulation": "Code editor: Click the exact line/character where the syntax error exists"
+        }
+      ]
+    },
+    {
+      "id": 1.8,
+      "name": "The API Gateway",
+      "description": "REST API methods and endpoint construction",
+      "encounters": [
+        {
+          "id": "z15-n4-001",
+          "zone": 1.5,
+          "node": 1.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "scenario": "You need to build a monitoring dashboard. Your script must ask the network controller for the current status of interface 'TenGigabitEthernet0/1'.",
+          "question": "Which HTTP method should your script use to RETRIEVE this information?",
+          "options": [
+            "POST /api/v1/interfaces/TenGigabitEthernet0/1/status",
+            "GET /api/v1/interfaces/TenGigabitEthernet0/1/status",
+            "PUT /api/v1/interfaces/TenGigabitEthernet0/1/status",
+            "DELETE /api/v1/interfaces/TenGigabitEthernet0/1/status"
+          ],
+          "correct_index": 1,
+          "explanation": "GET is used to retrieve data from a server. POST creates, PUT updates, DELETE removes.",
+          "xp_reward": 200,
+          "bits_reward": 100,
+          "tags": ["REST API", "HTTP Methods", "GET", "SDN"],
+          "practical_emulation": "cURL builder: Select correct verb and type endpoint path"
+        }
+      ]
+    },
+    {
+      "id": 1.9,
+      "name": "The Architect's Forge",
+      "description": "Choosing the right automation tool for the job",
+      "encounters": [
+        {
+          "id": "z15-n5-001",
+          "zone": 1.5,
+          "node": 1.5,
+          "type": "study_encounter",
+          "difficulty": "hard",
+          "scenario": "The CTO has given you three automation mandates. Choose the correct tool for each mission.",
+          "question": "Mission A: Quick one-time config change to 5 switches without installing software.\nMission B: Maintain 'Desired State' on 500 switches with drift detection.\nMission C: Custom logic script to integrate with proprietary database.",
+          "options": [
+            "A: Ansible, B: Puppet/Chef, C: Python",
+            "A: Puppet, B: Ansible, C: Bash",
+            "A: Python, B: Ansible, C: Puppet",
+            "A: Chef, B: Python, C: Ansible"
+          ],
+          "correct_index": 0,
+          "explanation": "A: Ansible (agentless, push-based, good for one-offs). B: Puppet/Chef (agent-based, continuous state compliance). C: Python (ultimate flexibility for custom logic).",
+          "xp_reward": 400,
+          "bits_reward": 200,
+          "tags": ["Ansible", "Puppet", "Chef", "Python", "Automation Tools"],
+          "practical_emulation": "Drag tool icons onto mission briefing cards"
+        }
+      ]
+    }
+  ]
+}

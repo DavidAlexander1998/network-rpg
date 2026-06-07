@@ -4,10 +4,14 @@ Network+ RPG - Entry point
 
 import sys
 import signal
-from typing import Optional
+import json
+import random
+from pathlib import Path
+from typing import Optional, Dict, Any, List
 
 from game.player import Player
 from game.combat import Combat
+from game.encounter import Encounter
 from game.zone_manager import ZoneManager, Zone, Node
 from game.save_manager import SaveManager
 from game.spaced_repetition import SpacedRepetition
@@ -18,6 +22,12 @@ _zone_manager = ZoneManager("content")
 _sr = SpacedRepetition()
 _current_player: Optional[Player] = None
 _current_slot: Optional[int] = None
+
+# Standalone bonus content: CLI drills, topology challenges, narrative flavor text
+_flavor_texts: Dict[str, Any] = {}
+_cli_encounters: List[Encounter] = []
+_topology_encounters: List[Encounter] = []
+_zones_entered: set = set()
 
 
 def _save_and_exit(signum=None, frame=None) -> None:
@@ -33,6 +43,53 @@ signal.signal(signal.SIGINT, _save_and_exit)
 def _preload_zones() -> None:
     for i in range(1, 6):
         _zone_manager.load_zone(i)
+
+
+def _load_extra_content() -> None:
+    """Load standalone bonus content: CLI drills, topology challenges, flavor texts."""
+    content_dir = Path("content")
+
+    flavor_file = content_dir / "flavor-texts.json"
+    if flavor_file.exists():
+        with open(flavor_file, "r", encoding="utf-8") as f:
+            _flavor_texts.update(json.load(f))
+
+    sources = (
+        ("cli-encounters.json", _cli_encounters),
+        ("topology-encounters.json", _topology_encounters),
+    )
+    for filename, bucket in sources:
+        path = content_dir / filename
+        if not path.exists():
+            continue
+        with open(path, "r", encoding="utf-8") as f:
+            for enc_data in json.load(f):
+                try:
+                    bucket.append(Encounter.from_dict(enc_data))
+                except (KeyError, ValueError) as e:
+                    print(f"Warning: skipping encounter in {filename}: {e}")
+
+
+def _maybe_show_zone_entry(zone_num: int) -> None:
+    """Show the zone's narrative entry text the first time it's visited this session."""
+    if zone_num in _zones_entered:
+        return
+    _zones_entered.add(zone_num)
+    text = _flavor_texts.get("zone_entries", {}).get(str(zone_num))
+    if text:
+        screens.show_zone_entry(zone_num, text)
+
+
+def _flash_node_transition() -> None:
+    transitions = _flavor_texts.get("node_transitions") or []
+    if transitions:
+        screens.show_flavor_line(random.choice(transitions))
+
+
+def _maybe_flash_encounter_intro() -> None:
+    intros = _flavor_texts.get("encounter_intros") or []
+    if intros and random.random() < 0.3:
+        screens.show_flavor_line(random.choice(intros))
 
 
 def _run_encounter_session(player: Player, zone: Zone, node: Node) -> bool:
@@ -65,11 +122,18 @@ def _run_encounter_session(player: Player, zone: Zone, node: Node) -> bool:
         if not player.is_alive():
             break
 
-        selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(encounters))
-        if selected is None:
-            break
+        _maybe_flash_encounter_intro()
 
-        result = Combat(player, encounter).process_answer(selected)
+        if encounter.encounter_type == "cli_encounter":
+            answer = screens.show_cli_encounter(encounter, player, question_num=idx + 1, total=len(encounters))
+            if answer is None:
+                break
+            result = Combat(player, encounter).process_cli_answer(answer)
+        else:
+            selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(encounters))
+            if selected is None:
+                break
+            result = Combat(player, encounter).process_answer(selected)
 
         if result.is_correct:
             _sr.record_success(encounter.id)
@@ -140,6 +204,8 @@ def _play_zone(player: Player, zone_num: int) -> None:
         screens.console.print(f"[red]Zone {zone_num} content not loaded.[/]")
         return
 
+    _maybe_show_zone_entry(zone_num)
+
     while True:
         node_choice = screens.show_node_map(zone, player)
         if node_choice is None:
@@ -158,6 +224,7 @@ def _play_zone(player: Player, zone_num: int) -> None:
             if menu_choice == "study":
                 screens.show_study_mode(node)
             # "quiz" or after finishing study cards → run encounters
+            _flash_node_transition()
             _run_encounter_session(player, zone, node)
 
 
@@ -197,7 +264,7 @@ def _save_load_menu(player: Player) -> Optional[Player]:
             choices=[
                 questionary.Choice("Save current game here", value="save"),
                 questionary.Choice("Load this save", value="load"),
-                questionary.Choice("← Back", value=None),
+                questionary.Choice("← Back", value="back"),
             ],
         ).ask()
 
@@ -234,6 +301,8 @@ def _main_loop(player: Player) -> None:
             _free_study_mode(player)
         elif choice == "acronym":
             _acronym_drill(player)
+        elif choice == "field":
+            _field_exercises(player)
         elif choice == "report":
             screens.show_study_report(player, _zone_manager)
         elif choice == "save":
@@ -244,9 +313,68 @@ def _main_loop(player: Player) -> None:
             break
 
 
+def _run_drill_set(player: Player, encounters: List[Encounter], label: str) -> None:
+    if not encounters:
+        screens.console.print(f"[yellow]No {label.lower()} loaded — skipping.[/]")
+        input("  Press Enter...")
+        return
+
+    drills = list(encounters)
+    random.shuffle(drills)
+    old_level = player.level
+
+    for idx, encounter in enumerate(drills):
+        if not player.is_alive():
+            break
+
+        if encounter.encounter_type == "cli_encounter":
+            answer = screens.show_cli_encounter(encounter, player, question_num=idx + 1, total=len(drills))
+            if answer is None:
+                break
+            result = Combat(player, encounter).process_cli_answer(answer)
+        else:
+            selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(drills))
+            if selected is None:
+                break
+            result = Combat(player, encounter).process_answer(selected)
+
+        if result.is_correct:
+            _sr.record_success(encounter.id)
+        else:
+            _sr.add_failed(encounter.id)
+
+        screens.show_combat_result(result, player)
+
+        if player.level > old_level:
+            screens.show_level_up(player, old_level)
+            old_level = player.level
+
+    if _current_slot:
+        _save_manager.save(player, _current_slot)
+
+
+def _field_exercises(player: Player) -> None:
+    import questionary
+    while True:
+        choice = questionary.select(
+            "Field Exercises:",
+            choices=[
+                questionary.Choice(f"🖥️   CLI Command Drills    ({len(_cli_encounters)} scenarios — type real commands)", value="cli"),
+                questionary.Choice(f"🗺️   Topology Challenges   ({len(_topology_encounters)} ASCII diagrams)", value="topo"),
+                questionary.Choice("← Back", value="back"),
+            ],
+            style=screens._QSTYLE,
+        ).ask()
+
+        if choice in (None, "back"):
+            return
+        elif choice == "cli":
+            _run_drill_set(player, _cli_encounters, "CLI command drills")
+        elif choice == "topo":
+            _run_drill_set(player, _topology_encounters, "topology challenges")
+
+
 def _acronym_drill(player: Player) -> None:
-    import json
-    from pathlib import Path
     acro_file = Path("content/acronyms.json")
     if not acro_file.exists():
         screens.console.print("[yellow]acronyms.json not found — skipping drill.[/]")
@@ -256,7 +384,6 @@ def _acronym_drill(player: Player) -> None:
     with open(acro_file, "r", encoding="utf-8") as f:
         acronyms = json.load(f)
 
-    import random
     random.shuffle(acronyms)
 
     for item in acronyms:
@@ -274,6 +401,7 @@ def main() -> None:
     global _current_slot
 
     _preload_zones()
+    _load_extra_content()
 
     saves = _save_manager.list_saves()
     has_saves = any(s["exists"] for s in saves)

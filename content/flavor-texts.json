@@ -1,0 +1,23 @@
+{
+  "zone_entries": {
+    "1": "The architecture here is a fractured stack of seven collapsing realities. You navigate the Physical layer's rusted ruins, feeling the abstraction of the higher layers peeling away like dead skin.",
+    "2": "Neon-lit gateways flicker with incorrect destination headers, bleeding data into the void. Every hop through this district feels like a gamble against a corrupted routing table.",
+    "3": "The air is thick with the static of endless syslog streams, a constant, low-frequency scream of system telemetry. Latency hangs in the smog like heavy rain, slowing every breath and every movement.",
+    "4": "Razor-wire ACLs slice through the darkness, guarding the perimeter with cold, mathematical indifference. Everything here is shrouded in black-ice encryption, a cipher that kills anyone without the proper handshake.",
+    "5": "This is the graveyard of discarded packets, where checksum errors rot in the gutters. The signal is lost here, a fractured, broken trace of what was once a coherent stream."
+  },
+  "node_transitions": [
+    "Squeezing through a choked bundle of frayed Cat6, the copper bites at your skin.",
+    "A violent, jagged SYN/ACK handshake forces your consciousness into the next sector.",
+    "Sliding through the crystalline, blinding light of a fiber-optic conduit.",
+    "The heavy, rhythmic thrum of a dying switchboard vibrates through your boots as you jump the gap.",
+    "Leaping through a burst of unencrypted wireless noise, the air screams with interference."
+  ],
+  "encounter_intros": [
+    "A rogue DHCP daemon materializes, attempting to assign you a soul it does not own.",
+    "Packet loss corruption seeps from the walls, eroding the reality of your very existence.",
+    "A massive, churning Spanning Tree loop begins to swallow the light.",
+    "The silence is shattered by the deafening, rhythmic roar of a localized broadcast storm.",
+    "A Time-to-Live expiration shadow looms, ready to prune your existence from the Grid."
+  ]
+}

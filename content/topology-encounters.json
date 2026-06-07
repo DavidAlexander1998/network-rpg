@@ -1,0 +1,72 @@
+[
+  {
+    "id": "topo-001",
+    "type": "topology_encounter",
+    "name": "The Lonely Hub",
+    "difficulty": "easy",
+    "ascii_diagram": "      ┌───┐\n      │H1 │\n      └───┘\n        │\n  ┌─────┴─────┐\n  │   [S1]    │\n  └─────┬─────┘\n        │\n      ┌─┴─┐\n      │H2 │\n      └───┘",
+    "question": "What is the single point of failure in this topology?",
+    "options": ["The Router", "The Central Switch [S1]", "The Host H1", "The Ethernet Cables"],
+    "correct_index": 1,
+    "explanation": "In a star topology, if the central switch fails, all connected nodes lose connectivity to each other.",
+    "xp_reward": 40,
+    "bits_reward": 20,
+    "tags": ["topology", "single-point-of-failure"]
+  },
+  {
+    "id": "topo-002",
+    "type": "topology_encounter",
+    "name": "The Trunk Trap",
+    "difficulty": "medium",
+    "ascii_diagram": "┌─────────┐         ┌─────────┐\n│ [S1]    │         │ [S2]    │\n│ VLAN 10 │ ~~~~~~~ │ VLAN 10 │\n└────┬────┘         └────┬────┘\n     │                  │\n   ┌─┴─┐              ┌─┴─┐\n   │H1 │              │H2 │\n   └─┬─┘              └─┬─┘\n     └───[VLAN 10]──────┘",
+    "question": "Why are H1 and H2 unable to communicate on VLAN 10?",
+    "options": ["The cable is broken", "The switch is powered off", "The link is an access port instead of a trunk", "VLAN 10 is disabled"],
+    "correct_index": 2,
+    "explanation": "To carry traffic for multiple VLANs between switches, the link must be configured as a Trunk port. The '~~~' indicates a misconfiguration where it is acting as a single access port.",
+    "xp_reward": 60,
+    "bits_reward": 30,
+    "tags": ["vlan", "trunking", "misconfiguration"]
+  },
+  {
+    "id": "topo-003",
+    "type": "topology_encounter",
+    "name": "The Infinite Loop",
+    "difficulty": "hard",
+    "ascii_diagram": "┌─────────┐      ┌─────────┐\n│ [S1]    │======│ [S2]    │\n│         │      │         │\n│         └======┘         │\n└─────────┘      └─────────┘",
+    "question": "What is causing the broadcast storm in this network?",
+    "options": ["A faulty router", "Lack of Spanning Tree Protocol (STP)", "Too many hosts on the segment", "A wireless interference"],
+    "correct_index": 1,
+    "explanation": "Redundant links between switches without STP enabled create a switching loop, causing broadcast packets to circulate infinitely.",
+    "xp_reward": 80,
+    "bits_reward": 40,
+    "tags": ["stp", "loop", "switching"]
+  },
+  {
+    "id": "topo-004",
+    "type": "topology_encounter",
+    "name": "The Mask Mismatch",
+    "difficulty": "medium",
+    "ascii_diagram": "┌─────────┐\n│ [S1]    │\n└─┬───┬───┘\n  │   │\n┌─┴─┐ ┌─┴─┐\n│H1 │ │H2 │\n└───┘ └─┬─┘\nH1: 10.0.0.5/24\nH2: 10.0.0.6/30",
+    "question": "Why can't Host 2 (10.0.0.6/30) communicate with a host at 10.0.0.8/24?",
+    "options": ["The cable is bad", "The IP address is duplicate", "The subnet mask is too restrictive", "The switch is full"],
+    "correct_index": 2,
+    "explanation": "A /30 mask means Host 2 only considers the range 10.0.0.4 to 10.0.0.7 as local. It will attempt to send traffic for 10.0.0.8 to its default gateway instead of directly to the host.",
+    "xp_reward": 50,
+    "bits_reward": 25,
+    "tags": ["subnetting", "ip-addressing"]
+  },
+  {
+    "id": "topo-005",
+    "type": "topology_encounter",
+    "name": "The Leaky DMZ",
+    "difficulty": "hard",
+    "ascii_diagram": "      ☁ (Internet)\n        │\n      ┌─┴─┐\n      │ F1│\n      └─┬─┘\n        ├──────────────┐\n      ┌─┴─┐          ┌─┴─┐\n      │S1 │          │S2 │\n      └─┬─┘          └─┬─┘\n        │ (Int)        │ (DMZ)\n      ┌─┴─┐          ┌─┴─┐\n      │H_I│ ~~~~~~~~ │H_D│\n      └─┬─┘          └─┬─┘",
+    "question": "Why is the Internal Host (H_I) vulnerable to the DMZ Host (H_D)?",
+    "options": ["The firewall is powered off", "There is an unauthorized direct link bypassing the firewall", "The DMZ is too large", "The cloud is compromised"],
+    "correct_index": 1,
+    "explanation": "A secure DMZ should force all traffic between the DMZ and the Internal network through the firewall. The '~~~' link shows a direct connection that bypasses security inspection.",
+    "xp_reward": 100,
+    "bits_reward": 50,
+    "tags": ["firewall", "dmz", "security"]
+  }
+]

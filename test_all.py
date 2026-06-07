@@ -226,4 +226,90 @@ except ValueError:
     pass
 print("[OK] Validators")
 
+print("\n=== TEST 16: cli_encounter — creation, matching, Combat ===")
+cli_data = {
+    "id": "z1-cli-001", "zone": 1, "node": 1.1, "type": "cli_encounter", "difficulty": "easy",
+    "scenario": "The link light is dark.", "objective": "Check interface status.",
+    "command_prompt": "Router>",
+    "correct_answers": ["show ip interface brief", "sh ip int br", "show ip interface"],
+    "accepts_partial": True,
+    "hint": "Try 'show' + 'ip interface brief'.",
+    "explanation": "show ip interface brief summarizes interface status.",
+    "xp_reward": 50, "bits_reward": 25, "tags": ["CLI", "Cisco"],
+}
+cli_enc = Encounter.from_dict(cli_data)
+assert cli_enc.encounter_type == "cli_encounter"
+assert cli_enc.scenario == "The link light is dark."
+assert cli_enc.get_correct_answer() == "show ip interface brief"
+# Exact match
+assert cli_enc.check_cli_answer("show ip interface brief") is True
+# Listed alternate, case/whitespace tolerant
+assert cli_enc.check_cli_answer("  SH IP INT BR  ") is True
+# Abbreviation matching not in the explicit list ("show" -> "sh", "interface" -> "iface" should NOT match)
+assert cli_enc.check_cli_answer("sh ip interface brief") is True
+assert cli_enc.check_cli_answer("show interface brief") is False  # missing 'ip' word
+assert cli_enc.check_cli_answer("configure terminal") is False
+assert cli_enc.check_cli_answer("") is False
+
+p_cli = Player("CliTester")
+cli_result = Combat(p_cli, cli_enc).process_cli_answer("sh ip int br")
+assert cli_result.is_correct is True
+assert cli_result.xp_gained == 50
+assert cli_result.bits_gained == 25
+assert p_cli.encounter_results["z1-cli-001"] is True
+
+p_cli_wrong = Player("CliTester2")
+cli_result_wrong = Combat(p_cli_wrong, cli_enc).process_cli_answer("ping 8.8.8.8")
+assert cli_result_wrong.is_correct is False
+assert cli_result_wrong.hp_lost == 10
+
+# Exact-only matching (accepts_partial False) rejects abbreviations
+ping_data = dict(cli_data)
+ping_data.update({
+    "id": "z1-cli-003", "correct_answers": ["ping 192.168.50.10"], "accepts_partial": False,
+})
+ping_enc = Encounter.from_dict(ping_data)
+assert ping_enc.check_cli_answer("ping 192.168.50.10") is True
+assert ping_enc.check_cli_answer("ping 192.168.50.1") is False
+print("[OK] cli_encounter creation, matching, Combat")
+
+print("\n=== TEST 17: topology_encounter — diagram + multiple choice ===")
+topo_data = {
+    "id": "topo-001", "type": "topology_encounter", "name": "The Lonely Hub", "difficulty": "easy",
+    "ascii_diagram": "[H1]---[S1]---[H2]",
+    "question": "What is the single point of failure?",
+    "options": ["The Router", "The Central Switch [S1]", "The Host H1", "The Cables"],
+    "correct_index": 1,
+    "explanation": "If S1 fails, all hosts lose connectivity.",
+    "xp_reward": 40, "bits_reward": 20, "tags": ["topology"],
+}
+topo_enc = Encounter.from_dict(topo_data)
+assert topo_enc.encounter_type == "topology_encounter"
+assert topo_enc.ascii_diagram == "[H1]---[S1]---[H2]"
+assert topo_enc.check_answer(1) is True
+assert topo_enc.check_answer(0) is False
+assert topo_enc.get_correct_answer() == "The Central Switch [S1]"
+
+p_topo = Player("TopoTester")
+topo_result = Combat(p_topo, topo_enc).process_answer(1)
+assert topo_result.is_correct is True
+assert topo_result.xp_gained == 40
+print("[OK] topology_encounter creation, Combat")
+
+print("\n=== TEST 18: Bonus content files load cleanly ===")
+import json as _json
+from pathlib import Path as _Path
+for fname, expect_min in (("cli-encounters.json", 5), ("topology-encounters.json", 5)):
+    raw = _json.load(open(_Path("content") / fname, encoding="utf-8"))
+    assert isinstance(raw, list) and len(raw) >= expect_min
+    for item in raw:
+        loaded = Encounter.from_dict(item)
+        assert loaded.id
+flavor = _json.load(open(_Path("content") / "flavor-texts.json", encoding="utf-8"))
+assert set(flavor.keys()) >= {"zone_entries", "node_transitions", "encounter_intros"}
+assert all(str(z) in flavor["zone_entries"] for z in range(1, 6))
+assert len(flavor["node_transitions"]) >= 5
+assert len(flavor["encounter_intros"]) >= 5
+print("[OK] Bonus content files (cli-encounters, topology-encounters, flavor-texts)")
+
 print("\n=== ALL TESTS PASSED ===")

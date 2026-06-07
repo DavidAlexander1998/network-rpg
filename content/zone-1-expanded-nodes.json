@@ -1,0 +1,66 @@
+{
+  "description": "Expanded study content for Zone 1 nodes 1.1-1.5, 1.7-1.8",
+  "nodes": [
+    {
+      "id": 1.1,
+      "name": "The Seven Layers - Expanded",
+      "encounters": [
+        {
+          "id": "z1-n1-exp-001", "zone": 1, "node": 1.1, "type": "study_encounter", "difficulty": "easy",
+          "title": "Layer 1: The Physical Foundation",
+          "scenario": "At the foundation of all networking is Layer 1, the Physical Layer. This layer deals with the actual transmission of raw bits as electrical signals, light pulses, or radio waves. It defines the physical media: copper cables (Cat5e, Cat6, Cat6a), fiber optic cables (SMF, MMF), and wireless radio frequencies.\n\nKey concepts at this layer:\n- Cabling standards and connector types (RJ45, LC, SC)\n- Signal encoding (how 1s and 0s are represented electrically)\n- Topology types (Bus, Star, Ring, Mesh)\n- Bandwidth and throughput limitations\n- Signal attenuation and interference\n\nDevices operating here: Hubs, Repeaters, Cables, NICs (physical interface)\n\nWithout a functioning Physical Layer, no higher-layer communication can occur.",
+          "question": "Which of the following operates at Layer 1 (Physical Layer)?",
+          "options": ["Router", "Hub", "Switch", "Firewall"],
+          "correct_index": 1,
+          "explanation": "Hubs operate at Layer 1. They simply regenerate and forward electrical signals to all ports. Routers operate at Layer 3, switches primarily at Layer 2, and firewalls at Layers 3-7.",
+          "xp_reward": 100, "bits_reward": 50, "tags": ["osi", "layer1", "physical"]
+        },
+        {
+          "id": "z1-n1-exp-002", "zone": 1, "node": 1.1, "type": "study_encounter", "difficulty": "easy",
+          "title": "Layer 2: Data Link - MAC Addresses and Frames",
+          "scenario": "Layer 2, the Data Link Layer, provides node-to-node communication within the same local network. The key concept here is the MAC ADDRESS (Media Access Control) - a 48-bit hardware address burned into every network interface card (NIC).\n\nFormat: XX:XX:XX:XX:XX:XX (6 hexadecimal pairs)\n- First 3 pairs: OUI (Organizationally Unique Identifier) - identifies the manufacturer\n- Last 3 pairs: Device-specific identifier\n\nLayer 2 organizes data into FRAMES. Each frame contains:\n- Source MAC address\n- Destination MAC address\n- Type/Length field\n- Data payload\n- Error checking (CRC)\n\nSwitches operate at Layer 2, using a MAC address table (CAM table) to forward frames only to the correct port.",
+          "question": "What is the purpose of a MAC address in networking?",
+          "options": [
+            "Identify the network globally",
+            "Identify a device within a local network segment",
+            "Encrypt data transmissions",
+            "Assign IP addresses automatically"
+          ],
+          "correct_index": 1,
+          "explanation": "MAC addresses uniquely identify devices within a local network segment (Layer 2). They are used for local delivery of frames, not global routing.",
+          "xp_reward": 100, "bits_reward": 50, "tags": ["osi", "layer2", "mac", "ethernet"]
+        },
+        {
+          "id": "z1-n1-exp-003", "zone": 1, "node": 1.1, "type": "study_encounter", "difficulty": "medium",
+          "title": "Layer 3: Network - IP Addressing and Routing",
+          "scenario": "Layer 3, the Network Layer, enables communication BETWEEN different networks. This is where IP (Internet Protocol) operates.\n\nIPv4 addresses are 32-bit numbers, typically written in dotted decimal notation (e.g., 192.168.1.100). Each address has two parts:\n- Network portion: Identifies which network the device is on\n- Host portion: Identifies the specific device on that network\n\nThe subnet mask determines where the split occurs (e.g., 255.255.255.0 means first 3 octets are network, last is host).\n\nROUTERS operate at Layer 3. They:\n- Examine destination IP addresses\n- Look up routes in a routing table\n- Forward packets toward their destination across network boundaries\n- Connect different subnets and networks\n\nWithout Layer 3, networks would be isolated islands.",
+          "question": "A packet needs to travel from Network A to Network B. Which device facilitates this at Layer 3?",
+          "options": ["Hub", "Switch", "Router", "Bridge"],
+          "correct_index": 2,
+          "explanation": "Routers operate at Layer 3 and forward packets between different networks based on IP addresses.",
+          "xp_reward": 150, "bits_reward": 75, "tags": ["osi", "layer3", "ip", "routing"]
+        },
+        {
+          "id": "z1-n1-exp-004", "zone": 1, "node": 1.1, "type": "study_encounter", "difficulty": "medium",
+          "title": "Layer 4: Transport - TCP and UDP",
+          "scenario": "Layer 4, the Transport Layer, manages end-to-end communication between applications on different hosts. The two primary protocols are TCP and UDP.\n\nTCP (Transmission Control Protocol):\n- Connection-oriented (three-way handshake)\n- Reliable delivery (acknowledgments, retransmissions)\n- Flow control and congestion control\n- Used for: Web browsing (HTTP), Email, File transfers\n\nUDP (User Datagram Protocol):\n- Connectionless (no handshake)\n- Unreliable (best effort, no retransmissions)\n- Low overhead, faster\n- Used for: Video streaming, VoIP, DNS queries, online gaming\n\nPort numbers identify specific applications/services:\n- Port 80: HTTP\n- Port 443: HTTPS\n- Port 22: SSH\n- Port 53: DNS",
+          "question": "Which protocol should be used for a video conferencing application requiring real-time delivery with minimal latency?",
+          "options": ["TCP", "UDP", "HTTP", "FTP"],
+          "correct_index": 1,
+          "explanation": "UDP is preferred for real-time applications like video conferencing because it has lower latency. TCP's reliability mechanisms (retransmissions) would cause delays.",
+          "xp_reward": 150, "bits_reward": 75, "tags": ["osi", "layer4", "tcp", "udp", "ports"]
+        },
+        {
+          "id": "z1-n1-exp-005", "zone": 1, "node": 1.1, "type": "study_encounter", "difficulty": "easy",
+          "title": "Layers 5-7: Session, Presentation, Application",
+          "scenario": "The top three layers work closely together and are often implemented by the same application.\n\nLayer 5 - SESSION:\nManages connections/dialogues between applications. Establishes, maintains, and terminates sessions. Handles authentication and authorization during sessions.\n\nLayer 6 - PRESENTATION:\nHandles data formatting, encryption/decryption, and compression.\n- SSL/TLS encryption happens here\n- Data conversion (e.g., EBCDIC to ASCII)\n- Image/audio format handling\n\nLayer 7 - APPLICATION:\nThe interface users interact with. Protocols include:\n- HTTP/HTTPS (web)\n- FTP (file transfer)\n- SMTP/POP3/IMAP (email)\n- SSH (secure shell)\n\nThese layers are closest to the end user and furthest from the physical transmission.",
+          "question": "At which layer does SSL/TLS encryption occur?",
+          "options": ["Layer 3", "Layer 4", "Layer 6", "Layer 7"],
+          "correct_index": 2,
+          "explanation": "SSL/TLS encryption occurs at Layer 6 (Presentation Layer), which handles data formatting and security transformations.",
+          "xp_reward": 100, "bits_reward": 50, "tags": ["osi", "session", "presentation", "application"]
+        }
+      ]
+    }
+  ]
+}

@@ -97,6 +97,7 @@ def show_main_menu(player: Player) -> str:
             questionary.Choice("⚔   Story Mode     (zones unlock sequentially)", value="story"),
             questionary.Choice("📚  Free Study      (all zones open — drill weak areas)", value="free"),
             questionary.Choice("🔤  Acronym Drill", value="acronym"),
+            questionary.Choice("🖧   Field Exercises (CLI Drills & Topology)", value="field"),
             questionary.Choice("📊  Study Report", value="report"),
             questionary.Choice("💾  Save / Load", value="save"),
             questionary.Choice("❌  Quit", value="quit"),
@@ -139,10 +140,32 @@ def show_zone_select(zone_manager: ZoneManager, player: Player) -> Optional[int]
         else:
             choices.append(questionary.Choice(f"[LOCKED] Zone {zone_num} — {zone_manager.get_locked_reason(zone_num, player)}", value=None, disabled="locked"))
 
-    choices.append(questionary.Choice("← Back", value=None))
+    choices.append(questionary.Choice("← Back", value="back"))
 
     result = questionary.select("Select zone:", choices=choices, style=_QSTYLE).ask()
-    return result
+    return None if result in (None, "back") else result
+
+
+def _get_node_category(node_id: float) -> str:
+    """Group nodes by category for cleaner display."""
+    if node_id < 1.1:
+        return "📚 PREREQUISITES (Start Here)"
+    elif node_id < 1.4:
+        return "🎯 CORE CONCEPTS"
+    elif node_id < 1.5:
+        return "🔧 NETWORK SERVICES"
+    elif node_id < 1.6:
+        return "💻 ADVANCED TOPICS"
+    elif node_id < 1.7:
+        return "🗺️  NETWORK DESIGN"
+    elif node_id < 1.8:
+        return "📍 ADDRESSING"
+    elif node_id < 1.9:
+        return "🌊 MODERN TECH"
+    elif node_id < 1.44:
+        return "🔌 FIBER OPTIC (Expanded)"
+    else:
+        return "🔌 COPPER CABLING (Expanded)"
 
 
 def show_node_map(zone: Zone, player: Player) -> Optional[float]:
@@ -152,21 +175,35 @@ def show_node_map(zone: Zone, player: Player) -> Optional[float]:
     console.print(Rule(f"[bold bright_cyan]{ZONE_NAMES.get(zone.number, zone.name)}[/]", style="bright_blue"))
     console.print()
 
-    choices = []
+    # Group nodes by category
+    from collections import OrderedDict
+    categorized = OrderedDict()
     for node in zone.nodes:
-        correct, total = node.get_completion_stats(player)
-        completed = node.is_node_completed(player)
-        node_id_str = str(node.id)
+        cat = _get_node_category(node.id)
+        if cat not in categorized:
+            categorized[cat] = []
+        categorized[cat].append(node)
 
-        if completed:
-            icon = "[green]●[/]"
-            status = f"[green]DONE ({correct}/{total})[/]"
-        else:
-            icon = "[bright_white]○[/]"
-            status = f"[dim]{correct}/{total} correct[/]" if correct > 0 else "[dim]not started[/]"
+    choices = []
+    current_cat = None
+    
+    for cat, nodes in categorized.items():
+        # Add category header
+        choices.append(questionary.Choice(f"[bold bright_blue]\n{cat}[/]", value=None, disabled=True))
+        
+        for node in nodes:
+            correct, total = node.get_completion_stats(player)
+            completed = node.is_node_completed(player)
 
-        label = f"Node {node.id}: {node.name}  {status}"
-        choices.append(questionary.Choice(label, value=node.id))
+            if completed:
+                icon = "[green]●[/]"
+                status = f"[green]DONE ({correct}/{total})[/]"
+            else:
+                icon = "[bright_white]○[/]"
+                status = f"[dim]{correct}/{total} done[/]" if correct > 0 else "[dim]not started[/]"
+
+            label = f"  {icon} {node.name[:45]:<45} {status}"
+            choices.append(questionary.Choice(label, value=node.id))
 
     # Guardian row
     guardian_count = len(zone.guardian_encounters)
@@ -185,10 +222,10 @@ def show_node_map(zone: Zone, player: Player) -> Optional[float]:
     else:
         choices.append(questionary.Choice(g_label, value=None, disabled="complete all nodes first"))
 
-    choices.append(questionary.Choice("← Back", value=None))
+    choices.append(questionary.Choice("← Back", value="back"))
 
     result = questionary.select("Select node:", choices=choices, style=_QSTYLE).ask()
-    return result
+    return None if result in (None, "back") else result
 
 
 def show_encounter(encounter: Encounter, player: Player, question_num: int = 1, total: int = 1) -> Optional[int]:
@@ -208,6 +245,25 @@ def show_encounter(encounter: Encounter, player: Player, question_num: int = 1, 
         console.print(f"  [dim]Tags: {', '.join(encounter.tags)}[/]")
     console.print()
 
+    # Show scenario/study content first (if present)
+    if encounter.scenario:
+        console.print(Panel(
+            f"[bright_white]{encounter.scenario}[/]",
+            border_style="bright_blue",
+            title="[bright_blue]STUDY CONTENT[/]",
+            padding=(1, 2),
+        ))
+        console.print()
+
+    if encounter.ascii_diagram:
+        console.print(Panel(
+            f"[bright_white]{encounter.ascii_diagram}[/]",
+            border_style="bright_magenta",
+            title="[bright_magenta]NETWORK TOPOLOGY[/]",
+            padding=(1, 2),
+        ))
+        console.print()
+
     console.print(Panel(
         f"[bold bright_white]{encounter.question}[/]",
         border_style="bright_cyan",
@@ -226,6 +282,50 @@ def show_encounter(encounter: Encounter, player: Player, question_num: int = 1, 
     if result is None:
         return None
     return result
+
+
+def show_cli_encounter(encounter: Encounter, player: Player, question_num: int = 1, total: int = 1) -> Optional[str]:
+    clear()
+    show_header(player)
+    console.print()
+
+    diff_color = {"easy": "green", "medium": "yellow", "hard": "red", "boss": "bright_red"}.get(
+        encounter.difficulty, "white"
+    )
+    console.print(
+        f"  [dim]Question {question_num}/{total}[/]  "
+        f"[{diff_color}]{encounter.difficulty.upper()}[/]  "
+        f"[dim]ID: {encounter.id}[/]"
+    )
+    if encounter.tags:
+        console.print(f"  [dim]Tags: {', '.join(encounter.tags)}[/]")
+    console.print()
+
+    console.print(Panel(
+        f"[bright_white]{encounter.scenario}[/]\n\n"
+        f"[bold bright_cyan]Objective:[/] {encounter.objective}",
+        border_style="bright_cyan",
+        title="[bright_cyan]CLI CHALLENGE[/]",
+        padding=(1, 2),
+    ))
+    console.print()
+
+    prompt_label = f"{encounter.command_prompt} " if encounter.command_prompt else "$ "
+
+    answer = questionary.text(prompt_label, style=_QSTYLE).ask()
+    if answer is None:
+        return None
+    answer = answer.strip()
+
+    if not encounter.check_cli_answer(answer) and encounter.hint:
+        console.print(f"\n  [yellow]💡 Hint: {encounter.hint}[/]")
+        console.print("  [dim]One more try...[/]\n")
+        retry = questionary.text(prompt_label, style=_QSTYLE).ask()
+        if retry is None:
+            return answer
+        answer = retry.strip()
+
+    return answer
 
 
 def show_combat_result(result: CombatResult, player: Player) -> None:
@@ -361,8 +461,9 @@ def show_save_menu(saves: List[Dict[str, Any]]) -> Optional[int]:
             label = f"Slot {slot}: — empty —"
         choices.append(questionary.Choice(label, value=slot))
 
-    choices.append(questionary.Choice("← Back", value=None))
-    return questionary.select("Select slot:", choices=choices, style=_QSTYLE).ask()
+    choices.append(questionary.Choice("← Back", value="back"))
+    result = questionary.select("Select slot:", choices=choices, style=_QSTYLE).ask()
+    return None if result in (None, "back") else result
 
 
 def show_new_game_prompt() -> Optional[str]:
@@ -581,3 +682,32 @@ def show_acronym_result(acronym: str, full_name: str, definition: str, correct: 
     console.print(f"  [bright_blue]{definition}[/]")
     console.print()
     input("  Press Enter to continue...")
+
+
+def show_zone_entry(zone_num: int, text: str) -> None:
+    """Full-screen narrative panel shown the first time a zone is entered."""
+    if not text:
+        return
+    clear()
+    console.print()
+    console.print(Rule(f"[bold bright_cyan]{ZONE_NAMES.get(zone_num, f'Zone {zone_num}')}[/]", style="bright_blue"))
+    console.print()
+    console.print(Panel(
+        f"[italic bright_white]{text}[/]",
+        border_style="bright_magenta",
+        title="[bright_magenta]ENTERING THE ZONE[/]",
+        padding=(1, 2),
+    ))
+    console.print()
+    input("  Press Enter to step through...")
+
+
+def show_flavor_line(text: str, pause: float = 1.6) -> None:
+    """A short atmospheric line flashed before a node or encounter begins, then cleared."""
+    if not text:
+        return
+    clear()
+    console.print()
+    console.print(f"  [italic dim bright_magenta]» {text}[/]")
+    console.print()
+    time.sleep(pause)

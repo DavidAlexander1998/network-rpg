@@ -1,0 +1,354 @@
+{
+  "zone": "The Physical Path - Expanded",
+  "zone_number": 1.4,
+  "name": "The Physical Path - Fiber Deep Dive",
+  "description": "Comprehensive fiber optic cabling for Network+. SMF vs MMF, connectors, troubleshooting, and safety.",
+  "nodes": [
+    {
+      "id": 1.41,
+      "name": "SMF vs MMF - The Core Divergence",
+      "description": "Understanding Single-Mode and Multi-Mode fiber differences",
+      "encounters": [
+        {
+          "id": "fiber_001",
+          "zone": 1.4,
+          "node": "fiber_basics",
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Core Divergence",
+          "scenario": "You stand before the Great Junction Box. Two types of glass strands lie before you. To master the physical layer, you must understand the fundamental nature of the light paths.",
+          "question": "Compare Single-Mode Fiber (SMF) and Multi-Mode Fiber (MMF). Which statement correctly identifies their core differences?",
+          "options": [
+            "SMF has a smaller core and uses lasers for long distances; MMF has a larger core and uses LEDs/VCSELs for shorter distances.",
+            "SMF uses multiple paths of light for high speed; MMF uses a single path for extreme distance.",
+            "MMF is more expensive and used for long-haul telecommunications; SMF is cheaper and used in local data centers.",
+            "SMF uses copper shielding to prevent interference; MMF uses pure glass cores."
+          ],
+          "correct_index": 0,
+          "explanation": "SMF has a tiny core (approx. 8-10 microns) that allows only one mode of light to propagate, making it ideal for long distances using lasers. MMF has a much larger core (50 or 62.5 microns), allowing multiple paths (modes) of light, typically using cheaper LED or VCSEL light sources for shorter distances.",
+          "xp_reward": 100,
+          "bits_reward": 50,
+          "tags": ["fiber", "smf", "mmf", "core_size", "n10-009"],
+          "practical_emulation": "Interactive comparison: View core sizes side-by-side and match light sources"
+        },
+        {
+          "id": "fiber_002",
+          "zone": 1.4,
+          "node": "fiber_basics",
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Hallway Analogy",
+          "scenario": "To visualize why MMF struggles over long distances, imagine a wide hallway (MMF) versus a narrow, straight corridor (SMF). In the wide hallway, people (light rays) run in zig-zags, bumping into walls and arriving at the end at different times. In the narrow corridor, everyone runs in a straight line.",
+          "question": "In the analogy above, what is the technical term for the phenomenon where different light paths arrive at the receiver at different times, causing signal blurring?",
+          "options": [
+            "Attenuation",
+            "Refraction",
+            "Modal Dispersion",
+            "Chromatic Aberration"
+          ],
+          "correct_index": 2,
+          "explanation": "Modal Dispersion occurs in Multi-Mode Fiber because the different paths (modes) taken by the light rays have different lengths, causing the light pulses to spread out (smear) over distance, which limits the effective range.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": ["fiber", "modal_dispersion", "analogy", "visual_learning"],
+          "practical_emulation": "Animation: Watch light rays bounce in MMF vs straight path in SMF"
+        },
+        {
+          "id": "fiber_003",
+          "zone": 1.4,
+          "node": "fiber_basics",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Architect's Blueprint",
+          "scenario": "A client presents you with two expansion projects. Project A requires connecting two buildings on opposite sides of a massive campus (5km apart). Project B requires connecting several servers within a single high-density data center rack (10 meters apart).",
+          "question": "Based on the distance and cost-efficiency requirements, which fiber types should you recommend?",
+          "options": [
+            "Project A: MMF | Project B: SMF",
+            "Project A: SMF | Project B: MMF",
+            "Project A: SMF | Project B: SMF",
+            "Project A: MMF | Project B: MMF"
+          ],
+          "correct_index": 1,
+          "explanation": "For long-distance campus backbones (5km), SMF is required because it can handle the distance without signal degradation from modal dispersion. For short-distance intra-rack connections (10m), MMF is the most cost-effective choice because the transceivers (LED/VCSEL) are much cheaper than SMF lasers.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": ["fiber", "use_case", "deployment", "real_world"],
+          "practical_emulation": "Scenario builder: Drag fiber type to appropriate deployment scenario"
+        },
+        {
+          "id": "fiber_004",
+          "zone": 1.4,
+          "node": "fiber_basics",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Technician's Sorting Task",
+          "scenario": "A shipment of mixed fiber components has arrived at the warehouse. You must quickly sort them into the correct bins to avoid a deployment error.",
+          "question": "Match the following requirements to the correct fiber type: 1. High bandwidth over 2km distance. 2. Low-cost implementation for a local LAN switch connection.",
+          "options": [
+            "1: MMF, 2: SMF",
+            "1: SMF, 2: MMF",
+            "1: SMF, 2: SMF",
+            "1: MMF, 2: MMF"
+          ],
+          "correct_index": 1,
+          "explanation": "2km is generally beyond the reliable limit for most MMF standards (which usually cap out around 300m-550m for high speeds), making SMF the correct choice for 1. For a local LAN switch (short distance), MMF is the standard choice due to lower transceiver costs.",
+          "xp_reward": 200,
+          "bits_reward": 100,
+          "tags": ["fiber", "matching", "decision_making", "practice"],
+          "practical_emulation": "Sorting game: Drag requirements to SMF or MMF bin"
+        },
+        {
+          "id": "fiber_005",
+          "zone": 1.4,
+          "node": "fiber_basics",
+          "type": "mob",
+          "difficulty": "medium",
+          "title": "The Certification Gate",
+          "scenario": "The Master Technician watches as you prepare for your final assessment. One wrong move and the network goes dark. Prove your knowledge of fiber optics.",
+          "question": "Which of the following is a primary advantage of Single-Mode Fiber (SMF) over Multi-Mode Fiber (MMF)?",
+          "options": [
+            "Lower cost of optical transceivers",
+            "Easier to terminate and splice due to larger core",
+            "Significantly greater distance capabilities",
+            "Ability to use inexpensive LED light sources"
+          ],
+          "correct_index": 2,
+          "explanation": "The primary advantage of SMF is its ability to transmit data over much longer distances (kilometers vs. meters) because it eliminates modal dispersion by using a single light path.",
+          "xp_reward": 500,
+          "bits_reward": 250,
+          "tags": ["fiber", "exam", "smf_advantage", "n10-009"],
+          "practical_emulation": "Boss fight: Answer correctly to pass the fiber certification"
+        }
+      ]
+    },
+    {
+      "id": 1.42,
+      "name": "The Lore of Light - Connector Mechanics",
+      "description": "LC, SC, ST, MTRJ connector types and their applications",
+      "encounters": [
+        {
+          "id": "fiber_006",
+          "zone": 1.4,
+          "node": "fiber_connectors",
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Lore of Light: Connector Mechanics",
+          "scenario": "To guide light through the glass, you must master the physical interface. Fiber connectors are categorized by how they lock and their physical footprint.",
+          "question": "Which connector types use a push-pull mechanism versus a twist-lock mechanism?",
+          "options": [
+            "Push-Pull: LC, SC, MTRJ | Twist-Lock: ST",
+            "Push-Pull: ST, SC | Twist-Lock: LC, MTRJ",
+            "Push-Pull: LC only | Twist-Lock: SC, ST, MTRJ",
+            "All fiber connectors use the same locking mechanism"
+          ],
+          "correct_index": 0,
+          "explanation": "LC, SC, and MTRJ use push-pull mechanisms. ST uses a twist-lock bayonet-style mechanism similar to BNC. LC is Small Form Factor (SFF) for high density. SC is a larger square connector. MTRJ looks like a miniature RJ-45.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["fiber", "connectors", "lc", "sc", "st", "mtrj"],
+          "practical_emulation": "Identify locking mechanisms on household items to internalize the concept"
+        },
+        {
+          "id": "fiber_007",
+          "zone": 1.4,
+          "node": "fiber_connectors",
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Eye of the Technician",
+          "scenario": "You are staring into a dark server room. You need to identify the connectors by sight before grabbing your cleaning kit.",
+          "question": "You see a small, rectangular connector with a tiny plastic tab on top. Which connector is this?",
+          "options": [
+            "LC - Small with a clip/tab",
+            "SC - Square, no clip, just push",
+            "ST - Round, requires quarter-turn",
+            "MTRJ - Looks like miniature RJ-45"
+          ],
+          "correct_index": 0,
+          "explanation": "LC connectors are small, rectangular, and feature a plastic tab/clip similar to Ethernet cables. SC is larger and square. ST is round with a twist-lock. MTRJ resembles a small RJ-45.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["fiber", "connectors", "visual_identification"],
+          "practical_emulation": "Flashcard drill: View connector images and name them within 2 seconds"
+        },
+        {
+          "id": "fiber_008",
+          "zone": 1.4,
+          "node": "fiber_connectors",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Deployment Scenario",
+          "scenario": "A client has three different environments. Match the connector to the mission: 1) Modern Data Center (High Density), 2) Legacy Campus Backbone, 3) Telecom/ISP Entry Point",
+          "question": "Which connector is best for a high-density data center where space is at a premium?",
+          "options": [
+            "ST - Secure twist-lock for reliability",
+            "SC - Durable and easy to use",
+            "LC - Small Form Factor for maximum density",
+            "MTRJ - Standardized for subscriber lines"
+          ],
+          "correct_index": 2,
+          "explanation": "LC (Lucent Connector) is a Small Form Factor (SFF) connector ideal for high-density environments. ST is common in older installations. SC is widely used in telecommunications. MTRJ is used for duplex connections in specific applications.",
+          "xp_reward": 75,
+          "bits_reward": 35,
+          "tags": ["fiber", "connectors", "deployment", "use_case"],
+          "practical_emulation": "Given space constraints and legacy requirements, select appropriate connector"
+        },
+        {
+          "id": "fiber_009",
+          "zone": 1.4,
+          "node": "fiber_connectors",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Sorting Ritual",
+          "scenario": "Match the following use-cases to the correct connector type.",
+          "question": "A technician needs to connect to a port that looks exactly like a miniature Ethernet jack. Which connector?",
+          "options": ["LC", "SC", "ST", "MTRJ"],
+          "correct_index": 3,
+          "explanation": "MTRJ (Mechanical Transfer Registered Jack) looks almost identical to a standard copper RJ-45 jack but is used for fiber duplex connections.",
+          "xp_reward": 100,
+          "bits_reward": 50,
+          "tags": ["fiber", "connectors", "matching", "mtrj"],
+          "practical_emulation": "Drag-and-drop: Move connector icons to correct environment bins"
+        },
+        {
+          "id": "fiber_010",
+          "zone": 1.4,
+          "node": "fiber_connectors",
+          "type": "mob",
+          "difficulty": "medium",
+          "title": "The Certification Gate - Connectors",
+          "scenario": "Final Exam Question: A network engineer is designing a new high-density fiber backbone for a massive data center.",
+          "question": "Which connector type is best suited for high-density environments due to its small form factor?",
+          "options": [
+            "ST",
+            "SC",
+            "LC",
+            "MTRJ"
+          ],
+          "correct_index": 2,
+          "explanation": "LC (Lucent Connector) is a Small Form Factor (SFF) connector. Its small size allows for much higher port density on switches and patch panels compared to the larger SC or the bulky ST.",
+          "xp_reward": 200,
+          "bits_reward": 100,
+          "tags": ["fiber", "connectors", "exam", "n10-009"],
+          "practical_emulation": "Timed multiple-choice quiz mimicking CompTIA Network+ exam"
+        }
+      ]
+    },
+    {
+      "id": 1.43,
+      "name": "The Troubleshooter's Toolkit",
+      "description": "OTDR, attenuation, bend radius, and fiber fault diagnosis",
+      "encounters": [
+        {
+          "id": "fiber_011",
+          "zone": 1.4,
+          "node": "fiber_troubleshooting",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Identifying Fiber Faults via OTDR Trace Analysis",
+          "scenario": "While performing a preventative maintenance check on a single-mode fiber link, you connect an OTDR to one end of the cable. After running the trace, you notice a significant drop in the optical signal level at the 2.5 km mark. Crucially, the trace shows a sharp decrease in power, but there is no corresponding reflective spike (Fresnel reflection) at that distance. The trace then continues at a lower power level for the remainder of the link.",
+          "question": "What is the most likely cause of the signal loss observed at the 2.5 km mark?",
+          "options": [
+            "A damaged connector with a large air gap",
+            "A macro-bend in the fiber",
+            "A faulty optical transceiver",
+            "A high-reflectance mechanical splice"
+          ],
+          "correct_index": 1,
+          "explanation": "In OTDR trace analysis, different types of events produce different visual signatures. A reflective event, such as a connector or a break with an air gap, produces a 'spike' (Fresnel reflection) due to the change in refractive index. A non-reflective event, such as a macro-bend (where the fiber is bent too tightly), causes a sudden increase in attenuation (a step down in the trace) without producing a reflective peak. Since the trace showed a drop in power but no reflective spike, a macro-bend is the most probable cause.",
+          "xp_reward": 250,
+          "bits_reward": 125,
+          "tags": ["fiber", "otdr", "troubleshooting", "macro-bend", "n10-009"],
+          "practical_emulation": "Analyze OTDR trace graphs to identify fault types"
+        },
+        {
+          "id": "fiber_012",
+          "zone": 1.4,
+          "node": "fiber_troubleshooting",
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "Fiber Optic Fundamentals: Attenuation",
+          "scenario": "Attenuation is the reduction in signal strength (optical power) as light travels through an optical fiber. As the signal progresses, some of the light energy is lost, which ultimately limits the maximum distance a signal can travel before it becomes unreadable by the receiver. Attenuation is measured in decibels (dB) or decibels per kilometer (dB/km). The primary causes include: Absorption (impurities in glass), Scattering (Rayleigh scattering), Bending Loss (macrobends and microbends), and Coupling Loss (poorly aligned connectors).",
+          "question": "A network technician is testing a long-haul fiber link and observes significant signal degradation. Upon inspection, they realize that a technician during installation had routed the fiber through a very tight, sharp bend in a corner of the equipment rack. Which specific type of attenuation is most likely responsible for this loss?",
+          "options": [
+            "Rayleigh Scattering",
+            "Absorption",
+            "Macrobending",
+            "Microbending"
+          ],
+          "correct_index": 2,
+          "explanation": "Macrobending refers to large-scale, visible bends in the fiber optic cable (such as a tight radius in a patch panel or rack) that cause the light to strike the cladding-core interface at an angle that allows it to escape the core. Microbending, while similar in effect, refers to microscopic-scale distortions in the fiber structure caused by external pressure or manufacturing defects, rather than the physical routing of the cable.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": ["fiber", "attenuation", "macrobending", "signal_loss"],
+          "practical_emulation": "Identify attenuation causes from visual inspection scenarios"
+        },
+        {
+          "id": "fiber_013",
+          "zone": 1.4,
+          "node": "fiber_troubleshooting",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Fiber Optic Troubleshooting: Bend Radius Violations",
+          "scenario": "During a routine inspection of a new telecommunications rack installation, a technician notices a sudden and significant increase in decibel (dB) loss on a single-mode fiber link. Upon closer inspection, the technician finds that several fiber patch cords have been routed through a tight corner of a cable management tray, resulting in sharp, acute angles that are significantly smaller than the manufacturer's recommended minimum bend radius. The fiber appears physically intact with no cracks or breaks in the outer jacket.",
+          "question": "Based on the scenario described, what is the technical cause of the signal loss, and what phenomenon is occurring?",
+          "options": [
+            "Microbending, where the fiber core is compressed by lateral pressure, causing light to scatter.",
+            "Macrobending, where the bend angle exceeds the critical angle, allowing light to leak from the core into the cladding.",
+            "Total Internal Reflection (TIR) failure due to the fiber core becoming too thick from the pressure.",
+            "Signal attenuation caused by the light traveling too fast through the bend, leading to thermal dissipation."
+          ],
+          "correct_index": 1,
+          "explanation": "When an optical fiber is bent too tightly—a phenomenon known as macrobending—the light rays inside the core strike the core-cladding interface at an angle that is shallower than the 'critical angle' required for Total Internal Reflection (TIR). Because the angle of incidence is no longer sufficient to reflect the light back into the core, the light escapes into the cladding and is lost, resulting in increased attenuation (signal loss). This is distinct from microbending, which refers to microscopic deviations in the fiber axis caused by small-scale mechanical stresses.",
+          "xp_reward": 200,
+          "bits_reward": 100,
+          "tags": ["fiber", "bend_radius", "macrobending", "troubleshooting"],
+          "practical_emulation": "Visual inspection: Identify improper bend radius in cable management"
+        },
+        {
+          "id": "fiber_014",
+          "zone": 1.4,
+          "node": "fiber_troubleshooting",
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Fiber Optic Troubleshooting Practice",
+          "scenario": "Match each scenario to its most likely cause:\n\nScenario 1: An OTDR scan shows a large reflection spike followed immediately by a significant drop in optical power level.\nScenario 2: A long-distance backbone link shows a slow, consistent increase in decibel (dB) loss over time.\nScenario 3: While performing routine cable management, a technician moves a patch cord and immediately the link status changes to 'Down'.",
+          "question": "Match scenarios to causes:\nA) Physical fiber fracture or core breakage\nB) Macro-bend or poorly seated connector\nC) Signal attenuation due to aging or dirty end-faces",
+          "options": [
+            "1-A, 2-B, 3-C",
+            "1-B, 2-C, 3-A",
+            "1-C, 2-A, 3-B",
+            "1-B, 2-A, 3-C"
+          ],
+          "correct_index": 1,
+          "explanation": "Scenario 1 (1-B): An OTDR spike indicates a reflection (like a bad connector or sharp macro-bend), and the subsequent drop indicates loss at that point. Scenario 2 (2-C): Gradual loss over time is typical of attenuation from aging or dirty connectors. Scenario 3 (3-A): Sudden total loss after mechanical movement indicates a physical break or fracture.",
+          "xp_reward": 300,
+          "bits_reward": 150,
+          "tags": ["fiber", "troubleshooting", "practice", "otdr", "scenario_matching"],
+          "practical_emulation": "Match symptoms to causes in three distinct real-world scenarios"
+        },
+        {
+          "id": "fiber_015",
+          "zone": 1.4,
+          "node": "fiber_troubleshooting",
+          "type": "mob",
+          "difficulty": "hard",
+          "title": "Fiber Optic Troubleshooting: Locating Faults",
+          "scenario": "A network administrator is investigating a connectivity issue on a long-distance single-mode fiber optic link connecting two buildings. An optical power meter indicates that the light signal arriving at the destination is significantly weaker than the baseline recorded during the initial installation. The administrator needs to identify the exact distance from the distribution frame to the point where the cable has been pinched or the splice has failed.",
+          "question": "Which of the following tools is most appropriate for pinpointing the precise location of the fault along the fiber run?",
+          "options": {
+            "A": "Visual Fault Locator (VFL)",
+            "B": "Optical Time Domain Reflectometer (OTDR)",
+            "C": "Optical Power Meter (OPM)",
+            "D": "Fiber Inspection Microscope"
+          },
+          "correct_answer": "B",
+          "explanation": "An Optical Time Domain Reflectometer (OTDR) is the correct tool because it sends light pulses down the fiber and measures the backscatter and reflections to characterize the link. This allows the technician to see a graph of the fiber's characteristics and identify the exact distance to events such as breaks, bends, or bad splices. A Visual Fault Locator (VFL) is only effective for short distances where light can leak visibly. An Optical Power Meter can tell you that the signal is weak, but not WHERE the loss is occurring. A Fiber Inspection Microscope is used to check connector cleanliness, not to find breaks along a cable run.",
+          "xp_reward": 500,
+          "bits_reward": 250,
+          "tags": ["fiber", "otdr", "troubleshooting", "tools", "exam", "n10-009"],
+          "practical_emulation": "Boss fight: Select the right tool for pinpointing fiber faults"
+        }
+      ]
+    }
+  ]
+}

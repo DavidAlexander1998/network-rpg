@@ -550,10 +550,86 @@ def show_study_report(player: Player, zone_manager: ZoneManager) -> None:
     input("  Press Enter to continue...")
 
 
+def show_study_first_mode(node: Node, player: Player) -> None:
+    """Study-first mode: show study content then mini-quiz before full encounters."""
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule(f"[bold bright_cyan]📚 STUDY-FIRST MODE: {node.name}[/]", style="bright_blue"))
+    console.print()
+
+    # Show study content if available
+    if node.study_content:
+        console.print(Panel(
+            f"[bright_white]{node.study_content}[/]",
+            border_style="bright_cyan",
+            title="[bright_cyan]STUDY CONTENT[/]",
+            padding=(1, 2),
+        ))
+        console.print()
+        input("  Press Enter to continue to mini-quiz...")
+
+    # Show quiz questions if available
+    if node.quiz_questions:
+        correct_count = 0
+        for i, q in enumerate(node.quiz_questions, 1):
+            clear()
+            show_header(player)
+            console.print()
+            console.print(f"[dim]Mini-Quiz Question {i}/{len(node.quiz_questions)}[/]")
+            console.print()
+            console.print(Panel(
+                f"[bold bright_white]{q.get('question', 'Question')}[/]",
+                border_style="bright_cyan",
+                title="[bright_cyan]QUESTION[/]",
+                padding=(1, 2),
+            ))
+            console.print()
+
+            options = q.get('options', [])
+            option_labels = ["A", "B", "C", "D"]
+            choices = []
+            for idx, option in enumerate(options):
+                label = f"  [{option_labels[idx]}]  {option}"
+                choices.append(questionary.Choice(label, value=idx))
+
+            result = questionary.select("Your answer:", choices=choices, style=_QSTYLE).ask()
+            correct_idx = q.get('correct_index', 0)
+
+            if result == correct_idx:
+                console.print(f"\n  [bright_green]✓ Correct![/]")
+                correct_count += 1
+            else:
+                correct_letter = option_labels[correct_idx] if correct_idx < len(option_labels) else "?"
+                console.print(f"\n  [red]✗ Wrong[/] — Correct answer: [{correct_letter}] {options[correct_idx] if correct_idx < len(options) else '?'}")
+
+            explanation = q.get('explanation', '')
+            if explanation:
+                console.print(f"  [bright_blue]{explanation}[/]")
+            console.print()
+            input("  Press Enter to continue...")
+
+        clear()
+        show_header(player)
+        console.print()
+        pct = int(correct_count / len(node.quiz_questions) * 100) if node.quiz_questions else 0
+        color = "bright_green" if pct >= 70 else ("yellow" if pct >= 50 else "red")
+        console.print(Panel(
+            f"[bold]Mini-Quiz Complete[/]\n\n"
+            f"Score: [{color}]{correct_count}/{len(node.quiz_questions)} ({pct}%)[/]\n\n"
+            f"[dim]Proceeding to full encounters...[/]",
+            border_style="bright_blue",
+            padding=(1, 2),
+        ))
+        console.print()
+        input("  Press Enter to start full quiz...")
+
+
 def show_study_menu(node: Node) -> str:
-    """Return 'study' | 'quiz' | 'back'."""
+    """Return 'study' | 'quiz' | 'study_first' | 'back'."""
     clear()
     card_count = len(node.study_cards)
+    has_study_first = bool(node.study_content or node.quiz_questions)
     console.print()
     console.print(Rule(f"[bold bright_cyan]Node {node.id}: {node.name}[/]", style="bright_blue"))
     console.print()
@@ -565,6 +641,11 @@ def show_study_menu(node: Node) -> str:
         choices.append(questionary.Choice(
             f"📖  Study Guide  ({card_count} reference cards — read before quiz)",
             value="study",
+        ))
+    if has_study_first:
+        choices.append(questionary.Choice(
+            "📚  Study-First Mode  (review content + mini-quiz before full encounters)",
+            value="study_first",
         ))
     choices += [
         questionary.Choice("⚔   Start Quiz  (go straight to encounters)", value="quiz"),

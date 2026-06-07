@@ -223,7 +223,9 @@ def _play_zone(player: Player, zone_num: int) -> None:
                 continue
             if menu_choice == "study":
                 screens.show_study_mode(node)
-            # "quiz" or after finishing study cards → run encounters
+            elif menu_choice == "study_first":
+                screens.show_study_first_mode(node, player)
+            # "quiz" or after finishing study cards / study-first mode → run encounters
             _flash_node_transition()
             _run_encounter_session(player, zone, node)
 

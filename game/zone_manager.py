@@ -38,6 +38,8 @@ class Node:
     description: str
     encounters: List[Encounter] = field(default_factory=list)
     study_cards: List[StudyCard] = field(default_factory=list)
+    study_content: Optional[str] = None
+    quiz_questions: List[Dict[str, Any]] = field(default_factory=list)
 
     def is_node_completed(self, player: Player) -> bool:
         if not self.encounters:
@@ -145,6 +147,8 @@ class ZoneManager:
                 description=node_data.get("description", ""),
                 encounters=encounters,
                 study_cards=study_cards,
+                study_content=node_data.get("study_content"),
+                quiz_questions=node_data.get("quiz_questions", []),
             )
             nodes.append(node)
         nodes.sort(key=lambda n: n.id)

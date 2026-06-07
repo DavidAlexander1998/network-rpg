@@ -1760,13 +1760,13 @@
           "title": "Fiber Optic Troubleshooting: Locating Faults",
           "scenario": "A network administrator is investigating a connectivity issue on a long-distance single-mode fiber optic link connecting two buildings. An optical power meter indicates that the light signal arriving at the destination is significantly weaker than the baseline recorded during the initial installation. The administrator needs to identify the exact distance from the distribution frame to the point where the cable has been pinched or the splice has failed.",
           "question": "Which of the following tools is most appropriate for pinpointing the precise location of the fault along the fiber run?",
-          "options": {
-            "A": "Visual Fault Locator (VFL)",
-            "B": "Optical Time Domain Reflectometer (OTDR)",
-            "C": "Optical Power Meter (OPM)",
-            "D": "Fiber Inspection Microscope"
-          },
-          "correct_answer": "B",
+          "options": [
+            "Visual Fault Locator (VFL)",
+            "Optical Time Domain Reflectometer (OTDR)",
+            "Optical Power Meter (OPM)",
+            "Fiber Inspection Microscope"
+          ],
+          "correct_index": 1,
           "explanation": "An Optical Time Domain Reflectometer (OTDR) is the correct tool because it sends light pulses down the fiber and measures the backscatter and reflections to characterize the link. This allows the technician to see a graph of the fiber's characteristics and identify the exact distance to events such as breaks, bends, or bad splices. A Visual Fault Locator (VFL) is only effective for short distances where light can leak visibly. An Optical Power Meter can tell you that the signal is weak, but not WHERE the loss is occurring. A Fiber Inspection Microscope is used to check connector cleanliness, not to find breaks along a cable run.",
           "xp_reward": 500,
           "bits_reward": 250,
@@ -2062,7 +2062,7 @@
     },
     {
       "id": 1.443,
-      "name": "The Troubleshooter's Toolkit",
+      "name": "The Copper Diagnostics Bench",
       "description": "Cable testers, tone generators, and crosstalk diagnosis",
       "encounters": [
         {

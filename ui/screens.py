@@ -152,20 +152,20 @@ def _get_node_category(node_id: float) -> str:
         return "📚 PREREQUISITES (Start Here)"
     elif node_id < 1.4:
         return "🎯 CORE CONCEPTS"
-    elif node_id < 1.5:
+    elif node_id < 1.41:
         return "🔧 NETWORK SERVICES"
+    elif node_id < 1.44:
+        return "🔌 FIBER OPTIC (Expanded)"
+    elif node_id < 1.5:
+        return "🔌 COPPER CABLING (Expanded)"
     elif node_id < 1.6:
         return "💻 ADVANCED TOPICS"
     elif node_id < 1.7:
         return "🗺️  NETWORK DESIGN"
     elif node_id < 1.8:
         return "📍 ADDRESSING"
-    elif node_id < 1.9:
-        return "🌊 MODERN TECH"
-    elif node_id < 1.44:
-        return "🔌 FIBER OPTIC (Expanded)"
     else:
-        return "🔌 COPPER CABLING (Expanded)"
+        return "🌊 MODERN TECH"
 
 
 def show_node_map(zone: Zone, player: Player) -> Optional[float]:

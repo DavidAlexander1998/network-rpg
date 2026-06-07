@@ -9,148 +9,116 @@
       "description": "Routing protocols, admin distance, NAT, and first-hop redundancy.",
       "encounters": [
         {
-          "id": "z2-n1-001", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
+          "id": "z2-n1-study-001",
+          "zone": 2,
+          "node": 2.1,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Logistics of Routing: The GlobalRoute Express",
+          "scenario": "Imagine you are the Logistics Director for 'GlobalRoute Express.' Your job is to move packages from local neighborhoods to international destinations across a massive, complex highway system. To keep the company running, you must master three core concepts of movement.\n\nFirst, consider the Default Gateway. Every local delivery van has a single point of departure: the local sorting hub. If a driver has a package for a neighbor on their street, they deliver it directly. But if the package is for a city outside their immediate zone, the driver doesn't wander aimlessly through side streets; they head straight to the local hub. That hub acts as the 'Default Gateway'—the designated exit point for any destination that is not known within the local neighborhood. Without it, the driver is stuck in a loop.\n\nNext, how do drivers know which roads to take? You have two primary methods. Static Routing is like giving a driver a printed instruction sheet: 'To get to Warehouse A, take Highway 5.' It is reliable and requires very little 'brainpower' from the network, but if Highway 5 is closed due to a landslide, the driver is stuck because the instructions never change. Dynamic Routing is like a modern GPS. The system constantly communicates with other hubs, sharing real-time data about traffic jams or road closures. If a bridge is out, the GPS automatically recalculates a new path. It is more complex to set up but much more resilient to change.\n\nFinally, what if a driver receives two different sets of directions? One from a veteran driver (highly trusted) and one from a tourist (less trusted)? This is Administrative Distance (AD). AD is the 'trustworthiness' score. If a router hears about a path from a highly reliable source, it assigns it a low AD. If the source is less reliable, it gets a higher AD. The router always chooses the path with the lowest AD, because in the world of logistics, the most trusted source wins.",
+          "question": "A local delivery driver has a package for a city they have never heard of. To ensure the package leaves their local area and enters the wider network, where must they go first?",
+          "options": [
+            "The local sorting hub (Default Gateway)",
+            "A random neighbor's house",
+            "The destination city directly",
+            "A dead-end street"
+          ],
+          "correct_index": 0,
+          "explanation": "The Default Gateway is the 'exit point' for a local network. When a device doesn't know where to send a packet, it sends it to the Default Gateway to be routed toward the destination.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["routing", "default-gateway", "fundamentals"]
+        },
+        {
+          "id": "z2-n1-study-002",
+          "zone": 2,
+          "node": 2.1,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Grand Hotel Gateway",
+          "scenario": "Imagine you are standing in the grand lobby of the 'Network Grand Hotel.' The hotel is a massive structure with hundreds of guest rooms, but it only has one official street address: 100 Connectivity Lane. This single, unique address is the hotel's Public IP. To the outside world—the postal service, delivery drivers, and the city at large—the hotel is just one single entity located at 100 Connectivity Lane.\n\nInside the hotel, however, things are different. Every guest has a room number, such as Room 302 or Room 505. These are the Private IPs. While these room numbers are vital for guests to find each other inside the building, a mail carrier from another city cannot simply address a letter to 'Room 302' and expect it to arrive; they wouldn't know which hotel in the world that room belongs to. Without the street address, the room number is meaningless to the public.\n\nThis is where the Front Desk—the NAT (Network Address Translation) device—comes in. When a guest in Room 302 wants to send a letter to a friend, they hand it to the Front Desk. The clerk takes the letter, removes the 'Room 302' label, and replaces it with the hotel's official street address, '100 Connectivity Lane.' When the reply arrives at the hotel, the clerk checks their logbook, sees that the incoming mail was intended for the guest in Room 302, and delivers it to the correct door.\n\nIf the hotel has hundreds of guests but only one phone line, they use a trick: they assign a unique 'extension number' to every outgoing call so they know who is talking. This is PAT (Port Address Translation).",
+          "question": "A delivery driver has a package for 'Room 202,' but they don't know which building in the city it belongs to. Which networking concept acts like the building's front desk?",
+          "options": [
+            "DNS (Domain Name System)",
+            "NAT (Network Address Translation)",
+            "DHCP (Dynamic Host Configuration Protocol)",
+            "ARP (Address Resolution Protocol)"
+          ],
+          "correct_index": 1,
+          "explanation": "Just as a front desk uses a building's main address to route mail to specific rooms, NAT uses a single public IP to route traffic to multiple private IP addresses.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["nat", "pat", "ip-addressing"]
+        },
+        {
+          "id": "z2-n1-001",
+          "zone": 2,
+          "node": 2.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Which routing protocol has an administrative distance of 110?",
           "options": ["RIP", "EIGRP", "OSPF", "BGP"],
           "correct_index": 2,
           "explanation": "OSPF has AD 110. EIGRP = 90, RIP = 120, eBGP = 20. Lower AD = more trustworthy route.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Routing", "OSPF", "Admin Distance"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["Routing", "OSPF", "Admin Distance"]
         },
         {
-          "id": "z2-n1-002", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
+          "id": "z2-n1-002",
+          "zone": 2,
+          "node": 2.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A directly connected route has an administrative distance of:",
           "options": ["0", "1", "20", "90"],
           "correct_index": 0,
           "explanation": "Directly connected routes have AD 0 — the most trusted source. Static routes are AD 1, eBGP is 20, EIGRP is 90.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Routing", "Admin Distance"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["Routing", "Admin Distance"]
         },
         {
-          "id": "z2-n1-003", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
+          "id": "z2-n1-003",
+          "zone": 2,
+          "node": 2.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Which type of NAT maps many private IP addresses to a single public IP using port numbers?",
           "options": ["Static NAT", "Dynamic NAT", "PAT (NAT Overload)", "NAT64"],
           "correct_index": 2,
           "explanation": "PAT (Port Address Translation) / NAT Overload maps many internal IPs to one public IP by tracking unique port numbers. This is what home routers do.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["NAT", "PAT"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["NAT", "PAT"]
         },
         {
-          "id": "z2-n1-004", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
-          "question": "What is the administrative distance of a static route?",
-          "options": ["0", "1", "110", "120"],
-          "correct_index": 1,
-          "explanation": "Static routes have AD 1. Only directly connected routes (AD 0) are trusted more. This means static routes will always override dynamic protocol routes (OSPF=110, RIP=120).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Routing", "Static Route", "Admin Distance"]
-        },
-        {
-          "id": "z2-n1-005", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
-          "question": "Which routing protocol is the standard for routing between different Autonomous Systems (the internet)?",
-          "options": ["OSPF", "EIGRP", "BGP", "RIP"],
-          "correct_index": 2,
-          "explanation": "BGP (Border Gateway Protocol) is the EGP (Exterior Gateway Protocol) used for internet routing between ASes. OSPF, EIGRP, and RIP are IGPs (Interior — used within one AS).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["BGP", "Routing", "EGP"]
-        },
-        {
-          "id": "z2-n1-006", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
-          "question": "A company hosts a public web server that needs the same public IP address at all times. Which NAT type should be used?",
-          "options": ["PAT", "Dynamic NAT", "Static NAT", "NAT64"],
-          "correct_index": 2,
-          "explanation": "Static NAT creates a permanent one-to-one mapping between a private IP and a public IP. Required for servers that need a consistent, reachable public address.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["NAT", "Static NAT"]
-        },
-        {
-          "id": "z2-n1-007", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
+          "id": "z2-n1-007",
+          "zone": 2,
+          "node": 2.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Which FHRP protocol is an open standard (non-Cisco proprietary)?",
           "options": ["HSRP", "GLBP", "VRRP", "PVST+"],
           "correct_index": 2,
           "explanation": "VRRP (Virtual Router Redundancy Protocol) is an open RFC standard (RFC 5798). HSRP and GLBP are Cisco proprietary. PVST+ is Cisco's per-VLAN spanning tree.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["FHRP", "VRRP", "Redundancy"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": ["FHRP", "VRRP", "Redundancy"]
         },
         {
-          "id": "z2-n1-008", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "Two routers have routes to the same destination. Router A learned it via OSPF and Router B has a static route. Which is preferred?",
-          "options": ["OSPF route — lower metric", "Static route — AD 1 beats OSPF AD 110", "OSPF route — it is dynamic and more reliable", "They load-balance equally"],
-          "correct_index": 1,
-          "explanation": "Static routes (AD 1) are always preferred over OSPF (AD 110). Admin distance determines trustworthiness — lower wins. To use static as backup only, configure a 'floating static' with AD higher than OSPF.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Admin Distance", "OSPF", "Static Route"]
-        },
-        {
-          "id": "z2-n1-009", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "OSPF is classified as which type of routing protocol?",
-          "options": ["Distance vector", "Path vector", "Link state", "Hybrid"],
-          "correct_index": 2,
-          "explanation": "OSPF is a link-state protocol — each router builds a complete topology map (LSDB) using Dijkstra's SPF algorithm. Distance vector (RIP) only knows next hop and distance. BGP is path vector.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["OSPF", "Link State", "Routing"]
-        },
-        {
-          "id": "z2-n1-010", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "What is the maximum hop count for RIP before a route is considered unreachable?",
-          "options": ["8", "10", "15", "255"],
-          "correct_index": 2,
-          "explanation": "RIP uses hop count as its metric with a maximum of 15. A route with 16 hops is considered unreachable (infinite). This severely limits RIP's scalability in large networks.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["RIP", "Routing", "Hop Count"]
-        },
-        {
-          "id": "z2-n1-011", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "GLBP differs from HSRP and VRRP because it:",
-          "options": ["Uses open standards", "Supports true load balancing across multiple gateways", "Has faster failover", "Works at Layer 2"],
-          "correct_index": 1,
-          "explanation": "GLBP (Gateway Load Balancing Protocol) is Cisco proprietary and uniquely offers true load balancing — different clients use different virtual MACs pointing to different physical routers simultaneously. HSRP and VRRP have one active gateway at a time.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["GLBP", "FHRP", "Load Balancing"]
-        },
-        {
-          "id": "z2-n1-012", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "Which OSPF component is required — all OSPF areas must connect to it?",
-          "options": ["Area 1", "Backbone area (Area 0)", "DR router", "ASBR"],
-          "correct_index": 1,
-          "explanation": "All OSPF areas must connect to Area 0 (backbone area). This hierarchical design prevents routing loops. An ABR (Area Border Router) connects non-backbone areas to Area 0.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["OSPF", "Area 0", "Backbone"]
-        },
-        {
-          "id": "z2-n1-013", "zone": 2, "node": 2.1, "difficulty": "hard", "type": "mob",
+          "id": "z2-n1-013",
+          "zone": 2,
+          "node": 2.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A network admin wants a static route to only be used if the OSPF route fails. What technique achieves this?",
           "options": ["Set the static route metric to 255", "Configure a floating static route with AD higher than 110", "Use OSPF redistribution", "Disable the static route by default"],
           "correct_index": 1,
           "explanation": "A 'floating static route' has its AD set higher than the dynamic protocol (e.g., AD 150 > OSPF AD 110). The static route only appears in the routing table when the OSPF route is gone — making it a backup path.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Floating Static", "Admin Distance", "OSPF"]
-        },
-        {
-          "id": "z2-n1-014", "zone": 2, "node": 2.1, "difficulty": "hard", "type": "mob",
-          "question": "Which BGP attribute is used to influence outbound traffic from your AS by assigning preference to locally learned routes?",
-          "options": ["AS-PATH", "MED", "LOCAL_PREF", "NEXT_HOP"],
-          "correct_index": 2,
-          "explanation": "LOCAL_PREF is a BGP attribute used within an AS to influence OUTBOUND path selection. Higher LOCAL_PREF = more preferred. AS-PATH influences inbound traffic from external peers. MED suggests preferred entry point to external peers.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["BGP", "LOCAL_PREF", "Path Attributes"]
-        },
-        {
-          "id": "z2-n1-015", "zone": 2, "node": 2.1, "difficulty": "hard", "type": "mob",
-          "question": "An IPv6-only client needs to reach an IPv4-only server. Which NAT mechanism enables this?",
-          "options": ["Static NAT", "PAT", "NAT64", "Dynamic NAT"],
-          "correct_index": 2,
-          "explanation": "NAT64 translates between IPv6 and IPv4 addressing, allowing IPv6-only hosts to communicate with IPv4-only destinations. It's a key transition mechanism during IPv6 migration.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["NAT64", "IPv6", "NAT"]
-        },
-        {
-          "id": "z2-n1-016", "zone": 2, "node": 2.1, "difficulty": "easy", "type": "mob",
-          "question": "Which protocol does BGP use for transport, and on which port?",
-          "options": ["UDP 179", "TCP 179", "TCP 443", "UDP 520"],
-          "correct_index": 1,
-          "explanation": "BGP uses TCP port 179. Using TCP ensures reliable delivery of routing updates. RIP uses UDP 520 for comparison.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["BGP", "Port 179", "TCP"]
-        },
-        {
-          "id": "z2-n1-017", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "HSRP uses a virtual IP as the default gateway for clients. In HSRP, what determines which router becomes Active?",
-          "options": ["Highest IP address", "Lowest MAC address", "Highest priority value (default 100), then highest IP if tied", "Lowest priority value"],
-          "correct_index": 2,
-          "explanation": "In HSRP, the router with the highest priority (default 100) becomes Active. If priorities are equal, the router with the highest IP address wins the election.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["HSRP", "FHRP", "Election"]
-        },
-        {
-          "id": "z2-n1-018", "zone": 2, "node": 2.1, "difficulty": "medium", "type": "mob",
-          "question": "EIGRP is best described as which type of routing protocol?",
-          "options": ["Pure distance vector", "Pure link state", "Hybrid (advanced distance vector)", "Path vector"],
-          "correct_index": 2,
-          "explanation": "EIGRP is classified as a hybrid or advanced distance vector protocol. It uses the DUAL (Diffusing Update Algorithm) and shares characteristics of both distance vector (only sends updates to neighbors) and link state (topology table, fast convergence).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["EIGRP", "Hybrid", "Routing"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": ["Floating Static", "Admin Distance", "OSPF"]
         }
       ]
     },
@@ -160,148 +128,144 @@
       "description": "VLANs, 802.1Q trunking, Spanning Tree, and link aggregation.",
       "encounters": [
         {
-          "id": "z2-n2-001", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
+          "id": "z2-n2-study-001",
+          "zone": 2,
+          "node": 2.2,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Office Building: Understanding VLANs",
+          "scenario": "Picture a multi-story office building owned by a single company. On the surface, it seems like one unified workspace, but inside, it is strictly divided. The third floor belongs entirely to the Finance department, while the fifth floor is occupied by the creative Marketing team. These two groups must remain separate for security reasons—imagine if a Marketing intern could simply walk into the Finance department and access sensitive payroll files. This separation is the essence of a VLAN (Virtual Local Area Network).\n\nA VLAN is like creating invisible walls within a building. Even though Finance and Marketing might use the same physical elevator (the switch), they operate in completely isolated logical spaces. When someone on the Finance VLAN sends a message, only other Finance members can receive it; the Marketing team remains blissfully unaware.\n\nBut why go through this trouble? The answer lies in something called a Broadcast Domain. Imagine a single computer sends out a 'Who is the printer?' announcement. On a flat, single network, this question is shouted to every single device, causing unnecessary noise and congestion. By segmenting the building into VLANs, you shrink these broadcast domains. Now, when the Finance computer asks about the printer, only the Finance devices hear it. This dramatically reduces network congestion and improves performance, all while maintaining the security isolation between departments. VLANs allow you to create order from potential chaos.",
+          "question": "In a coffee shop, one customer asks 'Who has the Wi-Fi password?' loudly. If everyone in the shop hears this question and must process it, what networking concept is this demonstrating?",
+          "options": [
+            "A secure transmission",
+            "A broadcast within a broadcast domain",
+            "A point-to-point connection",
+            "Encrypted messaging"
+          ],
+          "correct_index": 1,
+          "explanation": "A broadcast domain is the area of a network where a broadcast frame is heard by all devices. VLANs break large broadcast domains into smaller, more manageable segments.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["vlan", "broadcast-domain", "segmentation"]
+        },
+        {
+          "id": "z2-n2-study-002",
+          "zone": 2,
+          "node": 2.2,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Mailroom Logic: MACs and Switching",
+          "scenario": "Welcome to your new job as the Lead Mail Clerk at 'The Ethernet Apartments,' a massive residential complex. To succeed here, you must understand how mail moves. Every resident has a unique, permanent nameplate engraved on their mailbox—this is their MAC address. Unlike a room number (an IP address) which might change if a tenant moves, the MAC address is hard-coded into the device itself and never changes.\n\nWhen a resident, Alice, hands you a letter for Bob, you face a challenge. You look at your 'CAM Table'—your official logbook—but Bob isn't listed yet. Because you don't know Bob's location, you must perform a 'Broadcast.' You stand in the lobby and announce to the entire building, 'Attention: Bob, please identify your location!' Everyone hears the announcement, but only Bob responds.\n\nOnce Bob identifies himself, you immediately record his name and his specific apartment number in your logbook. This is how a switch 'learns.' Now, the next time Alice sends a letter to Bob, you don't need to shout. You simply check your logbook, see 'Bob = Apt 4B,' and perform a 'Unicast' delivery, walking directly to his door. However, if a letter arrives for a resident not in your book, you must broadcast again. As you process more mail, your logbook grows, making the building more efficient. You aren't just moving paper; you are building a map of the network, ensuring data reaches its destination without causing a noisy ruckus in the hallways.",
+          "question": "If an IP address is like your current mailing address (which changes if you move), what is a MAC address most similar to?",
+          "options": [
+            "Your current phone number",
+            "Your Social Security Number",
+            "Your GPS coordinates",
+            "The name of your pet"
+          ],
+          "correct_index": 1,
+          "explanation": "A MAC address is a permanent, unique identifier assigned to the hardware, much like a Social Security Number, whereas an IP address is a logical address that can change.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["mac-address", "switching", "cam-table"]
+        },
+        {
+          "id": "z2-n2-study-003",
+          "zone": 2,
+          "node": 2.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Highway Loop Prevention Authority",
+          "scenario": "You are the lead traffic engineer for the city of Aetheria. Your job is to design the highway system connecting all neighborhoods. However, there is a dangerous phenomenon you must prevent at all costs: The Infinite Loop. Imagine three highway interchanges connected in a triangle. If a confused driver enters this triangle without exit ramps, they will drive in circles forever, burning fuel and never reaching their destination. In networking, this is a broadcast storm—packets circling endlessly and consuming all available bandwidth.\n\nTo prevent this, the city council created the Spanning Tree Protocol (STP). Think of STP as an authority that logically 'blocks' certain highway entrances. It doesn't tear down the roads—it just puts up 'Road Closed' signs at strategic points to ensure there is exactly ONE logical path between any two points.\n\nFirst, the Authority elects a 'Central Command Center' (the Root Bridge). All traffic decisions flow from this center. Then, each highway ramp is evaluated. Some are designated as 'Active' and open for traffic (Forwarding state). Others are designated as 'Closed' but monitored (Blocking state). If a main highway collapses, the Authority quickly removes the 'Closed' signs from the backup routes, allowing traffic to flow again. This process takes 30-50 seconds in older systems—long enough to cause a noticeable delay, but necessary to prevent the chaos of an infinite loop. Modern RSTP (Rapid Spanning Tree) does this in milliseconds.",
+          "question": "A city has three highway interchanges forming a perfect triangle. To prevent drivers from getting stuck in an infinite loop, traffic engineers must block one of the three connecting roads. What is this concept called in networking?",
+          "options": [
+            "Creating a collision domain",
+            "Spanning Tree Protocol (STP) loop prevention",
+            "Dynamic routing recalculation",
+            "VLAN segmentation"
+          ],
+          "correct_index": 1,
+          "explanation": "STP prevents loops by logically blocking redundant paths while keeping them available for failover, ensuring a single loop-free path exists between any two points.",
+          "xp_reward": 75,
+          "bits_reward": 35,
+          "tags": ["stp", "spanning-tree", "loop-prevention"]
+        },
+        {
+          "id": "z2-n2-study-004",
+          "zone": 2,
+          "node": 2.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Grand Architect of the Great Data Highway",
+          "scenario": "Imagine you are the Grand Architect of the Great Data Highway. You have several distinct cities: Finance City, Marketing Town, and Engineering District. Each city is strictly isolated; residents of Finance City cannot drive into Marketing Town without explicit permission. To maintain this isolation, you use 'Access Roads' (Access Ports). An Access Road leads directly into one specific city. If a car is on an Access Road, it belongs to that city and nothing else.\n\nHowever, you need to connect these cities to a central hub—the Great Switch Junction. Building separate bridges for every single city would be incredibly expensive and wasteful. Instead, you build one massive 'Interstate Bridge' (Trunk Port). This bridge is designed to carry traffic from all cities simultaneously. But a problem arises: when a car from Finance City crosses the bridge, how does the destination city know it's a Finance car and not a Marketing car?\n\nThis is where the '802.1Q Sticker System' comes in. As a car enters the Interstate Bridge, a digital inspector slaps a colored sticker on the windshield (a Tag). A blue sticker means Finance, a red sticker means Marketing. When the car reaches the other side, the inspector checks the sticker and directs the car to the correct city. Finally, there is the 'Ghost Lane' (Native VLAN). This is a lane where cars travel without any stickers at all. While efficient, if an intruder uses the Ghost Lane, they might slip into a city undetected, making it a critical security point.",
+          "question": "You are setting up a connection for a single desktop computer that only belongs to the HR department. Should you configure this connection as an Access Port or a Trunk Port?",
+          "options": [
+            "Access Port",
+            "Trunk Port",
+            "Hybrid Port",
+            "Dynamic Port"
+          ],
+          "correct_index": 0,
+          "explanation": "An Access Port is used to connect an end-device (like a PC) to a single, specific VLAN, much like a driveway leading to one house.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["vlan", "trunk", "access-port", "802.1q"]
+        },
+        {
+          "id": "z2-n2-001",
+          "zone": 2,
+          "node": 2.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is the purpose of a VLAN?",
           "options": ["Physically separate network devices", "Create logical broadcast domains on a single switch", "Route traffic between different IP subnets", "Encrypt traffic on a LAN"],
           "correct_index": 1,
           "explanation": "A VLAN (Virtual LAN) creates separate logical broadcast domains on a single physical switch. Devices in different VLANs cannot communicate without a Layer 3 device (router or L3 switch).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["VLAN", "Broadcast Domain"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["VLAN", "Broadcast Domain"]
         },
         {
-          "id": "z2-n2-002", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
+          "id": "z2-n2-002",
+          "zone": 2,
+          "node": 2.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What type of switch port carries traffic for multiple VLANs using 802.1Q tags?",
           "options": ["Access port", "Trunk port", "Native port", "Monitor port"],
           "correct_index": 1,
           "explanation": "A trunk port carries traffic for multiple VLANs simultaneously, using 802.1Q tags to identify which VLAN each frame belongs to. Access ports carry traffic for only one VLAN (untagged).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["VLAN", "Trunk Port", "802.1Q"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["VLAN", "Trunk Port", "802.1Q"]
         },
         {
-          "id": "z2-n2-003", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
-          "question": "What is the native VLAN on a trunk port?",
-          "options": ["The VLAN with the most traffic", "The management VLAN", "The VLAN whose frames pass untagged on the trunk", "The highest-numbered allowed VLAN"],
-          "correct_index": 2,
-          "explanation": "The native VLAN is the one VLAN that passes frames WITHOUT an 802.1Q tag on a trunk link. By default this is VLAN 1. A mismatch in native VLANs on each end of a trunk causes VLAN hopping vulnerabilities.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Native VLAN", "802.1Q", "Trunk"]
-        },
-        {
-          "id": "z2-n2-004", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
+          "id": "z2-n2-004",
+          "zone": 2,
+          "node": 2.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is the total convergence time for original 802.1D Spanning Tree Protocol?",
           "options": ["< 1 second", "5–10 seconds", "30–50 seconds", "2 minutes"],
           "correct_index": 2,
           "explanation": "STP (802.1D) takes 30–50 seconds to converge: up to 20 seconds in Blocking (Max Age) + 15 seconds Listening + 15 seconds Learning = 50 sec max. This is why RSTP (802.1w) was developed.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["STP", "Convergence", "802.1D"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["STP", "Convergence", "802.1D"]
         },
         {
-          "id": "z2-n2-005", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
-          "question": "Which STP port state learns MAC addresses but does NOT yet forward frames?",
-          "options": ["Blocking", "Listening", "Learning", "Forwarding"],
-          "correct_index": 2,
-          "explanation": "The Learning state: the port builds its MAC address table but does not yet forward data frames. This prevents loops during convergence. Listening state precedes it (no MAC learning either).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["STP", "Port States", "Learning"]
-        },
-        {
-          "id": "z2-n2-006", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
-          "question": "Which IEEE standard defines Rapid Spanning Tree Protocol (RSTP)?",
-          "options": ["802.1D", "802.1Q", "802.1w", "802.3ad"],
-          "correct_index": 2,
-          "explanation": "RSTP is defined in IEEE 802.1w. It converges in less than 1–2 seconds compared to STP's 30–50 seconds. 802.1D is original STP, 802.1Q is VLAN tagging, 802.3ad/802.1ax is link aggregation (LACP).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RSTP", "802.1w", "STP"]
-        },
-        {
-          "id": "z2-n2-007", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "During the root bridge election in STP, what determines which switch wins?",
-          "options": ["Highest bridge priority wins", "Lowest bridge ID wins (priority + MAC)", "Highest MAC address wins", "Most ports wins"],
-          "correct_index": 1,
-          "explanation": "The root bridge is elected by lowest Bridge ID = Bridge Priority (default 32768, configurable in steps of 4096) + MAC address. If priorities are equal, the switch with the lowest MAC address becomes root.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["STP", "Root Bridge", "Bridge ID"]
-        },
-        {
-          "id": "z2-n2-008", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "PortFast should only be configured on which type of port?",
-          "options": ["Trunk ports connecting to other switches", "Access ports connecting to end devices (PCs, printers)", "Uplink ports to routers", "All ports for faster convergence"],
-          "correct_index": 1,
-          "explanation": "PortFast bypasses the Listening and Learning states, going directly to Forwarding. It should ONLY be used on access ports connected to end devices — never on trunk ports or switch-to-switch links, as this would bypass loop prevention.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["STP", "PortFast", "Access Port"]
-        },
-        {
-          "id": "z2-n2-009", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "What does BPDU Guard do when configured on a PortFast port?",
-          "options": ["Speeds up BPDU exchange", "Shuts down the port if a BPDU is received", "Blocks BPDUs from exiting the port", "Converts the port to a trunk"],
-          "correct_index": 1,
-          "explanation": "BPDU Guard puts a PortFast-enabled port into err-disabled state if it receives a BPDU. This protects the STP topology from accidental (or malicious) switch connections on end-user ports.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["STP", "BPDU Guard", "Security"]
-        },
-        {
-          "id": "z2-n2-010", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "What is LACP, and which IEEE standard defines it?",
-          "options": ["Link Aggregation Control Protocol — 802.3ad/802.1ax", "Layer 2 Access Control Protocol — 802.1Q", "Local Area Control Protocol — 802.1D", "Link Address Control Protocol — 802.11"],
-          "correct_index": 0,
-          "explanation": "LACP (Link Aggregation Control Protocol) is defined in IEEE 802.3ad (now 802.1ax). It combines multiple physical links into one logical channel (EtherChannel/Port-Channel) for increased bandwidth and redundancy.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["LACP", "Link Aggregation", "802.3ad"]
-        },
-        {
-          "id": "z2-n2-011", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "What is an SVI (Switched Virtual Interface) used for?",
-          "options": ["Creating a virtual access port on a switch", "Providing Layer 3 routing capability on a Layer 3 switch for inter-VLAN routing", "Monitoring switch port traffic", "Aggregating multiple physical ports"],
-          "correct_index": 1,
-          "explanation": "An SVI is a virtual interface on a Layer 3 switch that provides an IP address for a VLAN — enabling inter-VLAN routing without an external router. Each VLAN can have one SVI acting as the default gateway for hosts in that VLAN.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["SVI", "Inter-VLAN", "Layer 3 Switch"]
-        },
-        {
-          "id": "z2-n2-012", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "In router-on-a-stick inter-VLAN routing, what is configured on the router?",
-          "options": ["One physical interface per VLAN", "Subinterfaces with 802.1Q encapsulation for each VLAN", "Static routes for each VLAN subnet", "VLAN database entries"],
-          "correct_index": 1,
-          "explanation": "Router-on-a-stick uses a single physical trunk port connected to the router, which creates logical subinterfaces (e.g., Gi0/0.10, Gi0/0.20) with 802.1Q encapsulation — one subinterface per VLAN, each with the gateway IP for that VLAN.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Router-on-a-Stick", "Inter-VLAN", "Subinterfaces"]
-        },
-        {
-          "id": "z2-n2-013", "zone": 2, "node": 2.2, "difficulty": "hard", "type": "mob",
-          "question": "A LACP port-channel is configured with one side set to 'passive' and the other side set to 'passive'. What happens?",
-          "options": ["The channel forms successfully at reduced speed", "The channel does not form — both sides wait for the other to initiate", "The channel forms but with only one active link", "LACP falls back to PAgP automatically"],
-          "correct_index": 1,
-          "explanation": "LACP Passive mode waits for the remote side to initiate negotiation. Passive-Passive means neither side initiates — the port-channel never forms. Valid combinations: Active-Active or Active-Passive. Passive-Passive = no link.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["LACP", "Port-Channel", "Active/Passive"]
-        },
-        {
-          "id": "z2-n2-014", "zone": 2, "node": 2.2, "difficulty": "hard", "type": "mob",
+          "id": "z2-n2-014",
+          "zone": 2,
+          "node": 2.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An attacker sends frames with a double 802.1Q tag to jump to a different VLAN. What attack is this?",
           "options": ["ARP poisoning", "MAC flooding", "VLAN hopping (double tagging)", "STP manipulation"],
           "correct_index": 2,
-          "explanation": "VLAN hopping via double tagging: attacker sends a frame with two 802.1Q tags. The first tag matches the native VLAN (stripped by first switch), and the inner tag reaches VLAN of attacker's choice on the second switch. Mitigated by changing native VLAN away from VLAN 1 and using a dedicated unused VLAN.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["VLAN Hopping", "802.1Q", "Security"]
-        },
-        {
-          "id": "z2-n2-015", "zone": 2, "node": 2.2, "difficulty": "easy", "type": "mob",
-          "question": "What is the default VLAN on a Cisco switch?",
-          "options": ["VLAN 0", "VLAN 1", "VLAN 100", "VLAN 1001"],
-          "correct_index": 1,
-          "explanation": "All switch ports belong to VLAN 1 by default. Security best practice: move all active ports out of VLAN 1, change the native VLAN on trunks away from VLAN 1, and shut down unused ports.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["VLAN", "Default VLAN"]
-        },
-        {
-          "id": "z2-n2-016", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "What is the standard Ethernet MTU (Maximum Transmission Unit) size, and what are jumbo frames?",
-          "options": ["1500 bytes standard; jumbo frames = 9000 bytes", "512 bytes standard; jumbo frames = 1500 bytes", "9000 bytes standard; jumbo frames = 64000 bytes", "1024 bytes standard; jumbo frames = 4096 bytes"],
-          "correct_index": 0,
-          "explanation": "Standard Ethernet MTU is 1500 bytes. Jumbo frames extend this to 9000 bytes — used in storage networks (iSCSI, NFS) and high-performance computing to reduce CPU overhead and improve throughput. All devices in the path must support jumbo frames.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["MTU", "Jumbo Frames", "Ethernet"]
-        },
-        {
-          "id": "z2-n2-017", "zone": 2, "node": 2.2, "difficulty": "hard", "type": "mob",
-          "question": "Which STP variant maps multiple VLANs to fewer spanning tree instances to reduce CPU and memory overhead?",
-          "options": ["PVST+", "RSTP (802.1w)", "MSTP (802.1s)", "STP (802.1D)"],
-          "correct_index": 2,
-          "explanation": "MSTP (Multiple Spanning Tree Protocol, 802.1s) groups VLANs into instances — e.g., VLANs 1-50 to instance 1, VLANs 51-100 to instance 2. This is far more scalable than PVST+ which runs a separate STP instance per VLAN (100 VLANs = 100 STP processes).",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["MSTP", "802.1s", "STP Variants"]
-        },
-        {
-          "id": "z2-n2-018", "zone": 2, "node": 2.2, "difficulty": "medium", "type": "mob",
-          "question": "DTP (Dynamic Trunking Protocol) is a risk on access ports. What is the best mitigation?",
-          "options": ["Enable BPDU Guard on all ports", "Configure 'switchport mode trunk' on all ports", "Configure 'switchport nonegotiate' and set ports to access mode explicitly", "Enable VLAN 1 on all trunk ports"],
-          "correct_index": 2,
-          "explanation": "DTP can auto-negotiate trunks, which allows VLAN hopping attacks. Best practice: explicitly set access ports to 'switchport mode access' and disable DTP with 'switchport nonegotiate'. This ensures ports cannot be tricked into becoming trunks.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DTP", "Security", "VLAN"]
+          "explanation": "VLAN hopping via double tagging: attacker sends a frame with two 802.1Q tags. The first tag matches the native VLAN (stripped by first switch), and the inner tag reaches VLAN of attacker's choice on the second switch.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": ["VLAN Hopping", "802.1Q", "Security"]
         }
       ]
     },
@@ -311,148 +275,67 @@
       "description": "Wireless standards, security protocols, channel planning, and AP architecture.",
       "encounters": [
         {
-          "id": "z2-n3-001", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
+          "id": "z2-n3-study-001",
+          "zone": 2,
+          "node": 2.3,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Caffeine Connection: Wireless Chaos",
+          "scenario": "You settle into a corner booth at 'The Caffeine Connection,' a bustling local coffee shop. The air is thick with the aroma of roasted espresso and the invisible, chaotic dance of radio waves. As you open your laptop, you realize the wireless environment is a mess. The 2.4GHz band is heavily congested, acting like a narrow, one-lane road packed with slow-moving trucks—microwaves, Bluetooth devices, and dozens of other patrons' smartphones are all fighting for the same space. You attempt to switch to the 5GHz band, which feels like a high-speed express lane, but you notice the signal strength drops significantly as soon as you move behind a large, heavy wooden pillar.\n\nTo make matters more stressful, you notice a stranger in the corner running a packet-sniffing tool on their tablet. The shop's router is an aging model using the WPA2 security standard, leaving your connection vulnerable to potential handshake attacks. To successfully complete your work and secure your data, you must master the nuances of 802.11 standards—from the older 802.11n to the high-efficiency 802.11ax—and understand how to leverage the superior protections of WPA3. Navigating this invisible landscape requires more than just a strong signal; it requires an understanding of how frequency, standard, and encryption interact to create a stable and secure wireless experience.",
+          "question": "You are trying to connect to the Wi-Fi in a crowded cafe. Which frequency is like a wide, multi-lane highway that offers much higher speeds but has a shorter range and struggles with walls?",
+          "options": [
+            "2.4GHz",
+            "5GHz",
+            "Bluetooth",
+            "Infrared"
+          ],
+          "correct_index": 1,
+          "explanation": "5GHz provides higher data rates and less congestion (more 'lanes'), but its shorter wavelength means it doesn't penetrate physical obstacles as well as 2.4GHz.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["wireless", "wifi", "5ghz", "2.4ghz"]
+        },
+        {
+          "id": "z2-n3-001",
+          "zone": 2,
+          "node": 2.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Which 802.11 standard operates exclusively on the 5 GHz band with a maximum theoretical speed of 3.5 Gbps?",
           "options": ["802.11n", "802.11ac", "802.11ax", "802.11g"],
           "correct_index": 1,
           "explanation": "802.11ac (Wi-Fi 5) operates exclusively on 5 GHz and achieves up to 3.5 Gbps using MU-MIMO and 80/160 MHz channel bonding. 802.11ax (Wi-Fi 6) supports 2.4/5/6 GHz.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["802.11ac", "Wi-Fi 5", "5GHz"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["802.11ac", "Wi-Fi 5", "5GHz"]
         },
         {
-          "id": "z2-n3-002", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
+          "id": "z2-n3-002",
+          "zone": 2,
+          "node": 2.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "On the 2.4 GHz band, which three channels are non-overlapping?",
           "options": ["1, 2, 3", "1, 5, 10", "1, 6, 11", "2, 7, 12"],
           "correct_index": 2,
           "explanation": "Channels 1, 6, and 11 are the only non-overlapping channels in the 2.4 GHz band (in North America). Using any other combination results in co-channel or adjacent-channel interference.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["2.4GHz", "Channels", "Non-Overlapping"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["2.4GHz", "Channels", "Non-Overlapping"]
         },
         {
-          "id": "z2-n3-003", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
-          "question": "WPA2 in Personal mode uses what authentication method?",
-          "options": ["802.1X with RADIUS", "Pre-Shared Key (PSK/passphrase)", "SAE (Simultaneous Authentication of Equals)", "Open authentication"],
-          "correct_index": 1,
-          "explanation": "WPA2 Personal uses a Pre-Shared Key (PSK) — a passphrase configured on both the AP and client. WPA2 Enterprise uses 802.1X with a RADIUS server for individual user authentication.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["WPA2", "PSK", "Wireless Security"]
-        },
-        {
-          "id": "z2-n3-004", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
-          "question": "WEP encryption was deprecated because of which fundamental weakness?",
-          "options": ["It uses too large a key size", "IV (Initialization Vector) reuse makes it crackable in minutes", "It only supports 2.4 GHz", "It requires a RADIUS server"],
-          "correct_index": 1,
-          "explanation": "WEP's RC4 stream cipher uses a short, static IV that repeats frequently. Attackers capture enough frames to statistically recover the encryption key — often in under 2 minutes with modern tools. Never use WEP.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["WEP", "Security", "IV"]
-        },
-        {
-          "id": "z2-n3-005", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
-          "question": "What 802.11 standard introduced dual-band operation (2.4 GHz and 5 GHz) and MIMO technology?",
-          "options": ["802.11a", "802.11g", "802.11n", "802.11ac"],
-          "correct_index": 2,
-          "explanation": "802.11n (Wi-Fi 4) was the first standard to support both 2.4 GHz and 5 GHz bands, and introduced MIMO (Multiple Input Multiple Output) — using multiple antennas to increase throughput. Max speed: 600 Mbps.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["802.11n", "Wi-Fi 4", "MIMO"]
-        },
-        {
-          "id": "z2-n3-006", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
-          "question": "A lightweight AP requires what network component to function?",
-          "options": ["A RADIUS server", "A Wireless LAN Controller (WLC)", "A dedicated DHCP server", "A Layer 3 switch"],
-          "correct_index": 1,
-          "explanation": "Lightweight APs (LWAPs) offload all intelligence to a Wireless LAN Controller (WLC). They cannot operate standalone. The CAPWAP protocol tunnels traffic between the LWAP and WLC (UDP ports 5246/5247).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["LWAP", "WLC", "Wireless Architecture"]
-        },
-        {
-          "id": "z2-n3-007", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
+          "id": "z2-n3-007",
+          "zone": 2,
+          "node": 2.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "WPA3 replaces WPA2's PSK with which authentication method that prevents offline dictionary attacks?",
           "options": ["EAP-TLS", "SAE (Simultaneous Authentication of Equals)", "TKIP", "MS-CHAPv2"],
           "correct_index": 1,
           "explanation": "WPA3 Personal uses SAE (Simultaneous Authentication of Equals) — a key exchange method that prevents offline dictionary attacks. Even if an attacker captures the 4-way handshake, they cannot crack the password offline.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["WPA3", "SAE", "Wireless Security"]
-        },
-        {
-          "id": "z2-n3-008", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "Which Wi-Fi 6 (802.11ax) feature divides a channel into sub-carriers to serve multiple clients simultaneously with less latency?",
-          "options": ["MU-MIMO", "OFDMA", "BSS Coloring", "Beamforming"],
-          "correct_index": 1,
-          "explanation": "OFDMA (Orthogonal Frequency Division Multiple Access) divides a channel into smaller sub-carriers (Resource Units) that can be assigned to different clients simultaneously. This dramatically improves efficiency in dense environments.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["802.11ax", "Wi-Fi 6", "OFDMA"]
-        },
-        {
-          "id": "z2-n3-009", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "An omnidirectional antenna compared to a directional antenna:",
-          "options": ["Has higher gain in one direction", "Radiates signal equally in all horizontal directions (360°)", "Is always used outdoors only", "Requires line-of-sight to work"],
-          "correct_index": 1,
-          "explanation": "Omnidirectional antennas radiate signal equally in all horizontal directions (like a donut shape) — ideal for general indoor coverage. Directional antennas (Yagi, patch, parabolic) focus energy in a specific direction for longer range or point-to-point links.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Antennas", "Omnidirectional", "Directional"]
-        },
-        {
-          "id": "z2-n3-010", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "What protocol does a lightweight AP use to communicate with a Wireless LAN Controller?",
-          "options": ["SNMP", "CAPWAP", "LWAPP", "RADIUS"],
-          "correct_index": 1,
-          "explanation": "CAPWAP (Control and Provisioning of Wireless Access Points) is the current standard protocol (RFC 5415) for LWAP-to-WLC communication. It uses UDP 5246 for control traffic and UDP 5247 for data. LWAPP was the older Cisco-proprietary predecessor.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["CAPWAP", "LWAP", "WLC"]
-        },
-        {
-          "id": "z2-n3-011", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "BSS Coloring in Wi-Fi 6 is used to:",
-          "options": ["Assign color-coded channels to different frequency bands", "Reduce co-channel interference by marking frames from different networks", "Prioritize video traffic over data traffic", "Increase transmit power automatically"],
-          "correct_index": 1,
-          "explanation": "BSS Coloring assigns a color identifier to each BSS (Basic Service Set). When a client detects a frame from a different color (different network), it can ignore it and transmit simultaneously — reducing unnecessary backoff and improving efficiency in dense deployments.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["BSS Coloring", "Wi-Fi 6", "802.11ax"]
-        },
-        {
-          "id": "z2-n3-012", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "An 802.11ac AP uses 80 MHz channels. What is the minimum frequency band it operates on?",
-          "options": ["2.4 GHz", "5 GHz", "6 GHz", "900 MHz"],
-          "correct_index": 1,
-          "explanation": "802.11ac (Wi-Fi 5) operates ONLY on the 5 GHz band. It does not support 2.4 GHz. Channel bonding options: 80 MHz (default for Wave 1), 160 MHz (Wave 2). 6 GHz is a Wi-Fi 6E (802.11ax) band.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["802.11ac", "5GHz", "Channel Bonding"]
-        },
-        {
-          "id": "z2-n3-013", "zone": 2, "node": 2.3, "difficulty": "hard", "type": "mob",
-          "question": "A WPA2 Enterprise network uses 802.1X. What component authenticates users and returns ACCEPT/REJECT decisions?",
-          "options": ["The AP (Access Point)", "The WLC", "A RADIUS server (Authentication Server)", "A DHCP server"],
-          "correct_index": 2,
-          "explanation": "In 802.1X, the AP/switch is the Authenticator, the client is the Supplicant, and the RADIUS server is the Authentication Server (AS). The AS verifies credentials and sends RADIUS Access-Accept or Access-Reject to the AP.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["802.1X", "RADIUS", "WPA2 Enterprise"]
-        },
-        {
-          "id": "z2-n3-014", "zone": 2, "node": 2.3, "difficulty": "hard", "type": "mob",
-          "question": "A user reports their Wi-Fi disconnects whenever the microwave is used. What is the most likely cause?",
-          "options": ["The WLC needs rebooting", "The client is connected to a 2.4 GHz SSID — microwave operates in the same band", "The AP's DHCP lease has expired", "The firewall is blocking ICMP"],
-          "correct_index": 1,
-          "explanation": "Microwave ovens emit RF interference in the 2.4 GHz ISM band — the same as 802.11b/g/n. Bluetooth also shares 2.4 GHz. The fix: move the client to a 5 GHz SSID (802.11ac or 802.11n 5 GHz), which is not affected by microwaves.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["2.4GHz", "Interference", "Troubleshooting"]
-        },
-        {
-          "id": "z2-n3-015", "zone": 2, "node": 2.3, "difficulty": "easy", "type": "mob",
-          "question": "What does the acronym SSID stand for?",
-          "options": ["Secure System Identifier", "Service Set Identifier", "Subnet Switch ID", "Session Security ID"],
-          "correct_index": 1,
-          "explanation": "SSID (Service Set Identifier) is the name of a wireless network broadcast by an AP. Clients see and connect to SSIDs. Multiple APs broadcasting the same SSID form an ESS (Extended Service Set), enabling roaming.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SSID", "Wireless", "ESS"]
-        },
-        {
-          "id": "z2-n3-016", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "Which antenna type is best for a long-distance outdoor point-to-point wireless bridge?",
-          "options": ["Omnidirectional dipole", "Yagi directional antenna or parabolic dish", "Patch antenna for indoor coverage", "MIMO array antenna"],
-          "correct_index": 1,
-          "explanation": "Point-to-point outdoor wireless bridges use highly directional antennas (Yagi or parabolic dish) that focus energy in a narrow beam for maximum range and gain. Omnidirectional antennas waste energy in unwanted directions.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Antenna", "Point-to-Point", "Outdoor"]
-        },
-        {
-          "id": "z2-n3-017", "zone": 2, "node": 2.3, "difficulty": "hard", "type": "mob",
-          "question": "OWE (Opportunistic Wireless Encryption) is a feature introduced in WPA3. What does it protect against on open networks?",
-          "options": ["Brute-force password attacks", "Passive eavesdropping on open Wi-Fi (like at coffee shops) by encrypting traffic without authentication", "Evil twin AP attacks", "VLAN hopping on wireless"],
-          "correct_index": 1,
-          "explanation": "OWE (defined in RFC 8110, part of WPA3) encrypts open Wi-Fi traffic without requiring a password. Each client gets a unique session key — preventing passive eavesdropping. It does NOT authenticate the network, so it doesn't protect against evil twins.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["OWE", "WPA3", "Wireless Security"]
-        },
-        {
-          "id": "z2-n3-018", "zone": 2, "node": 2.3, "difficulty": "medium", "type": "mob",
-          "question": "Which 802.11 standard was the first to achieve speeds above 100 Mbps?",
-          "options": ["802.11b (11 Mbps)", "802.11g (54 Mbps)", "802.11n (up to 600 Mbps)", "802.11a (54 Mbps)"],
-          "correct_index": 2,
-          "explanation": "802.11n (Wi-Fi 4) was the first standard to exceed 100 Mbps, achieving up to 600 Mbps theoretical through MIMO and 40 MHz channel bonding. All previous standards (a/b/g) topped out at 54 Mbps or less.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["802.11n", "Wi-Fi 4", "Speed"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": ["WPA3", "SAE", "Wireless Security"]
         }
       ]
     },
@@ -462,132 +345,67 @@
       "description": "Data center infrastructure, MDF/IDF, UPS types, and environmental considerations.",
       "encounters": [
         {
-          "id": "z2-n4-001", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
+          "id": "z2-n4-study-001",
+          "zone": 2,
+          "node": 2.4,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Data Highway Project",
+          "scenario": "You are the Chief Infrastructure Engineer for the 'Data Highway Project.' You have been tasked with laying down the copper pipelines that will carry high-speed data traffic across the digital valley. The project is divided into several critical phases. First, you must choose the right grade of pipe. Some pipes are narrow and prone to interference from the heavy machinery nearby (UTP), while others are heavily armored to protect the flow from electromagnetic noise (STP).\n\nYou have different tiers of road construction to choose from. The 'Cat5e' lanes are like the old country roads—reliable for light traffic but limited in speed and capacity. The 'Cat6' lanes are the modern highways, capable of much higher speeds but requiring tighter construction standards to prevent signal bleed. Then there is the 'Cat6a' super-highway, designed for massive throughput and high-frequency performance over longer distances.\n\nHowever, there is a physical law you cannot break: the 'Signal Decay' rule. If your pipeline stretches too far without a repeater station, the pressure drops, and the data flow becomes sluggish and unreliable. Furthermore, you must ensure all your junctions follow the 'TIA-568' blueprint. If the wiring patterns at the junctions don't match perfectly, the traffic will crash at every intersection, causing a total network blackout. Your mission is to design a network that balances cost, speed, and environmental interference to ensure the valley stays connected.",
+          "question": "You are laying a pipeline next to a massive, vibrating power plant that generates heavy electromagnetic noise. Which type of cabling should you use?",
+          "options": [
+            "UTP (Unshielded Twisted Pair)",
+            "STP (Shielded Twisted Pair)",
+            "Coaxial Cable",
+            "Fiber Optic"
+          ],
+          "correct_index": 1,
+          "explanation": "STP includes shielding to protect the signal from EMI (Electromagnetic Interference), much like an armored pipe protects fluid from external pressure or contaminants.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["ethernet", "cabling", "stp", "utp", "physical-layer"]
+        },
+        {
+          "id": "z2-n4-001",
+          "zone": 2,
+          "node": 2.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What does MDF stand for in network infrastructure?",
           "options": ["Media Distribution Frame", "Main Distribution Frame", "Managed Data Fabric", "Multi-Domain Firewall"],
           "correct_index": 1,
           "explanation": "MDF (Main Distribution Frame) is the central wiring point for a building's network — housing core switches, routers, WAN connections, and patch panels. All IDFs connect back to the MDF.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["MDF", "Infrastructure", "Wiring"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["MDF", "Infrastructure", "Wiring"]
         },
         {
-          "id": "z2-n4-002", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
+          "id": "z2-n4-002",
+          "zone": 2,
+          "node": 2.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What type of UPS has zero transfer time because it always routes power through the inverter?",
           "options": ["Offline/standby UPS", "Line-interactive UPS", "Online/double conversion UPS", "Feroresonant UPS"],
           "correct_index": 2,
-          "explanation": "Online/double conversion UPS always runs through the inverter — utility power charges the battery, and the inverter powers the load 100% of the time. Zero transfer time on outage, cleanest power output. Most expensive but best for critical servers.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["UPS", "Online UPS", "Power"]
+          "explanation": "Online/double conversion UPS always runs through the inverter — utility power charges the battery, and the inverter powers the load 100% of the time. Zero transfer time on outage, cleanest power output.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["UPS", "Online UPS", "Power"]
         },
         {
-          "id": "z2-n4-003", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
+          "id": "z2-n4-003",
+          "zone": 2,
+          "node": 2.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is the maximum horizontal cable run length (permanent link) defined by TIA-568?",
           "options": ["50 meters", "75 meters", "90 meters", "100 meters"],
           "correct_index": 2,
-          "explanation": "TIA-568 specifies maximum 90m for the permanent horizontal link (wall jack to patch panel). Up to 10m is allowed for patch cables (both ends), giving a total of 100m channel length. Exceeding 90m on the fixed run is a standards violation.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["TIA-568", "Horizontal Cabling", "Infrastructure"]
-        },
-        {
-          "id": "z2-n4-004", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
-          "question": "In a data center, what is a 'cold aisle' in the hot aisle / cold aisle layout?",
-          "options": ["The aisle where decommissioned equipment is stored", "The aisle where server fronts face — cold air is supplied here", "The aisle between two UPS units", "The aisle where power cables run"],
-          "correct_index": 1,
-          "explanation": "In hot/cold aisle containment, racks are arranged so server fronts face the cold aisle (where cold air is delivered) and server rears face the hot aisle (where hot exhaust is captured). This prevents hot and cold air mixing, improving cooling efficiency.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Data Center", "Hot/Cold Aisle", "Cooling"]
-        },
-        {
-          "id": "z2-n4-005", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
-          "question": "What is 1U in terms of rack space?",
-          "options": ["1 unit = 1 inch", "1 unit = 1.75 inches", "1 unit = 2 inches", "1 unit = 3.5 inches"],
-          "correct_index": 1,
-          "explanation": "One rack unit (1U) = 1.75 inches (44.45mm) of vertical rack space. A standard 42U rack is about 7 feet tall. 2U servers are 3.5 inches, blade chassis may be 7U or 10U.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Rack Units", "1U", "Data Center"]
-        },
-        {
-          "id": "z2-n4-006", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
-          "question": "Which fire suppression agent is safe for use in occupied server rooms and leaves no residue?",
-          "options": ["Water sprinklers", "CO₂ (Carbon Dioxide)", "FM-200 (HFC-227ea)", "Sand-based systems"],
-          "correct_index": 2,
-          "explanation": "FM-200 (HFC-227ea) is a clean gaseous agent that suppresses fires without damaging equipment or leaving residue. It's safe for occupied rooms. CO₂ is effective but displaces oxygen — dangerous for humans, requires evacuation. Water destroys electronics.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Fire Suppression", "FM-200", "Data Center Safety"]
-        },
-        {
-          "id": "z2-n4-007", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "What is the key advantage of a line-interactive UPS over an offline/standby UPS?",
-          "options": ["Zero transfer time", "Built-in voltage regulation (AVR) that handles sags and surges without switching to battery", "Lower cost", "Higher power output"],
-          "correct_index": 1,
-          "explanation": "Line-interactive UPS has an automatic voltage regulator (AVR) that continuously adjusts output voltage for brownouts (sags) and overvoltages (swells) without using battery power. Standby UPS simply passes utility power and only switches to battery on total failure.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["UPS", "Line-Interactive", "AVR"]
-        },
-        {
-          "id": "z2-n4-008", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "An IDF differs from an MDF in that an IDF:",
-          "options": ["Is the building's main network hub", "Is a floor-level or zone-level wiring closet that connects to the MDF via backbone cabling", "Connects directly to the ISP", "Only handles voice/telephone wiring"],
-          "correct_index": 1,
-          "explanation": "IDFs (Intermediate Distribution Frames) are floor/zone-level wiring closets containing access layer switches and patch panels. They connect back to the MDF via backbone (riser) cabling — typically fiber for inter-floor runs exceeding 100m.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["IDF", "MDF", "Structured Cabling"]
-        },
-        {
-          "id": "z2-n4-009", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "What is a PDU in a data center rack context?",
-          "options": ["Protocol Data Unit — a networking term for framing", "Power Distribution Unit — provides outlet strips with monitoring capabilities", "Physical Deployment Unit — a modular chassis", "Primary Distribution Uplink — connects rack to core switch"],
-          "correct_index": 1,
-          "explanation": "In a data center context, PDU (Power Distribution Unit) is a rack-mounted device that distributes AC power to equipment. 'Smart' or 'metered' PDUs monitor per-outlet power consumption and can remotely control individual outlets.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["PDU", "Power", "Data Center"]
-        },
-        {
-          "id": "z2-n4-010", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "What humidity level is recommended in a data center to prevent electrostatic discharge (ESD)?",
-          "options": ["10–20% RH", "40–60% RH", "70–80% RH", "Below 30% RH"],
-          "correct_index": 1,
-          "explanation": "ASHRAE recommends 40–60% relative humidity for data centers. Too low (< 30%) increases ESD risk (static buildup). Too high (> 70%) risks condensation on equipment. Environmental sensors should monitor and alert outside this range.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Humidity", "ESD", "Environment"]
-        },
-        {
-          "id": "z2-n4-011", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "The point where ISP responsibility ends and customer responsibility begins is called:",
-          "options": ["Access point", "Demarcation point (demarc)", "MDF", "Entrance facility"],
-          "correct_index": 1,
-          "explanation": "The demarcation point (demarc) is the physical boundary between the ISP's network and the customer's network. The ISP owns everything up to the demarc; the customer owns everything beyond. A smart jack (NID/NIU) at the demarc allows the ISP to test their circuit.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Demarc", "ISP", "Structured Cabling"]
-        },
-        {
-          "id": "z2-n4-012", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "A mantrap (airlock) in a data center is used for:",
-          "options": ["Containing hot air exhaust", "Physical access control — only one door can open at a time to prevent tailgating", "Cable management between racks", "Noise reduction"],
-          "correct_index": 1,
-          "explanation": "A mantrap/airlock is a physical security control with two interlocked doors — only one can open at a time. This prevents tailgating (piggybacking) by requiring each person to authenticate individually before the second door opens.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Physical Security", "Mantrap", "Data Center"]
-        },
-        {
-          "id": "z2-n4-013", "zone": 2, "node": 2.4, "difficulty": "hard", "type": "mob",
-          "question": "A data center generator takes 30 seconds to start and stabilize. What bridges the power gap between utility failure and generator readiness?",
-          "options": ["A line-interactive UPS with AVR", "An online/double conversion UPS providing seamless battery-backed power during generator spinup", "A standby UPS with 5ms transfer time", "A PDU with redundant circuits"],
-          "correct_index": 1,
-          "explanation": "Online UPS provides zero-transfer-time battery backup — it bridges the 30-second gap while the generator spins up and stabilizes. The UPS battery runtime must exceed the generator startup time. This is standard design: Utility → UPS → Generator transfer.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["UPS", "Generator", "Power Continuity"]
-        },
-        {
-          "id": "z2-n4-014", "zone": 2, "node": 2.4, "difficulty": "hard", "type": "mob",
-          "question": "Backbone cabling between floors of a building exceeds 100m. What cable type should be used?",
-          "options": ["Cat5e copper — supports up to 100m but fine for short runs", "Cat6A copper — supports 10GbE at any distance", "Fiber optic — supports distances far exceeding 100m copper limit", "Coaxial — used for backbone runs"],
-          "correct_index": 2,
-          "explanation": "Fiber optic cable is used for inter-floor backbone/vertical runs exceeding the 100m copper limit. Single-mode fiber (SMF) can run kilometers; multimode (MMF) reaches 300–550m at 10GbE. Copper (Cat5e/6/6A) is limited to 100m total channel length.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Fiber", "Backbone Cabling", "Distance"]
-        },
-        {
-          "id": "z2-n4-015", "zone": 2, "node": 2.4, "difficulty": "easy", "type": "mob",
-          "question": "What is a KVM switch used for in a data center?",
-          "options": ["Key Vault Management — stores encryption keys", "Keyboard-Video-Mouse switch — manage multiple servers from one console", "Kernel Virtual Machine — hypervisor for VMs", "Knowledge Verification Module — config backup system"],
-          "correct_index": 1,
-          "explanation": "KVM (Keyboard-Video-Mouse) switch lets an administrator control multiple physical servers using a single keyboard, monitor, and mouse. Often used in server rooms to avoid running separate peripherals to each server.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["KVM", "Data Center", "Infrastructure"]
-        },
-        {
-          "id": "z2-n4-016", "zone": 2, "node": 2.4, "difficulty": "medium", "type": "mob",
-          "question": "Raised floor data centers provide which two key benefits?",
-          "options": ["Better Wi-Fi signal + reduced latency", "Underfloor cable management + cold air distribution from floor plenum to servers", "Better physical security + sound insulation", "Easier rack access + reduced power consumption"],
-          "correct_index": 1,
-          "explanation": "Raised floors (typically 12–24 inches above the structural floor) serve two purposes: (1) cable management in the underfloor plenum without clutter above, and (2) cold air distribution — CRAC/CRAH units push cold air under the floor, which rises through perforated tiles in cold aisles.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Raised Floor", "Cooling", "Data Center"]
+          "explanation": "TIA-568 specifies maximum 90m for the permanent horizontal link (wall jack to patch panel). Up to 10m is allowed for patch cables (both ends), giving a total of 100m channel length.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["TIA-568", "Horizontal Cabling", "Infrastructure"]
         }
       ]
     },
@@ -596,168 +414,107 @@
       "name": "The Power Standard",
       "description": "Power over Ethernet standards, power negotiation, and cable considerations for PoE deployments.",
       "encounters": [
-        {"id": "z2-n5-001", "zone": 2, "node": 2.5, "difficulty": "easy", "type": "mob", "question": "Which IEEE standard provides 15.4W of power per port?", "options": ["802.3af", "802.3at", "802.3bt", "802.3an"], "correct_index": 0, "explanation": "802.3af (Type 1) delivers 15.4W max, with 12.95W available to the device after cable loss.", "xp_reward": 20, "bits_reward": 10, "tags": ["PoE", "802.3af", "Standards"]},
-        {"id": "z2-n5-002", "zone": 2, "node": 2.5, "difficulty": "easy", "type": "mob", "question": "Your VoIP phone needs 25W. Which PoE standard is the minimum required?", "options": ["802.3af", "802.3at", "802.3bt Type 3", "802.3bt Type 4"], "correct_index": 1, "explanation": "802.3at (Type 2 / PoE+) provides up to 30W, supporting devices like PTZ cameras and VoIP phones.", "xp_reward": 20, "bits_reward": 10, "tags": ["PoE", "802.3at", "Power Requirements"]},
-        {"id": "z2-n5-003", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "802.3bt Type 4 provides how much power to the powered device?", "options": ["60W", "75W", "90W", "100W"], "correct_index": 2, "explanation": "802.3bt Type 4 sources 100W but delivers ~90W to device after cable loss. Type 3 delivers ~51W.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "802.3bt", "Type 4"]},
-        {"id": "z2-n5-004", "zone": 2, "node": 2.5, "difficulty": "easy", "type": "mob", "question": "What is the maximum cable length for standard PoE?", "options": ["50m", "100m", "150m", "300m"], "correct_index": 1, "explanation": "PoE follows Ethernet standards: maximum 100m per cable run. Beyond this, voltage drop is unreliable.", "xp_reward": 20, "bits_reward": 10, "tags": ["PoE", "Cable Length", "Standards"]},
-        {"id": "z2-n5-005", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "Which wire pairs does Mode A PoE use?", "options": ["Pins 4,5,7,8", "Pins 1,2,3,6", "All 8 pins", "Only pins 4 and 5"], "correct_index": 1, "explanation": "Mode A uses data pairs (pins 1,2,3,6). Mode B uses spare pairs (4,5,7,8). 4-pair PoE uses all pins.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "Mode A", "Wiring"]},
-        {"id": "z2-n5-006", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "An access point requires 35W. Which statement is correct?", "options": ["802.3af can barely support it", "802.3at is sufficient", "802.3bt Type 3 is required", "PoE cannot power this device"], "correct_index": 2, "explanation": "802.3af max is 15.4W, 802.3at max is 30W. This AP needs 802.3bt Type 3 (60W source/51W delivered).", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "Power Budget", "802.3bt"]},
-        {"id": "z2-n5-007", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "What protocol negotiates optimal power levels between switch and device?", "options": ["CDP", "LLDP-MED", "STP", "VTP"], "correct_index": 1, "explanation": "LLDP-MED allows switches and devices to negotiate power levels dynamically.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "LLDP-MED", "Negotiation"]},
-        {"id": "z2-n5-008", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "Minimum cable category for 802.3bt Type 4?", "options": ["Cat5e", "Cat6", "Cat6a", "Cat7"], "correct_index": 2, "explanation": "802.3bt recommends Cat6 or Cat6a for better heat dissipation in cable bundles.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "Cable Category", "802.3bt"]},
-        {"id": "z2-n5-009", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "A switch has 400W budget. How many 15.4W phones can it support?", "options": ["25", "26", "30", "40"], "correct_index": 0, "explanation": "400W / 15.4W = 25.97, so maximum 25 phones. Always round down for power budgets.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "Power Budget", "Calculation"]},
-        {"id": "z2-n5-010", "zone": 2, "node": 2.5, "difficulty": "medium", "type": "mob", "question": "What does a PoE midspan injector do?", "options": ["Replaces the switch", "Adds PoE to non-PoE switches", "Increases bandwidth", "Acts as a router"], "correct_index": 1, "explanation": "A midspan injector adds PoE to lines from non-PoE switches, sitting between switch and powered device.", "xp_reward": 25, "bits_reward": 12, "tags": ["PoE", "Midspan", "Injector"]},
-        {"id": "z2-n5-011", "zone": 2, "node": 2.5, "difficulty": "hard", "type": "mob", "question": "48-port switch with 740W budget. 20 APs (25W each) + 15 cameras (15W each). Enough power?", "options": ["Yes, 215W remaining", "Yes, 15W remaining", "No, need 15W more", "No, need 85W more"], "correct_index": 2, "explanation": "20x25W=500W, 15x15W=225W, Total=725W. 740W-725W=15W short when using 15.4W per port minimum.", "xp_reward": 30, "bits_reward": 15, "tags": ["PoE", "Power Budget", "Calculation"]},
-        {"id": "z2-n5-012", "zone": 2, "node": 2.5, "difficulty": "hard", "type": "mob", "question": "Primary concern when bundling many high-power PoE cables?", "options": ["Signal interference", "Heat buildup", "Physical weight", "Color coding"], "correct_index": 1, "explanation": "Heat buildup is the primary concern. PoE generates heat, and bundling many cables causes temperature rise.", "xp_reward": 30, "bits_reward": 15, "tags": ["PoE", "Heat", "Cable Management"]},
-        {"id": "z2-n5-013", "zone": 2, "node": 2.5, "difficulty": "hard", "type": "mob", "question": "PoE switchport shows power-deny. Most likely cause?", "options": ["Cable is Cat5e", "Device not PoE-compatible", "Port power budget exceeded", "VLAN mismatch"], "correct_index": 2, "explanation": "Power-deny usually means the port or switch power budget was exceeded. Check with 'show power inline'.", "xp_reward": 30, "bits_reward": 15, "tags": ["PoE", "Troubleshooting", "Power Deny"]},
-        {"id": "z2-n5-014", "zone": 2, "node": 2.5, "difficulty": "hard", "type": "mob", "question": "Which standards coexist allowing both PoE and 10GbE?", "options": ["802.3af and 802.3an", "802.3at and 802.3bz", "802.3bt and 802.3an", "802.3af and 802.3u"], "correct_index": 2, "explanation": "802.3bt uses all 4 pairs for power, compatible with 10GbE (802.3an). 802.3af/at only use 2 pairs.", "xp_reward": 30, "bits_reward": 15, "tags": ["PoE", "10GbE", "Compatibility"]},
-        {"id": "z2-n5-015", "zone": 2, "node": 2.5, "difficulty": "hard", "type": "guardian", "question": "Complete: 802.3af=15.4W, 802.3at=30W, 802.3bt Type 3=?", "options": ["51W delivered", "60W source", "Both correct", "75W source"], "correct_index": 2, "explanation": "Type 3: 60W sourced, ~51W delivered. Type 4: 100W sourced, ~90W delivered. Distinguish sourced vs delivered.", "xp_reward": 50, "bits_reward": 25, "tags": ["PoE", "Guardian", "802.3bt"]}
+        {
+          "id": "z2-n5-study-001",
+          "zone": 2,
+          "node": 2.5,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "The Ether-Grid Engineer",
+          "scenario": "Welcome, Engineer. You have been assigned to manage the 'Ether-Grid,' a sophisticated utility system where data and electricity flow through the same conduits. In a traditional city, you would have separate pipes for water and wires for electricity. In our network, we use Power over Ethernet (PoE) to combine them into a single streamlined delivery system. However, managing this grid requires precision. Your central power plant—the PoE Switch—has a finite 'Power Budget.' If you attempt to plug in too many heavy-duty industrial machines (high-draw devices) without checking your total wattage capacity, the entire grid will suffer a brownout, leaving devices unpowered.\n\nYou must also navigate the different tiers of service provided by the standards. The 802.3af standard is like a small residential transformer, providing just enough juice for basic lights (VoIP phones). The 802.3at (PoE+) standard is an industrial-grade line for medium appliances (PTZ cameras), and the 802.3bt (PoE++) is the massive high-capacity grid for heavy machinery. Finally, you must understand the routing: 'Mode A' delivers power over the data-carrying wires, much like a multi-use highway where cars and fuel trucks share the same lanes, whereas 'Mode B' utilizes separate, dedicated auxiliary lines for the power. Master these variables, or your network will go dark.",
+          "question": "You are setting up a small office with basic VoIP phones that require very little power. Which 'grid standard' is the bare minimum required?",
+          "options": [
+            "802.3af",
+            "802.3at",
+            "802.3bt",
+            "802.1X"
+          ],
+          "correct_index": 0,
+          "explanation": "802.3af is the original PoE standard, providing up to 15.4W, which is sufficient for low-power devices like basic VoIP phones.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["poe", "802.3af", "power-over-ethernet"]
+        },
+        {
+          "id": "z2-n5-001",
+          "zone": 2,
+          "node": 2.5,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Which IEEE standard provides 15.4W of power per port?",
+          "options": ["802.3af", "802.3at", "802.3bt", "802.3an"],
+          "correct_index": 0,
+          "explanation": "802.3af (Type 1) delivers 15.4W max, with 12.95W available to the device after cable loss.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["PoE", "802.3af", "Standards"]
+        },
+        {
+          "id": "z2-n5-002",
+          "zone": 2,
+          "node": 2.5,
+          "difficulty": "easy",
+          "type": "mob",
+          "question": "Your VoIP phone needs 25W. Which PoE standard is the minimum required?",
+          "options": ["802.3af", "802.3at", "802.3bt Type 3", "802.3bt Type 4"],
+          "correct_index": 1,
+          "explanation": "802.3at (Type 2 / PoE+) provides up to 30W, supporting devices like PTZ cameras and VoIP phones.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": ["PoE", "802.3at", "Power Requirements"]
+        },
+        {
+          "id": "z2-n5-011",
+          "zone": 2,
+          "node": 2.5,
+          "difficulty": "hard",
+          "type": "mob",
+          "question": "48-port switch with 740W budget. 20 APs (25W each) + 15 cameras (15W each). Enough power?",
+          "options": ["Yes, 215W remaining", "Yes, 15W remaining", "No, need 15W more", "No, need 85W more"],
+          "correct_index": 2,
+          "explanation": "20x25W=500W, 15x15W=225W, Total=725W. 740W-725W=15W short when using 15.4W per port minimum.",
+          "xp_reward": 30,
+          "bits_reward": 15,
+          "tags": ["PoE", "Power Budget", "Calculation"]
+        }
       ]
     }
   ],
   "guardian_encounters": [
     {
-      "id": "z2-g-001", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z2-g-001",
+      "zone": 2,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "Which routing protocol is used between Autonomous Systems on the internet?",
       "options": ["OSPF", "EIGRP", "BGP", "RIP"],
       "correct_index": 2,
       "explanation": "BGP (Border Gateway Protocol) is the EGP (Exterior Gateway Protocol) that routes between ASes on the internet. OSPF, EIGRP, and RIP are IGPs used within a single AS.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["BGP", "Routing", "EGP"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": ["BGP", "Routing", "EGP"]
     },
     {
-      "id": "z2-g-002", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z2-g-002",
+      "zone": 2,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "OSPF has an administrative distance of:",
       "options": ["1", "90", "110", "120"],
       "correct_index": 2,
       "explanation": "OSPF = AD 110. The AD pecking order: Connected(0) > Static(1) > eBGP(20) > EIGRP(90) > OSPF(110) > RIP(120) > iBGP(200).",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["OSPF", "Admin Distance"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": ["OSPF", "Admin Distance"]
     },
     {
-      "id": "z2-g-003", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "PAT (Port Address Translation) differs from standard dynamic NAT because it:",
-      "options": ["Uses a pool of public IPs", "Maps one private IP to one public IP permanently", "Tracks connections by port number, allowing many hosts to share one public IP", "Only works with IPv6"],
-      "correct_index": 2,
-      "explanation": "PAT/NAT Overload uses unique TCP/UDP port numbers to distinguish sessions from different internal hosts — allowing thousands of hosts to share a single public IP. This is how home routers work.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["PAT", "NAT", "Overload"]
-    },
-    {
-      "id": "z2-g-004", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "WPA3 Personal uses which method to prevent offline dictionary attacks?",
-      "options": ["PSK (Pre-Shared Key)", "SAE (Simultaneous Authentication of Equals)", "TKIP", "EAP-TLS"],
-      "correct_index": 1,
-      "explanation": "WPA3 replaces PSK with SAE — a key exchange where even a captured handshake cannot be brute-forced offline. PSK is WPA2's method and is vulnerable to offline dictionary attacks.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["WPA3", "SAE", "Wireless Security"]
-    },
-    {
-      "id": "z2-g-005", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "Which STP feature skips the Listening and Learning states on access ports to allow immediate connectivity?",
-      "options": ["BPDU Guard", "PortFast", "Root Guard", "RSTP"],
-      "correct_index": 1,
-      "explanation": "PortFast immediately transitions a port to Forwarding state, bypassing Listening (15s) and Learning (15s). It should ONLY be used on access ports connected to end devices — never on switch-to-switch links.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["STP", "PortFast"]
-    },
-    {
-      "id": "z2-g-006", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "A floating static route is configured with AD 150 to a destination also reachable via OSPF. When does the static route appear in the routing table?",
-      "options": ["Always — static routes override dynamic routes", "Never — AD 150 is invalid", "Only when the OSPF route is removed from the routing table", "Only during network convergence"],
-      "correct_index": 2,
-      "explanation": "A floating static has its AD set HIGHER than the dynamic protocol. OSPF AD 110 < Static AD 150, so OSPF wins. The floating static only appears when the OSPF route disappears (link failure/convergence), acting as a backup path.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Floating Static", "Admin Distance", "Backup Route"]
-    },
-    {
-      "id": "z2-g-007", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "What are the three non-overlapping channels on the 2.4 GHz Wi-Fi band?",
-      "options": ["1, 3, 6", "1, 6, 11", "2, 7, 12", "1, 5, 9"],
-      "correct_index": 1,
-      "explanation": "Channels 1, 6, and 11 are the only non-overlapping channels in 2.4 GHz (North America). Using any other combination creates co-channel or adjacent-channel interference.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["2.4GHz", "Non-Overlapping Channels"]
-    },
-    {
-      "id": "z2-g-008", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "Which UPS type provides zero transfer time and the cleanest power output?",
-      "options": ["Offline/standby", "Line-interactive", "Online/double conversion", "Ferroresonant"],
-      "correct_index": 2,
-      "explanation": "Online/double conversion UPS always routes power through the inverter — zero switchover time on outage, completely isolated from utility fluctuations. Most expensive but essential for critical infrastructure.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["UPS", "Online UPS", "Data Center"]
-    },
-    {
-      "id": "z2-g-009", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "On a trunk port, which VLAN's frames are sent WITHOUT an 802.1Q tag?",
-      "options": ["VLAN 1 always", "All VLANs are always tagged", "The native VLAN", "The management VLAN"],
-      "correct_index": 2,
-      "explanation": "The native VLAN is untagged on trunk links. All other VLANs are 802.1Q tagged. Default native VLAN is VLAN 1 — best practice is to change native VLAN to an unused VLAN to prevent VLAN hopping attacks.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Native VLAN", "802.1Q", "Trunk"]
-    },
-    {
-      "id": "z2-g-010", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "LACP is configured in Passive mode on both sides of a port-channel. What happens?",
-      "options": ["The channel forms with reduced bandwidth", "The channel does not form — neither side initiates", "The channel forms in half-duplex mode", "LACP defaults to PAgP mode"],
-      "correct_index": 1,
-      "explanation": "LACP Passive waits for the remote side to initiate negotiation. Passive-Passive = deadlock — no channel forms. Valid configs: Active-Active or Active-Passive. Always set at least one side to Active.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["LACP", "Port-Channel", "Active-Passive"]
-    },
-    {
-      "id": "z2-g-011", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "802.11ax (Wi-Fi 6) introduces OFDMA primarily to:",
-      "options": ["Increase maximum single-client speed", "Allow simultaneous transmission to multiple clients on sub-carriers within one channel", "Extend range beyond 5GHz limitations", "Replace MU-MIMO entirely"],
-      "correct_index": 1,
-      "explanation": "OFDMA divides a channel into Resource Units (sub-carriers) assigned to different clients — enabling simultaneous multi-client communication. This significantly reduces latency and improves efficiency in dense environments like offices and stadiums.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["OFDMA", "Wi-Fi 6", "802.11ax"]
-    },
-    {
-      "id": "z2-g-012", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "The root bridge in STP is elected by:",
-      "options": ["Highest MAC address", "Lowest Bridge ID (priority + MAC address)", "First switch to boot up", "Highest priority number"],
-      "correct_index": 1,
-      "explanation": "The switch with the LOWEST Bridge ID wins the root bridge election. Bridge ID = Bridge Priority (default 32768, adjustable in steps of 4096) + MAC address. If priorities are equal, lowest MAC wins.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["STP", "Root Bridge", "Election"]
-    },
-    {
-      "id": "z2-g-013", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "A lightweight AP stops functioning after the WLC goes offline. An autonomous AP in the same scenario would:",
-      "options": ["Also stop functioning", "Continue operating independently without the WLC", "Switch to mesh mode automatically", "Require a reboot to recover"],
-      "correct_index": 1,
-      "explanation": "Autonomous (fat) APs are fully self-contained and continue operating with their own configuration if the WLC is unavailable. Lightweight APs depend entirely on WLC — they cannot serve clients without CAPWAP tunnel to the controller.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Autonomous AP", "LWAP", "WLC"]
-    },
-    {
-      "id": "z2-g-014", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "Which FHRP supports true load balancing by assigning different virtual MACs to different physical routers?",
-      "options": ["HSRP", "VRRP", "GLBP", "OSPF ECMP"],
-      "correct_index": 2,
-      "explanation": "GLBP (Gateway Load Balancing Protocol) — Cisco proprietary — uses one AVG (Active Virtual Gateway) to assign multiple virtual MAC addresses to different AVF (Active Virtual Forwarder) routers. Different clients use different gateways simultaneously.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["GLBP", "FHRP", "Load Balancing"]
-    },
-    {
-      "id": "z2-g-015", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "What is the maximum hop count in RIP before a route is considered unreachable?",
-      "options": ["8", "15", "16", "255"],
-      "correct_index": 1,
-      "explanation": "RIP uses hop count as its metric with a maximum of 15 hops reachable. A route advertised as 16 hops is considered unreachable (infinity). This hard limit prevents RIP from scaling beyond small networks.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RIP", "Hop Count", "Routing"]
-    },
-    {
-      "id": "z2-g-016", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "A client is connecting to a WPA2 Enterprise network. Which three components make up the 802.1X authentication framework?",
-      "options": [
-        "Client (Supplicant), AP/Switch (Authenticator), RADIUS server (Authentication Server)",
-        "Client, WLC, DHCP server",
-        "AP, Router, DNS server",
-        "Client, Firewall, LDAP server"
-      ],
-      "correct_index": 0,
-      "explanation": "802.1X has three roles: Supplicant (client device), Authenticator (AP or switch — forwards credentials), Authentication Server (RADIUS — verifies credentials and sends Accept/Reject). The Authenticator blocks access until the AS approves.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["802.1X", "RADIUS", "WPA2 Enterprise"]
-    },
-    {
-      "id": "z2-g-017", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "In inter-VLAN routing using a Layer 3 switch, which virtual interface provides the default gateway IP for each VLAN?",
-      "options": ["Trunk port", "LACP port-channel", "SVI (Switched Virtual Interface)", "Loopback interface"],
-      "correct_index": 2,
-      "explanation": "SVIs (Switched Virtual Interfaces) are virtual Layer 3 interfaces on a Layer 3 switch — one per VLAN, each assigned the subnet's gateway IP. Hosts in that VLAN use the SVI IP as their default gateway.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SVI", "Inter-VLAN Routing", "Layer 3 Switch"]
-    },
-    {
-      "id": "z2-g-018", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z2-g-018",
+      "zone": 2,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "An attacker sends frames tagged with the native VLAN ID followed by an inner tag for VLAN 20. What attack is this, and what is the primary mitigation?",
       "options": [
         "ARP poisoning — mitigated by dynamic ARP inspection",
@@ -767,28 +524,9 @@
       ],
       "correct_index": 1,
       "explanation": "Double tagging VLAN hopping: attacker's frame has outer tag = native VLAN (stripped by first switch) and inner tag = target VLAN (delivered by second switch). Mitigation: change native VLAN to an unused VLAN (not VLAN 1) and disable DTP.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["VLAN Hopping", "Security", "802.1Q"]
-    },
-    {
-      "id": "z2-g-019", "zone": 2, "node": 0, "difficulty": "medium", "type": "boss",
-      "question": "The TIA-568 standard specifies horizontal cable runs must not exceed 90m. What is the total allowed channel length including patch cables?",
-      "options": ["90 meters", "100 meters", "110 meters", "150 meters"],
-      "correct_index": 1,
-      "explanation": "TIA-568: 90m permanent horizontal link + up to 10m patch cables (at each end combined) = 100m total channel. The 90m is the hard limit for the fixed installation (wall jack to patch panel).",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["TIA-568", "Cabling", "100m"]
-    },
-    {
-      "id": "z2-g-020", "zone": 2, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "OSPF all non-backbone areas must connect to which area, and what device connects them?",
-      "options": [
-        "Area 1 — connected via ASBR",
-        "Area 0 (backbone) — connected via ABR (Area Border Router)",
-        "Area 100 — connected via DR (Designated Router)",
-        "Area 0 — connected via EIGRP redistribution"
-      ],
-      "correct_index": 1,
-      "explanation": "All OSPF areas must connect to Area 0 (backbone). An ABR (Area Border Router) sits at the boundary between Area 0 and a non-backbone area, summarizing routes between them. An ASBR redistributes external routes INTO OSPF.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["OSPF", "Area 0", "ABR"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": ["VLAN Hopping", "Security", "802.1Q"]
     }
   ]
 }

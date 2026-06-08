@@ -159,12 +159,13 @@ zm = ZoneManager("content")
 z = zm.load_zone(1)
 assert z is not None
 assert z.number == 1
-assert len(z.nodes) == 19, f"Expected 19 nodes, got {len(z.nodes)}"
+assert len(z.nodes) == 8, f"Expected 8 nodes, got {len(z.nodes)}"
 assert len(z.guardian_encounters) == 20, f"Expected 20 guardian questions, got {len(z.guardian_encounters)}"
-# Check node IDs match spec
+total_encounters = sum(len(n.encounters) for n in z.nodes)
+assert total_encounters == 80, f"Expected 80 encounters, got {total_encounters}"
+# Check node IDs match spec (clean sequential 1.1 .. 1.8)
 node_ids = [n.id for n in z.nodes]
-assert 1.1 in node_ids
-assert 1.8 in node_ids
+assert node_ids == [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8], f"Unexpected node ids: {node_ids}"
 # Every node needs at least a couple encounters to be playable
 for node in z.nodes:
     assert len(node.encounters) >= 2, f"Node {node.id} has only {len(node.encounters)} encounters"

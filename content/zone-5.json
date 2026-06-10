@@ -9,6 +9,46 @@
       "description": "CompTIA's 7-step troubleshooting process, OSI layer approaches, and problem documentation.",
       "encounters": [
         {
+          "id": "z5-n1-study-001",
+          "zone": 5,
+          "node": 5.1,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Mechanic's Two Approaches: Compare to Spec, or Swap the Part",
+          "scenario": "A mechanic diagnosing 'this car feels sluggish' has two complementary approaches. First: compare to BASELINE/SPEC — pull out last year's dyno results from when the car ran fine, and compare them against today's readings. If fuel pressure was 50 PSI then and is 30 PSI now, that deviation points straight at the fault. Second: COMPONENT SWAP (substitution) — if there's no baseline, or comparison doesn't pinpoint it, swap a suspect part (the fuel pump) for a known-good spare. If the symptom disappears, that part was faulty; if it persists, move to the next suspect. In networking, a BASELINE is recorded normal-operation data (bandwidth, latency, error rates) used later to spot anomalies. SUBSTITUTION means physically replacing a suspect cable, NIC, port, or transceiver with a known-good one to isolate hardware faults — especially useful when no baseline data exists and divide-and-conquer has narrowed the problem to one segment.",
+          "question": "A user reports their connection 'feels slow' today. The helpdesk pulls up last month's recorded interface stats for that port (typical: 20% utilization, <5ms latency) and compares them to today's readings (95% utilization, 80ms latency) — immediately pointing to congestion. Separately, a technician with no historical data simply swaps the user's patch cable for a known-good one to see if performance improves. How do these two techniques differ?",
+          "options": [
+            "They're identical — comparing to a baseline IS the same thing as swapping a component",
+            "The helpdesk used baseline comparison (current metrics vs recorded normal-operation metrics to spot a deviation); the technician used component substitution (replacing a suspect part with a known-good one to test if the symptom is hardware-related) — most useful when no baseline exists",
+            "Baseline comparison only works on wireless networks, while component swapping only works on wired networks",
+            "Component swapping should always be tried BEFORE establishing a theory of probable cause, per CompTIA's 7-step process"
+          ],
+          "correct_index": 1,
+          "explanation": "Comparing current metrics to a recorded baseline is data-driven anomaly detection — it tells you something changed and roughly how much. Component substitution is a hypothesis test — physically swapping a suspect part to see if a specific symptom follows the part or stays put. They're complementary, not identical, and substitution is especially valuable when no historical baseline exists to point you anywhere. Option A is wrong for that reason — one compares numbers, the other tests a physical hypothesis. Option C is wrong: nothing limits baseline comparison to wireless or substitution to wired — both apply broadly. Option D is wrong: per the 7-step process, you establish a theory of probable cause (step 2) BEFORE testing it (step 3) — randomly swapping parts before forming a theory is the 'shotgun' anti-pattern the methodology exists to avoid.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["troubleshooting", "baseline", "substitution", "methodology"]
+        },
+        {
+          "id": "z5-n1-study-002",
+          "zone": 5,
+          "node": 5.1,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Smoke Detector and the New Toaster",
+          "scenario": "Imagine a smoke detector starts going off every morning at 7am, starting the exact same week someone got a new toaster. You don't need to inspect every wire in the house — the TIMING correlation between 'new toaster appeared' and 'alarm started' is the strongest clue available. In networking, when a symptom appears SUDDENLY rather than developing gradually, the very first question should be 'what changed recently?' — a firmware update, an ACL edit, a new device, a config push, a certificate rotation, a DHCP scope change. Checking the change management log (RFC history from Zone 3) for anything touching the affected system is often far faster than re-running every diagnostic from scratch, because it directly tests the single most probable cause of a sudden, isolated symptom.",
+          "question": "At 9 AM, multiple finance department users suddenly start getting 'certificate not trusted' warnings on an internal HR portal that worked fine yesterday. No other internal site is affected. Before running any packet captures, what should the technician check FIRST?",
+          "options": [
+            "Immediately replace the HR server's network cable — hardware degrades randomly, so a cable swap is always the right first step",
+            "Check the change management log for any changes to the HR portal's certificate, the internal CA, or related infrastructure overnight — a sudden, isolated symptom strongly suggests a recent change is the cause",
+            "Re-image every finance department workstation, since a cert error affecting multiple users at once must mean malware",
+            "Escalate immediately to the ISP, since certificate errors are always caused by upstream DNS issues"
+          ],
+          "correct_index": 1,
+          "explanation": "A sudden symptom affecting MULTIPLE users at the SAME TIME, isolated to ONE application, is the classic signature of a recent change rather than gradual hardware decay, malware, or a random fault — checking the change log (RFCs, recent CAB-approved changes) directly tests the most probable cause first. Option A is wrong: cable issues typically affect a single user or segment, not many users hitting one specific application simultaneously, and swapping hardware before forming a theory is the 'shotgun' anti-pattern. Option C is wrong: re-imaging is drastic and time-consuming with no evidence of malware, and malware producing an identical cert-trust error across many machines, isolated to one internal site, would be an unusual way for malware to behave compared to a simple changed/expired/rotated certificate. Option D is wrong: certificate trust errors are a PKI/identity validation issue, not a DNS issue — escalating to the ISP for an internal-only app skips internal investigation entirely.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["troubleshooting", "change-management", "root-cause", "methodology"]
+        },
+        {
           "id": "z5-n1-001", "zone": 5, "node": 5.1, "difficulty": "easy", "type": "mob",
           "question": "What is the FIRST step in CompTIA's network troubleshooting methodology?",
           "options": ["Test a theory", "Establish a plan of action", "Identify the problem", "Document the findings"],
@@ -111,6 +151,46 @@
       "name": "The Cable Lab",
       "description": "Physical layer faults, cable types, connectors, and troubleshooting tools.",
       "encounters": [
+        {
+          "id": "z5-n2-study-001",
+          "zone": 5,
+          "node": 5.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Right Key for the Right Lock: Fiber Modes and Wavelengths",
+          "scenario": "Multimode fiber (MMF) is like a wide hallway where light can bounce down at many angles ('modes') — cheap LEDs/VCSELs at 850nm work fine over short distances (up to ~550m on OM3/OM4 for 10GbE), but those bouncing paths spread out (modal dispersion) and limit distance. Single-mode fiber (SMF) is a narrow hallway where light travels essentially one straight path — it requires a precise laser, usually at 1310nm or 1550nm, but can run for tens of kilometers. The key point: an SFP/transceiver is built for a SPECIFIC wavelength and fiber type. Plug an 850nm multimode transceiver into single-mode fiber (or vice versa), and a basic light-source/power-meter test might still detect SOME light reaching the far end — but the link won't establish, or will be extremely error-prone, because the receiver can't properly decode a signal from a mismatched source.",
+          "question": "A technician runs a fiber light source and power meter test on a new single-mode run between two buildings — light is detected at the far end within the expected loss budget, so the fiber itself seems fine. But when matching switches are connected via SFPs, the link light never comes up. They discover one SFP is an 850nm multimode transceiver and the other is a 1310nm single-mode transceiver. What's the issue, and why didn't the power meter test catch it?",
+          "options": [
+            "The fiber run is simply too long for any transceiver — distance is the only issue",
+            "The two transceivers operate at different wavelengths/fiber types (850nm MMF vs 1310nm SMF) and can't link with each other regardless of fiber condition; a power meter test only confirms the fiber can carry SOME light, not that two specific transceivers are compatible with each other or the fiber type",
+            "Power meters can only test copper cabling, so the result is meaningless here",
+            "The transceivers must be DAC cables, not SFPs, which is why they're incompatible"
+          ],
+          "correct_index": 1,
+          "explanation": "A power/light test verifies the fiber's physical continuity and loss budget — it says nothing about whether the electronics on each end speak the same 'language.' An 850nm multimode SFP and a 1310nm single-mode SFP use different light sources, wavelengths, and (often) launch into fiber with different core sizes — they will not negotiate a link with each other no matter how clean the fiber is. Option A is wrong: nothing in the scenario indicates the run exceeds single-mode's distance limits (kilometers); the failure is a transceiver mismatch, not distance. Option C is wrong: optical power meters are specifically a fiber tool — they don't test copper at all. Option D is wrong: DAC (Direct Attach Copper) cables are a different physical medium entirely and aren't relevant to this fiber scenario; the issue is purely SFP wavelength/type mismatch.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["fiber", "SFP", "wavelength", "single-mode", "multimode"]
+        },
+        {
+          "id": "z5-n2-study-002",
+          "zone": 5,
+          "node": 5.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Bundle of Chargers in a Sealed Box",
+          "scenario": "Picture a thick bundle of phone chargers, all plugged in and zip-tied together inside a small enclosed box. Each charger gives off a little heat individually — harmless on its own. But bundle hundreds together with no airflow, and the heat compounds: the temperature inside the bundle climbs well above room temperature. Copper Ethernet cables carrying PoE work the same way — each cable's conductors warm up slightly from the DC current powering devices (phones, cameras, APs). In a single cable this is negligible. But in a LARGE BUNDLE (50, 100+ cables in a conduit or tray) carrying high-wattage PoE+ (802.3bt, up to ~90W per port), the cumulative heat raises the temperature INSIDE the bundle — and heat increases copper resistance, which increases attenuation/insertion loss. Cables in the CENTER of the bundle, with the worst airflow, are affected most. Mitigation: use Cat6A (larger conductors, better heat dissipation) for high-density PoE+ runs, follow manufacturer bundle-size deratings, and favor ventilated cable trays over sealed conduits.",
+          "question": "A building installs 200 PoE+ security cameras (802.3bt, ~60W each), with all cables run together in a single large bundle inside a sealed conduit. After a few months, cameras in the CENTER of the bundle show intermittent connectivity and higher-than-expected attenuation on cable certification tests, while cables on the OUTER edge of the bundle test fine. What is the most likely cause, and what would help?",
+          "options": [
+            "The center cables are simply longer than the outer cables, exceeding the 100m limit",
+            "Cumulative heat from high-wattage PoE+ current across hundreds of bundled cables raises the temperature inside the bundle, especially in the center where airflow is worst; higher temperature increases copper resistance and attenuation. Using Cat6A and following bundle-size deratings or improving airflow would help",
+            "PoE+ cameras require fiber, not copper, so copper cabling will always fail eventually",
+            "The issue is unrelated to PoE — it must be EMI from fluorescent lighting near the conduit"
+          ],
+          "correct_index": 1,
+          "explanation": "Heat from current flowing through hundreds of bundled PoE+ cables accumulates inside a sealed bundle, hitting center cables hardest because they're most insulated from any airflow. Heat raises copper resistance, and resistance directly increases attenuation/insertion loss — exactly the certification failures described, isolated to the center of the bundle. Cat6A's larger conductors dissipate heat better and tolerate more current; bundle-size deratings and better airflow (cable trays vs sealed conduit) reduce the heat buildup itself. Option A is wrong: cable length is a per-run physical fact, not something that correlates with position-in-bundle. Option C is wrong: PoE+ over copper is standard and supported up to 100m at full power with appropriate cable — copper isn't doomed to fail. Option D is wrong: EMI from lighting would affect cables based on PROXIMITY to the light fixture, not based on position within the cable bundle itself, and wouldn't explain a center-vs-edge pattern this clean.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["PoE", "cable-bundling", "heat", "attenuation", "Cat6A"]
+        },
         {
           "id": "z5-n2-001", "zone": 5, "node": 5.2, "difficulty": "easy", "type": "mob",
           "question": "Which tool is used to locate the far end of an unknown cable by injecting an audio tone and tracing it?",
@@ -231,6 +311,46 @@
       "description": "Network troubleshooting commands — ping, traceroute, nslookup, nmap, netstat, arp, ipconfig.",
       "encounters": [
         {
+          "id": "z5-n3-study-001",
+          "zone": 5,
+          "node": 5.3,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Phone Call That Hangs Up Mid-Sentence",
+          "scenario": "Imagine you're on a phone call and the line suddenly goes dead mid-sentence — from YOUR side, all you know is 'the call ended abruptly.' A TCP RST (reset) is exactly that: one side immediately tears down the connection without the normal goodbye (FIN/ACK) handshake. From the CLIENT's view (a browser showing 'Connection reset'), you can't tell WHO hung up or WHY — the server app crashing? A firewall actively terminating the connection? Nothing listening on that port? A PACKET CAPTURE (tcpdump/Wireshark) run at multiple points reveals the full picture: the SOURCE IP of the RST (the server itself, or a middle device injecting it with a spoofed source?), where it falls in the sequence (right after SYN, suggesting a closed port, or mid-conversation, suggesting active termination?), and timing. Capturing at BOTH ends of a connection can expose discrepancies — like a RST the receiving side sees but the supposed sender never actually transmitted.",
+          "question": "Users report connections to an internal app server (port 8443) get abruptly reset a few seconds after connecting. A technician runs tcpdump simultaneously at the client and the server. The server-side capture shows SYN, SYN-ACK, and several data packets — but the server NEVER sends a RST. The client-side capture shows a RST arriving with a source IP matching the server. What does this discrepancy most likely indicate, and what should the technician check next?",
+          "options": [
+            "The server's NIC is faulty and dropping its own outgoing RST packets before they reach the capture",
+            "An intermediate device (firewall, IPS, or load balancer) on the path is injecting a RST with a spoofed source IP to terminate the connection — likely a security policy, idle timeout, or inspection rule; check inline security device logs/policies for that connection",
+            "TCP RST packets are never visible in packet captures — the client must be misreading a FIN packet as a RST",
+            "The client's OS generated the RST locally due to a timeout, and the source IP shown in a capture is irrelevant"
+          ],
+          "correct_index": 1,
+          "explanation": "If the server's own capture shows it never sent a RST, but the client received one appearing to be FROM the server, that RST was injected somewhere ON THE PATH — classic behavior of an inline security appliance terminating a connection that matches a policy by sending a spoofed RST, which looks to the receiving end exactly like the other side hung up. This is why capturing at multiple points is so valuable — it surfaces discrepancies a single-point capture would hide. Option A is wrong: a NIC dropping its OWN outgoing packets wouldn't explain the CLIENT receiving a RST — that packet had to come from somewhere on the wire. Option C is wrong: RST is a normal, clearly visible TCP flag, distinct from FIN, in any capture tool. Option D is wrong: a client-generated RST would carry the CLIENT's source IP, not the server's — the scenario specifically describes a RST appearing to originate from the server that the server never sent.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["packet-capture", "tcpdump", "tcp-rst", "troubleshooting"]
+        },
+        {
+          "id": "z5-n3-study-002",
+          "zone": 5,
+          "node": 5.3,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Guest List vs the Building Directory",
+          "scenario": "A switch's MAC ADDRESS TABLE is like a guest list at a building's front desk: it records which ROOM (port) each VISITOR (MAC address/end device) is currently in, learned automatically as frames arrive. 'show mac address-table' tells you 'MAC AA:BB:CC is reachable via port Gi0/3' — great for finding WHERE an end device physically connects. But it says nothing about the BUILDING's structure — which hallways connect to which OTHER buildings (switches/routers). CDP (Cisco Discovery Protocol) / LLDP (the open IEEE standard) is a directory shared between adjacent buildings' front desks: each network device periodically announces itself (name, model, IP, port) to its directly-connected neighbors. 'show cdp/lldp neighbors' tells you 'Gi0/24 on this switch connects to Gi0/1 on SwitchB' — mapping the physical TOPOLOGY between infrastructure devices, not where end-user devices sit.",
+          "question": "A technician needs to find (1) which physical switch port a user's laptop (known MAC address) is plugged into, AND (2) how that access switch connects upstream to the distribution switch (which port-to-port link). Which combination of commands provides this, and why can't either alone do the whole job?",
+          "options": [
+            "show mac address-table alone provides both, since MAC addresses uniquely identify both end devices and switches",
+            "show mac address-table (to find which port the laptop's MAC is learned on) plus show cdp/lldp neighbors (to find which port connects to the distribution switch and which port it terminates on there) — the MAC table maps end-host locations, while CDP/LLDP maps inter-device topology",
+            "show cdp neighbors alone provides both, since CDP tracks every MAC address on every port, including end-user devices",
+            "Neither command can provide this — only a physical site walk-through with a cable tracer can determine port-to-port connections"
+          ],
+          "correct_index": 1,
+          "explanation": "The MAC address table is built from frames the switch receives — it records which port each source MAC was last seen on, exactly how you find an end-host's physical port. CDP/LLDP is separate: networking devices (switches, routers, APs, IP phones) announce themselves to directly-connected neighbors, which is how you discover device-to-device topology — information a MAC table doesn't provide (it just shows 'this MAC was learned on this port,' not 'this port connects to this named device'). Option A is wrong: two switches connected to each other don't exchange identity via MAC table entries — an uplink port just shows a pile of OTHER devices' MACs learned through it, not the neighboring switch's identity. Option C is wrong: CDP/LLDP isn't typically enabled on (or supported by) end-user devices — it's primarily useful for infrastructure-to-infrastructure links. Option D is wrong: CDP/LLDP exists specifically to avoid needing physical cable tracing for infrastructure links — both commands are standard, fast, software-based tools for this.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["mac-address-table", "cdp", "lldp", "topology-discovery"]
+        },
+        {
           "id": "z5-n3-001", "zone": 5, "node": 5.3, "difficulty": "easy", "type": "mob",
           "question": "What does a 169.254.x.x IP address in ipconfig output indicate?",
           "options": ["A valid static IP assigned by the admin", "A public IP assigned by the ISP", "APIPA — the host failed to obtain a DHCP address and self-assigned a link-local address", "An IPv6 link-local address"],
@@ -350,6 +470,46 @@
       "description": "Wireless troubleshooting — interference, coverage, authentication failures, and APIPA.",
       "encounters": [
         {
+          "id": "z5-n4-study-001",
+          "zone": 5,
+          "node": 5.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Highway Lanes: 2.4GHz vs 5GHz vs 6GHz",
+          "scenario": "2.4GHz is an old, narrow backroad that EVERYONE uses — microwaves, Bluetooth, baby monitors, and neighboring APs all crowd onto it, and it has only 3 non-overlapping 'lanes' (channels 1/6/11). But its lower frequency travels FARTHER and penetrates walls better. 5GHz is a wider highway with 24+ non-overlapping lanes and support for much wider channels (40/80/160MHz) — far less congestion and higher throughput, but shorter range and more easily blocked by walls. 6GHz (Wi-Fi 6E/7) is a brand-new freeway that's nearly empty — 59 non-overlapping channels, the least congestion and highest throughput potential, but the SHORTEST range/penetration of the three. The general rule: as frequency goes UP, range/penetration goes DOWN, but available spectrum (and therefore throughput potential and freedom from congestion) goes UP.",
+          "question": "A multi-floor office has two complaints: (1) users in a large open warehouse far from any AP report weak, dropping signal, and (2) users in a densely-packed engineering area near many APs report slow speeds despite strong signal, with spectrum analysis showing heavy channel overlap. An engineer proposes moving warehouse clients toward 2.4GHz and engineering-area clients toward 5GHz/6GHz. Does this make sense?",
+          "options": [
+            "No — frequency band has no effect on range or congestion; the issue must be AP hardware age in both cases",
+            "Yes — 2.4GHz's lower frequency travels farther and penetrates obstacles better, helping the warehouse's range problem; 5GHz/6GHz offer far more non-overlapping channels and wider-bandwidth options, reducing the congestion/overlap causing the engineering area's slowdowns",
+            "No — 6GHz should be used in the warehouse, because higher frequencies always have the longest range",
+            "Yes, but only because 2.4GHz devices are inherently newer and faster than 5GHz devices"
+          ],
+          "correct_index": 1,
+          "explanation": "Frequency directly affects both propagation physics and available spectrum — 2.4GHz's longer wavelength gives it better range and wall penetration, useful where coverage (not speed) is the bottleneck, even with only 3 non-overlapping channels. 5GHz (24+ channels) and 6GHz (59 channels) provide far more spectrum to spread dense AP deployments across without overlap, directly addressing a congestion problem, at the cost of range — acceptable when APs are close together. Option A is wrong: this tradeoff between range/penetration and available channels/throughput IS the core effect of frequency choice. Option C is wrong: it reverses the relationship — 6GHz has the SHORTEST range/penetration of the three, the worst choice for a large open warehouse with sparse APs. Option D is wrong: 2.4GHz isn't 'faster' or 'newer' — 5GHz/6GHz support much wider channels and higher throughput; the conclusion in B happens to be correct, but for the reasons stated in B (range/penetration and channel availability), not device age.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["wifi", "2.4ghz", "5ghz", "6ghz", "frequency-tradeoffs"]
+        },
+        {
+          "id": "z5-n4-study-002",
+          "zone": 5,
+          "node": 5.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Lantern, the Flashlight, and the Laser Pointer",
+          "scenario": "An OMNIDIRECTIONAL antenna is a LANTERN: light spreads 360° in all directions horizontally — great for general coverage in an open area (a typical indoor AP), but the energy is spread thin, limiting range in any one direction. A DIRECTIONAL antenna (Yagi/patch) is a FLASHLIGHT: it focuses energy into a beam toward one direction, giving much higher gain along that path — useful for a long hallway, a specific zone, or a medium-distance point-to-point link. A PARABOLIC DISH is a LASER POINTER: an extremely narrow, very high-gain beam, used for LONG-DISTANCE point-to-point links — connecting buildings across a campus or even miles apart — where all the energy must be concentrated in a tight beam aimed precisely at the other dish. For a PtP bridge, you need high gain and a narrow beam aimed at the other end; an omnidirectional antenna wastes nearly all its energy in directions with no receiver.",
+          "question": "A company needs to bridge a warehouse network to a main office network 1.5 miles away, with clear rooftop-to-rooftop line-of-sight. They install standard omnidirectional antennas on wireless bridges at both ends, but the link is unreliable with very low throughput. What change would most likely fix this, and why?",
+          "options": [
+            "Replace the omnidirectional antennas with high-gain directional antennas (parabolic dish or high-gain Yagi) aimed precisely at each other — concentrating the radio energy into a narrow, high-gain beam toward the only receiver that matters, instead of spreading it 360°",
+            "Increase the transmit power on the omnidirectional antennas — power output, not antenna pattern, determines point-to-point link quality",
+            "Switch both ends to 2.4GHz, since lower frequencies are always better for long-distance links regardless of antenna type",
+            "1.5 miles is simply impossible for any wireless technology — a fiber run is the only solution"
+          ],
+          "correct_index": 0,
+          "explanation": "Omnidirectional antennas spread energy 360° horizontally — for a PtP link, only a tiny fraction ever reaches the other end, while the antenna also receives interference equally from every direction. A high-gain directional antenna concentrates the SAME transmit power into a narrow beam aimed at the other end, dramatically increasing effective signal strength at the receiver while reducing received interference — exactly what long-distance PtP links require. Option B is wrong: an omni antenna at higher power still wastes most of that power in useless directions, and regulatory EIRP limits cap how far this can go anyway — antenna gain/pattern, not raw power, is the key lever. Option C is wrong: 2.4GHz isn't 'always better' regardless of antenna — many long PtP bridges run successfully on 5GHz with high-gain directional antennas; the antenna PATTERN mismatch is the actual root cause here, not band choice. Option D is wrong: 1.5-mile PtP wireless bridges with directional antennas and clear line-of-sight are a common, well-established solution — exactly what parabolic-dish bridges are designed for.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["antennas", "point-to-point", "directional", "wireless-bridge"]
+        },
+        {
           "id": "z5-n4-001", "zone": 5, "node": 5.4, "difficulty": "easy", "type": "mob",
           "question": "A laptop connected to Wi-Fi shows IP address 169.254.47.12. What does this indicate?",
           "options": ["Excellent Wi-Fi signal — the AP assigned a link-local address", "Successful WPA3 authentication", "DHCP failure — Wi-Fi connected but could not obtain a DHCP address", "The MAC address was blocked by wireless ACL"],
@@ -460,6 +620,46 @@
       "name": "The Service Desk",
       "description": "DHCP, DNS, NTP, routing, duplicate IP, and IP addressing service troubleshooting.",
       "encounters": [
+        {
+          "id": "z5-n5-study-001",
+          "zone": 5,
+          "node": 5.5,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Phonebook's Different Page Types: DNS Records",
+          "scenario": "DNS is a phonebook with different PAGE TYPES for different purposes. An A record = 'Name → IPv4 address,' the basic white-pages entry. AAAA = the same, for IPv6. CNAME = 'this name is just an ALIAS — look up THIS OTHER name instead' (a forwarding note). MX (Mail Exchanger) = 'for THIS domain's email, deliver it to THIS mail server,' with a priority number (lower = more preferred). TXT = a free-form notes field, commonly used for domain ownership verification and email security (SPF/DKIM/DMARC). NS = 'THESE servers are authoritative for this domain.' PTR = a REVERSE lookup, IP address → name, the opposite of an A record. SRV = 'for THIS service, connect to THIS host on THIS port,' used by VoIP/directory services for auto-discovery.",
+          "question": "A company stands up a new mail server and creates an A record (mail.example.com → new IP), but forgets to update the MX record, which still points to 'oldmail.example.com' — a name with no A record at all. Separately, the PTR record for the new mail server's IP still resolves back to the OLD server's hostname. What are the likely consequences of EACH issue?",
+          "options": [
+            "Both are cosmetic only — DNS records are purely for human readability with no functional impact",
+            "The stale MX record means inbound email can't be delivered (other mail servers can't find a valid destination via 'oldmail.example.com'); the mismatched PTR record can get outbound mail flagged as spam, since many receiving servers check that the sending IP's PTR hostname matches the sender (forward-confirmed reverse DNS)",
+            "Both issues only affect IPv6 connectivity — IPv4 mail delivery is unaffected by MX or PTR records",
+            "The MX record issue is irrelevant because A records alone are sufficient for email delivery; only the PTR record matters"
+          ],
+          "correct_index": 1,
+          "explanation": "MX records tell other mail servers WHERE to deliver mail for a domain — if it points to a hostname with no A/AAAA record, inbound mail fails entirely, no matter how correct the new server's own A record is. PTR records (reverse DNS) are checked by many receiving mail servers as part of spam filtering — a mismatch between a sending IP's PTR hostname and the actual sender (FCrDNS) is a red flag that can get outbound mail flagged or rejected. Option A is wrong: MX and PTR records for mail have direct functional consequences, not just informational ones. Option C is wrong: these are application-layer (DNS/SMTP) concerns independent of IPv4 vs IPv6. Option D is wrong: an A record only resolves a name to an address once you already know which name to look up — it's the MX record's job to say WHICH name to look up for a domain's mail.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["DNS", "MX", "PTR", "record-types", "email"]
+        },
+        {
+          "id": "z5-n5-study-002",
+          "zone": 5,
+          "node": 5.5,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Translator Who Forwards Your Shout Across the River",
+          "scenario": "DHCP DISCOVER messages are BROADCASTS (destination 255.255.255.255), and routers don't forward broadcasts between subnets/VLANs by design — staying within one broadcast domain is the whole point of segmenting with VLANs. So a client on VLAN 30 shouting 'DHCP DISCOVER!' can't be heard by a DHCP server sitting on VLAN 1 — the router between them silently drops the broadcast. A DHCP RELAY AGENT (configured via 'ip helper-address <DHCP server IP>' on the VLAN 30 SVI) is a translator standing at the river's edge: it hears the broadcast on VLAN 30 and repackages it as a UNICAST packet addressed directly to the DHCP server, stamping its own interface IP into the GIADDR field — telling the server 'this came from VLAN 30, use that subnet's scope, and send the reply back to ME to relay to the client.'",
+          "question": "A new VLAN 30 (subnet 10.30.0.0/24) is created on a Layer 3 switch. Devices plugged into VLAN 30 receive APIPA (169.254.x.x) addresses instead of addresses from the central DHCP server, which lives on VLAN 1 and already has a configured scope for 10.30.0.0/24. What is the most likely missing configuration, and how does it work?",
+          "options": [
+            "The DHCP server needs a second network card physically connected to VLAN 30",
+            "An 'ip helper-address' (DHCP relay) pointing to the central DHCP server is missing on VLAN 30's SVI — without it, DHCP DISCOVER broadcasts from VLAN 30 never cross the router boundary; the relay converts the broadcast to a unicast packet addressed to the server, tagging it with the VLAN 30 gateway's IP so the server picks the correct scope",
+            "VLAN 30 needs its own separate DHCP server — a single DHCP server can never serve more than one subnet, even with relay configured",
+            "The clients need static routes manually configured pointing to the DHCP server"
+          ],
+          "correct_index": 1,
+          "explanation": "DHCP DISCOVER is a broadcast, and routers don't forward broadcasts between subnets by design — that's fundamental to what a broadcast domain is. An 'ip helper-address' on the VLAN 30 SVI listens for DHCP broadcasts on that VLAN and relays them as unicast to the configured DHCP server, including the GIADDR (the SVI's own IP) so the server knows which scope to use and where to send the reply. Option A is wrong: a DHCP server can serve many subnets/scopes from a single connection — that's the entire point of DHCP relay. Option C is wrong: one centrally-located server with multiple scopes (one per subnet) is the standard, scalable design, made possible by relay across VLANs. Option D is wrong: clients can't have static routes configured before they HAVE an IP address, and routing has nothing to do with DHCP broadcast forwarding — that's a Layer 2/3 boundary issue solved at the router/relay, not the client.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["dhcp", "dhcp-relay", "ip-helper", "broadcast-domain"]
+        },
         {
           "id": "z5-n5-001", "zone": 5, "node": 5.5, "difficulty": "easy", "type": "mob",
           "question": "New devices on the network are failing to get IP addresses. Existing devices work fine. What is the most likely DHCP cause?",

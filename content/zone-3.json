@@ -9,6 +9,48 @@
       "description": "SNMP, syslog, NetFlow, and network monitoring tools.",
       "encounters": [
         {
+          "id": "z3-n1-study-001",
+          "zone": 3,
+          "node": 3.1,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "SNMP: Traps vs. Polls",
+          "scenario": "Learn the difference between 'polling' and 'traps' in SNMP management. Definition: A 'poll' is a manager requesting data (e.g., 'How much traffic on port 1?'), while a 'trap' is an unsolicited alert sent by a device (e.g., 'Alert! Port 1 just went down!'). Analogy: Think of polling like a security guard walking around checking every door at scheduled intervals, whereas a trap is a smoke detector that only alerts the fire department when it detects smoke immediately.",
+          "question": "A network administrator wants to be notified instantly whenever a specific router port loses its physical link. Which SNMP mechanism should they rely on?",
+          "options": [
+            "SNMP Polling (Request/Response)",
+            "SNMP Traps",
+            "ICMP Echo Requests",
+            "ARP Table Broadcasts"
+          ],
+          "correct_index": 1,
+          "explanation": "Correct: SNMP Traps are unsolicited notifications sent by an agent to the manager when a specific event occurs (like a link failure). Option A is incorrect because polling requires the manager to ask repeatedly. Option C (Ping) only tests reachability and does not provide specific status alerts. Option D is used for MAC address discovery.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["snmp", "traps", "monitoring"]
+        },
+        {
+          "id": "z3-n1-study-002",
+          "zone": 3,
+          "node": 3.1,
+          "type": "study_encounter",
+          "difficulty": "easy",
+          "title": "Log Management: Syslog vs NetFlow",
+          "scenario": "Understand the difference between 'Syslog' (events) and 'NetFlow' (traffic patterns). Definition: Syslog provides a record of specific system events (e.g., 'User login failed' or 'Interface down'). NetFlow provides metadata about traffic flows (who, where, when, and how much data). Analogy: If your network were a city, Syslog would be the 911 emergency calls reporting specific incidents (a fire, a crime), while NetFlow is like the GPS tracking data of all vehicles on the road—it does not show the content of their conversation, but it shows where people are moving and how much traffic there is.",
+          "question": "An engineer is trying to identify which internal server is consuming the most bandwidth during peak hours. Which tool provides the best visibility for this?",
+          "options": [
+            "Syslog records",
+            "SNMP Traps",
+            "NetFlow / IPFIX data",
+            "ICMP TTL analysis"
+          ],
+          "correct_index": 2,
+          "explanation": "Correct: NetFlow provides granular statistics on traffic flows (source/destination IPs, ports, and volume), making it the ideal tool for capacity planning. Option A (Syslog) is for discrete system events like login failures or hardware errors. Option B (Traps) are just alerts. Option D (TTL) is used to determine hop counts, not bandwidth usage.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": ["syslog", "netflow", "traffic-analysis"]
+        },
+        {
           "id": "z3-n1-001", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
           "question": "SNMP agents send unsolicited notifications to the NMS when an event occurs. What are these called?",
           "options": ["Polls", "Traps", "Queries", "Informs"],

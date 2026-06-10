@@ -1,6 +1,21 @@
 {
   "3.1": [
     {
+      "title": "SNMP vs Syslog vs NetFlow",
+      "type": "table",
+      "headers": ["Protocol", "Data Type", "Common Purpose", "Typical Port"],
+      "rows": [
+        ["SNMP", "Management/State", "Device health, status, and configuration", "161 (Query), 162 (Trap)"],
+        ["Syslog", "System Events", "Logging errors, logins, and state changes", "514"],
+        ["NetFlow", "Traffic Flow", "Volume, source/destination, and usage patterns", "2055"]
+      ]
+    },
+    {
+      "title": "SNMP Trap vs Poll",
+      "type": "concept",
+      "body": "A Poll is a 'pull' mechanism: The Management Station (NMS) asks the device for information at set intervals.\n\nA Trap is a 'push' mechanism: The Device (Agent) sends an unsolicited notification to the NMS immediately when a specific condition is met."
+    },
+    {
       "title": "SNMP Versions — v1 vs v2c vs v3",
       "type": "table",
       "headers": ["Version", "Security", "Community Strings", "Key Features", "Use Today?"],

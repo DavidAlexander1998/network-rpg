@@ -1,63 +1,186 @@
 {
   "2.1": [
     {
-      "title": "Administrative Distance (AD) — Quick Reference",
-      "type": "table",
-      "headers": ["Route Source", "AD Value", "Notes"],
-      "rows": [
-        ["Directly Connected", "0", "The interface is physically connected — always preferred"],
-        ["Static Route", "1", "Manually configured by admin — almost always preferred over dynamic"],
-        ["eBGP (external BGP)", "20", "Routes learned from external BGP peers (internet routing)"],
-        ["EIGRP (internal)", "90", "Cisco proprietary — DUAL algorithm, fast convergence"],
-        ["OSPF", "110", "Open standard — link-state, area-based, SPF algorithm"],
-        ["IS-IS", "115", "Link-state, used by large ISPs, rarely tested on N+"],
-        ["RIP v1/v2", "120", "Distance vector, hop count ≤15, slow convergence — legacy"],
-        ["EIGRP (external)", "170", "Routes redistributed INTO EIGRP from another protocol"],
-        ["iBGP (internal BGP)", "200", "BGP routes learned from internal BGP peers — least trusted dynamic"],
-        ["Unknown / Unreachable", "255", "Never installed in routing table — effectively blocked"]
-      ],
+      "title": "Static vs Dynamic Routing \u2014 Printed Directions vs GPS",
+      "type": "concept",
+      "body": "STATIC ROUTING is like handing a driver a printed instruction sheet: 'To reach Warehouse A, take Highway 5, then Exit 12.' It never changes on its own \u2014 reliable, predictable, and uses zero CPU/bandwidth for upkeep. But if Highway 5 closes, the driver is stuck following directions to a dead end until a human rewrites the sheet.\n\nDYNAMIC ROUTING is like a GPS that talks to other GPS units in real time. If a bridge goes out, every GPS in the network hears about it within seconds and recalculates a new route automatically. The cost: the GPS units constantly chatter with each other (routing protocol overhead) and the math is more complex (SPF, DUAL, etc.).\n\nWHEN TO USE WHICH:\n  - Static: small networks, stub networks (only one way in/out), default routes, or a backup 'floating' route.\n  - Dynamic: anything with multiple paths, redundancy, or where the topology changes (links fail, new sites added).\n\nADMINISTRATIVE DISTANCE is the 'whose directions do I trust more' tiebreaker \u2014 if a router learns the SAME destination from both a static route AND a dynamic protocol, the lower AD wins (static AD=1 beats OSPF AD=110 by default).",
       "key_points": [
-        "Lower AD = more trustworthy. Router installs LOWEST AD route.",
-        "Static AD=1 almost always beats dynamic protocols (AD 90–200).",
-        "Floating static route: set AD > dynamic protocol AD to use as backup only.",
-        "Memorise: Connected(0) > Static(1) > eBGP(20) > EIGRP(90) > OSPF(110) > RIP(120) > iBGP(200).",
-        "Exam trap: 'Which route is preferred?' — always pick lowest AD."
+        "Static = printed directions: zero overhead, but doesn't adapt to outages.",
+        "Dynamic = live GPS: adapts automatically, but costs CPU/bandwidth to maintain.",
+        "Lower AD always wins when two sources disagree about the same route.",
+        "Mnemonic for the most-tested AD order (low to high): 'Cool Students Enjoy Eating Outrageous Recipes Indoors' = Connected(0), Static(1), eBGP(20), EIGRP(90), OSPF(110), RIP(120), iBGP(200).",
+        "A floating static route deliberately uses a HIGH AD so it only activates as a backup when the dynamic route disappears."
       ]
     },
     {
-      "title": "Routing Protocols — Head-to-Head",
+      "title": "Administrative Distance (AD) \u2014 Quick Reference",
       "type": "table",
-      "headers": ["Protocol", "Type", "Algorithm", "Metric", "AD", "Use Case"],
+      "headers": [
+        "Route Source",
+        "AD Value",
+        "Notes"
+      ],
       "rows": [
-        ["RIP v2", "Distance Vector", "Bellman-Ford", "Hop count (max 15)", "120", "Small legacy networks — avoid in production"],
-        ["EIGRP", "Hybrid (Adv. DV)", "DUAL", "Bandwidth + Delay (+ load, reliability)", "90", "Cisco-only enterprise LANs"],
-        ["OSPF", "Link State", "Dijkstra (SPF)", "Cost (based on bandwidth)", "110", "Multi-vendor enterprise, most common IGP"],
-        ["BGP", "Path Vector", "Best-path selection", "AS-PATH, MED, LOCAL_PREF", "20/200", "Internet routing between ASes — THE internet protocol"],
-        ["IS-IS", "Link State", "Dijkstra (SPF)", "Cost (configured manually)", "115", "Service provider networks, rarely in enterprise"]
+        [
+          "Directly Connected",
+          "0",
+          "The interface is physically connected \u2014 always preferred"
+        ],
+        [
+          "Static Route",
+          "1",
+          "Manually configured by admin \u2014 almost always preferred over dynamic"
+        ],
+        [
+          "eBGP (external BGP)",
+          "20",
+          "Routes learned from external BGP peers (internet routing)"
+        ],
+        [
+          "EIGRP (internal)",
+          "90",
+          "Cisco proprietary \u2014 DUAL algorithm, fast convergence"
+        ],
+        [
+          "OSPF",
+          "110",
+          "Open standard \u2014 link-state, area-based, SPF algorithm"
+        ],
+        [
+          "IS-IS",
+          "115",
+          "Link-state, used by large ISPs, rarely tested on N+"
+        ],
+        [
+          "RIP v1/v2",
+          "120",
+          "Distance vector, hop count \u226415, slow convergence \u2014 legacy"
+        ],
+        [
+          "EIGRP (external)",
+          "170",
+          "Routes redistributed INTO EIGRP from another protocol"
+        ],
+        [
+          "iBGP (internal BGP)",
+          "200",
+          "BGP routes learned from internal BGP peers \u2014 least trusted dynamic"
+        ],
+        [
+          "Unknown / Unreachable",
+          "255",
+          "Never installed in routing table \u2014 effectively blocked"
+        ]
+      ],
+      "key_points": [
+        "Lower AD = more trustworthy. Router installs LOWEST AD route.",
+        "Static AD=1 almost always beats dynamic protocols (AD 90\u2013200).",
+        "Floating static route: set AD > dynamic protocol AD to use as backup only.",
+        "Memorise: Connected(0) > Static(1) > eBGP(20) > EIGRP(90) > OSPF(110) > RIP(120) > iBGP(200).",
+        "Exam trap: 'Which route is preferred?' \u2014 always pick lowest AD."
+      ]
+    },
+    {
+      "title": "Routing Protocols \u2014 Head-to-Head",
+      "type": "table",
+      "headers": [
+        "Protocol",
+        "Type",
+        "Algorithm",
+        "Metric",
+        "AD",
+        "Use Case"
+      ],
+      "rows": [
+        [
+          "RIP v2",
+          "Distance Vector",
+          "Bellman-Ford",
+          "Hop count (max 15)",
+          "120",
+          "Small legacy networks \u2014 avoid in production"
+        ],
+        [
+          "EIGRP",
+          "Hybrid (Adv. DV)",
+          "DUAL",
+          "Bandwidth + Delay (+ load, reliability)",
+          "90",
+          "Cisco-only enterprise LANs"
+        ],
+        [
+          "OSPF",
+          "Link State",
+          "Dijkstra (SPF)",
+          "Cost (based on bandwidth)",
+          "110",
+          "Multi-vendor enterprise, most common IGP"
+        ],
+        [
+          "BGP",
+          "Path Vector",
+          "Best-path selection",
+          "AS-PATH, MED, LOCAL_PREF",
+          "20/200",
+          "Internet routing between ASes \u2014 THE internet protocol"
+        ],
+        [
+          "IS-IS",
+          "Link State",
+          "Dijkstra (SPF)",
+          "Cost (configured manually)",
+          "115",
+          "Service provider networks, rarely in enterprise"
+        ]
       ],
       "key_points": [
         "IGP (Interior) = inside one AS: RIP, EIGRP, OSPF, IS-IS.",
         "EGP (Exterior) = between ASes: BGP (only one in use today).",
-        "OSPF area 0 = backbone area — all other areas must connect to area 0.",
+        "OSPF area 0 = backbone area \u2014 all other areas must connect to area 0.",
         "BGP uses TCP port 179.",
         "OSPF elects DR/BDR on multi-access segments (Ethernet) to reduce LSA flooding.",
-        "EIGRP uses RTP (Reliable Transport Protocol) — not TCP/UDP."
+        "EIGRP uses RTP (Reliable Transport Protocol) \u2014 not TCP/UDP."
       ]
     },
     {
-      "title": "NAT Types — Translation Explained",
+      "title": "NAT Types \u2014 Translation Explained",
       "type": "table",
-      "headers": ["NAT Type", "Mapping", "Direction", "Use Case"],
+      "headers": [
+        "NAT Type",
+        "Mapping",
+        "Direction",
+        "Use Case"
+      ],
       "rows": [
-        ["Static NAT", "One-to-one: single private IP ↔ single public IP", "Bidirectional", "Hosting a server — needs consistent public IP"],
-        ["Dynamic NAT", "Pool: private IP → one public IP from pool", "Outbound only", "Multiple clients sharing a pool of public IPs"],
-        ["PAT / NAT Overload", "Many-to-one: all private IPs → one public IP + unique port", "Outbound only", "Home/office internet access — most common NAT"],
-        ["NAT64", "IPv6 ↔ IPv4 translation", "Bidirectional", "IPv6-only hosts communicating with IPv4 servers"]
+        [
+          "Static NAT",
+          "One-to-one: single private IP \u2194 single public IP",
+          "Bidirectional",
+          "Hosting a server \u2014 needs consistent public IP"
+        ],
+        [
+          "Dynamic NAT",
+          "Pool: private IP \u2192 one public IP from pool",
+          "Outbound only",
+          "Multiple clients sharing a pool of public IPs"
+        ],
+        [
+          "PAT / NAT Overload",
+          "Many-to-one: all private IPs \u2192 one public IP + unique port",
+          "Outbound only",
+          "Home/office internet access \u2014 most common NAT"
+        ],
+        [
+          "NAT64",
+          "IPv6 \u2194 IPv4 translation",
+          "Bidirectional",
+          "IPv6-only hosts communicating with IPv4 servers"
+        ]
       ],
       "key_points": [
-        "PAT (Port Address Translation) = NAT Overload — tracks connections by port number.",
+        "PAT (Port Address Translation) = NAT Overload \u2014 tracks connections by port number.",
         "Static NAT needed for inbound connections (servers, DMZ hosts).",
-        "NAT hides internal addressing — 'inside local' is the private IP.",
+        "NAT hides internal addressing \u2014 'inside local' is the private IP.",
         "Inside global = public IP seen by internet. Inside local = private IP on LAN.",
         "NAT breaks end-to-end connectivity (can cause VoIP, VPN, gaming issues)."
       ]
@@ -65,18 +188,42 @@
     {
       "title": "First Hop Redundancy Protocols (FHRP)",
       "type": "table",
-      "headers": ["Protocol", "Standard", "Active/Standby Role Names", "Load Balancing", "Notes"],
+      "headers": [
+        "Protocol",
+        "Standard",
+        "Active/Standby Role Names",
+        "Load Balancing",
+        "Notes"
+      ],
       "rows": [
-        ["HSRP", "Cisco proprietary", "Active / Standby", "Per-VLAN only (via multiple groups)", "Hot Standby Router Protocol — most common on Cisco"],
-        ["VRRP", "Open (RFC 5798)", "Master / Backup", "Per-VLAN only (via multiple groups)", "Virtual Router Redundancy Protocol — vendor-neutral"],
-        ["GLBP", "Cisco proprietary", "AVG + AVFs", "Yes — true load balancing per-gateway", "Gateway Load Balancing Protocol — most advanced, Cisco only"]
+        [
+          "HSRP",
+          "Cisco proprietary",
+          "Active / Standby",
+          "Per-VLAN only (via multiple groups)",
+          "Hot Standby Router Protocol \u2014 most common on Cisco"
+        ],
+        [
+          "VRRP",
+          "Open (RFC 5798)",
+          "Master / Backup",
+          "Per-VLAN only (via multiple groups)",
+          "Virtual Router Redundancy Protocol \u2014 vendor-neutral"
+        ],
+        [
+          "GLBP",
+          "Cisco proprietary",
+          "AVG + AVFs",
+          "Yes \u2014 true load balancing per-gateway",
+          "Gateway Load Balancing Protocol \u2014 most advanced, Cisco only"
+        ]
       ],
       "key_points": [
         "All FHRPs create a virtual IP + virtual MAC shared by the group.",
-        "Clients use the VIRTUAL IP as their default gateway — not a physical router IP.",
-        "HSRP: one active, one standby. Election: highest priority wins (default 100); tie → highest IP.",
-        "VRRP: same concept as HSRP but RFC standard — compatible with all vendors.",
-        "GLBP: one AVG (Active Virtual Gateway) assigns different virtual MACs → true load balancing.",
+        "Clients use the VIRTUAL IP as their default gateway \u2014 not a physical router IP.",
+        "HSRP: one active, one standby. Election: highest priority wins (default 100); tie \u2192 highest IP.",
+        "VRRP: same concept as HSRP but RFC standard \u2014 compatible with all vendors.",
+        "GLBP: one AVG (Active Virtual Gateway) assigns different virtual MACs \u2192 true load balancing.",
         "Preemption: when a higher-priority router comes back up, it can reclaim active role (must be enabled in HSRP)."
       ]
     }
@@ -85,126 +232,296 @@
     {
       "title": "VLAN Fundamentals & 802.1Q Trunking",
       "type": "concept",
-      "body": "A VLAN (Virtual LAN) is a logical segment of a switched network. It creates separate broadcast domains without needing physical separation.\n\n802.1Q TAGGING:\nWhen a frame travels over a trunk link, an 802.1Q tag (4 bytes) is inserted into the Ethernet header:\n  • Tag Protocol ID (TPID): 0x8100\n  • Priority (PCP): 3 bits (QoS/CoS)\n  • Drop Eligible (DEI): 1 bit\n  • VLAN ID (VID): 12 bits → supports 4094 VLANs (0 and 4095 reserved)\n\nPORT MODES:\n  • Access port: belongs to ONE VLAN, frames are UNTAGGED\n  • Trunk port: carries MULTIPLE VLANs, frames are TAGGED (except native VLAN)\n  • Native VLAN: the ONE VLAN that is NOT tagged on a trunk (default VLAN 1 — change it for security)\n  • Voice VLAN: access port can carry data VLAN + voice VLAN simultaneously (for IP phones)",
+      "body": "A VLAN (Virtual LAN) is a logical segment of a switched network. It creates separate broadcast domains without needing physical separation.\n\n802.1Q TAGGING:\nWhen a frame travels over a trunk link, an 802.1Q tag (4 bytes) is inserted into the Ethernet header:\n  \u2022 Tag Protocol ID (TPID): 0x8100\n  \u2022 Priority (PCP): 3 bits (QoS/CoS)\n  \u2022 Drop Eligible (DEI): 1 bit\n  \u2022 VLAN ID (VID): 12 bits \u2192 supports 4094 VLANs (0 and 4095 reserved)\n\nPORT MODES:\n  \u2022 Access port: belongs to ONE VLAN, frames are UNTAGGED\n  \u2022 Trunk port: carries MULTIPLE VLANs, frames are TAGGED (except native VLAN)\n  \u2022 Native VLAN: the ONE VLAN that is NOT tagged on a trunk (default VLAN 1 \u2014 change it for security)\n  \u2022 Voice VLAN: access port can carry data VLAN + voice VLAN simultaneously (for IP phones)",
       "key_points": [
-        "VLANs create separate broadcast domains — a broadcast in VLAN 10 doesn't reach VLAN 20.",
-        "Trunk ports tag ALL VLANs except the native VLAN — native VLAN frames pass untagged.",
-        "Native VLAN mismatch = security risk (VLAN hopping) — always set native VLAN to unused VLAN.",
-        "Default VLAN is VLAN 1 — all ports start in VLAN 1; best practice is to NOT use VLAN 1 for data.",
+        "VLANs create separate broadcast domains \u2014 a broadcast in VLAN 10 doesn't reach VLAN 20.",
+        "Trunk ports tag ALL VLANs except the native VLAN \u2014 native VLAN frames pass untagged.",
+        "Native VLAN mismatch = security risk (VLAN hopping) \u2014 always set native VLAN to unused VLAN.",
+        "Default VLAN is VLAN 1 \u2014 all ports start in VLAN 1; best practice is to NOT use VLAN 1 for data.",
         "Inter-VLAN routing requires either a router (router-on-a-stick) or a Layer 3 switch (SVI).",
-        "DTP (Dynamic Trunking Protocol) — Cisco auto-negotiates trunk; disable on access ports (switchport nonegotiate)."
+        "DTP (Dynamic Trunking Protocol) \u2014 Cisco auto-negotiates trunk; disable on access ports (switchport nonegotiate)."
       ]
     },
     {
       "title": "STP Port States & Roles (802.1D)",
       "type": "table",
-      "headers": ["Port State", "Learns MACs?", "Forwards Frames?", "Duration"],
+      "headers": [
+        "Port State",
+        "Learns MACs?",
+        "Forwards Frames?",
+        "Duration"
+      ],
       "rows": [
-        ["Blocking", "No", "No", "Up to 20 sec (Max Age)"],
-        ["Listening", "No", "No", "15 sec (Forward Delay)"],
-        ["Learning", "Yes", "No", "15 sec (Forward Delay)"],
-        ["Forwarding", "Yes", "Yes", "Normal operation"],
-        ["Disabled", "No", "No", "Admin shutdown"]
+        [
+          "Blocking",
+          "No",
+          "No",
+          "Up to 20 sec (Max Age)"
+        ],
+        [
+          "Listening",
+          "No",
+          "No",
+          "15 sec (Forward Delay)"
+        ],
+        [
+          "Learning",
+          "Yes",
+          "No",
+          "15 sec (Forward Delay)"
+        ],
+        [
+          "Forwarding",
+          "Yes",
+          "Yes",
+          "Normal operation"
+        ],
+        [
+          "Disabled",
+          "No",
+          "No",
+          "Admin shutdown"
+        ]
       ],
       "key_points": [
-        "STP convergence = 30–50 seconds total (Blocking→Listening→Learning→Forwarding).",
-        "Mnemonic for states: Blocking Learners Listen First — BLLF, or 'Big Losers Listen Forever'.",
+        "STP convergence = 30\u201350 seconds total (Blocking\u2192Listening\u2192Learning\u2192Forwarding).",
+        "Mnemonic for states: Blocking Learners Listen First \u2014 BLLF, or 'Big Losers Listen Forever'.",
         "PORT ROLES: Root Port (toward root bridge), Designated Port (best port on a segment, forwards), Alternate/Backup (blocked to prevent loops).",
         "ROOT BRIDGE: elected by lowest Bridge ID = Bridge Priority (default 32768) + MAC address. Tie: lower MAC wins.",
         "All ports on Root Bridge = Designated (Forwarding).",
-        "PortFast: skips Listening/Learning — use on ACCESS ports only (not trunk). Enables immediately.",
+        "PortFast: skips Listening/Learning \u2014 use on ACCESS ports only (not trunk). Enables immediately.",
         "BPDU Guard: shuts down a PortFast port if it receives a BPDU (protects against accidental switch connections)."
       ]
     },
     {
       "title": "STP Variants & LACP",
       "type": "table",
-      "headers": ["Protocol", "IEEE Standard", "Convergence", "Instances", "Notes"],
+      "headers": [
+        "Protocol",
+        "IEEE Standard",
+        "Convergence",
+        "Instances",
+        "Notes"
+      ],
       "rows": [
-        ["STP", "802.1D", "30–50 seconds", "1 (CST)", "Original — one spanning tree for all VLANs. Too slow for modern networks."],
-        ["RSTP", "802.1w", "< 1–2 seconds", "1 (CST)", "Rapid STP — same logic, much faster. Backward compatible with 802.1D."],
-        ["PVST+", "Cisco proprietary", "30–50 sec", "1 per VLAN", "Per-VLAN STP — separate tree per VLAN. Rapid PVST+ uses 802.1w per VLAN."],
-        ["MSTP", "802.1s", "< 1–2 seconds", "Multiple mapped to VLANs", "Maps multiple VLANs to fewer STP instances — scalable in large networks."],
-        ["LACP", "802.3ad (802.1ax)", "N/A — link aggregation", "N/A", "Combines multiple physical links into one logical link (EtherChannel/Port-Channel). Active/passive modes."]
+        [
+          "STP",
+          "802.1D",
+          "30\u201350 seconds",
+          "1 (CST)",
+          "Original \u2014 one spanning tree for all VLANs. Too slow for modern networks."
+        ],
+        [
+          "RSTP",
+          "802.1w",
+          "< 1\u20132 seconds",
+          "1 (CST)",
+          "Rapid STP \u2014 same logic, much faster. Backward compatible with 802.1D."
+        ],
+        [
+          "PVST+",
+          "Cisco proprietary",
+          "30\u201350 sec",
+          "1 per VLAN",
+          "Per-VLAN STP \u2014 separate tree per VLAN. Rapid PVST+ uses 802.1w per VLAN."
+        ],
+        [
+          "MSTP",
+          "802.1s",
+          "< 1\u20132 seconds",
+          "Multiple mapped to VLANs",
+          "Maps multiple VLANs to fewer STP instances \u2014 scalable in large networks."
+        ],
+        [
+          "LACP",
+          "802.3ad (802.1ax)",
+          "N/A \u2014 link aggregation",
+          "N/A",
+          "Combines multiple physical links into one logical link (EtherChannel/Port-Channel). Active/passive modes."
+        ]
       ],
       "key_points": [
-        "RSTP (802.1w) = what you should use today — same concept as STP but < 2 sec convergence.",
+        "RSTP (802.1w) = what you should use today \u2014 same concept as STP but < 2 sec convergence.",
         "LACP modes: Active (initiates negotiation) and Passive (responds to negotiation). Active-Active or Active-Passive works; Passive-Passive does NOT.",
-        "EtherChannel/Port-Channel: up to 8 active links bundled. STP sees it as ONE logical link — no blocking needed.",
+        "EtherChannel/Port-Channel: up to 8 active links bundled. STP sees it as ONE logical link \u2014 no blocking needed.",
         "LACP vs PAgP: LACP is IEEE standard; PAgP is Cisco proprietary (both do link aggregation).",
-        "MSTP groups VLANs into instances — reduces CPU load vs PVST+ in large deployments."
+        "MSTP groups VLANs into instances \u2014 reduces CPU load vs PVST+ in large deployments."
       ]
     },
     {
       "title": "Inter-VLAN Routing Methods",
       "type": "table",
-      "headers": ["Method", "How it works", "Hardware needed", "Pros / Cons"],
+      "headers": [
+        "Method",
+        "How it works",
+        "Hardware needed",
+        "Pros / Cons"
+      ],
       "rows": [
-        ["Router-on-a-stick", "Single trunk link from switch to router; router uses subinterfaces (one per VLAN)", "Router + managed switch", "Simple setup; router becomes bottleneck at high traffic"],
-        ["Layer 3 Switch (SVI)", "Switch itself routes between VLANs using Switch Virtual Interfaces", "Layer 3 switch only", "Fast (hardware routing); no external router needed; most scalable"],
-        ["Separate router per VLAN", "Each VLAN has a dedicated router port", "Multiple router ports", "Simple but wastes ports; impractical for many VLANs"]
+        [
+          "Router-on-a-stick",
+          "Single trunk link from switch to router; router uses subinterfaces (one per VLAN)",
+          "Router + managed switch",
+          "Simple setup; router becomes bottleneck at high traffic"
+        ],
+        [
+          "Layer 3 Switch (SVI)",
+          "Switch itself routes between VLANs using Switch Virtual Interfaces",
+          "Layer 3 switch only",
+          "Fast (hardware routing); no external router needed; most scalable"
+        ],
+        [
+          "Separate router per VLAN",
+          "Each VLAN has a dedicated router port",
+          "Multiple router ports",
+          "Simple but wastes ports; impractical for many VLANs"
+        ]
       ],
       "key_points": [
         "SVI (Switched Virtual Interface) = virtual Layer 3 interface on a switch, one per VLAN.",
-        "Router-on-a-stick: connect switch trunk port to router → create subinterfaces with 802.1Q encapsulation.",
+        "Router-on-a-stick: connect switch trunk port to router \u2192 create subinterfaces with 802.1Q encapsulation.",
         "Layer 3 switch is always preferred in enterprise (line-rate routing, no bottleneck).",
         "Default gateway for hosts in each VLAN = IP address of the SVI or router subinterface for that VLAN.",
-        "Exam question: 'Host A (VLAN 10) can't reach Host B (VLAN 20)' → usually missing SVI or misconfigured inter-VLAN routing."
+        "Exam question: 'Host A (VLAN 10) can't reach Host B (VLAN 20)' \u2192 usually missing SVI or misconfigured inter-VLAN routing."
       ]
     }
   ],
   "2.3": [
     {
-      "title": "802.11 Wireless Standards — Full Comparison",
+      "title": "802.11 Wireless Standards \u2014 Full Comparison",
       "type": "table",
-      "headers": ["Standard", "Wi-Fi Name", "Frequency", "Max Speed", "Key Feature"],
+      "headers": [
+        "Standard",
+        "Wi-Fi Name",
+        "Frequency",
+        "Max Speed",
+        "Key Feature"
+      ],
       "rows": [
-        ["802.11a", "Wi-Fi 1", "5 GHz", "54 Mbps", "First 5GHz standard. Less range, no 2.4GHz interference."],
-        ["802.11b", "Wi-Fi 2", "2.4 GHz", "11 Mbps", "First widely adopted. Slow; prone to interference (microwaves, BT)."],
-        ["802.11g", "Wi-Fi 3", "2.4 GHz", "54 Mbps", "Backward compatible with 802.11b. Replaced b in most deployments."],
-        ["802.11n", "Wi-Fi 4", "2.4 / 5 GHz", "600 Mbps", "MIMO (multiple antennas). Channel bonding to 40 MHz. Dual-band."],
-        ["802.11ac", "Wi-Fi 5", "5 GHz only", "3.5 Gbps", "MU-MIMO, 80/160 MHz channels, beamforming. Common today."],
-        ["802.11ax", "Wi-Fi 6/6E", "2.4 / 5 / 6 GHz", "9.6 Gbps", "OFDMA, BSS coloring, TWT (Target Wake Time). Dense environments."],
-        ["802.11be", "Wi-Fi 7", "2.4 / 5 / 6 GHz", "46 Gbps (theoretical)", "Multi-Link Operation (MLO). Latest standard (2024)."]
+        [
+          "802.11a",
+          "Wi-Fi 1",
+          "5 GHz",
+          "54 Mbps",
+          "First 5GHz standard. Less range, no 2.4GHz interference."
+        ],
+        [
+          "802.11b",
+          "Wi-Fi 2",
+          "2.4 GHz",
+          "11 Mbps",
+          "First widely adopted. Slow; prone to interference (microwaves, BT)."
+        ],
+        [
+          "802.11g",
+          "Wi-Fi 3",
+          "2.4 GHz",
+          "54 Mbps",
+          "Backward compatible with 802.11b. Replaced b in most deployments."
+        ],
+        [
+          "802.11n",
+          "Wi-Fi 4",
+          "2.4 / 5 GHz",
+          "600 Mbps",
+          "MIMO (multiple antennas). Channel bonding to 40 MHz. Dual-band."
+        ],
+        [
+          "802.11ac",
+          "Wi-Fi 5",
+          "5 GHz only",
+          "3.5 Gbps",
+          "MU-MIMO, 80/160 MHz channels, beamforming. Common today."
+        ],
+        [
+          "802.11ax",
+          "Wi-Fi 6/6E",
+          "2.4 / 5 / 6 GHz",
+          "9.6 Gbps",
+          "OFDMA, BSS coloring, TWT (Target Wake Time). Dense environments."
+        ],
+        [
+          "802.11be",
+          "Wi-Fi 7",
+          "2.4 / 5 / 6 GHz",
+          "46 Gbps (theoretical)",
+          "Multi-Link Operation (MLO). Latest standard (2024)."
+        ]
       ],
       "key_points": [
         "Memorise: a=5GHz/54M, b=2.4GHz/11M, g=2.4GHz/54M, n=both/600M, ac=5GHz/3.5G, ax=all/9.6G.",
         "802.11ac/Wi-Fi 5 = 5GHz ONLY. Cannot use 2.4GHz band.",
-        "Wi-Fi 6E adds the 6GHz band — less congestion, more channels, shorter range.",
+        "Wi-Fi 6E adds the 6GHz band \u2014 less congestion, more channels, shorter range.",
         "MIMO (n) = multiple antennas transmit/receive simultaneously on same channel.",
-        "MU-MIMO (ac/ax) = Multiple User MIMO — serves multiple clients simultaneously.",
-        "OFDMA (ax/Wi-Fi 6) = divides channel into sub-carriers per client — efficient in dense deployments."
+        "MU-MIMO (ac/ax) = Multiple User MIMO \u2014 serves multiple clients simultaneously.",
+        "OFDMA (ax/Wi-Fi 6) = divides channel into sub-carriers per client \u2014 efficient in dense deployments."
       ]
     },
     {
-      "title": "Wireless Security — WEP/WPA/WPA2/WPA3",
+      "title": "Wireless Security \u2014 WEP/WPA/WPA2/WPA3",
       "type": "table",
-      "headers": ["Standard", "Encryption", "Auth (Personal)", "Auth (Enterprise)", "Status"],
+      "headers": [
+        "Standard",
+        "Encryption",
+        "Auth (Personal)",
+        "Auth (Enterprise)",
+        "Status"
+      ],
       "rows": [
-        ["WEP", "RC4 (40/104-bit key, weak IV)", "Shared Key / Open", "N/A", "BROKEN — do not use. IV reuse → cracked in minutes."],
-        ["WPA (Wi-Fi Protected Access)", "TKIP (RC4 with per-packet key)", "PSK (passphrase)", "802.1X + EAP", "Deprecated — TKIP has vulnerabilities. Avoid."],
-        ["WPA2 (802.11i)", "AES-CCMP (strong)", "PSK (passphrase)", "802.1X + EAP (RADIUS)", "Current standard — still widely used and secure."],
-        ["WPA3", "AES-GCMP-256 (Enterprise), AES-128 (Personal)", "SAE (replaces PSK)", "192-bit Suite B + 802.1X", "Strongest — SAE resists offline dictionary attacks."],
-        ["OWE (Wi-Fi Enhanced Open)", "Opportunistic Wireless Encryption", "None (open network)", "N/A", "Encrypts open networks without authentication (WPA3 feature)."]
+        [
+          "WEP",
+          "RC4 (40/104-bit key, weak IV)",
+          "Shared Key / Open",
+          "N/A",
+          "BROKEN \u2014 do not use. IV reuse \u2192 cracked in minutes."
+        ],
+        [
+          "WPA (Wi-Fi Protected Access)",
+          "TKIP (RC4 with per-packet key)",
+          "PSK (passphrase)",
+          "802.1X + EAP",
+          "Deprecated \u2014 TKIP has vulnerabilities. Avoid."
+        ],
+        [
+          "WPA2 (802.11i)",
+          "AES-CCMP (strong)",
+          "PSK (passphrase)",
+          "802.1X + EAP (RADIUS)",
+          "Current standard \u2014 still widely used and secure."
+        ],
+        [
+          "WPA3",
+          "AES-GCMP-256 (Enterprise), AES-128 (Personal)",
+          "SAE (replaces PSK)",
+          "192-bit Suite B + 802.1X",
+          "Strongest \u2014 SAE resists offline dictionary attacks."
+        ],
+        [
+          "OWE (Wi-Fi Enhanced Open)",
+          "Opportunistic Wireless Encryption",
+          "None (open network)",
+          "N/A",
+          "Encrypts open networks without authentication (WPA3 feature)."
+        ]
       ],
       "key_points": [
         "WPA2 Personal = PSK (pre-shared key / passphrase). WPA2 Enterprise = 802.1X + RADIUS server.",
-        "WPA3 SAE (Simultaneous Authentication of Equals) replaces PSK — prevents offline brute-force attacks.",
-        "WPA2 vulnerability: KRACK attack (Key Reinstallation Attack) — mitigated by patches.",
+        "WPA3 SAE (Simultaneous Authentication of Equals) replaces PSK \u2014 prevents offline brute-force attacks.",
+        "WPA2 vulnerability: KRACK attack (Key Reinstallation Attack) \u2014 mitigated by patches.",
         "802.1X = port-based access control framework. EAP = Extensible Authentication Protocol (runs over 802.1X).",
         "Common EAP types: EAP-TLS (certificate both sides), PEAP (server cert + MSCHAPv2), EAP-FAST.",
-        "Captive portal: redirect unauthenticated users to a login page — common in guest Wi-Fi."
+        "Captive portal: redirect unauthenticated users to a login page \u2014 common in guest Wi-Fi."
       ]
     },
     {
       "title": "Wireless Channel Planning",
       "type": "concept",
-      "body": "2.4 GHz BAND:\n  • 11 channels in North America (14 worldwide)\n  • Channels are 22 MHz wide but spaced 5 MHz apart → OVERLAP\n  • Non-overlapping channels: 1, 6, 11 (the only three that don't interfere)\n  • All APs in the same area should use channels 1, 6, or 11\n  • 2.4 GHz has only 3 non-overlapping channels → congested in dense environments\n\n5 GHz BAND:\n  • 24+ non-overlapping 20 MHz channels (varies by country/regulatory domain)\n  • Channels can be bonded: 40 MHz (2 channels), 80 MHz (4 channels), 160 MHz (8 channels)\n  • DFS (Dynamic Frequency Selection): some 5GHz channels require radar detection + avoidance\n  • UNII-1 (indoor), UNII-2 (DFS), UNII-3, UNII-4 sub-bands\n\n6 GHz BAND (Wi-Fi 6E):\n  • 59 non-overlapping 20 MHz channels\n  • Huge capacity improvement — ideal for dense deployments",
+      "body": "2.4 GHz BAND:\n  \u2022 11 channels in North America (14 worldwide)\n  \u2022 Channels are 22 MHz wide but spaced 5 MHz apart \u2192 OVERLAP\n  \u2022 Non-overlapping channels: 1, 6, 11 (the only three that don't interfere)\n  \u2022 All APs in the same area should use channels 1, 6, or 11\n  \u2022 2.4 GHz has only 3 non-overlapping channels \u2192 congested in dense environments\n\n5 GHz BAND:\n  \u2022 24+ non-overlapping 20 MHz channels (varies by country/regulatory domain)\n  \u2022 Channels can be bonded: 40 MHz (2 channels), 80 MHz (4 channels), 160 MHz (8 channels)\n  \u2022 DFS (Dynamic Frequency Selection): some 5GHz channels require radar detection + avoidance\n  \u2022 UNII-1 (indoor), UNII-2 (DFS), UNII-3, UNII-4 sub-bands\n\n6 GHz BAND (Wi-Fi 6E):\n  \u2022 59 non-overlapping 20 MHz channels\n  \u2022 Huge capacity improvement \u2014 ideal for dense deployments",
       "key_points": [
-        "2.4 GHz non-overlapping: 1, 6, 11 — MEMORISE THIS. Only these three can coexist without interference.",
-        "5 GHz has 24+ non-overlapping channels — much less congestion than 2.4 GHz.",
-        "Co-channel interference: two APs on same channel → contention (worse than adjacent channel).",
-        "Adjacent channel interference: partially overlapping channels (e.g., 1 and 3) → noise floor rises.",
+        "2.4 GHz non-overlapping: 1, 6, 11 \u2014 MEMORISE THIS. Only these three can coexist without interference.",
+        "5 GHz has 24+ non-overlapping channels \u2014 much less congestion than 2.4 GHz.",
+        "Co-channel interference: two APs on same channel \u2192 contention (worse than adjacent channel).",
+        "Adjacent channel interference: partially overlapping channels (e.g., 1 and 3) \u2192 noise floor rises.",
         "Cell sizing: turn down AP power to avoid overlap in dense deployments (smaller cells = more APs needed).",
         "Site survey: walk-through to measure signal strength, noise, and interference before deploying APs."
       ]
@@ -212,54 +529,114 @@
     {
       "title": "AP Architecture & Antenna Types",
       "type": "table",
-      "headers": ["Topic", "Type/Mode", "Description"],
+      "headers": [
+        "Topic",
+        "Type/Mode",
+        "Description"
+      ],
       "rows": [
-        ["AP Mode", "Autonomous (Fat AP)", "Fully self-contained — manages own SSID, security, RF. No controller needed. Hard to manage at scale."],
-        ["AP Mode", "Lightweight (Thin AP / LWAP)", "Offloads config and management to WLC (Wireless LAN Controller). Uses CAPWAP tunnel to WLC."],
-        ["AP Mode", "Mesh AP", "Wireless backhaul to other APs — no wired connection to every AP. Extends coverage where cables can't reach."],
-        ["AP Mode", "Bridge Mode", "Connects two wired LAN segments wirelessly — point-to-point or point-to-multipoint."],
-        ["Antenna", "Omnidirectional", "Radiates 360° horizontally (like a donut shape). Default for most indoor APs. Lower gain (~2–5 dBi)."],
-        ["Antenna", "Directional (Yagi / Patch)", "Focused beam — high gain in one direction. Used for point-to-point links or specific coverage areas."],
-        ["Antenna", "Parabolic Dish", "Extremely high gain, very narrow beam. Long-distance outdoor point-to-point links (up to miles)."],
-        ["Protocol", "CAPWAP", "Control and Provisioning of Wireless Access Points — UDP 5246 (control) + 5247 (data). LWAP↔WLC tunnel."]
+        [
+          "AP Mode",
+          "Autonomous (Fat AP)",
+          "Fully self-contained \u2014 manages own SSID, security, RF. No controller needed. Hard to manage at scale."
+        ],
+        [
+          "AP Mode",
+          "Lightweight (Thin AP / LWAP)",
+          "Offloads config and management to WLC (Wireless LAN Controller). Uses CAPWAP tunnel to WLC."
+        ],
+        [
+          "AP Mode",
+          "Mesh AP",
+          "Wireless backhaul to other APs \u2014 no wired connection to every AP. Extends coverage where cables can't reach."
+        ],
+        [
+          "AP Mode",
+          "Bridge Mode",
+          "Connects two wired LAN segments wirelessly \u2014 point-to-point or point-to-multipoint."
+        ],
+        [
+          "Antenna",
+          "Omnidirectional",
+          "Radiates 360\u00b0 horizontally (like a donut shape). Default for most indoor APs. Lower gain (~2\u20135 dBi)."
+        ],
+        [
+          "Antenna",
+          "Directional (Yagi / Patch)",
+          "Focused beam \u2014 high gain in one direction. Used for point-to-point links or specific coverage areas."
+        ],
+        [
+          "Antenna",
+          "Parabolic Dish",
+          "Extremely high gain, very narrow beam. Long-distance outdoor point-to-point links (up to miles)."
+        ],
+        [
+          "Protocol",
+          "CAPWAP",
+          "Control and Provisioning of Wireless Access Points \u2014 UDP 5246 (control) + 5247 (data). LWAP\u2194WLC tunnel."
+        ]
       ],
       "key_points": [
         "CAPWAP: lightweight AP tunnels all traffic to WLC. UDP 5246 (control plane) + 5247 (data plane).",
-        "WLC (Wireless LAN Controller): centrally manages LWAPs — RF profiles, SSIDs, security, roaming.",
+        "WLC (Wireless LAN Controller): centrally manages LWAPs \u2014 RF profiles, SSIDs, security, roaming.",
         "Autonomous APs: simple to set up individually; nightmare to manage at scale (each configured separately).",
         "Omnidirectional: good for open office/coverage. Directional: good for hallways, point-to-point outdoor.",
         "EIRP (Effective Isotropic Radiated Power): regulated max transmit power including antenna gain.",
-        "SSID can be the same across multiple APs → client roams seamlessly (ESS — Extended Service Set)."
+        "SSID can be the same across multiple APs \u2192 client roams seamlessly (ESS \u2014 Extended Service Set)."
       ]
     }
   ],
   "2.4": [
     {
-      "title": "Data Center Hierarchy — MDF, IDF & Cabling",
+      "title": "Data Center Hierarchy \u2014 MDF, IDF & Cabling",
       "type": "concept",
-      "body": "WIRING HIERARCHY (3-tier structured cabling):\n\n  Entrance Facility (EF)\n       ↓\n  Main Distribution Frame (MDF)\n       ↓ (vertical/backbone cabling)\n  Intermediate Distribution Frame (IDF) — one per floor / wiring closet\n       ↓ (horizontal cabling — max 90m)\n  Work Area (end devices)\n\nMDF:\n  • Houses core/distribution switches, routers, WAN connections, patch panels\n  • Central point for the entire building's network\n  • Connects to all IDFs via backbone cabling (fiber between floors)\n\nIDF:\n  • Floor-level or zone-level wiring closet\n  • Houses access layer switches, patch panels\n  • Connected to MDF via riser cables (fiber or Cat6A)\n  • Contains: switch(es), patch panel, cable management, UPS\n\nHORIZONTAL CABLING (TIA-568):\n  • Max 90m permanent link + 10m for patch cables = 100m total\n  • Copper (Cat5e/Cat6/Cat6A) — 1000BASE-T up to 100m\n  • Fiber for IDF→MDF runs (exceeds copper limit)",
+      "body": "WIRING HIERARCHY (3-tier structured cabling):\n\n  Entrance Facility (EF)\n       \u2193\n  Main Distribution Frame (MDF)\n       \u2193 (vertical/backbone cabling)\n  Intermediate Distribution Frame (IDF) \u2014 one per floor / wiring closet\n       \u2193 (horizontal cabling \u2014 max 90m)\n  Work Area (end devices)\n\nMDF:\n  \u2022 Houses core/distribution switches, routers, WAN connections, patch panels\n  \u2022 Central point for the entire building's network\n  \u2022 Connects to all IDFs via backbone cabling (fiber between floors)\n\nIDF:\n  \u2022 Floor-level or zone-level wiring closet\n  \u2022 Houses access layer switches, patch panels\n  \u2022 Connected to MDF via riser cables (fiber or Cat6A)\n  \u2022 Contains: switch(es), patch panel, cable management, UPS\n\nHORIZONTAL CABLING (TIA-568):\n  \u2022 Max 90m permanent link + 10m for patch cables = 100m total\n  \u2022 Copper (Cat5e/Cat6/Cat6A) \u2014 1000BASE-T up to 100m\n  \u2022 Fiber for IDF\u2192MDF runs (exceeds copper limit)",
       "key_points": [
         "MDF = building's core network hub. IDF = floor/zone distribution point.",
         "Horizontal cabling limit: 90m permanent link + 10m patch = 100m total (TIA-568).",
-        "Backbone/vertical cabling connects MDF to IDFs — typically fiber (exceeds 100m copper limit).",
-        "66 block (voice/legacy) vs 110 block (data) vs patch panel (modern) — exam knows all three.",
+        "Backbone/vertical cabling connects MDF to IDFs \u2014 typically fiber (exceeds 100m copper limit).",
+        "66 block (voice/legacy) vs 110 block (data) vs patch panel (modern) \u2014 exam knows all three.",
         "Demarcation point (demarc): where ISP's responsibility ends and customer's begins (usually at entrance facility).",
-        "Smart jack (NID/NIU): ISP equipment at demarc — tests circuit from ISP side."
+        "Smart jack (NID/NIU): ISP equipment at demarc \u2014 tests circuit from ISP side."
       ]
     },
     {
       "title": "UPS Types & Power Infrastructure",
       "type": "table",
-      "headers": ["UPS Type", "How it works", "Switchover time", "Power quality", "Cost"],
+      "headers": [
+        "UPS Type",
+        "How it works",
+        "Switchover time",
+        "Power quality",
+        "Cost"
+      ],
       "rows": [
-        ["Offline / Standby", "Passes utility power directly; battery + inverter only switch on during outage", "5–25 ms (brief gap)", "Basic surge/spike protection only", "Lowest"],
-        ["Line-Interactive", "Voltage regulator (AVR) adjusts output continuously; battery activates for total failure", "< 4 ms", "Good — handles sags and swells without battery", "Medium"],
-        ["Online / Double Conversion", "Always runs through inverter — utility charges battery, inverter powers load 100% of time", "0 ms (no transfer)", "Best — clean, regulated, isolated from utility", "Highest"]
+        [
+          "Offline / Standby",
+          "Passes utility power directly; battery + inverter only switch on during outage",
+          "5\u201325 ms (brief gap)",
+          "Basic surge/spike protection only",
+          "Lowest"
+        ],
+        [
+          "Line-Interactive",
+          "Voltage regulator (AVR) adjusts output continuously; battery activates for total failure",
+          "< 4 ms",
+          "Good \u2014 handles sags and swells without battery",
+          "Medium"
+        ],
+        [
+          "Online / Double Conversion",
+          "Always runs through inverter \u2014 utility charges battery, inverter powers load 100% of time",
+          "0 ms (no transfer)",
+          "Best \u2014 clean, regulated, isolated from utility",
+          "Highest"
+        ]
       ],
       "key_points": [
-        "Offline UPS: basic and cheap — OK for desktops. NOT suitable for sensitive servers.",
-        "Line-Interactive: best value for small server rooms — AVR handles brownouts without depleting battery.",
-        "Online (Double Conversion): gold standard for data centers — zero transfer time, cleanest power.",
+        "Offline UPS: basic and cheap \u2014 OK for desktops. NOT suitable for sensitive servers.",
+        "Line-Interactive: best value for small server rooms \u2014 AVR handles brownouts without depleting battery.",
+        "Online (Double Conversion): gold standard for data centers \u2014 zero transfer time, cleanest power.",
         "UPS runtime: determined by battery capacity (Ah) vs load (W). More load = shorter runtime.",
         "PDU (Power Distribution Unit): rack-mounted power strip. 'Smart PDU' monitors per-outlet wattage.",
         "Generator: long-term backup power; UPS bridges the gap while generator spins up (~10-30 sec).",
@@ -269,14 +646,57 @@
     {
       "title": "Physical Environment & Data Center Standards",
       "type": "concept",
-      "body": "HOT AISLE / COLD AISLE (ASHRAE standard):\n  • Server racks arranged in alternating rows facing each other\n  • Cold aisle: server fronts face each other ← cold air delivered from floor/CRAC unit\n  • Hot aisle: server rears face each other → hot exhaust vented to return/ceiling\n  • Prevents hot and cold air from mixing → improves cooling efficiency\n\nRACK UNITS:\n  • 1U = 1.75 inches of vertical rack space\n  • Standard rack = 42U\n  • 'Half-depth' servers: 2-post rack (open frame); full-depth servers need 4-post rack\n\nENVIRONMENTAL MONITORING:\n  • Temperature: ASHRAE A2 class = 10°C–35°C (50°F–95°F) for most IT equipment\n  • Humidity: 40–60% RH recommended. Too low → ESD risk. Too high → condensation.\n  • Environmental sensors alert on temp/humidity out of range\n\nFIRE SUPPRESSION:\n  • NEVER water in a server room — use clean agent suppression\n  • FM-200 (HFC-227ea): fast, leaves no residue, safe for occupied rooms\n  • Halon: replaced by FM-200 (Halon depletes ozone — banned for new installations)\n  • CO₂: effective but displaces oxygen — evacuate before activation\n\nPHYSICAL SECURITY:\n  • Mantrap (airlock): two doors — only one opens at a time\n  • Biometric + badge: multi-factor physical access\n  • CCTV: surveillance logging for audit trails",
+      "body": "HOT AISLE / COLD AISLE (ASHRAE standard):\n  \u2022 Server racks arranged in alternating rows facing each other\n  \u2022 Cold aisle: server fronts face each other \u2190 cold air delivered from floor/CRAC unit\n  \u2022 Hot aisle: server rears face each other \u2192 hot exhaust vented to return/ceiling\n  \u2022 Prevents hot and cold air from mixing \u2192 improves cooling efficiency\n\nRACK UNITS:\n  \u2022 1U = 1.75 inches of vertical rack space\n  \u2022 Standard rack = 42U\n  \u2022 'Half-depth' servers: 2-post rack (open frame); full-depth servers need 4-post rack\n\nENVIRONMENTAL MONITORING:\n  \u2022 Temperature: ASHRAE A2 class = 10\u00b0C\u201335\u00b0C (50\u00b0F\u201395\u00b0F) for most IT equipment\n  \u2022 Humidity: 40\u201360% RH recommended. Too low \u2192 ESD risk. Too high \u2192 condensation.\n  \u2022 Environmental sensors alert on temp/humidity out of range\n\nFIRE SUPPRESSION:\n  \u2022 NEVER water in a server room \u2014 use clean agent suppression\n  \u2022 FM-200 (HFC-227ea): fast, leaves no residue, safe for occupied rooms\n  \u2022 Halon: replaced by FM-200 (Halon depletes ozone \u2014 banned for new installations)\n  \u2022 CO\u2082: effective but displaces oxygen \u2014 evacuate before activation\n\nPHYSICAL SECURITY:\n  \u2022 Mantrap (airlock): two doors \u2014 only one opens at a time\n  \u2022 Biometric + badge: multi-factor physical access\n  \u2022 CCTV: surveillance logging for audit trails",
       "key_points": [
         "Hot/cold aisle containment: alternating front-to-front and back-to-back rack rows.",
         "1U = 1.75 inches. Standard rack = 42U (~7 feet). Know this for port density questions.",
-        "ASHRAE A2 temperature range: 10°C–35°C — most servers today can tolerate this range.",
-        "FM-200 = safe clean agent for occupied server rooms. CO₂ requires evacuation.",
-        "ESD (Electrostatic Discharge): risk when humidity too low — ground strap, anti-static mats.",
+        "ASHRAE A2 temperature range: 10\u00b0C\u201335\u00b0C \u2014 most servers today can tolerate this range.",
+        "FM-200 = safe clean agent for occupied server rooms. CO\u2082 requires evacuation.",
+        "ESD (Electrostatic Discharge): risk when humidity too low \u2014 ground strap, anti-static mats.",
         "Raised floor: allows underfloor cable management and cold air distribution from CRAC units."
+      ]
+    }
+  ],
+  "2.5": [
+    {
+      "title": "PoE Standards Quick Reference",
+      "type": "table",
+      "headers": [
+        "Standard",
+        "Power",
+        "Use Case"
+      ],
+      "rows": [
+        [
+          "802.3af (Type 1)",
+          "15.4W",
+          "Basic VoIP phones, basic sensors"
+        ],
+        [
+          "802.3at (Type 2 / PoE+)",
+          "30W",
+          "PTZ cameras, high-power APs"
+        ],
+        [
+          "802.3bt (Type 3/4)",
+          "60W - 90W",
+          "HD Video units, multi-gigabit devices"
+        ]
+      ]
+    },
+    {
+      "title": "PoE Power Negotiation & Budgeting",
+      "type": "concept",
+      "body": "Power is negotiated between the Powered Device (PD) and the Power Sourcing Equipment (PSE). Management of the total power budget is critical: a switch with a limited budget must account for individual port requirements (e.g., 15.4W/30W) to avoid over-subscription."
+    },
+    {
+      "title": "Cable & Infrastructure Considerations",
+      "type": "list",
+      "key_points": [
+        "Cat5e minimum for basic 802.3af (15.4W)",
+        "Cat6 or better recommended for longer runs to minimize power loss",
+        "Bundle limits: High-wattage PoE can cause heat buildup in large cable bundles",
+        "Distance limit: Max run length is 100m; cable resistance reduces available wattage at the end of long runs"
       ]
     }
   ]

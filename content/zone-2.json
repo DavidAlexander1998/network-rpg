@@ -296,6 +296,27 @@
           "tags": ["wireless", "wifi", "5ghz", "2.4ghz"]
         },
         {
+          "id": "z2-n3-study-002",
+          "zone": 2,
+          "node": 2.3,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Bouncer's Secret Handshake: WPA2 vs WPA3",
+          "scenario": "Picture the Wi-Fi password as the secret password whispered to a bouncer outside an exclusive club. Under WPA2-Personal, every guest whispers the SAME password, and the bouncer confirms it during a brief exchange called the 4-way handshake. Here's the problem: a person standing nearby with a recording device (a packet sniffer) can capture that entire handshake exchange. They don't need to be inside the club to do this - just close enough to overhear it. Once recorded, they can take that recording home and try millions of guessed passwords against it on their own computer, completely offline, with nobody at the club ever knowing. This is an OFFLINE DICTIONARY ATTACK, and it's WPA2-PSK's biggest weakness if the password is weak or common.\n\nWPA3-Personal fixes this with a new handshake called SAE (Simultaneous Authentication of Equals), nicknamed the 'Dragonfly' handshake. Instead of whispering the password itself, both the guest and the bouncer perform a cryptographic exchange that PROVES each side knows the password WITHOUT ever transmitting it or anything derived from it in a crackable form. It's like a secret handshake where both people prove they know the secret hand gesture without ever showing the gesture to a bystander filming them. Even if the attacker records the entire SAE exchange, that recording is useless for offline guessing - they would have to interact with the live AP for every single guess, and the AP can detect and lock out repeated failed attempts. WPA3 also forces PMF (Protected Management Frames), which prevents an attacker from forging deauthentication frames to kick clients off the network and force a fresh handshake to capture.",
+          "question": "An attacker sits in a cafe's parking lot and passively records the WPA2-PSK 4-way handshake of the cafe's Wi-Fi as customers connect. They take the capture home to brute-force it overnight. If the cafe instead used WPA3-Personal (SAE), what would change about this attack?",
+          "options": [
+            "Nothing - SAE uses the same handshake as WPA2 and is equally vulnerable to offline cracking",
+            "The captured exchange would be useless for offline guessing - each password attempt requires live interaction with the AP, which can detect and throttle repeated failures",
+            "SAE eliminates the need for a password entirely, so there is nothing to capture",
+            "SAE only protects enterprise networks with a RADIUS server, so a personal/PSK cafe network gains no benefit"
+          ],
+          "correct_index": 1,
+          "explanation": "Correct: SAE (Simultaneous Authentication of Equals) is a Diffie-Hellman-based exchange. A passively captured SAE exchange gives an attacker nothing to brute-force offline - every guess requires a live round-trip with the AP, which can rate-limit or lock out an attacker making repeated attempts. Option A is wrong - this offline-cracking weakness is exactly what SAE was designed to fix versus WPA2-PSK's 4-way handshake. Option C is wrong - WPA3-Personal still uses a passphrase, SAE just changes how that passphrase is verified. Option D is wrong - SAE replaces PSK in WPA3-Personal (no RADIUS needed); WPA3-Enterprise is a separate, additional mode.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": ["wpa3", "sae", "wireless-security", "wpa2"]
+        },
+        {
           "id": "z2-n3-001",
           "zone": 2,
           "node": 2.3,
@@ -366,6 +387,27 @@
           "tags": ["ethernet", "cabling", "stp", "utp", "physical-layer"]
         },
         {
+          "id": "z2-n4-study-002",
+          "zone": 2,
+          "node": 2.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Corporate Org Chart: MDF and IDF Wiring Hierarchy",
+          "scenario": "Think of a large company's mail system spread across a 10-story office tower. All mail to and from the outside world - the postal trucks, the courier deliveries - arrives at one central mailroom in the lobby. This central mailroom is the MDF (Main Distribution Frame): it houses the core switches, routers, the connection to the ISP (the demarc), and the main patch panels. From here, big bundles of pre-sorted mail are sent up to each floor through a pneumatic tube system - this is your BACKBONE (vertical) CABLING, almost always fiber, because a single run from the lobby to the 10th floor would be far too long for copper.\n\nEach floor has its own small mail room - this is the IDF (Intermediate Distribution Frame). The floor's mail clerk (an access-layer switch) takes the bundle that arrived via the pneumatic tube and sorts it into individual mail slots for each office door on that floor. The walk from the floor's mail room to each individual office door is the HORIZONTAL CABLING - and TIA-568 says that walk (the permanent link) cannot be longer than 90 meters, with up to another 10m of patch cable on each end for a 100m total channel. If an office is too far from its floor's mail room, the clerk simply cannot reach it with a single run.\n\nThe key insight: MDF = one central hub for the whole building. IDF = one distribution point per floor or wing, feeding off the MDF via backbone cabling, then feeding end devices via horizontal cabling.",
+          "question": "A new office is being fitted out on the 8th floor of a building whose MDF is in the basement. The office desk is 70 meters of cable away from the 8th floor's IDF, but the IDF itself is connected to the basement MDF via a 200-meter fiber backbone run. Is this a valid design?",
+          "options": [
+            "No - the desk's 70m run plus the 200m backbone exceeds the 100m TIA-568 limit, so the whole path is non-compliant",
+            "Yes - the 90m/100m TIA-568 horizontal cabling limit applies only to the IDF-to-desk run (70m, which is fine); the IDF-to-MDF backbone uses fiber, which is not bound by the 100m copper limit",
+            "No - IDFs are not allowed to connect to desks directly, only to the MDF",
+            "Yes, but only if the backbone cabling is also copper to keep latency consistent"
+          ],
+          "correct_index": 1,
+          "explanation": "Correct: The 90m permanent link / 100m total channel limit from TIA-568 applies to HORIZONTAL copper cabling - the IDF-to-work-area run, here 70m, well within budget. The backbone (vertical) cabling between the IDF and MDF is typically fiber precisely because it often needs to span much greater distances than 100m, and fiber's distance limits are measured in kilometers. Option A incorrectly adds the two runs together as if they were one copper segment. Option C is wrong - connecting end devices is the IDF's entire purpose. Option D is backwards - fiber is preferred for long backbone runs specifically because it ISN'T limited like copper.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": ["mdf", "idf", "cabling", "tia-568", "infrastructure"]
+        },
+        {
           "id": "z2-n4-001",
           "zone": 2,
           "node": 2.4,
@@ -434,6 +476,27 @@
           "xp_reward": 50,
           "bits_reward": 25,
           "tags": ["poe", "802.3af", "power-over-ethernet"]
+        },
+        {
+          "id": "z2-n5-study-002",
+          "zone": 2,
+          "node": 2.5,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Power Plant Manager: Budgeting the Grid",
+          "scenario": "You've been promoted from grid technician to Power Plant Manager. Your PoE switch is the plant, and it has a fixed total output called the POWER BUDGET - say, 400 watts total to share across all 24 ports. Every device you plug in is a 'customer' requesting a service tier from your grid. A basic VoIP phone (802.3af, up to 15.4W) is like a small house requesting residential service. A PTZ security camera or a Wi-Fi 6 access point (802.3at / PoE+, up to 30W) is like a small business requesting commercial service - roughly double the residential allotment. The newest 802.3bt (PoE++) devices, like multi-radio APs or PTZ cameras with heaters, can request up to 60W (Type 3) or 90W (Type 4) - industrial-grade service.\n\nAs the plant manager, you cannot promise more total power than your plant can generate. If your 400W plant already has 350W reserved for existing customers, and a new industrial customer (90W) tries to connect, you simply cannot serve them - the switch will refuse to power that port (or power it at a reduced/no level) rather than risk an overload. This is why before deploying a batch of new PoE devices, you always do the math first: add up each device's CLASS-based power draw and compare it against your switch's total power budget, leaving headroom for future growth.",
+          "question": "A 24-port switch advertises a 400W PoE power budget. The network team plans to deploy 10 Wi-Fi 6 access points, each negotiating as 802.3at (PoE+) Class 4 devices drawing 25.5W each. After installing all 10 APs, how much of the power budget remains, and is the deployment safe?",
+          "options": [
+            "255W consumed, 145W remaining - safe, with headroom for a few more low-power devices like phones",
+            "400W consumed exactly - safe, but with zero headroom for any future devices",
+            "255W consumed, but unsafe because PoE+ devices require the switch to reserve double their rated class power",
+            "510W consumed - unsafe, exceeds the 400W budget by 110W"
+          ],
+          "correct_index": 0,
+          "explanation": "Correct: 10 APs x 25.5W = 255W. 400W - 255W = 145W remaining - plenty of headroom for additional devices like a few VoIP phones (15.4W each) later. Option B miscounts the total as exactly 400W. Option C invents a 'double reservation' rule that doesn't exist - the switch reserves the negotiated class wattage, not double it. Option D doubles the AP count's power draw incorrectly (10 x 51W instead of 10 x 25.5W). Always do this arithmetic BEFORE a rollout - running out of power budget mid-deployment means some APs simply won't power on.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": ["poe", "power-budget", "802.3at", "calculation"]
         },
         {
           "id": "z2-n5-001",

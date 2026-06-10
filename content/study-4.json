@@ -73,6 +73,17 @@
         "Insider threat: hardest to detect — has legitimate credentials. Defence: least privilege, DLP, audit logs.",
         "Script kiddies: unsophisticated but can still cause damage with off-the-shelf tools."
       ]
+    },
+    {
+      "title": "Threat Actor Mnemonic — \"Sneaky Hackers Inside Often Attack\"",
+      "type": "mnemonic",
+      "body": "Sneaky Hackers Inside Often Attack = the 5 threat actor types:\nScript kiddie → low skill, downloaded tools, no real motive.\nHacktivist → ideology, wants to be SEEN.\nInsider → already has access — hardest to detect.\nOrganized crime → money (ransomware, fraud).\nAPT/nation-state → patient, stealthy, long-term access.",
+      "key_points": [
+        "Hacktivist wants visibility; APT wants the opposite — long-term stealth.",
+        "Insider threats are hard to catch because the access itself isn't suspicious.",
+        "Sophistication/resourcing roughly increases left→right in the mnemonic.",
+        "Quickest exam tell-apart: ideology vs money vs espionage."
+      ]
     }
   ],
   "4.2": [
@@ -118,6 +129,17 @@
         "Honeypot: zero legitimate traffic expected — any access = suspicious. High signal-to-noise ratio for alerts.",
         "Zero Trust: 'never trust, always verify' — no implicit trust based on network location. Every access request authenticated/authorized.",
         "Defense in depth: multiple overlapping security layers — compromising one layer doesn't mean full compromise."
+      ]
+    },
+    {
+      "title": "The DMZ Sandwich — Two-Firewall Design",
+      "type": "concept",
+      "body": "Internet → FW1 → DMZ (web/mail/DNS servers) → FW2 → Internal LAN.\nDMZ = the filling — reachable from outside, but can't freely reach the LAN.\nFW1: only DMZ-bound traffic gets in. FW2: only specific DMZ→LAN flows allowed (e.g., web server → DB on one port).",
+      "key_points": [
+        "If a DMZ server is compromised, FW2 still blocks it from roaming the LAN.",
+        "Single-firewall DMZ = a third interface/zone on one device — same logic, less redundancy.",
+        "Public-facing servers (web, mail, DNS) live in the DMZ — never the internal LAN.",
+        "Implicit deny on both firewalls — only explicitly permitted flows pass."
       ]
     }
   ],
@@ -187,6 +209,17 @@
         "OCSP stapling: server fetches OCSP response and 'staples' it to TLS handshake — client doesn't need to query OCSP separately.",
         "AES (symmetric) for bulk data. RSA/ECDH (asymmetric) for key exchange. Hybrid approach used in TLS.",
         "Self-signed certificate: signed by same entity that issued it — not trusted by others without explicit import."
+      ]
+    },
+    {
+      "title": "AH vs ESP — \"AH, No Hiding\"",
+      "type": "mnemonic",
+      "body": "AH (Authentication Header) = \"AH, no hiding\" — integrity + auth only, payload stays in cleartext. IP protocol 51.\nESP (Encapsulating Security Payload) = Encrypts, Seals, Protects — encryption + integrity + auth. IP protocol 50.\n\nAlmost every real deployment uses ESP.",
+      "key_points": [
+        "AH provides NO confidentiality — that's the whole mnemonic.",
+        "ESP is the one that actually encrypts the payload.",
+        "Protocol numbers: AH=51, ESP=50 — both ride directly on IP, not TCP/UDP.",
+        "Tunnel mode (whole packet) vs transport mode (payload only) applies to both."
       ]
     }
   ],

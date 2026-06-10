@@ -3,13 +3,12 @@
     {
       "title": "Static vs Dynamic Routing \u2014 Printed Directions vs GPS",
       "type": "concept",
-      "body": "STATIC ROUTING is like handing a driver a printed instruction sheet: 'To reach Warehouse A, take Highway 5, then Exit 12.' It never changes on its own \u2014 reliable, predictable, and uses zero CPU/bandwidth for upkeep. But if Highway 5 closes, the driver is stuck following directions to a dead end until a human rewrites the sheet.\n\nDYNAMIC ROUTING is like a GPS that talks to other GPS units in real time. If a bridge goes out, every GPS in the network hears about it within seconds and recalculates a new route automatically. The cost: the GPS units constantly chatter with each other (routing protocol overhead) and the math is more complex (SPF, DUAL, etc.).\n\nWHEN TO USE WHICH:\n  - Static: small networks, stub networks (only one way in/out), default routes, or a backup 'floating' route.\n  - Dynamic: anything with multiple paths, redundancy, or where the topology changes (links fail, new sites added).\n\nADMINISTRATIVE DISTANCE is the 'whose directions do I trust more' tiebreaker \u2014 if a router learns the SAME destination from both a static route AND a dynamic protocol, the lower AD wins (static AD=1 beats OSPF AD=110 by default).",
+      "body": "Static = printed directions: fixed route, zero overhead, doesn't adapt if the road closes.\nDynamic = GPS: routers share updates and reroute automatically, at the cost of CPU/bandwidth.\n\nUse static for stub networks, defaults, or backup routes. Use dynamic wherever topology changes or redundancy exists.",
       "key_points": [
-        "Static = printed directions: zero overhead, but doesn't adapt to outages.",
-        "Dynamic = live GPS: adapts automatically, but costs CPU/bandwidth to maintain.",
-        "Lower AD always wins when two sources disagree about the same route.",
-        "Mnemonic for the most-tested AD order (low to high): 'Cool Students Enjoy Eating Outrageous Recipes Indoors' = Connected(0), Static(1), eBGP(20), EIGRP(90), OSPF(110), RIP(120), iBGP(200).",
-        "A floating static route deliberately uses a HIGH AD so it only activates as a backup when the dynamic route disappears."
+        "AD = tiebreaker when two sources know the same route \u2014 lowest AD wins.",
+        "Static AD=1 beats OSPF AD=110 by default.",
+        "Mnemonic (low\u2192high AD): Connected(0), Static(1), eBGP(20), EIGRP(90), OSPF(110), RIP(120), iBGP(200).",
+        "Floating static route: deliberately set a HIGH AD so it's only a backup."
       ]
     },
     {

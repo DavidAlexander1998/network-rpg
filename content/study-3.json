@@ -142,13 +142,11 @@
     {
       "title": "Traffic Shaping vs Policing — The On-Ramp Meter vs The Speed Trap",
       "type": "concept",
-      "body": "Traffic SHAPING is like a metering light on a highway on-ramp: when too many cars arrive at once, the light holds some back in a queue and releases them at a steady, sustainable rate. Nothing is turned away — traffic is just smoothed out and slightly delayed, so the highway never gets overwhelmed. This is why shaping BUFFERS excess traffic instead of dropping it, at the cost of added latency.\n\nTraffic POLICING is like a speed trap: there's no warning and no queue. The moment a car exceeds the limit, it's pulled over (the packet is dropped or re-marked) — right then, with no smoothing. Policing enforces a hard ceiling instantly, with zero added delay, but excess traffic is simply discarded (or demoted), which can trigger retransmissions.\n\nBoth mechanisms typically use a TOKEN BUCKET: traffic within the bucket's tokens passes normally; traffic beyond it is either queued (shaping) or dropped/remarked (policing).",
+      "body": "Shaping = on-ramp metering light: holds excess traffic in a queue and releases it at a steady rate. Nothing dropped, but adds delay.\nPolicing = speed trap: excess traffic is dropped or re-marked instantly. No delay, but causes loss/retransmits.\n\nBoth use a token bucket — traffic within the bucket passes normally, traffic beyond it is queued (shaping) or dropped (policing).",
       "key_points": [
-        "Shaping = queue + delay excess traffic (smooths bursts, no loss, but adds latency) — common on outbound interfaces toward a slower link (e.g., a LAN-to-WAN uplink).",
-        "Policing = drop or re-mark excess traffic immediately (no buffering, no added delay, but causes loss/retransmits) — common on inbound interfaces to enforce a contracted rate (e.g., an ISP enforcing a customer's CIR).",
-        "Both use a token bucket: tokens accumulate at the contracted rate; sending consumes tokens; an empty bucket means the next packet is shaped (queued) or policed (dropped).",
-        "Shaping smooths bursty traffic into a steady stream — ideal for protecting a downstream bottleneck without triggering TCP retransmissions.",
-        "Policing protects the network FROM a sender exceeding its agreed rate — common at ISP demarcation points and data center ingress."
+        "Shaping: queue + delay, no loss — used outbound toward a slower link.",
+        "Policing: drop/re-mark, no delay — used inbound to enforce a contracted rate (e.g., ISP CIR).",
+        "Shaping smooths bursts; policing protects the network from a sender exceeding its rate."
       ]
     }
   ],
@@ -208,13 +206,12 @@
     {
       "title": "Change Management Order — \"Rita Cooks Wonderful Indian Tacos, Daily\"",
       "type": "mnemonic",
-      "body": "A formal network change always follows the same order, and skipping a step is the #1 cause of 'who approved this?!' incidents. Use the sentence 'Rita Cooks Wonderful Indian Tacos, Daily' to lock in the sequence:\n\n  Rita = RFC (Request for Change) — document what, why, when, and how to undo it\n  Cooks = CAB (Change Advisory Board) — reviews risk and approves/rejects\n  Wonderful = Window (the scheduled maintenance period — usually low-traffic hours)\n  Indian = Implementation — execute the documented procedure step by step\n  Tacos = Testing — verify the change actually achieved its goal\n  Daily = Documentation — update diagrams, configs, and IP records to reflect the new reality\n\nIf something breaks during Implementation or Testing, ROLLBACK happens before you ever reach Documentation — using the rollback plan written into the original RFC.",
+      "body": "\"Rita Cooks Wonderful Indian Tacos, Daily\" = the change order:\nRita=RFC (request, scope, rollback plan) → Cooks=CAB (approves) → Wonderful=Window (maintenance time) → Indian=Implementation → Tacos=Testing → Daily=Documentation.\n\nIf Implementation/Testing fails, ROLLBACK happens before Documentation.",
       "key_points": [
-        "Standard change = pre-approved, low-risk, repeatable — skips full CAB review (e.g., adding a user account).",
-        "Normal change = full RFC + CAB cycle, the sequence above in full.",
-        "Emergency change = implement first to stop the bleeding, but RFC/CAB/documentation still happen retroactively — 'fix first, document second'.",
-        "A change without a rollback plan is not ready for the CAB — risk assessment is incomplete without one.",
-        "Configuration backups are taken BEFORE implementation, so a rollback has something to restore to."
+        "Standard change = pre-approved, low-risk, skips full CAB.",
+        "Normal change = full RFC + CAB cycle (the mnemonic above).",
+        "Emergency change = fix first, document/CAB after.",
+        "Always back up config BEFORE implementing — gives rollback something to restore."
       ]
     }
   ],
@@ -261,15 +258,13 @@
       ]
     },
     {
-      "title": "Parity — The Study Group's Answer-Check Sheet",
+      "title": "Parity — One Disk of Math, Not Data",
       "type": "concept",
-      "body": "Picture four students each writing down a single digit (0-9) as their 'data'. A fifth student, the 'parity checker', doesn't write data — instead, for every problem, they record a value calculated FROM the other four answers (using XOR, the same math RAID controllers use). If any ONE of the four students loses their sheet, the parity checker's value PLUS the three remaining sheets is enough to mathematically recompute exactly what was on the lost sheet.\n\nThis is exactly how RAID 5 PARITY works: across a 'stripe' (one row of data spread across all disks), one disk's worth of space holds a parity block computed from all the others. Lose any ONE disk, and the controller reconstructs its data on-the-fly from parity + the surviving disks.\n\n'DISTRIBUTED' parity (used by RAID 5/6) means the parity-checker role ROTATES — stripe 1's parity might live on disk 4, stripe 2's on disk 3, and so on — so no single disk becomes a write bottleneck.\n\nRAID 6 adds a SECOND independent parity calculation (often called P and Q, using different math) per stripe — so it can lose TWO disks and still reconstruct everything, at the cost of more capacity and write overhead.",
+      "body": "Parity = checksum (XOR) across all data disks in a stripe. Takes ~1 disk of capacity, any array size. Lose 1 disk → parity + survivors rebuild it.\n\n'Distributed' = parity rotates across all disks (no bottleneck).",
       "key_points": [
-        "Parity is calculated data (via XOR), not a copy — it takes roughly ONE disk's worth of space regardless of array size.",
-        "RAID 5 = one parity block per stripe → survives exactly ONE disk failure.",
-        "RAID 6 = two independent parity blocks (P+Q) per stripe → survives TWO simultaneous disk failures.",
-        "'Distributed' parity rotates which physical disk holds the parity block for each stripe, spreading the write load evenly.",
-        "Rebuilding a failed disk means reading EVERY remaining disk to recompute the missing data — this is why large RAID 5 arrays have long, risky rebuild windows (a second failure during rebuild = total data loss)."
+        "RAID 5 = 1 parity block → survives 1 disk failure.",
+        "RAID 6 = 2 parity blocks (P+Q) → survives 2 disk failures.",
+        "Rebuild reads ALL surviving disks — long rebuild = 2nd-failure risk."
       ]
     }
   ],
@@ -332,13 +327,12 @@
     {
       "title": "GFS Backup Rotation — The Family Tree of Backup Sets",
       "type": "concept",
-      "body": "GFS (Grandfather-Father-Son) is the classic three-tier rotation scheme for deciding WHICH backups you keep and for HOW LONG, balancing storage cost against how far back in time you can restore.\n\n  SON = the daily backup. Short retention — typically overwritten/recycled within a week. Gives you fine-grained 'restore yesterday's file' coverage.\n  FATHER = the weekly backup. Medium retention — typically kept for about a month. One of the week's 'sons' gets PROMOTED to become that week's 'father' and is kept longer instead of being recycled.\n  GRANDFATHER = the monthly backup. Long retention — often kept for a year and moved offsite for archival/compliance. One of the month's 'fathers' gets promoted to become that month's 'grandfather'.\n\nThe key idea is PROMOTION: you don't run separate daily/weekly/monthly jobs that triple your storage — instead, the SAME backup job runs daily, but certain runs (e.g., the Friday one, or the last day of the month) get pulled aside and retained longer instead of being recycled on the normal daily schedule.",
+      "body": "GFS (Grandfather-Father-Son) = 3-tier backup retention.\nSon = daily, kept days. Father = weekly, kept ~a month. Grandfather = monthly, kept ~a year (often offsite).\n\nKey idea: PROMOTION — the same daily job is just retained longer on certain days, not run 3x.",
       "key_points": [
-        "GFS balances cost vs. restorability: keeping every daily backup forever is too expensive; deleting old backups too soon means you can't recover from a problem discovered weeks later.",
-        "Promotion, not duplication: one backup run can serve as that day's 'son', that week's 'father', AND that month's 'grandfather' — it's the SAME data, just retained on different schedules.",
-        "Grandfather (monthly) backups are the best candidates for OFFSITE/cold storage — they change infrequently and satisfy long-term compliance retention requirements.",
-        "GFS works with any backup TYPE underneath it (full, incremental, or differential) — GFS controls retention/rotation, not the backup method itself.",
-        "Test restores from each tier periodically — a 9-month-old grandfather tape that fails to restore defeats the entire point of long retention."
+        "Balances storage cost vs how far back you can restore.",
+        "Grandfather (monthly) tapes are best candidates for offsite/cold storage.",
+        "Works with any backup type underneath (full/incremental/differential).",
+        "Test restores from each tier — an untested grandfather tape is worthless."
       ]
     }
   ]

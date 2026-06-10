@@ -9,6 +9,46 @@
       "description": "Attack types, social engineering, DDoS categories, and threat actors.",
       "encounters": [
         {
+          "id": "z4-n1-study-001",
+          "zone": 4,
+          "node": 4.1,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Unwanted House Guests: A Malware Taxonomy",
+          "scenario": "Imagine your network as a house, and malware as different kinds of unwanted guests who get in. A VIRUS is a guest who can't get in by themselves — they need YOU to open the door (a user must run an infected file/macro), and once inside they attach themselves to your other belongings (host files), spreading only when those items are shared. A WORM doesn't need an invitation at all — it picks the lock itself, lets itself in, and then crawls through the walls to every connected house on the street, completely on its own (self-propagating across a network, no user action required). A TROJAN walks up disguised as a delivery driver carrying a box labeled 'free software' — you let it in voluntarily because it LOOKS legitimate, but the box contains something else entirely. A ROOTKIT doesn't just enter the house — it hides inside the walls and rewires the security cameras (embeds at the OS/kernel level) so that even when you check 'who's in my house,' the guest is invisible to normal tools. A KEYLOGGER/SPYWARE quietly photocopies your mail before resealing it and putting it back — you never notice anything is missing, but every password you type gets copied. A LOGIC BOMB is a guest who plants a hidden device in the basement that does nothing... until a specific date or condition is met (e.g., a disgruntled admin's account being disabled), at which point it detonates.",
+          "question": "An employee opens an email attachment disguised as an invoice. Nothing visibly happens, but weeks later, security analysts discover the program has been embedded in the OS kernel, hiding its own process from Task Manager and antivirus scans, while a separate hidden routine is set to wipe the file server on the date the employee's manager is scheduled to leave the company. Which TWO malware characteristics are present in this scenario?",
+          "options": [
+            "A worm (self-propagating across the network) and a virus (requires a host file to spread)",
+            "A trojan (disguised as a legitimate file to gain initial entry) combined with a rootkit (kernel-level hiding) and a logic bomb (triggers on a future condition)",
+            "Ransomware (encrypts files for payment) and spyware (logs keystrokes)",
+            "A logic bomb only — the disguised attachment and kernel hiding are both side effects of the same logic bomb mechanism"
+          ],
+          "correct_index": 1,
+          "explanation": "The disguised invoice attachment is classic TROJAN behavior — malware that gains entry by LOOKING like something legitimate the user wants to open. 'Hiding its own process from Task Manager and antivirus' at the OS/kernel level is the defining trait of a ROOTKIT. The hidden routine that activates on a future date/condition (the manager's departure date) is a LOGIC BOMB. Option A is wrong: nothing in the scenario describes self-propagation to other hosts (worm) or attaching to other files to spread (virus) — the malware arrived via a single targeted email and stayed on one system. Option C is wrong: there's no mention of files being encrypted for ransom, and while keylogging IS a form of spyware, the scenario describes a kernel-hiding mechanism and a timed wipe, not credential logging. Option D is wrong: a logic bomb is just the TRIGGER mechanism (wait for a condition, then act) — it doesn't explain HOW the malware got in (trojan) or HOW it stayed hidden (rootkit); these are three distinct, separately-named techniques working together, not one mechanism with three names.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["malware", "trojan", "rootkit", "logic-bomb", "taxonomy"]
+        },
+        {
+          "id": "z4-n1-study-002",
+          "zone": 4,
+          "node": 4.1,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Who's Casing the Building? Profiling Threat Actors",
+          "scenario": "Picture different kinds of people 'casing' a building before a break-in — each tells you something different about the threat. A SCRIPT KIDDIE is a teenager rattling door handles with a borrowed crowbar — low skill, using tools and exploits they downloaded and don't fully understand, often just to see what happens. A HACKTIVIST is a protester spray-painting a slogan on the wall in broad daylight — the goal is the MESSAGE and the VISIBILITY (a defacement, a leaked document, a DDoS with a press release), not staying hidden. ORGANISED CRIME is a professional burglary crew — methodical, financially motivated, here for something they can sell (data, ransomware payouts, fraud). An INSIDER THREAT is someone who already has a key to the building — a current or former employee misusing legitimate access, which is part of why insider threats are so hard to detect (the access itself isn't 'suspicious'). An ADVANCED PERSISTENT THREAT (APT), often nation-state sponsored, doesn't break in loudly at all — they rent the apartment next door for years and slowly tunnel through the wall, taking small amounts at a time and covering their tracks, prioritizing LONG-TERM UNDETECTED ACCESS over a quick score.",
+          "question": "A forensic investigation traces a breach to a phishing email opened 14 months ago by an employee in the accounts department. Since that initial access, an external attacker has maintained undetected access to the file server, exfiltrating small amounts of data during normal business hours specifically to blend in with regular traffic, with no public statement or visible disruption at any point. Which threat actor category does this MOST likely describe?",
+          "options": [
+            "Script kiddie — using a phishing email is the hallmark of a low-skill, off-the-shelf attack",
+            "Hacktivist — the long-term campaign shows a clear ideological commitment",
+            "Advanced Persistent Threat (APT) — the long dwell time, stealth, and low-and-slow exfiltration designed to blend in are the defining characteristics",
+            "Insider threat — only someone with existing employee credentials could access the file server for 14 months"
+          ],
+          "correct_index": 2,
+          "explanation": "The defining traits of an APT are right there in the name: ADVANCED (the attacker evaded detection for over a year by mimicking normal traffic patterns), PERSISTENT (14 months of continuous access), THREAT (ongoing data exfiltration). Option A is wrong: while phishing CAN be used by unsophisticated attackers, a script kiddie's activity is typically noisy and short-lived — sustaining undetected access for 14+ months while deliberately blending into normal business-hours traffic requires far more discipline and resources than 'borrowed tools.' Option B is wrong: hacktivism is defined by VISIBILITY — a defacement, a manifesto, a public DDoS — the scenario explicitly states there was 'no public statement or visible disruption,' which is the opposite of a hacktivist's goal. Option D is wrong: the scenario states the initial access came from an EXTERNAL attacker via a phishing email — the employee was a victim (their credentials/session were compromised), not the perpetrator; an external actor who gained a foothold and then operated patiently for over a year is the textbook APT pattern, regardless of whether the entry point happened to be a person.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["threat-actors", "apt", "insider-threat", "hacktivist"]
+        },
+        {
           "id": "z4-n1-001", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
           "question": "An attacker sends thousands of SYN packets to a server without completing the TCP handshake. What attack is this?",
           "options": ["UDP flood", "SYN flood (DoS — protocol attack)", "DNS amplification", "Ping of Death"],
@@ -149,6 +189,48 @@
       "description": "Firewalls, IDS/IPS, DMZ, network segmentation, and Zero Trust architecture.",
       "encounters": [
         {
+          "id": "z4-n2-study-001",
+          "zone": 4,
+          "node": 4.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Badge at the Door vs Badge at Every Door: Zero Trust",
+          "scenario": "Picture a traditional office building with ONE security checkpoint at the front entrance. Once you badge in there, you can walk to any floor, any office, any filing cabinet — nobody checks you again. This is PERIMETER-BASED security: a strong wall around the 'trusted' inside, and an 'untrusted' outside. The problem is obvious — if someone steals an employee's badge (or that employee's laptop gets compromised by phishing), they're INSIDE the building with full freedom of movement, and no further checks will catch them. ZERO TRUST flips this model: now EVERY door inside the building — every office, every cabinet, every server room — has its OWN badge reader, and it doesn't matter if you already badged in at the front. Every single access request is independently authenticated and authorized, based on the principle 'never trust, always verify,' regardless of whether the request came from inside or outside the traditional perimeter. A stolen badge still gets someone past the front door, but it won't open the server room, the HR files, or the finance database — each of those checks credentials again, every time.",
+          "question": "An employee's laptop is compromised via a phishing email while connected to the internal corporate Wi-Fi. In a traditional PERIMETER-based security model, what is the most significant immediate risk — and how would a Zero Trust architecture change that outcome?",
+          "options": [
+            "Traditional: the firewall would have already blocked the phishing email, so this scenario couldn't happen under either model.",
+            "Traditional: because the laptop is already 'inside' the trusted network, the attacker likely has broad lateral access to internal resources with no further checks; Zero Trust requires every resource access to be re-authenticated and authorized regardless of network location, sharply limiting lateral movement.",
+            "Traditional and Zero Trust behave identically once a device is connected to the internal network — the security model only affects external/remote connections.",
+            "Zero Trust would have prevented the phishing email from being delivered in the first place, since it inspects all inbound email content."
+          ],
+          "correct_index": 1,
+          "explanation": "This is the core motivation for Zero Trust: in a perimeter model, 'inside the network' is treated as inherently trustworthy, so a single compromised device can move laterally to other systems with minimal additional friction. Zero Trust removes that assumption — every access to every resource (file share, database, internal app) requires its own authentication/authorization check, so a compromised laptop's blast radius is contained to only what THAT session was explicitly granted, not 'everything on the LAN.' Option A is wrong: phishing emails frequently bypass email filtering (that's WHY this scenario is common in the real world) — no firewall or filter is 100% effective, which is exactly why architectures need to assume a breach will eventually occur. Option C is wrong: this is the opposite of Zero Trust's whole point — Zero Trust explicitly applies INSIDE the network too, treating internal traffic with the same scrutiny as external traffic, unlike perimeter models which only scrutinize the boundary. Option D is wrong: Zero Trust is an ACCESS CONTROL philosophy applied to resource requests (verify every request) — it is not primarily an email-filtering technology, and doesn't claim to stop phishing delivery itself."
+,
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["zero-trust", "perimeter-security", "lateral-movement"]
+        },
+        {
+          "id": "z4-n2-study-002",
+          "zone": 4,
+          "node": 4.2,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Broken Turnstile: Fail-Open vs Fail-Closed",
+          "scenario": "Imagine a subway turnstile that suddenly breaks. There are two ways it can fail. FAIL-OPEN: the turnstile arm springs open and stays open — everyone walks through freely, ticket or not. Commuters keep moving (availability is preserved), but ticket-checking has effectively stopped (security/inspection is gone) until someone fixes it. FAIL-CLOSED: the turnstile arm locks rigidly in place — NOBODY gets through, including people with valid tickets, until it's repaired. Security is preserved (nothing unchecked gets through), but availability is completely lost. An inline IPS (Intrusion Prevention System) sits directly in the traffic path, like that turnstile sits in the commuter's path — and when it crashes or loses power, it must be built (often via a hardware bypass/TAP) to do ONE of these two things. Neither choice is universally 'correct' — it's a deliberate tradeoff between availability and security that an organization configures based on what matters more for that specific link.",
+          "question": "A company deploys an inline IPS between its core switch and edge router. During a software update, the IPS crashes unexpectedly. Network monitoring shows that traffic continued flowing between the LAN and the internet throughout the crash, completely uninspected, until the IPS came back online 10 minutes later. Which failure mode was this IPS configured for, and what is the security implication?",
+          "options": [
+            "Fail-closed — all traffic was blocked until the IPS recovered, which is why the outage lasted 10 minutes.",
+            "Fail-open — traffic passed through uninspected during the outage, prioritizing availability over security; this represents a real (if temporary) security gap with zero intrusion detection/prevention active.",
+            "Active-active clustering — the IPS automatically failed over to a redundant unit with no service interruption or security gap.",
+            "This is impossible — an inline device that crashes must always stop all traffic through it, regardless of configuration."
+          ],
+          "correct_index": 1,
+          "explanation": "The scenario explicitly states traffic 'continued flowing... completely uninspected' — that is the definition of fail-open. The 10-minute window represents a real security gap: no IPS signatures were being checked, so any attack traffic during that window would have passed freely. Option A is wrong: fail-CLOSED would mean total connectivity loss during the crash (matching the turnstile that locks shut) — but the scenario describes the opposite, traffic continuing to flow. Option C is wrong: nothing in the scenario mentions a redundant unit or automatic failover — 'traffic continued uninspected' specifically rules out a seamless handoff to a working IPS, since a working failover unit WOULD still be inspecting traffic. Option D is wrong: this is precisely why fail-open hardware bypass exists — many inline security appliances include a physical bypass mechanism (a relay or optical switch) that, on power/software failure, directly connects the wire pairs so the link stays up even though the inspection engine is offline."
+,
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["ips", "fail-open", "fail-closed", "inline-security"]
+        },
+        {
           "id": "z4-n2-001", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
           "question": "The key difference between a stateless and stateful firewall is:",
           "options": ["Stateless firewalls are faster but inspect application payloads", "Stateful firewalls track connection state — return traffic is automatically permitted without explicit rules", "Stateless firewalls only work at Layer 7", "Stateful firewalls cannot filter by port number"],
@@ -276,6 +358,46 @@
       "description": "VPN technologies, IPsec modes, SSL/TLS, PKI, and cryptographic concepts.",
       "encounters": [
         {
+          "id": "z4-n3-study-001",
+          "zone": 4,
+          "node": 4.3,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Locked Box and the Key Courier: Hybrid Encryption in TLS",
+          "scenario": "Imagine you need to send a friend a heavy, locked strongbox full of documents, but you've never met them and share no secret. ASYMMETRIC encryption solves the 'we've never met' problem: your friend mails you their open PADLOCK (their public key) — anyone can click it shut, but only your friend's matching key (their private key) opens it. The catch: this lock-and-key math is far too slow to use on an entire strongbox of documents. So instead, you use the padlock to secure a tiny envelope containing a SHARED COMBINATION (a symmetric session key) — one small, slow operation. Once your friend opens that envelope with their private key, you BOTH hold the same combination, and from then on every document is locked and unlocked with that shared combination via fast SYMMETRIC encryption (like AES) — thousands of times faster than the padlock approach. Slow asymmetric crypto ONCE to agree on a key, then fast symmetric crypto for everything else: that's exactly what happens in a TLS handshake.",
+          "question": "A packet capture of a TLS handshake shows the client and server using RSA or ECDHE to agree on a 'pre-master secret,' but the bulk of the session's traffic is encrypted with AES-256-GCM. Why does TLS use TWO different types of encryption instead of just one?",
+          "options": [
+            "AES is considered insecure for key exchange, so RSA must always run first as a security upgrade",
+            "Asymmetric encryption (RSA/ECDHE) solves the problem of securely agreeing on a secret with no prior shared key, but it's computationally expensive; once both sides share a symmetric session key, fast AES handles the bulk data — this combination is called hybrid encryption",
+            "RSA encrypts the connection metadata while AES encrypts only the TCP headers",
+            "The handshake uses AES first to establish the connection, and RSA only encrypts the final few packets for extra protection"
+          ],
+          "correct_index": 1,
+          "explanation": "Asymmetric encryption (RSA key transport, or ECDHE for ephemeral key exchange) is the only practical way for two parties with no prior shared secret to agree on one — but its math is far too slow to encrypt megabytes of application data per second. Symmetric encryption like AES is extremely fast but requires both sides to already possess the same key. TLS combines both: use the slow asymmetric algorithm ONCE to establish a symmetric session key, then switch to fast AES for everything else — this is HYBRID encryption. Option A is wrong: AES isn't 'insecure' for key exchange — it's USELESS for it, because symmetric algorithms require the key to already be shared; security has nothing to do with the ordering. Option C is wrong: RSA/ECDHE establishes the session key, not 'metadata,' and AES encrypts the entire application payload, not just headers. Option D reverses the actual order — the asymmetric step happens FIRST to establish the symmetric key, and AES handles the bulk of the session afterward.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["TLS", "hybrid-encryption", "symmetric", "asymmetric", "key-exchange"]
+        },
+        {
+          "id": "z4-n3-study-002",
+          "zone": 4,
+          "node": 4.3,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Notarized Letter vs the Letter You Wrote Yourself: Certificate Trust Chains",
+          "scenario": "A digital certificate is a letter of introduction: 'I certify that this server really is hr.internal.corp.' The question is always WHO is making that certification, and do you already trust THEM? A certificate signed by a public CA (DigiCert, Let's Encrypt) is like a letter notarized by a notary your browser already recognizes — their root certificate ships pre-installed in your OS/browser trust store, so the chain is unbroken: you trust the notary, the notary vouches for the server, so you trust the server. A SELF-SIGNED certificate is a letter you wrote and signed yourself — it might say all the right things, but nobody else has reason to trust YOUR signature, since no chain leads back to a notary they recognize. Browsers flag this as 'untrusted' not because the ENCRYPTION is broken (the session can still be fully encrypted) but because the IDENTITY claim can't be verified through a trust chain. Many ORGANIZATIONS run their own INTERNAL CA and push its root certificate to all managed devices (via Group Policy or MDM) — to those devices, certificates signed by the internal CA are fully trusted, even though that CA isn't in any public trust store.",
+          "question": "An employee visiting https://hr.internal.corp on their personal laptop gets a 'Your connection is not private (NET::ERR_CERT_AUTHORITY_INVALID)' warning. A coworker visiting the exact same URL on a company-managed laptop sees no warning at all. What is the MOST likely explanation?",
+          "options": [
+            "The connection is unencrypted on the personal laptop but encrypted on the company laptop",
+            "The HR portal uses a certificate signed by the company's internal CA. The managed laptop has that internal CA's root certificate in its trusted store and can build a complete chain; the personal laptop doesn't, so the chain is broken — the connection may still be encrypted, but the identity can't be verified",
+            "The certificate has expired, but only according to the personal laptop's clock",
+            "This always indicates an active man-in-the-middle attack targeting the personal laptop specifically"
+          ],
+          "correct_index": 1,
+          "explanation": "The 'untrusted certificate authority' error means the browser couldn't build a chain of trust from the presented certificate back to a root CA it already trusts — it does NOT mean the connection isn't encrypted (TLS can still succeed even when identity verification fails, which is why browsers let you 'proceed anyway'). The classic cause for an INTERNAL site behaving differently across devices is a private CA: the managed laptop has the org's internal root CA pre-installed (pushed via MDM/Group Policy) and can validate the chain; the personal laptop never received that root certificate, so the same cert looks 'untrusted' to it. Option A is wrong: encryption and identity verification are separate checks — a cert can fail trust-chain validation while the connection is still encrypted. Option C is wrong: a clock-skew expiration error is a different message (NET::ERR_CERT_DATE_INVALID), and since both devices hit the same server with the same cert, real expiration would affect both — only one device erroring points to a trust-store difference. Option D is wrong: while cert warnings can indicate a MITM and shouldn't be dismissed casually, this clean a pattern (one device type errors, another doesn't, on an internal site) is far more consistent with a missing internal root CA than an active attack.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["PKI", "certificates", "trust-chain", "self-signed", "internal-CA"]
+        },
+        {
           "id": "z4-n3-001", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
           "question": "IPsec ESP (Encapsulating Security Payload) provides:",
           "options": ["Authentication only — no encryption", "Encryption, integrity, and authentication of the payload", "Only IP header authentication", "NAT traversal capability"],
@@ -394,6 +516,46 @@
       "name": "The Gatehouse",
       "description": "AAA, RADIUS, TACACS+, 802.1X, NAC, port security, DHCP snooping, DAI, and ACLs.",
       "encounters": [
+        {
+          "id": "z4-n4-study-001",
+          "zone": 4,
+          "node": 4.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "Showing ID at the Door: 802.1X EAP Types",
+          "scenario": "802.1X authentication can use different EAP methods, like different ways of proving who you are at a guarded door. With EAP-TLS, BOTH you and the guard show ID badges — mutual certificate authentication. It's the strongest option, but every single visitor needs a badge issued in advance (a client certificate from a PKI), which is a heavy administrative lift. With PEAP, only the GUARD shows ID first (a server certificate), establishing a private, encrypted booth; once inside that booth, YOU prove your identity the easy way — username and password (MSCHAPv2). No visitor badges needed, which makes PEAP far easier to roll out at scale. EAP-FAST is Cisco's lighter alternative: instead of a server certificate, it uses a pre-shared 'Protected Access Credential' (PAC) to set up that private booth. LEAP, Cisco's old proprietary method, skips the secure tunnel entirely and is crackable with offline dictionary tools (e.g., asleap) — it's deprecated and should never be used.",
+          "question": "A company wants strong, certificate-based MUTUAL authentication for a small number of high-security lab devices, while a separate department wants to roll out 802.1X to thousands of BYOD laptops WITHOUT installing a client certificate on each one. Which EAP types fit these two needs, respectively?",
+          "options": [
+            "EAP-FAST for the high-security devices; LEAP for the BYOD laptops",
+            "EAP-TLS for the high-security devices (mutual certificate auth — strongest available, but requires a client cert per device); PEAP for the BYOD laptops (server certificate builds an encrypted tunnel, then username/password authenticates inside it — no client cert needed)",
+            "LEAP for both, since it requires no certificates anywhere and works on any device",
+            "PEAP for the high-security devices (because it uses a tunnel) and EAP-TLS for the BYOD laptops (because it doesn't need a server certificate)"
+          ],
+          "correct_index": 1,
+          "explanation": "EAP-TLS requires a certificate on BOTH the client and server — the strongest mutual authentication available, but it demands a PKI capable of issuing, distributing, and revoking a certificate for every single device, making it best suited to a smaller pool of high-security endpoints. PEAP wraps a weaker inner method (username/password via MSCHAPv2) inside a TLS tunnel built using ONLY a server-side certificate — clients need no certificate at all, which is exactly what makes it practical for thousands of BYOD devices. Option A is wrong: EAP-FAST is a lighter PAC-based alternative roughly comparable to PEAP, not stronger than EAP-TLS, and LEAP is deprecated and insecure everywhere. Option C is wrong: LEAP's well-known vulnerability to offline dictionary attacks against MSCHAPv1 makes it unsuitable for any modern deployment, high-security or otherwise. Option D reverses the requirements: PEAP does NOT provide mutual certificate authentication (no client cert), and EAP-TLS specifically REQUIRES a server certificate to even start — making it the worst possible choice for a 'no certificates at all' BYOD rollout.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["802.1X", "EAP", "EAP-TLS", "PEAP", "authentication"]
+        },
+        {
+          "id": "z4-n4-study-002",
+          "zone": 4,
+          "node": 4.4,
+          "type": "study_encounter",
+          "difficulty": "medium",
+          "title": "The Echo Chamber: Broadcast Storms and Storm Control",
+          "scenario": "Picture a room where two people each hold a megaphone pointed at each other. If one shouts, the other repeats it back — louder and louder, forever. This is a Layer 2 LOOP: if two switch ports end up connected to each other (directly or through a redundant path with no loop prevention), a single broadcast frame gets forwarded back and forth endlessly, because Ethernet frames have NO TTL — nothing makes them expire. Within seconds this BROADCAST STORM consumes 100% of bandwidth and CPU on every switch in the loop, taking the whole segment down. Spanning Tree Protocol normally PREVENTS loops by blocking redundant paths before they ever carry traffic — but if STP is disabled, misconfigured, or a non-STP-aware device creates the loop, nothing stops it. STORM CONTROL is the safety net for that case: it's a switch port feature that monitors what percentage of a port's bandwidth is broadcast (and optionally multicast/unknown-unicast) traffic, and if that percentage exceeds a configured threshold, the switch drops the excess or err-disables the port — capping the damage even though it didn't prevent the loop itself.",
+          "question": "A junior tech accidentally connects both ends of a spare patch cable into two access ports on the same switch. STP has been globally disabled on this switch for unrelated troubleshooting. Within seconds, every device on the switch loses connectivity and CPU utilization spikes to 100%. Which feature, if configured on those access ports, would have limited the damage even with STP disabled?",
+          "options": [
+            "DHCP snooping — it would have blocked the looped traffic since it arrived on an untrusted port",
+            "Storm control — configured to monitor the percentage of broadcast traffic on each port and drop excess traffic or err-disable the port once a threshold is exceeded, capping the storm's impact regardless of why the loop exists",
+            "Port security — limiting MAC addresses per port would have stopped the broadcast storm, since loops generate excessive new MAC addresses",
+            "An extended ACL blocking broadcast traffic — ACLs are the standard mechanism switches use to limit broadcast storms"
+          ],
+          "correct_index": 1,
+          "explanation": "Storm control is purpose-built as a rate-based safety net for excessive broadcast/multicast/unknown-unicast traffic on a port — exactly the symptom of a Layer 2 loop, regardless of WHY the loop exists. It doesn't prevent the loop, but it caps the damage by dropping excess traffic or disabling the port before the storm saturates the switch. Option A is wrong: DHCP snooping filters DHCP messages and builds a binding table — it has nothing to do with broadcast storms or general loop traffic. Option C is wrong: port security limits how many distinct MAC addresses a port learns; a broadcast storm is the SAME frame looping endlessly, not a flood of new MAC addresses, so port security wouldn't trigger. Option D is wrong: ACLs filter routed traffic based on IP/port/protocol — they don't operate at the rate-based, Layer-2 broadcast-percentage level that storm control does, and aren't the standard tool for loop-induced storms.",
+          "xp_reward": 60, "bits_reward": 30,
+          "tags": ["storm-control", "layer2-loop", "broadcast-storm", "stp"]
+        },
         {
           "id": "z4-n4-001", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
           "question": "RADIUS uses which transport protocol and ports for authentication?",

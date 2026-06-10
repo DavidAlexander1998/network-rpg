@@ -42,6 +42,17 @@
         "If ping gateway fails but ping own IP works → local config issue (wrong mask, wrong gateway).",
         "Document the approach used — helps next engineer start where you left off."
       ]
+    },
+    {
+      "title": "The 7-Step Mnemonic — \"Ice Eaters Taste Everything In Vivid Detail\"",
+      "type": "mnemonic",
+      "body": "Ice Eaters Taste Everything In Vivid Detail = I-E-T-E-I-V-D, the 7 steps in order:\nIdentify → Establish theory → Test theory → Establish plan → Implement (or escalate) → Verify → Document.\n\nIf step 3 (Test) fails, loop back to step 2 — don't skip ahead to a fix.",
+      "key_points": [
+        "Step 3 fails → back to step 2, never jump straight to implementing.",
+        "Step 5: escalate if the fix is beyond your skill or authority.",
+        "Step 6: verify the FIX, and check nothing else broke.",
+        "Step 7: documenting is mandatory, not optional."
+      ]
     }
   ],
   "5.2": [
@@ -109,6 +120,17 @@
         "EMI: run data cables perpendicular to power cables when crossing; avoid running parallel and close.",
         "Shielded cable (STP/FTP): required near high-EMI sources — requires proper grounding to be effective."
       ]
+    },
+    {
+      "title": "dB Math — The Rule of 10s and 3s",
+      "type": "concept",
+      "body": "dB is logarithmic, but two shortcuts cover most exam math:\n±10dB = ×10 or ÷10 power.\n±3dB = ×2 or ÷2 power.\n\nExample: -13dB loss = -10dB (÷10) then -3dB (÷2) = original power ÷20.",
+      "key_points": [
+        "+dB = gain (amp/repeater). -dB = loss (attenuation, splices, connectors).",
+        "Typical loss: ~0.3-0.5dB per connector, ~0.1-0.2dB per splice.",
+        "Power meter reads dBm — compare against the transceiver's minimum receive sensitivity.",
+        "Add up all losses (connectors + splices + fiber length) and check against the link's dB budget."
+      ]
     }
   ],
   "5.3": [
@@ -138,6 +160,17 @@
         "arp -a: if gateway MAC resolves to attacker's MAC → ARP poisoning. If incomplete → ARP failing (Layer 2 issue).",
         "netstat -rn: routing table without DNS resolution — faster. Shows if default route (0.0.0.0) is present."
       ]
+    },
+    {
+      "title": "netstat Connection States — Reading the Conversation",
+      "type": "concept",
+      "body": "LISTENING = a service is waiting, but not yet talking to anyone.\nESTABLISHED = an active session — both sides exchanging data.\nTIME_WAIT = connection just closed, OS holding the socket briefly to catch stray packets.\nCLOSE_WAIT = remote side closed, but THIS host hasn't closed its end — often an app bug.",
+      "key_points": [
+        "Many LISTENING ports with nothing ESTABLISHED → service up, but no clients connecting.",
+        "Lots of CLOSE_WAIT → app isn't closing sockets — possible resource leak.",
+        "TIME_WAIT pile-up under load is normal — it self-clears after the OS timeout.",
+        "netstat -an: -a = all connections/listening ports, -n = numeric (no DNS lookups)."
+      ]
     }
   ],
   "5.4": [
@@ -162,6 +195,17 @@
         "Signal strength (dBm) vs signal quality: strong signal with high noise floor = still poor quality.",
         "Hidden SSID: client must manually enter SSID name — provides minimal security benefit, causes connection issues.",
         "Band steering: AP can push capable clients to 5GHz to reduce 2.4GHz congestion."
+      ]
+    },
+    {
+      "title": "Reading Wi-Fi Signal — dBm and SNR",
+      "type": "concept",
+      "body": "dBm is negative — closer to 0 is stronger:\n-30dBm = excellent (right next to the AP).\n-67dBm = usable minimum for VoIP/video.\n-80dBm or worse = unreliable, frequent retries.\n\nSNR = signal minus noise floor. Below ~20dB means low speeds even if the signal looks 'strong'.",
+      "key_points": [
+        "A strong signal (-40dBm) on a noisy channel can perform worse than a weaker, quiet one.",
+        "Roaming threshold: clients should switch APs around -67 to -70dBm, not wait for -80dBm.",
+        "RSSI scales differ by vendor — compare trends, not raw numbers, across devices.",
+        "High noise floor = more retransmits = lower throughput, even with full bars."
       ]
     }
   ],

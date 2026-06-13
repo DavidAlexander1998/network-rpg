@@ -1,7 +1,7 @@
 {
   "zone": 3,
   "name": "The Operations Bastion",
-  "description": "Network operations — monitoring, performance, documentation, HA, and disaster recovery.",
+  "description": "Network operations \u2014 monitoring, performance, documentation, HA, and disaster recovery.",
   "nodes": [
     {
       "id": 3.1,
@@ -12,7 +12,7 @@
           "id": "z3-n1-study-001",
           "zone": 3,
           "node": 3.1,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "SNMP: Traps vs. Polls",
           "scenario": "Learn the difference between 'polling' and 'traps' in SNMP management. Definition: A 'poll' is a manager requesting data (e.g., 'How much traffic on port 1?'), while a 'trap' is an unsolicited alert sent by a device (e.g., 'Alert! Port 1 just went down!'). Analogy: Think of polling like a security guard walking around checking every door at scheduled intervals, whereas a trap is a smoke detector that only alerts the fire department when it detects smoke immediately.",
@@ -27,16 +27,20 @@
           "explanation": "Correct: SNMP Traps are unsolicited notifications sent by an agent to the manager when a specific event occurs (like a link failure). Option A is incorrect because polling requires the manager to ask repeatedly. Option C (Ping) only tests reachability and does not provide specific status alerts. Option D is used for MAC address discovery.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["snmp", "traps", "monitoring"]
+          "tags": [
+            "snmp",
+            "traps",
+            "monitoring"
+          ]
         },
         {
           "id": "z3-n1-study-002",
           "zone": 3,
           "node": 3.1,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "Log Management: Syslog vs NetFlow",
-          "scenario": "Understand the difference between 'Syslog' (events) and 'NetFlow' (traffic patterns). Definition: Syslog provides a record of specific system events (e.g., 'User login failed' or 'Interface down'). NetFlow provides metadata about traffic flows (who, where, when, and how much data). Analogy: If your network were a city, Syslog would be the 911 emergency calls reporting specific incidents (a fire, a crime), while NetFlow is like the GPS tracking data of all vehicles on the road—it does not show the content of their conversation, but it shows where people are moving and how much traffic there is.",
+          "scenario": "Understand the difference between 'Syslog' (events) and 'NetFlow' (traffic patterns). Definition: Syslog provides a record of specific system events (e.g., 'User login failed' or 'Interface down'). NetFlow provides metadata about traffic flows (who, where, when, and how much data). Analogy: If your network were a city, Syslog would be the 911 emergency calls reporting specific incidents (a fire, a crime), while NetFlow is like the GPS tracking data of all vehicles on the road\u2014it does not show the content of their conversation, but it shows where people are moving and how much traffic there is.",
           "question": "An engineer is trying to identify which internal server is consuming the most bandwidth during peak hours. Which tool provides the best visibility for this?",
           "options": [
             "Syslog records",
@@ -48,119 +52,357 @@
           "explanation": "Correct: NetFlow provides granular statistics on traffic flows (source/destination IPs, ports, and volume), making it the ideal tool for capacity planning. Option A (Syslog) is for discrete system events like login failures or hardware errors. Option B (Traps) are just alerts. Option D (TTL) is used to determine hop counts, not bandwidth usage.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["syslog", "netflow", "traffic-analysis"]
+          "tags": [
+            "syslog",
+            "netflow",
+            "traffic-analysis"
+          ]
         },
         {
-          "id": "z3-n1-001", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-001",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "SNMP agents send unsolicited notifications to the NMS when an event occurs. What are these called?",
-          "options": ["Polls", "Traps", "Queries", "Informs"],
+          "options": [
+            "Polls",
+            "Traps",
+            "Queries",
+            "Informs"
+          ],
           "correct_index": 1,
           "explanation": "SNMP Traps are asynchronous notifications sent from an agent to the NMS (manager) without being polled. They are unreliable (UDP, no ACK). SNMPv2c/v3 Informs are similar but require acknowledgement.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SNMP", "Traps", "Monitoring"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SNMP",
+            "Traps",
+            "Monitoring"
+          ]
         },
         {
-          "id": "z3-n1-002", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-002",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Which UDP port does SNMP use for manager-to-agent queries?",
-          "options": ["514", "161", "162", "2055"],
+          "options": [
+            "514",
+            "161",
+            "162",
+            "2055"
+          ],
           "correct_index": 1,
           "explanation": "SNMP uses UDP 161 for manager-to-agent queries (GET, SET requests). UDP 162 is used for agent-to-manager traps/informs. UDP 514 is syslog. UDP 2055 is NetFlow.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SNMP", "UDP 161", "Ports"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SNMP",
+            "UDP 161",
+            "Ports"
+          ]
         },
         {
-          "id": "z3-n1-003", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-003",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Syslog messages are sent to which default UDP port?",
-          "options": ["161", "162", "514", "2055"],
+          "options": [
+            "161",
+            "162",
+            "514",
+            "2055"
+          ],
           "correct_index": 2,
           "explanation": "Syslog uses UDP port 514 by default. TCP 514 or TCP/TLS 6514 is used when reliability or encryption is needed. Syslog messages flow from network devices to a centralised syslog server.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Syslog", "UDP 514", "Ports"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Syslog",
+            "UDP 514",
+            "Ports"
+          ]
         },
         {
-          "id": "z3-n1-004", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-004",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Which syslog severity level indicates the system is unusable (highest severity)?",
-          "options": ["Level 7 — Debug", "Level 0 — Emergency", "Level 1 — Alert", "Level 3 — Error"],
+          "options": [
+            "Level 7 \u2014 Debug",
+            "Level 0 \u2014 Emergency",
+            "Level 1 \u2014 Alert",
+            "Level 3 \u2014 Error"
+          ],
           "correct_index": 1,
           "explanation": "Level 0 (Emergency) = system unusable. Lower number = higher severity. The scale: 0=Emergency, 1=Alert, 2=Critical, 3=Error, 4=Warning, 5=Notice, 6=Info, 7=Debug.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Syslog", "Severity Levels"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Syslog",
+            "Severity Levels"
+          ]
         },
         {
-          "id": "z3-n1-005", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-005",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "NetFlow / IPFIX is used to:",
-          "options": ["Monitor CPU and memory on network devices", "Analyse traffic flows — source/destination IP, port, protocol, and byte counts", "Send log messages to a syslog server", "Configure devices remotely"],
+          "options": [
+            "Monitor CPU and memory on network devices",
+            "Analyse traffic flows \u2014 source/destination IP, port, protocol, and byte counts",
+            "Send log messages to a syslog server",
+            "Configure devices remotely"
+          ],
           "correct_index": 1,
-          "explanation": "NetFlow (Cisco) and IPFIX (IETF standard) export traffic flow records from routers/switches to a collector. They show who is talking to whom, on what port, how much traffic — without capturing actual packet content.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["NetFlow", "IPFIX", "Traffic Analysis"]
+          "explanation": "NetFlow (Cisco) and IPFIX (IETF standard) export traffic flow records from routers/switches to a collector. They show who is talking to whom, on what port, how much traffic \u2014 without capturing actual packet content.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "NetFlow",
+            "IPFIX",
+            "Traffic Analysis"
+          ]
         },
         {
-          "id": "z3-n1-006", "zone": 3, "node": 3.1, "difficulty": "easy", "type": "mob",
+          "id": "z3-n1-006",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is a MIB in the context of SNMP?",
-          "options": ["The SNMP manager software", "A database of manageable objects and variables on a network device", "A security policy for SNMP access", "A type of SNMP packet"],
+          "options": [
+            "The SNMP manager software",
+            "A database of manageable objects and variables on a network device",
+            "A security policy for SNMP access",
+            "A type of SNMP packet"
+          ],
           "correct_index": 1,
           "explanation": "MIB (Management Information Base) is a hierarchical database that describes all the objects that can be monitored or managed via SNMP on a device. Each object has a unique OID (Object Identifier) like 1.3.6.1.2.1.2.2.1.10 (interface octets in).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SNMP", "MIB", "OID"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SNMP",
+            "MIB",
+            "OID"
+          ]
         },
         {
-          "id": "z3-n1-007", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-007",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "SNMPv3 with AuthPriv mode provides:",
-          "options": ["Authentication only — no encryption", "Neither authentication nor encryption", "Both authentication and encryption (AES/DES)", "Encryption only — no authentication"],
+          "options": [
+            "Authentication only \u2014 no encryption",
+            "Neither authentication nor encryption",
+            "Both authentication and encryption (AES/DES)",
+            "Encryption only \u2014 no authentication"
+          ],
           "correct_index": 2,
           "explanation": "SNMPv3 has three security levels: NoAuthNoPriv (no security), AuthNoPriv (authentication only via MD5/SHA), and AuthPriv (authentication + encryption with AES or DES). AuthPriv is the most secure and recommended for production.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["SNMPv3", "AuthPriv", "Security"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "SNMPv3",
+            "AuthPriv",
+            "Security"
+          ]
         },
         {
-          "id": "z3-n1-008", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-008",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "What is a key security risk of using SNMPv1 or SNMPv2c in production?",
-          "options": ["They do not support MIBs", "Community strings are transmitted in cleartext — can be sniffed", "They cannot generate traps", "They require complex certificate management"],
+          "options": [
+            "They do not support MIBs",
+            "Community strings are transmitted in cleartext \u2014 can be sniffed",
+            "They cannot generate traps",
+            "They require complex certificate management"
+          ],
           "correct_index": 1,
-          "explanation": "SNMPv1 and v2c use community strings (e.g., 'public' for read-only, 'private' for read-write) transmitted in cleartext over UDP. An attacker sniffing the network can capture these strings and use them to read — or even write — device configurations.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["SNMP", "Security", "Community Strings"]
+          "explanation": "SNMPv1 and v2c use community strings (e.g., 'public' for read-only, 'private' for read-write) transmitted in cleartext over UDP. An attacker sniffing the network can capture these strings and use them to read \u2014 or even write \u2014 device configurations.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "SNMP",
+            "Security",
+            "Community Strings"
+          ]
         },
         {
-          "id": "z3-n1-009", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-009",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Port mirroring (SPAN) is configured on a switch to:",
-          "options": ["Improve port speed by mirroring traffic to a faster link", "Copy traffic from one port to a monitor port for analysis (e.g., Wireshark)", "Mirror switch configuration to a backup device", "Duplicate broadcast traffic to reduce flooding"],
+          "options": [
+            "Improve port speed by mirroring traffic to a faster link",
+            "Copy traffic from one port to a monitor port for analysis (e.g., Wireshark)",
+            "Mirror switch configuration to a backup device",
+            "Duplicate broadcast traffic to reduce flooding"
+          ],
           "correct_index": 1,
-          "explanation": "SPAN (Switched Port Analyzer) copies all traffic from a source port (or VLAN) to a designated monitor port — allowing a network analyser (Wireshark) or IDS sensor connected to the monitor port to inspect all that traffic.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["SPAN", "Port Mirroring", "Packet Capture"]
+          "explanation": "SPAN (Switched Port Analyzer) copies all traffic from a source port (or VLAN) to a designated monitor port \u2014 allowing a network analyser (Wireshark) or IDS sensor connected to the monitor port to inspect all that traffic.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "SPAN",
+            "Port Mirroring",
+            "Packet Capture"
+          ]
         },
         {
-          "id": "z3-n1-010", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-010",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Which syslog level would typically be generated when a router interface goes down?",
-          "options": ["Level 0 — Emergency", "Level 2 — Critical", "Level 3 — Error", "Level 7 — Debug"],
+          "options": [
+            "Level 0 \u2014 Emergency",
+            "Level 2 \u2014 Critical",
+            "Level 3 \u2014 Error",
+            "Level 7 \u2014 Debug"
+          ],
           "correct_index": 2,
           "explanation": "Interface down events are typically Level 3 (Error) in syslog. Level 0 (Emergency) is for total system failure. Level 7 (Debug) is verbose per-packet tracing. Knowing the severity helps filter relevant alerts from noise.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Syslog", "Severity", "Interface"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Syslog",
+            "Severity",
+            "Interface"
+          ]
         },
         {
-          "id": "z3-n1-011", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-011",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "What does establishing a network baseline mean?",
-          "options": ["Configuring minimum security settings on all devices", "Recording normal performance metrics to compare against future anomalies", "Setting the lowest acceptable QoS threshold", "Backing up all device configurations"],
+          "options": [
+            "Configuring minimum security settings on all devices",
+            "Recording normal performance metrics to compare against future anomalies",
+            "Setting the lowest acceptable QoS threshold",
+            "Backing up all device configurations"
+          ],
           "correct_index": 1,
-          "explanation": "A baseline documents 'normal' network behaviour — bandwidth utilisation, CPU loads, traffic patterns, error rates. Monitoring tools compare current metrics against the baseline to detect anomalies (spikes, unusual traffic) that may indicate problems or attacks.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Baseline", "Monitoring", "Anomaly Detection"]
+          "explanation": "A baseline documents 'normal' network behaviour \u2014 bandwidth utilisation, CPU loads, traffic patterns, error rates. Monitoring tools compare current metrics against the baseline to detect anomalies (spikes, unusual traffic) that may indicate problems or attacks.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Baseline",
+            "Monitoring",
+            "Anomaly Detection"
+          ]
         },
         {
-          "id": "z3-n1-012", "zone": 3, "node": 3.1, "difficulty": "hard", "type": "mob",
+          "id": "z3-n1-012",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "RSPAN differs from SPAN in that RSPAN:",
-          "options": ["Requires a WLC to function", "Mirrors traffic from a remote switch across the network to a local monitor port", "Only captures inbound traffic", "Uses encryption to protect mirrored traffic"],
+          "options": [
+            "Requires a WLC to function",
+            "Mirrors traffic from a remote switch across the network to a local monitor port",
+            "Only captures inbound traffic",
+            "Uses encryption to protect mirrored traffic"
+          ],
           "correct_index": 1,
-          "explanation": "RSPAN (Remote SPAN) extends port mirroring across multiple switches — traffic is tagged with a special RSPAN VLAN and transported across trunk links to reach the monitor port on a different switch. Useful when the monitoring workstation is not locally connected to the source switch.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["RSPAN", "SPAN", "Port Mirroring"]
+          "explanation": "RSPAN (Remote SPAN) extends port mirroring across multiple switches \u2014 traffic is tagged with a special RSPAN VLAN and transported across trunk links to reach the monitor port on a different switch. Useful when the monitoring workstation is not locally connected to the source switch.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "RSPAN",
+            "SPAN",
+            "Port Mirroring"
+          ]
         },
         {
-          "id": "z3-n1-013", "zone": 3, "node": 3.1, "difficulty": "hard", "type": "mob",
+          "id": "z3-n1-013",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An SNMP Inform differs from an SNMP Trap in that an Inform:",
-          "options": ["Uses TCP instead of UDP", "Requires the manager to send an acknowledgement — unacknowledged Informs are retransmitted", "Contains more detailed MIB data", "Can only be used with SNMPv1"],
+          "options": [
+            "Uses TCP instead of UDP",
+            "Requires the manager to send an acknowledgement \u2014 unacknowledged Informs are retransmitted",
+            "Contains more detailed MIB data",
+            "Can only be used with SNMPv1"
+          ],
           "correct_index": 1,
-          "explanation": "SNMPv2c/v3 Informs require the NMS to send an acknowledgement. If no ACK is received, the agent retransmits the Inform. Traditional Traps are fire-and-forget (UDP, no ACK) — can be lost silently.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["SNMP", "Inform", "Trap"]
+          "explanation": "SNMPv2c/v3 Informs require the NMS to send an acknowledgement. If no ACK is received, the agent retransmits the Inform. Traditional Traps are fire-and-forget (UDP, no ACK) \u2014 can be lost silently.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "SNMP",
+            "Inform",
+            "Trap"
+          ]
         },
         {
-          "id": "z3-n1-014", "zone": 3, "node": 3.1, "difficulty": "medium", "type": "mob",
+          "id": "z3-n1-014",
+          "zone": 3,
+          "node": 3.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Which NetFlow/IPFIX collector port is commonly used?",
-          "options": ["UDP 161", "UDP 514", "UDP 2055", "TCP 443"],
+          "options": [
+            "UDP 161",
+            "UDP 514",
+            "UDP 2055",
+            "TCP 443"
+          ],
           "correct_index": 2,
           "explanation": "NetFlow records are exported to a collector on UDP port 2055 by default (also common: 9555, 9995). IPFIX (the IETF standard successor to NetFlow) uses the same mechanism. The collector analyses these records for traffic visibility.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["NetFlow", "UDP 2055", "Ports"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "NetFlow",
+            "UDP 2055",
+            "Ports"
+          ]
+        },
+        {
+          "id": "z3-n1-study-003",
+          "zone": 3,
+          "node": 3.1,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Architect's Blueprint",
+          "scenario": "You enter the Great Hall of Infrastructure, where the Master Architect stands before a sprawling map of the kingdom's digital backbone. 'To maintain such a vast realm,' he bellows, 'one cannot manually configure every stone and gate!'\n\nHe explains that tools like Ansible, Puppet, and Chef are used to automate configuration management across thousands of devices simultaneously. To monitor the pulse of the network, they rely on ICMP for reachability and SNMP for health status. Finally, he points to a glowing scroll: 'The Baseline.' This is the performance reference point; any deviation from this baseline warns us of an impending siege.",
+          "question": "Which set of tools would a network administrator use to automate the configuration management of hundreds of switches across a large enterprise?",
+          "options": [
+            "ICMP and SNMP",
+            "Ansible, Puppet, and Chef",
+            "RTO and RPO",
+            "SIEM and IDS"
+          ],
+          "correct_index": 1,
+          "explanation": "Ansible, Puppet, and Chef are configuration management tools designed to automate the setup and maintenance of network devices. ICMP and SNMP are monitoring protocols used to check reachability and status, not for automated configuration deployment.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "management",
+            "automation",
+            "monitoring"
+          ]
         }
       ]
     },
@@ -173,10 +415,10 @@
           "id": "z3-n2-study-001",
           "zone": 3,
           "node": 3.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Relay Race: Latency, Jitter, and Packet Loss",
-          "scenario": "Picture a relay race where each runner carries a baton (a data packet) across the network to the finish line. LATENCY is simply how long it takes ONE runner to complete their leg - measured in milliseconds. A latency of 20ms means each runner takes 20ms, end to end.\n\nJITTER is the VARIATION between runners' times. If runner 1 takes 20ms, runner 2 takes 22ms, runner 3 suddenly takes 60ms, then runner 4 takes 19ms - the average might still look fine, but that wild swing (jitter) is a problem for anything that needs steady, evenly-spaced delivery, like a phone call or video stream. The receiving end uses a small JITTER BUFFER - like a race announcer who waits a beat before reading out each leg's result, smoothing the commentary so listeners don't notice the runners' uneven pace. But if the buffer is too small for the jitter, the announcer runs out of things to say at a steady pace and there's an awkward silence.\n\nPACKET LOSS is a runner who never finishes the leg at all - the baton is gone. For TCP traffic (web pages, file downloads), a 'replacement runner' is sent (retransmission) - slower, but the data eventually arrives intact. For UDP traffic (VoIP, live video), there is NO replacement runner - that fragment of audio or video is gone forever. Sending a 'late' replacement would be pointless anyway, since the live conversation has already moved past that moment.",
+          "scenario": "Picture a relay race where each runner carries a baton (a data packet) to the finish line. LATENCY is how long ONE runner takes \u2014 measured in milliseconds; 20ms latency means each leg takes 20ms. JITTER is the VARIATION between runners' times \u2014 if times bounce 20ms, 22ms, 60ms, 19ms, the average looks fine but that swing is a problem for anything needing steady delivery, like a phone call. The receiving end uses a JITTER BUFFER \u2014 like an announcer who waits a beat before reading each result, smoothing the commentary. Too small a buffer for the jitter, and there's an awkward silence. PACKET LOSS is a runner who never finishes \u2014 the baton is gone. TCP sends a 'replacement runner' (retransmission); UDP (VoIP, live video) does NOT \u2014 a late replacement would arrive after the live moment has passed.",
           "question": "A user on a VoIP call reports brief moments where a syllable is completely missing - clean silence, no stutter or delay, just gone. At the same time, a continuous ping to the far end shows occasional 'Request timed out' results. Why can't the network simply retransmit the missing audio the way it would retransmit a dropped piece of a file download?",
           "options": [
             "It can - VoIP uses TCP, so missing audio is automatically retransmitted and replayed seamlessly",
@@ -185,19 +427,25 @@
             "The issue is latency - the round trip time is too high for any retransmission to succeed before the call ends"
           ],
           "correct_index": 1,
-          "explanation": "Correct: clean, silent gaps in a live call combined with ping timeouts point to packet loss on a UDP-based media stream. VoIP deliberately uses UDP (not TCP) because by the time a lost packet was detected and retransmitted, the live conversation has already moved on - a late syllable is worse than a missing one. Option A is wrong on the facts (VoIP media uses UDP, not TCP) and on the logic (even TCP retransmission wouldn't help a real-time stream). Option C misattributes the symptom to jitter and describes a buffer behavior that doesn't make retransmission 'instantaneous.' Option D describes a different problem (overall delay) that wouldn't produce isolated silent gaps.",
+          "explanation": "Clean, silent gaps in a live call combined with ping timeouts point to packet loss on a UDP-based media stream. VoIP deliberately uses UDP because by the time a lost packet was retransmitted, the conversation has moved on \u2014 late audio is worse than missing audio. Wrong: (A) VoIP media uses UDP, not TCP, and even TCP retransmission wouldn't help real-time streams. (C) misattributes the symptom to jitter; a buffer doesn't make retransmission instantaneous. (D) describes overall delay, which wouldn't produce isolated silent gaps.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["latency", "jitter", "packet-loss", "voip", "metrics"]
+          "tags": [
+            "latency",
+            "jitter",
+            "packet-loss",
+            "voip",
+            "metrics"
+          ]
         },
         {
           "id": "z3-n2-study-002",
           "zone": 3,
           "node": 3.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Airport Security Lanes: QoS, Shaping, and Policing",
-          "scenario": "Imagine an airport with two security lanes: a 'priority' lane for time-sensitive travelers and a regular lane for everyone else. DSCP (Differentiated Services Code Point) is like a code printed directly on your boarding pass - a Layer 3 marking in the IP header that ANY airport along a multi-leg journey can read and honor, even after you change planes (cross multiple routers). DSCP EF (Expedited Forwarding, value 46) means 'priority lane' - typically reserved for VoIP. DSCP BE (Best Effort, value 0) is the default regular lane.\n\nCoS (Class of Service / 802.1p) is different - it's like a wristband sticker applied only within ONE terminal building. It's a Layer 2 marking that lives in the 802.1Q VLAN tag, so it only means something on a trunk link between switches in the same building; once your 'flight' leaves that terminal (the frame is de-encapsulated at a Layer 3 boundary), the wristband is gone, and the journey relies on the boarding-pass code (DSCP) instead.\n\nNow, what happens when too many people show up for the priority lane at once? TRAFFIC SHAPING is like opening a holding area before the lane - everyone still gets through eventually, just with some waiting (added delay), but nobody is turned away. TRAFFIC POLICING is the opposite - security simply turns people away on the spot once the lane's rate limit is hit, with no holding area at all. Refused travelers must try again later.",
+          "scenario": "Imagine an airport with a 'priority' security lane and a regular lane. DSCP (Differentiated Services Code Point) is a code printed on your boarding pass \u2014 a Layer 3 marking ANY airport on a multi-leg journey can read, even after changing planes (crossing routers). DSCP EF (46) means 'priority lane,' typically for VoIP; DSCP BE (0) is the default regular lane. CoS (802.1p) is different \u2014 a wristband sticker valid only within ONE terminal. It's a Layer 2 marking in the VLAN tag, meaningful only on a trunk between switches in the same building; once the frame crosses a Layer 3 boundary, the wristband is gone and DSCP takes over. When too many people show up for the priority lane: TRAFFIC SHAPING opens a holding area \u2014 everyone gets through eventually, just delayed. TRAFFIC POLICING simply turns people away on the spot once the rate limit is hit \u2014 no holding area.",
           "question": "An ISP guarantees a customer 100 Mbps. The customer's traffic occasionally bursts to 120 Mbps. The ISP's edge router is configured to instantly discard any traffic above 100 Mbps, with no buffering whatsoever. What is the ISP doing, and what's the likely effect on the customer's TCP-based downloads during those bursts?",
           "options": [
             "Traffic shaping - the excess 20 Mbps is queued and delivered slightly later, so TCP just sees extra latency with no drops",
@@ -206,119 +454,343 @@
             "LLQ - the excess traffic is placed into a strict-priority queue ahead of the customer's other traffic"
           ],
           "correct_index": 1,
-          "explanation": "Correct: 'instantly discard... with no buffering' is the textbook definition of traffic POLICING. Dropping TCP segments causes the sender to detect loss and invoke congestion control, cutting its sending rate (e.g., via slow start / congestion avoidance) until conditions improve. Option A describes shaping, which the question explicitly rules out by saying there's no buffering. Option C describes CoS, a Layer 2 mechanism that wouldn't survive a WAN hop and doesn't match 'discard.' Option D (LLQ) is a queuing priority mechanism for real-time traffic, not a rate-limiting/enforcement tool for a customer's overall link.",
+          "explanation": "'Instantly discard... with no buffering' is the textbook definition of traffic POLICING. Dropping TCP segments causes the sender to detect loss and invoke congestion control, cutting its sending rate until conditions improve. Wrong: (A) describes shaping, ruled out by 'no buffering.' (C) describes CoS, a Layer 2 mechanism that wouldn't survive a WAN hop and doesn't match 'discard.' (D) LLQ is a queuing priority mechanism for real-time traffic, not a rate-limiting tool for a customer's link.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["qos", "dscp", "cos", "traffic-shaping", "traffic-policing"]
+          "tags": [
+            "qos",
+            "dscp",
+            "cos",
+            "traffic-shaping",
+            "traffic-policing"
+          ]
         },
         {
-          "id": "z3-n2-001", "zone": 3, "node": 3.2, "difficulty": "easy", "type": "mob",
+          "id": "z3-n2-001",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Jitter in networking refers to:",
-          "options": ["The total delay from source to destination", "Variation in latency between consecutive packets", "Packet loss percentage", "Maximum bandwidth of a link"],
+          "options": [
+            "The total delay from source to destination",
+            "Variation in latency between consecutive packets",
+            "Packet loss percentage",
+            "Maximum bandwidth of a link"
+          ],
           "correct_index": 1,
           "explanation": "Jitter is the variation in latency between packets. If packets arrive at 10ms, 30ms, 8ms, 25ms intervals, the variation is jitter. High jitter causes choppy VoIP and video. VoIP tolerance: jitter < 30ms.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Jitter", "Latency", "QoS"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Jitter",
+            "Latency",
+            "QoS"
+          ]
         },
         {
-          "id": "z3-n2-002", "zone": 3, "node": 3.2, "difficulty": "easy", "type": "mob",
+          "id": "z3-n2-002",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is the difference between bandwidth and throughput?",
-          "options": ["They are the same thing", "Bandwidth is the maximum capacity; throughput is the actual data rate achieved", "Throughput is always higher than bandwidth", "Bandwidth applies to wireless; throughput applies to wired"],
+          "options": [
+            "They are the same thing",
+            "Bandwidth is the maximum capacity; throughput is the actual data rate achieved",
+            "Throughput is always higher than bandwidth",
+            "Bandwidth applies to wireless; throughput applies to wired"
+          ],
           "correct_index": 1,
-          "explanation": "Bandwidth is the theoretical maximum data rate of a link (e.g., 1 Gbps). Throughput is what's actually delivered after overhead, errors, and congestion. Throughput is always ≤ bandwidth.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Bandwidth", "Throughput", "Metrics"]
+          "explanation": "Bandwidth is the theoretical maximum data rate of a link (e.g., 1 Gbps). Throughput is what's actually delivered after overhead, errors, and congestion. Throughput is always \u2264 bandwidth.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Bandwidth",
+            "Throughput",
+            "Metrics"
+          ]
         },
         {
-          "id": "z3-n2-003", "zone": 3, "node": 3.2, "difficulty": "easy", "type": "mob",
+          "id": "z3-n2-003",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "VoIP quality degrades when which three metrics are poor? (Choose the correct set)",
-          "options": ["Bandwidth, MTU, VLAN tagging", "Latency, jitter, packet loss", "Routing protocol convergence, DNS TTL, ARP cache", "Duplex, speed, fiber wavelength"],
+          "options": [
+            "Bandwidth, MTU, VLAN tagging",
+            "Latency, jitter, packet loss",
+            "Routing protocol convergence, DNS TTL, ARP cache",
+            "Duplex, speed, fiber wavelength"
+          ],
           "correct_index": 1,
           "explanation": "VoIP is sensitive to latency (< 150ms end-to-end), jitter (< 30ms), and packet loss (< 1%). QoS (DSCP EF marking, LLQ) is used to prioritise voice traffic over data on congested links.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["VoIP", "Latency", "Jitter", "Packet Loss"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "VoIP",
+            "Latency",
+            "Jitter",
+            "Packet Loss"
+          ]
         },
         {
-          "id": "z3-n2-004", "zone": 3, "node": 3.2, "difficulty": "easy", "type": "mob",
+          "id": "z3-n2-004",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "DSCP EF (Expedited Forwarding) has a value of:",
-          "options": ["0", "10", "46", "63"],
+          "options": [
+            "0",
+            "10",
+            "46",
+            "63"
+          ],
           "correct_index": 2,
-          "explanation": "DSCP EF = 46. It marks packets for the highest-priority queue — used for VoIP/real-time traffic. DSCP BE (Best Effort) = 0 (default, no special treatment). The DSCP field is 6 bits in the IP header (0–63 range).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["DSCP", "EF", "QoS"]
+          "explanation": "DSCP EF = 46. It marks packets for the highest-priority queue \u2014 used for VoIP/real-time traffic. DSCP BE (Best Effort) = 0 (default, no special treatment). The DSCP field is 6 bits in the IP header (0\u201363 range).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "DSCP",
+            "EF",
+            "QoS"
+          ]
         },
         {
-          "id": "z3-n2-005", "zone": 3, "node": 3.2, "difficulty": "easy", "type": "mob",
+          "id": "z3-n2-005",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "CRC errors on a switch interface most likely indicate:",
-          "options": ["A routing loop", "Cable or physical layer problem (bad cable, connector, or interference)", "A spanning tree misconfiguration", "VLAN mismatch"],
+          "options": [
+            "A routing loop",
+            "Cable or physical layer problem (bad cable, connector, or interference)",
+            "A spanning tree misconfiguration",
+            "VLAN mismatch"
+          ],
           "correct_index": 1,
-          "explanation": "CRC (Cyclic Redundancy Check) errors occur when the FCS on a received frame doesn't match — indicating data corruption. Most common causes: bad cable, damaged connector, electromagnetic interference, or faulty SFP/transceiver.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["CRC Errors", "Physical Layer", "Troubleshooting"]
+          "explanation": "CRC (Cyclic Redundancy Check) errors occur when the FCS on a received frame doesn't match \u2014 indicating data corruption. Most common causes: bad cable, damaged connector, electromagnetic interference, or faulty SFP/transceiver.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "CRC Errors",
+            "Physical Layer",
+            "Troubleshooting"
+          ]
         },
         {
-          "id": "z3-n2-006", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-006",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Traffic shaping vs traffic policing: what is the key difference?",
-          "options": ["Shaping is inbound; policing is outbound", "Shaping buffers excess traffic (adds delay); policing drops excess traffic immediately", "Shaping uses DSCP; policing uses CoS", "They are identical functions with different names"],
+          "options": [
+            "Shaping is inbound; policing is outbound",
+            "Shaping buffers excess traffic (adds delay); policing drops excess traffic immediately",
+            "Shaping uses DSCP; policing uses CoS",
+            "They are identical functions with different names"
+          ],
           "correct_index": 1,
-          "explanation": "Traffic shaping queues excess traffic and transmits it when within the rate limit — smooth output but adds delay (buffer). Traffic policing drops or re-marks excess traffic instantly — hard limit, no delay added, but packets are lost.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Traffic Shaping", "Traffic Policing", "QoS"]
+          "explanation": "Traffic shaping queues excess traffic and transmits it when within the rate limit \u2014 smooth output but adds delay (buffer). Traffic policing drops or re-marks excess traffic instantly \u2014 hard limit, no delay added, but packets are lost.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Traffic Shaping",
+            "Traffic Policing",
+            "QoS"
+          ]
         },
         {
-          "id": "z3-n2-007", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-007",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A duplex mismatch between two Ethernet devices causes which specific error to appear on the full-duplex side?",
-          "options": ["Runts and giants", "Late collisions and CRC errors", "STP topology changes", "MAC flooding"],
+          "options": [
+            "Runts and giants",
+            "Late collisions and CRC errors",
+            "STP topology changes",
+            "MAC flooding"
+          ],
           "correct_index": 1,
-          "explanation": "When one device is full-duplex and the other half-duplex: the HD device uses CSMA/CD and detects collisions. The FD device sees late collisions (detected after 512 bits — after a legitimate frame start) and CRC errors. This is a classic duplex mismatch signature.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Duplex Mismatch", "Late Collisions", "CRC"]
+          "explanation": "When one device is full-duplex and the other half-duplex: the HD device uses CSMA/CD and detects collisions. The FD device sees late collisions (detected after 512 bits \u2014 after a legitimate frame start) and CRC errors. This is a classic duplex mismatch signature.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Duplex Mismatch",
+            "Late Collisions",
+            "CRC"
+          ]
         },
         {
-          "id": "z3-n2-008", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-008",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "CoS (Class of Service / 802.1p) operates at which OSI layer?",
-          "options": ["Layer 3 — IP header DSCP field", "Layer 2 — 802.1Q VLAN tag PCP bits", "Layer 4 — TCP/UDP port", "Layer 7 — application payload"],
+          "options": [
+            "Layer 3 \u2014 IP header DSCP field",
+            "Layer 2 \u2014 802.1Q VLAN tag PCP bits",
+            "Layer 4 \u2014 TCP/UDP port",
+            "Layer 7 \u2014 application payload"
+          ],
           "correct_index": 1,
-          "explanation": "CoS / 802.1p uses the 3-bit PCP (Priority Code Point) field in the 802.1Q VLAN tag — Layer 2. Values 0–7 (7 = highest priority). Only available on tagged (VLAN trunk) frames. DSCP is the Layer 3 equivalent in the IP header.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["CoS", "802.1p", "QoS", "Layer 2"]
+          "explanation": "CoS / 802.1p uses the 3-bit PCP (Priority Code Point) field in the 802.1Q VLAN tag \u2014 Layer 2. Values 0\u20137 (7 = highest priority). Only available on tagged (VLAN trunk) frames. DSCP is the Layer 3 equivalent in the IP header.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "CoS",
+            "802.1p",
+            "QoS",
+            "Layer 2"
+          ]
         },
         {
-          "id": "z3-n2-009", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-009",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Runts on a switch interface are frames smaller than the minimum Ethernet frame size. What is that minimum?",
-          "options": ["32 bytes", "48 bytes", "64 bytes", "128 bytes"],
+          "options": [
+            "32 bytes",
+            "48 bytes",
+            "64 bytes",
+            "128 bytes"
+          ],
           "correct_index": 2,
-          "explanation": "The minimum valid Ethernet frame is 64 bytes (including the 14-byte header and 4-byte FCS). Frames smaller than 64 bytes are called runts — typically caused by collisions (CSMA/CD truncation) or a faulty NIC.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Runts", "Ethernet", "Frame Size"]
+          "explanation": "The minimum valid Ethernet frame is 64 bytes (including the 14-byte header and 4-byte FCS). Frames smaller than 64 bytes are called runts \u2014 typically caused by collisions (CSMA/CD truncation) or a faulty NIC.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Runts",
+            "Ethernet",
+            "Frame Size"
+          ]
         },
         {
-          "id": "z3-n2-010", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-010",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "LLQ (Low Latency Queuing) guarantees what for real-time traffic?",
-          "options": ["Maximum bandwidth allocation", "Strict priority queue — real-time traffic is always served before other queues", "DSCP marking at Layer 3", "Traffic is buffered during congestion"],
+          "options": [
+            "Maximum bandwidth allocation",
+            "Strict priority queue \u2014 real-time traffic is always served before other queues",
+            "DSCP marking at Layer 3",
+            "Traffic is buffered during congestion"
+          ],
           "correct_index": 1,
           "explanation": "LLQ creates a strict priority queue that is always emptied before other queues. This guarantees VoIP and real-time traffic is never delayed by data traffic. Without LLQ, queuing delay increases jitter and latency for voice.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["LLQ", "QoS", "Priority Queue"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "LLQ",
+            "QoS",
+            "Priority Queue"
+          ]
         },
         {
-          "id": "z3-n2-011", "zone": 3, "node": 3.2, "difficulty": "hard", "type": "mob",
+          "id": "z3-n2-011",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An interface shows input errors and CRC errors but no output errors. The link partner shows similar errors on its output. What is the most likely cause?",
-          "options": ["Routing misconfiguration", "Faulty cable or connector between the two devices", "STP blocking state", "MTU mismatch"],
+          "options": [
+            "Routing misconfiguration",
+            "Faulty cable or connector between the two devices",
+            "STP blocking state",
+            "MTU mismatch"
+          ],
           "correct_index": 1,
-          "explanation": "Input errors + CRC errors on one side matching output errors on the other side = physical layer problem between the two devices — bad cable, faulty connector, damaged SFP, or EMI interference. Replace the physical cable/connector first.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["CRC", "Interface Errors", "Physical Layer"]
+          "explanation": "Input errors + CRC errors on one side matching output errors on the other side = physical layer problem between the two devices \u2014 bad cable, faulty connector, damaged SFP, or EMI interference. Replace the physical cable/connector first.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "CRC",
+            "Interface Errors",
+            "Physical Layer"
+          ]
         },
         {
-          "id": "z3-n2-012", "zone": 3, "node": 3.2, "difficulty": "hard", "type": "mob",
+          "id": "z3-n2-012",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An organisation notices VoIP calls are choppy even though total bandwidth utilisation is only 40%. What is the most likely cause and fix?",
           "options": [
-            "Insufficient bandwidth — upgrade the link",
-            "No QoS configured — voice traffic is competing with bulk data in the same queue",
+            "Insufficient bandwidth \u2014 upgrade the link",
+            "No QoS configured \u2014 voice traffic is competing with bulk data in the same queue",
             "DNS resolution delays affecting call setup",
             "STP convergence causing packet loss"
           ],
           "correct_index": 1,
-          "explanation": "Choppy VoIP at low bandwidth utilisation = classic QoS problem. Without QoS, VoIP packets sit in the same queue as bulk data transfers. A large data burst fills the buffer, causing VoIP packets to queue — introducing jitter and latency. Fix: implement DSCP EF + LLQ for voice.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["VoIP", "QoS", "Jitter", "Troubleshooting"]
+          "explanation": "Choppy VoIP at low bandwidth utilisation = classic QoS problem. Without QoS, VoIP packets sit in the same queue as bulk data transfers. A large data burst fills the buffer, causing VoIP packets to queue \u2014 introducing jitter and latency. Fix: implement DSCP EF + LLQ for voice.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "VoIP",
+            "QoS",
+            "Jitter",
+            "Troubleshooting"
+          ]
         },
         {
-          "id": "z3-n2-013", "zone": 3, "node": 3.2, "difficulty": "medium", "type": "mob",
+          "id": "z3-n2-013",
+          "zone": 3,
+          "node": 3.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "What is the purpose of establishing a network baseline?",
-          "options": ["To document the minimum security configuration", "To record normal performance metrics as a reference for anomaly detection", "To set the maximum allowed bandwidth per user", "To configure default QoS markings"],
+          "options": [
+            "To document the minimum security configuration",
+            "To record normal performance metrics as a reference for anomaly detection",
+            "To set the maximum allowed bandwidth per user",
+            "To configure default QoS markings"
+          ],
           "correct_index": 1,
-          "explanation": "A baseline documents what 'normal' looks like — CPU usage, bandwidth, error rates, traffic patterns. When metrics deviate significantly from the baseline, it triggers investigation. Without a baseline, you cannot distinguish normal from abnormal.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Baseline", "Anomaly Detection", "Monitoring"]
+          "explanation": "A baseline documents what 'normal' looks like \u2014 CPU usage, bandwidth, error rates, traffic patterns. When metrics deviate significantly from the baseline, it triggers investigation. Without a baseline, you cannot distinguish normal from abnormal.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Baseline",
+            "Anomaly Detection",
+            "Monitoring"
+          ]
+        },
+        {
+          "id": "z3-n2-study-003",
+          "zone": 3,
+          "node": 3.2,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Eye of the Watcher",
+          "scenario": "Deep within the fortress, you find a glowing crystal that pulses with every log entry from across the realm. This is the SIEM\u2014the 'Security Information and Event Management' hub.\n\n'It sees all,' whispers a guardian. The SIEM aggregates logs from firewalls, servers, and routers into one location. It correlates these events to find patterns of attack, detects anomalies that human eyes might miss, and provides the necessary data for compliance audits and forensic investigations after a breach.",
+          "question": "What is the primary purpose of a SIEM system in a network environment?",
+          "options": [
+            "To provide high-speed routing between local subnets.",
+            "To aggregate logs from multiple sources to correlate events and detect anomalies.",
+            "To act as a primary firewall for incoming traffic.",
+            "To encrypt data packets traveling over public networks."
+          ],
+          "correct_index": 1,
+          "explanation": "A SIEM (Security Information and Event Management) is specifically designed to aggregate logs from various sources, correlate that data to find security threats or anomalies, and assist in compliance/forensics.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "security",
+            "siem",
+            "logging"
+          ]
         }
       ]
     },
@@ -331,10 +803,10 @@
           "id": "z3-n3-study-001",
           "zone": 3,
           "node": 3.3,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "Renovating an Occupied Hospital: Change Management",
-          "scenario": "A hospital can never fully close, so any renovation - even moving a single light switch - must be carefully planned. Before any work begins, the construction team submits blueprints describing exactly what will change, why, and crucially, how to put everything back EXACTLY as it was if something goes wrong mid-renovation. In networking, this blueprint is the RFC (Request for Change) - and that 'put it back' section is the ROLLBACK PLAN.\n\nA review board made up of representatives from different departments (facilities, security, medical staff) examines the blueprint before any work starts. In networking, this is the CAB (Change Advisory Board) - they approve, reject, or send the RFC back for revisions. Work itself happens during a scheduled CHANGE WINDOW - the hospital's quietest overnight hours, when the fewest patients (users) will be affected.\n\nNow imagine a pipe bursts at 2am - a genuine emergency. There's no time for the normal multi-day blueprint review. An EMERGENCY CHANGE lets the team act immediately using an expedited approval process. But even then, the team documents exactly what they did AFTER the fact - 'fix first, document second,' never 'fix and forget,' because the next team that touches that pipe needs to know what's actually there now.",
+          "scenario": "A hospital can never fully close, so any renovation \u2014 even moving a light switch \u2014 must be carefully planned. Before work begins, the team submits blueprints describing exactly what will change, why, and how to put everything back EXACTLY as it was if something goes wrong. In networking, this blueprint is the RFC (Request for Change), and the 'put it back' section is the ROLLBACK PLAN. A review board (facilities, security, medical staff) examines the blueprint first \u2014 in networking, the CAB (Change Advisory Board), which approves, rejects, or sends it back. Work happens during a scheduled CHANGE WINDOW \u2014 the quietest hours. If a pipe bursts at 2am, an EMERGENCY CHANGE lets the team act immediately via expedited approval \u2014 but they document what they did AFTER the fact: 'fix first, document second,' never 'fix and forget.'",
           "question": "An engineer submits an RFC to the CAB stating: 'Plan: Replace the core switch's failing uplink SFP module Friday at 11pm. Reason: rising CRC error counts on that interface.' The CAB sends it back without approval. What is most likely missing that the CAB needs before it can approve this change?",
           "options": [
             "The exact manufacturer serial number of the replacement SFP module",
@@ -343,19 +815,24 @@
             "A detailed log of every troubleshooting command already run to diagnose the CRC errors"
           ],
           "correct_index": 1,
-          "explanation": "Correct: every RFC needs a rollback plan - the 'how do we undo this if it doesn't work' answer. The CAB can't assess risk without knowing what happens if the new SFP also shows errors, or if the link doesn't come back up at all (e.g., re-seat the old SFP, revert any config changes, escalate). Option A is excessive detail the CAB doesn't need to approve risk. Option C is impractical and not how impact assessments work (impact is described in terms of scope/systems affected, not individual users). Option D is useful background but isn't the gating requirement - an RFC can reference prior troubleshooting briefly without a full transcript.",
+          "explanation": "Every RFC needs a rollback plan \u2014 the 'how do we undo this if it doesn't work' answer. The CAB can't assess risk without knowing what happens if the new SFP also errors or the link doesn't come back (re-seat the old SFP, revert config, escalate). Wrong: (A) excessive detail the CAB doesn't need. (C) impractical \u2014 impact is described by scope/systems, not individual users. (D) useful background, but not the gating requirement.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["change-management", "rfc", "cab", "rollback"]
+          "tags": [
+            "change-management",
+            "rfc",
+            "cab",
+            "rollback"
+          ]
         },
         {
           "id": "z3-n3-study-002",
           "zone": 3,
           "node": 3.3,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Subway Map vs The Street Map: Documentation Types",
-          "scenario": "A subway map shows how stations CONNECT - which lines run where, where you transfer - in a clean, simplified way. It doesn't show real-world distances or which streets run above each tunnel. This is a LOGICAL DIAGRAM: it shows IP subnets, VLANs, and routing relationships - HOW data flows - without caring which rack or floor a device physically occupies.\n\nA street map, by contrast, shows the EXACT physical layout: real distances, which building sits on which corner, where utility lines actually run underground. This is a PHYSICAL or WIRING DIAGRAM: exact device locations, rack positions, port numbers, and cable runs.\n\nNow picture a city's master address registry - a living database of every address, who's registered there, and which addresses are vacant. In networking, this is IPAM (IP Address Management): it tracks every IP address in use, which subnets are allocated, DHCP leases, and DNS records - preventing two devices from ever being handed the same 'address' (an IP conflict).",
+          "scenario": "A subway map shows how stations CONNECT \u2014 which lines run where, where you transfer \u2014 without real-world distances or which streets sit above each tunnel. This is a LOGICAL DIAGRAM: IP subnets, VLANs, and routing relationships \u2014 HOW data flows \u2014 without caring which rack or floor a device occupies. A street map shows the EXACT physical layout: real distances, buildings, where utility lines actually run. This is a PHYSICAL/WIRING DIAGRAM: exact device locations, rack positions, port numbers, cable runs. A city's master address registry tracks every address and who's registered there \u2014 in networking, this is IPAM (IP Address Management): every IP in use, subnet allocations, DHCP leases, DNS records, preventing IP conflicts.",
           "question": "A technician needs to find which physical switch port a failing server's cable is plugged into, so they can dispatch someone to replace the cable. Which documentation should they check, and why won't the OTHER major diagram type help here?",
           "options": [
             "The logical diagram - it shows the server's IP address and VLAN, which is exactly the information needed to locate the cable",
@@ -364,114 +841,337 @@
             "Either document works equally well, since logical and physical diagrams are automatically kept in sync"
           ],
           "correct_index": 1,
-          "explanation": "Correct: locating a physical cable requires physical/wiring or rack documentation - it maps a device to an actual port, patch panel, and cable ID. The logical diagram (A) shows addressing and routing relationships, which is great for understanding traffic flow but useless for finding a cable in a rack. IPAM (C) tracks IP allocation and DNS records, not physical rack layout - that's the job of physical/rack documentation. Option D is wrong, and dangerously so: documentation does NOT sync itself, which is exactly why out-of-date diagrams are a recurring exam theme.",
+          "explanation": "Locating a physical cable requires physical/wiring or rack documentation \u2014 it maps a device to an actual port, patch panel, and cable ID. Wrong: (A) the logical diagram shows addressing/routing, great for traffic flow but useless for finding a cable in a rack. (C) IPAM tracks IP allocation and DNS, not physical rack layout. (D) is wrong, and dangerously so \u2014 documentation does NOT sync itself, which is exactly why out-of-date diagrams are a recurring exam theme.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["documentation", "logical-diagram", "physical-diagram", "ipam"]
+          "tags": [
+            "documentation",
+            "logical-diagram",
+            "physical-diagram",
+            "ipam"
+          ]
         },
         {
-          "id": "z3-n3-001", "zone": 3, "node": 3.3, "difficulty": "easy", "type": "mob",
+          "id": "z3-n3-001",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A logical network diagram differs from a physical network diagram in that a logical diagram:",
-          "options": ["Shows exact cable lengths", "Shows IP addressing, VLANs, and routing topology without physical locations", "Includes rack unit positions of devices", "Shows only Layer 1 connections"],
+          "options": [
+            "Shows exact cable lengths",
+            "Shows IP addressing, VLANs, and routing topology without physical locations",
+            "Includes rack unit positions of devices",
+            "Shows only Layer 1 connections"
+          ],
           "correct_index": 1,
-          "explanation": "Logical diagrams show network topology, IP subnets, routing, and VLANs — how data flows, not where equipment physically sits. Physical diagrams show actual device locations, cable runs, and port numbers.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Network Diagrams", "Logical", "Physical"]
+          "explanation": "Logical diagrams show network topology, IP subnets, routing, and VLANs \u2014 how data flows, not where equipment physically sits. Physical diagrams show actual device locations, cable runs, and port numbers.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Network Diagrams",
+            "Logical",
+            "Physical"
+          ]
         },
         {
-          "id": "z3-n3-002", "zone": 3, "node": 3.3, "difficulty": "easy", "type": "mob",
+          "id": "z3-n3-002",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An AUP (Acceptable Use Policy) is:",
-          "options": ["A technical document defining QoS parameters", "A policy that defines permitted uses of the organisation's network and systems by users", "A contract between an ISP and a customer", "A document describing the DR site"],
+          "options": [
+            "A technical document defining QoS parameters",
+            "A policy that defines permitted uses of the organisation's network and systems by users",
+            "A contract between an ISP and a customer",
+            "A document describing the DR site"
+          ],
           "correct_index": 1,
-          "explanation": "An AUP defines what users are and are not allowed to do on the organisation's network — websites they can visit, software they can install, data they can share. Users typically must sign the AUP. Violations can result in disciplinary action.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["AUP", "Policy", "Documentation"]
+          "explanation": "An AUP defines what users are and are not allowed to do on the organisation's network \u2014 websites they can visit, software they can install, data they can share. Users typically must sign the AUP. Violations can result in disciplinary action.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "AUP",
+            "Policy",
+            "Documentation"
+          ]
         },
         {
-          "id": "z3-n3-003", "zone": 3, "node": 3.3, "difficulty": "easy", "type": "mob",
+          "id": "z3-n3-003",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An SLA of 99.9% uptime allows approximately how much downtime per year?",
-          "options": ["~52 minutes", "~8.76 hours", "~1 day", "~5 minutes"],
+          "options": [
+            "~52 minutes",
+            "~8.76 hours",
+            "~1 day",
+            "~5 minutes"
+          ],
           "correct_index": 1,
-          "explanation": "99.9% uptime = 0.1% downtime. 0.001 × 8,760 hours/year ≈ 8.76 hours. 99.99% = ~52.6 min/year. 99.999% (five nines) = ~5.26 min/year.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SLA", "Uptime", "Availability"]
+          "explanation": "99.9% uptime = 0.1% downtime. 0.001 \u00d7 8,760 hours/year \u2248 8.76 hours. 99.99% = ~52.6 min/year. 99.999% (five nines) = ~5.26 min/year.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SLA",
+            "Uptime",
+            "Availability"
+          ]
         },
         {
-          "id": "z3-n3-004", "zone": 3, "node": 3.3, "difficulty": "easy", "type": "mob",
+          "id": "z3-n3-004",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Before implementing a network change, the most important document to prepare is:",
-          "options": ["A network diagram", "An RFC (Request for Change) with a rollback plan", "A syslog export", "An SNMP baseline report"],
+          "options": [
+            "A network diagram",
+            "An RFC (Request for Change) with a rollback plan",
+            "A syslog export",
+            "An SNMP baseline report"
+          ],
           "correct_index": 1,
-          "explanation": "An RFC (Request for Change) documents the proposed change, reason, scope, risk, implementation steps, test criteria, and critically — a rollback plan. Without a rollback plan, a failed change can cause extended outages.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Change Management", "RFC", "Rollback"]
+          "explanation": "An RFC (Request for Change) documents the proposed change, reason, scope, risk, implementation steps, test criteria, and critically \u2014 a rollback plan. Without a rollback plan, a failed change can cause extended outages.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Change Management",
+            "RFC",
+            "Rollback"
+          ]
         },
         {
-          "id": "z3-n3-005", "zone": 3, "node": 3.3, "difficulty": "easy", "type": "mob",
+          "id": "z3-n3-005",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is IPAM used for in network operations?",
-          "options": ["Intrusion Prevention and Monitoring", "IP Address Management — tracking and managing IP address allocation and DNS records", "Interconnect Protocol for Access Management", "Inline Packet Analysis Module"],
+          "options": [
+            "Intrusion Prevention and Monitoring",
+            "IP Address Management \u2014 tracking and managing IP address allocation and DNS records",
+            "Interconnect Protocol for Access Management",
+            "Inline Packet Analysis Module"
+          ],
           "correct_index": 1,
           "explanation": "IPAM (IP Address Management) is software or processes for tracking IP address allocations, subnets, DHCP leases, and DNS records. It prevents IP conflicts, maintains documentation, and supports auditing. Examples: Infoblox, phpIPAM, SolarWinds IPAM.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["IPAM", "Documentation", "IP Management"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "IPAM",
+            "Documentation",
+            "IP Management"
+          ]
         },
         {
-          "id": "z3-n3-006", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-006",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "The CAB (Change Advisory Board) is responsible for:",
-          "options": ["Configuring network devices during a change window", "Reviewing and approving or rejecting Requests for Change", "Monitoring network performance post-change", "Writing the RFC documents"],
+          "options": [
+            "Configuring network devices during a change window",
+            "Reviewing and approving or rejecting Requests for Change",
+            "Monitoring network performance post-change",
+            "Writing the RFC documents"
+          ],
           "correct_index": 1,
-          "explanation": "The CAB evaluates proposed changes for risk, impact, and resource requirements — then approves, rejects, or requests modifications. It typically includes IT, security, operations, and business stakeholders.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["CAB", "Change Management", "RFC"]
+          "explanation": "The CAB evaluates proposed changes for risk, impact, and resource requirements \u2014 then approves, rejects, or requests modifications. It typically includes IT, security, operations, and business stakeholders.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "CAB",
+            "Change Management",
+            "RFC"
+          ]
         },
         {
-          "id": "z3-n3-007", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-007",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A BYOD policy should address which security concern as the highest priority?",
-          "options": ["Personal device screen resolution requirements", "Network segmentation — personal devices on guest/isolated network, not corporate LAN", "Device color and form factor standards", "Mandatory antivirus brand"],
+          "options": [
+            "Personal device screen resolution requirements",
+            "Network segmentation \u2014 personal devices on guest/isolated network, not corporate LAN",
+            "Device color and form factor standards",
+            "Mandatory antivirus brand"
+          ],
           "correct_index": 1,
-          "explanation": "BYOD risk: personal devices may be compromised, unpatched, or infected. Best practice: place personal devices on an isolated guest VLAN/network with internet access only — never on the corporate LAN with access to sensitive systems.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["BYOD", "Policy", "Network Segmentation"]
+          "explanation": "BYOD risk: personal devices may be compromised, unpatched, or infected. Best practice: place personal devices on an isolated guest VLAN/network with internet access only \u2014 never on the corporate LAN with access to sensitive systems.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "BYOD",
+            "Policy",
+            "Network Segmentation"
+          ]
         },
         {
-          "id": "z3-n3-008", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-008",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "What does DLP (Data Loss Prevention) technology monitor and prevent?",
-          "options": ["Physical theft of server hardware", "Unauthorised exfiltration of sensitive data (email, USB, cloud upload)", "Denial of service attacks from the internet", "Unauthorised login attempts"],
+          "options": [
+            "Physical theft of server hardware",
+            "Unauthorised exfiltration of sensitive data (email, USB, cloud upload)",
+            "Denial of service attacks from the internet",
+            "Unauthorised login attempts"
+          ],
           "correct_index": 1,
-          "explanation": "DLP monitors data in motion (network), at rest (storage), and in use (endpoints) for sensitive content — PII, credit card numbers (PCI), medical records (HIPAA). It blocks or alerts when sensitive data is about to leave the organisation unauthorised.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DLP", "Data Loss Prevention", "Policy"]
+          "explanation": "DLP monitors data in motion (network), at rest (storage), and in use (endpoints) for sensitive content \u2014 PII, credit card numbers (PCI), medical records (HIPAA). It blocks or alerts when sensitive data is about to leave the organisation unauthorised.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "DLP",
+            "Data Loss Prevention",
+            "Policy"
+          ]
         },
         {
-          "id": "z3-n3-009", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-009",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "An emergency change differs from a normal change in that:",
-          "options": ["It never requires documentation", "It uses an expedited approval process — but documentation must still be completed after the fact", "It bypasses the rollback plan requirement", "Only the network admin can approve it"],
+          "options": [
+            "It never requires documentation",
+            "It uses an expedited approval process \u2014 but documentation must still be completed after the fact",
+            "It bypasses the rollback plan requirement",
+            "Only the network admin can approve it"
+          ],
           "correct_index": 1,
-          "explanation": "Emergency changes (e.g., responding to an active security breach) use a streamlined or post-hoc approval process — fix first, document second. But documentation is never skipped entirely — the RFC must be completed after resolution for audit purposes.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Change Management", "Emergency Change"]
+          "explanation": "Emergency changes (e.g., responding to an active security breach) use a streamlined or post-hoc approval process \u2014 fix first, document second. But documentation is never skipped entirely \u2014 the RFC must be completed after resolution for audit purposes.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Change Management",
+            "Emergency Change"
+          ]
         },
         {
-          "id": "z3-n3-010", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-010",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "An NDA (Non-Disclosure Agreement) with a network vendor is important because:",
-          "options": ["It defines the SLA for network uptime", "It legally protects confidential network information shared during the vendor engagement", "It replaces the need for an AUP", "It certifies the vendor's technical qualifications"],
+          "options": [
+            "It defines the SLA for network uptime",
+            "It legally protects confidential network information shared during the vendor engagement",
+            "It replaces the need for an AUP",
+            "It certifies the vendor's technical qualifications"
+          ],
           "correct_index": 1,
-          "explanation": "An NDA legally prevents the vendor from disclosing confidential information — network diagrams, IP schemes, security configurations — shared during sales, support, or implementation. Always require NDAs before sharing sensitive network documentation.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["NDA", "Policy", "Vendor"]
+          "explanation": "An NDA legally prevents the vendor from disclosing confidential information \u2014 network diagrams, IP schemes, security configurations \u2014 shared during sales, support, or implementation. Always require NDAs before sharing sensitive network documentation.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "NDA",
+            "Policy",
+            "Vendor"
+          ]
         },
         {
-          "id": "z3-n3-011", "zone": 3, "node": 3.3, "difficulty": "hard", "type": "mob",
+          "id": "z3-n3-011",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A rack diagram is most useful for which activity?",
-          "options": ["Designing IP addressing schemes", "Planning power distribution, rack unit allocation, and physical cable management in a data center", "Documenting routing protocol configurations", "Tracking user account permissions"],
+          "options": [
+            "Designing IP addressing schemes",
+            "Planning power distribution, rack unit allocation, and physical cable management in a data center",
+            "Documenting routing protocol configurations",
+            "Tracking user account permissions"
+          ],
           "correct_index": 1,
           "explanation": "Rack diagrams show which equipment occupies which rack units (U positions), power draw per device, PDU connections, and cable management. Essential for capacity planning, data center moves, and preventing PDU/UPS overload.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Rack Diagram", "Documentation", "Data Center"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Rack Diagram",
+            "Documentation",
+            "Data Center"
+          ]
         },
         {
-          "id": "z3-n3-012", "zone": 3, "node": 3.3, "difficulty": "hard", "type": "mob",
+          "id": "z3-n3-012",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "Why is out-of-date network documentation considered MORE dangerous than having no documentation?",
-          "options": ["It wastes storage space", "It can actively mislead troubleshooting and cause engineers to make incorrect assumptions about the network", "It violates compliance requirements", "It cannot be shared with new team members"],
+          "options": [
+            "It wastes storage space",
+            "It can actively mislead troubleshooting and cause engineers to make incorrect assumptions about the network",
+            "It violates compliance requirements",
+            "It cannot be shared with new team members"
+          ],
           "correct_index": 1,
           "explanation": "An engineer consulting outdated documentation may wrongly diagnose problems (e.g., expecting a link to be a certain speed or subnet to be a certain range). This can extend outages and lead to incorrect changes. No documentation forces caution; wrong documentation induces false confidence.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Documentation", "Best Practices"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Documentation",
+            "Best Practices"
+          ]
         },
         {
-          "id": "z3-n3-013", "zone": 3, "node": 3.3, "difficulty": "medium", "type": "mob",
+          "id": "z3-n3-013",
+          "zone": 3,
+          "node": 3.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "MDM (Mobile Device Management) is used in BYOD environments to:",
-          "options": ["Block all personal devices from the network", "Enforce security policies, enable remote wipe, and containerise corporate data on personal devices", "Monitor personal device usage for billing purposes", "Provide VPN access to corporate resources"],
+          "options": [
+            "Block all personal devices from the network",
+            "Enforce security policies, enable remote wipe, and containerise corporate data on personal devices",
+            "Monitor personal device usage for billing purposes",
+            "Provide VPN access to corporate resources"
+          ],
           "correct_index": 1,
-          "explanation": "MDM solutions (Intune, Jamf, MobileIron) enforce policies on enrolled personal devices — require PIN/encryption, remotely wipe if lost, and containerise corporate email/apps separate from personal apps. This is the technical enforcement side of a BYOD policy.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["MDM", "BYOD", "Mobile Security"]
+          "explanation": "MDM solutions (Intune, Jamf, MobileIron) enforce policies on enrolled personal devices \u2014 require PIN/encryption, remotely wipe if lost, and containerise corporate email/apps separate from personal apps. This is the technical enforcement side of a BYOD policy.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "MDM",
+            "BYOD",
+            "Mobile Security"
+          ]
+        },
+        {
+          "id": "z3-n3-study-003",
+          "zone": 3,
+          "node": 3.3,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Gate of Protocols",
+          "scenario": "A spectral gate blocks your path, guarded by a spirit of the old ways. 'Many use the Simple Network Management Protocol,' it tolls, 'but not all are created equal.'\n\nIt warns you that SNMPv1 is an ancient relic, insecure and reliant on simple community strings. SNMPv2c introduced bulk transfers but still lacks encryption. Only SNMPv3 provides the sacred protections of authentication and encryption (AuthPriv). To pass safely in a modern realm, one must use the strongest shield available.",
+          "question": "Which version of SNMP is recommended for production environments because it supports both authentication and encryption?",
+          "options": [
+            "SNMPv1",
+            "SNMPv2c",
+            "SNMPv3",
+            "ICMP"
+          ],
+          "correct_index": 2,
+          "explanation": "SNMPv1 and v2c are considered insecure for modern production use because they lack robust security features. SNMPv3 is the standard for secure management as it includes both authentication and encryption (AuthPriv).",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "snmp",
+            "management",
+            "security"
+          ]
         }
       ]
     },
@@ -484,10 +1184,10 @@
           "id": "z3-n4-study-001",
           "zone": 3,
           "node": 3.4,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Library's Backup Strategies: RAID Levels",
-          "scenario": "Imagine a library storing one massive reference book across multiple shelves. RAID 0 (striping only) splits the book into chapters and puts each chapter on a different shelf - multiple readers can grab different chapters at once for speed, but if ANY shelf is destroyed, that chapter - and the usefulness of the whole book - is gone. No redundancy at all.\n\nRAID 1 (mirroring) instead makes a complete duplicate of the entire book on a second shelf. If one shelf burns, the other has everything - but you've used double the shelf space to store one book's worth of content.\n\nRAID 5 splits the book into chapters across several shelves PLUS one extra shelf holding a 'summary key' (parity) clever enough to reconstruct ANY ONE missing chapter if exactly one shelf is lost. RAID 6 adds a SECOND summary shelf, so the library can lose TWO shelves and still reconstruct everything.\n\nWhy bother with the second summary shelf? Because for today's enormous shelves (multi-terabyte drives), rebuilding a lost chapter from the summary key can take many hours. During that rebuild, a RAID 5 library has ZERO redundancy left - if a second shelf fails before the rebuild finishes, the book is gone for good. RAID 6's second parity shelf means the library can survive that second failure even mid-rebuild.",
+          "scenario": "Imagine a library storing one massive reference book across multiple shelves. RAID 0 (striping only) splits the book into chapters, one per shelf \u2014 fast, but if ANY shelf is destroyed, that chapter (and the book's usefulness) is gone. No redundancy. RAID 1 (mirroring) duplicates the entire book on a second shelf \u2014 if one burns, the other has everything, but uses double the space. RAID 5 splits the book across several shelves PLUS one extra 'summary key' (parity) shelf that can reconstruct ANY ONE missing chapter if exactly one shelf is lost. RAID 6 adds a SECOND summary shelf, surviving TWO lost shelves. Why bother? For today's huge multi-terabyte drives, rebuilding from the summary key can take hours \u2014 during which a RAID 5 library has ZERO redundancy left. RAID 6's second parity shelf survives a failure even mid-rebuild.",
           "question": "A company stores financial records on a RAID 5 array of six large drives. One drive fails, and the array enters degraded mode while a replacement is shipped - the rebuild will take about 18 hours once it arrives. What is the primary risk during those 18 hours, and how would RAID 6 change the outcome for future arrays?",
           "options": [
             "The array will run out of free space during the rebuild; RAID 0 would prevent this by not using parity",
@@ -496,19 +1196,24 @@
             "The rebuild will silently corrupt data on the surviving drives; RAID 10 avoids this because it never uses parity"
           ],
           "correct_index": 1,
-          "explanation": "Correct: RAID 5 tolerates exactly one failed disk. During the rebuild window - which can be many hours for large drives - the array has NO remaining fault tolerance, so a second failure means total data loss. RAID 6's second, independent parity block allows the array to survive that second failure even while still rebuilding from the first. Option A misunderstands rebuilds - no extra capacity is consumed. Option C is false - performance returns to normal post-rebuild, and RAID 1's 50% capacity cost is a different trade-off, not a fix for this risk. Option D is false - rebuilding reconstructs data FROM parity onto the new disk; it doesn't corrupt the surviving disks (though the added I/O load is part of why a second failure during rebuild is a realistic risk).",
+          "explanation": "RAID 5 tolerates exactly one failed disk. During the rebuild \u2014 which can take many hours for large drives \u2014 the array has NO remaining fault tolerance, so a second failure means total data loss. RAID 6's second, independent parity block survives that second failure even mid-rebuild. Wrong: (A) rebuilds don't consume extra capacity. (C) performance returns to normal post-rebuild, and RAID 1's 50% capacity cost is a different trade-off. (D) rebuilding reconstructs data FROM parity onto the new disk \u2014 it doesn't corrupt surviving disks.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["raid", "raid5", "raid6", "fault-tolerance"]
+          "tags": [
+            "raid",
+            "raid5",
+            "raid6",
+            "fault-tolerance"
+          ]
         },
         {
           "id": "z3-n4-study-002",
           "zone": 3,
           "node": 3.4,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Kitchen's Single Oven: SPOF and HA Design",
-          "scenario": "Picture a busy restaurant kitchen. ACTIVE-ACTIVE high availability is like having two chefs both cooking simultaneously, splitting incoming orders between them - if one chef goes home sick, the other keeps the kitchen running (more slowly, but open). ACTIVE-PASSIVE is like having a second chef sitting in the back, fully trained but idle, who only steps up to the stove if the first chef collapses - simple, but that second chef's time is 'wasted' during normal service.\n\nNIC TEAMING is like giving a delivery driver two cars: in active-backup mode, the second car sits in the garage as a spare; in LACP/active-active mode, both cars are out making deliveries simultaneously, doubling throughput AND providing a fallback if one breaks down.\n\nNow here's the trap: imagine this restaurant has two chefs, a backup generator, redundant gas lines, AND a second delivery driver - but the entire kitchen has exactly ONE oven, and EVERY dish on the menu must go through it. If that oven breaks, the kitchen stops completely, no matter how much redundancy exists everywhere else. That oven is a SINGLE POINT OF FAILURE (SPOF) - and SPOFs are sneaky precisely because they hide behind otherwise-impressive redundancy elsewhere.",
+          "scenario": "Picture a busy restaurant kitchen. ACTIVE-ACTIVE HA is two chefs cooking simultaneously, splitting orders \u2014 if one goes home sick, the other keeps the kitchen running, just slower. ACTIVE-PASSIVE is a second chef sitting idle in back, fully trained, who only steps up if the first collapses \u2014 simple, but 'wasted' during normal service. NIC TEAMING is like giving a delivery driver two cars: active-backup keeps the second car as a spare; LACP/active-active runs both simultaneously, doubling throughput AND providing fallback. Now the trap: this kitchen has two chefs, a backup generator, redundant gas lines, and a second driver \u2014 but exactly ONE oven, and EVERY dish must go through it. If that oven breaks, the kitchen stops completely, no matter how much redundancy exists elsewhere. That oven is a SINGLE POINT OF FAILURE (SPOF).",
           "question": "A company's website runs on two web servers behind a load-balancer (active-active), with dual power supplies and two separate ISP links from different providers. However, both web servers query a SINGLE database server with no replica or failover instance. That database server crashes. What happens, and what concept does this illustrate?",
           "options": [
             "The load balancer automatically reroutes database queries to one of the web servers, so the site stays fully operational",
@@ -517,114 +1222,339 @@
             "The dual ISP links detect the database failure and fail over to a backup database hosted by the second ISP"
           ],
           "correct_index": 1,
-          "explanation": "Correct: a SPOF is ANY single component whose failure takes the whole system down - here, despite redundant web servers, power supplies, and ISP links, the single database server is exactly that component. Eliminating SPOFs means EVERY layer needs redundancy, not just the layers that are easy or cheap to duplicate. Option A is wrong - load balancers distribute web traffic across web servers; they have no mechanism to substitute for a database. Option C is wrong - RAID protects against local disk failure, not application-level database availability, and a web server isn't a database. Option D is wrong - ISP redundancy addresses internet connectivity, not database hosting; a second ISP doesn't magically provide a database replica.",
+          "explanation": "A SPOF is ANY single component whose failure takes the whole system down \u2014 here, despite redundant web servers, power, and ISP links, the single database server is exactly that. Eliminating SPOFs means EVERY layer needs redundancy, not just the easy/cheap ones. Wrong: (A) load balancers distribute web traffic; they can't substitute for a database. (C) RAID protects local disks, not application-level database availability. (D) ISP redundancy addresses internet connectivity, not database hosting \u2014 a second ISP doesn't provide a database replica.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["spof", "high-availability", "active-active", "active-passive"]
+          "tags": [
+            "spof",
+            "high-availability",
+            "active-active",
+            "active-passive"
+          ]
         },
         {
-          "id": "z3-n4-001", "zone": 3, "node": 3.4, "difficulty": "easy", "type": "mob",
+          "id": "z3-n4-001",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "RAID 1 provides fault tolerance by:",
-          "options": ["Striping data across multiple disks", "Writing identical data to two disks simultaneously (mirroring)", "Distributing parity across all disks", "Combining striping and mirroring"],
+          "options": [
+            "Striping data across multiple disks",
+            "Writing identical data to two disks simultaneously (mirroring)",
+            "Distributing parity across all disks",
+            "Combining striping and mirroring"
+          ],
           "correct_index": 1,
-          "explanation": "RAID 1 mirrors data — every write goes to both disks simultaneously. If one disk fails, the other contains a complete copy. Requires minimum 2 disks; usable capacity = 50% (one disk's worth).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RAID 1", "Mirroring", "Redundancy"]
+          "explanation": "RAID 1 mirrors data \u2014 every write goes to both disks simultaneously. If one disk fails, the other contains a complete copy. Requires minimum 2 disks; usable capacity = 50% (one disk's worth).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RAID 1",
+            "Mirroring",
+            "Redundancy"
+          ]
         },
         {
-          "id": "z3-n4-002", "zone": 3, "node": 3.4, "difficulty": "easy", "type": "mob",
+          "id": "z3-n4-002",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What is the minimum number of disks required for RAID 5?",
-          "options": ["2", "3", "4", "6"],
+          "options": [
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
           "correct_index": 1,
-          "explanation": "RAID 5 requires a minimum of 3 disks (data striped + distributed parity). With 3 disks, 1 disk is effectively used for parity — usable capacity = N-1 disks. RAID 5 can survive one disk failure.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RAID 5", "Parity", "Minimum Disks"]
+          "explanation": "RAID 5 requires a minimum of 3 disks (data striped + distributed parity). With 3 disks, 1 disk is effectively used for parity \u2014 usable capacity = N-1 disks. RAID 5 can survive one disk failure.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RAID 5",
+            "Parity",
+            "Minimum Disks"
+          ]
         },
         {
-          "id": "z3-n4-003", "zone": 3, "node": 3.4, "difficulty": "easy", "type": "mob",
+          "id": "z3-n4-003",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "RAID 0 is NOT used for critical data because:",
-          "options": ["It is too slow for practical use", "It provides no redundancy — any single disk failure destroys all data", "It requires too many disks", "It cannot be combined with other RAID levels"],
+          "options": [
+            "It is too slow for practical use",
+            "It provides no redundancy \u2014 any single disk failure destroys all data",
+            "It requires too many disks",
+            "It cannot be combined with other RAID levels"
+          ],
           "correct_index": 1,
-          "explanation": "RAID 0 stripes data across disks for maximum performance — no parity, no mirroring. If any disk fails, ALL data is lost. Never use RAID 0 for data you cannot afford to lose. It is only appropriate for scratch space or caches.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RAID 0", "Striping", "No Redundancy"]
+          "explanation": "RAID 0 stripes data across disks for maximum performance \u2014 no parity, no mirroring. If any disk fails, ALL data is lost. Never use RAID 0 for data you cannot afford to lose. It is only appropriate for scratch space or caches.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RAID 0",
+            "Striping",
+            "No Redundancy"
+          ]
         },
         {
-          "id": "z3-n4-004", "zone": 3, "node": 3.4, "difficulty": "easy", "type": "mob",
+          "id": "z3-n4-004",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "What does NIC teaming provide?",
-          "options": ["Route aggregation across multiple routers", "Combines multiple NICs into one logical interface for redundancy and/or increased bandwidth", "VLAN segmentation between two switches", "Wireless channel bonding"],
+          "options": [
+            "Route aggregation across multiple routers",
+            "Combines multiple NICs into one logical interface for redundancy and/or increased bandwidth",
+            "VLAN segmentation between two switches",
+            "Wireless channel bonding"
+          ],
           "correct_index": 1,
-          "explanation": "NIC teaming (bonding) combines two or more physical NICs into one logical interface. Modes: Active-Backup (one NIC active, other standby — redundancy only) or LACP/802.3ad (both active — redundancy + bandwidth aggregation).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["NIC Teaming", "Bonding", "HA"]
+          "explanation": "NIC teaming (bonding) combines two or more physical NICs into one logical interface. Modes: Active-Backup (one NIC active, other standby \u2014 redundancy only) or LACP/802.3ad (both active \u2014 redundancy + bandwidth aggregation).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "NIC Teaming",
+            "Bonding",
+            "HA"
+          ]
         },
         {
-          "id": "z3-n4-005", "zone": 3, "node": 3.4, "difficulty": "easy", "type": "mob",
+          "id": "z3-n4-005",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "In an active-passive cluster, the passive node:",
-          "options": ["Processes traffic alongside the active node", "Sits idle and only takes over if the active node fails", "Load balances traffic with the active node", "Backs up the active node's data only"],
+          "options": [
+            "Processes traffic alongside the active node",
+            "Sits idle and only takes over if the active node fails",
+            "Load balances traffic with the active node",
+            "Backs up the active node's data only"
+          ],
           "correct_index": 1,
           "explanation": "Active-passive (failover) clustering: the passive node is on standby, not processing requests. On active node failure, the passive node takes over. Simpler than active-active but wastes the standby node's capacity during normal operation.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Active-Passive", "Clustering", "HA"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Active-Passive",
+            "Clustering",
+            "HA"
+          ]
         },
         {
-          "id": "z3-n4-006", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-006",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "RAID 5 can survive how many simultaneous disk failures?",
-          "options": ["Zero", "One", "Two", "Up to half the array"],
+          "options": [
+            "Zero",
+            "One",
+            "Two",
+            "Up to half the array"
+          ],
           "correct_index": 1,
-          "explanation": "RAID 5 uses single distributed parity — can recover from exactly ONE disk failure. Two simultaneous failures = data loss. For environments with large disks (> 2TB) where rebuild times create risk windows, RAID 6 (two parity disks) is preferred.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["RAID 5", "Fault Tolerance", "Parity"]
+          "explanation": "RAID 5 uses single distributed parity \u2014 can recover from exactly ONE disk failure. Two simultaneous failures = data loss. For environments with large disks (> 2TB) where rebuild times create risk windows, RAID 6 (two parity disks) is preferred.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "RAID 5",
+            "Fault Tolerance",
+            "Parity"
+          ]
         },
         {
-          "id": "z3-n4-007", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-007",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "RAID 10 (1+0) combines which two RAID levels?",
-          "options": ["RAID 0 + RAID 5", "RAID 1 (mirroring) + RAID 0 (striping)", "RAID 5 + RAID 6", "RAID 1 + RAID 6"],
+          "options": [
+            "RAID 0 + RAID 5",
+            "RAID 1 (mirroring) + RAID 0 (striping)",
+            "RAID 5 + RAID 6",
+            "RAID 1 + RAID 6"
+          ],
           "correct_index": 1,
-          "explanation": "RAID 10 mirrors data first (RAID 1), then stripes across the mirrored pairs (RAID 0). Minimum 4 disks. Combines the performance of striping with the redundancy of mirroring. Can survive one failure per mirrored pair — potentially multiple disk failures.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["RAID 10", "Mirroring", "Striping"]
+          "explanation": "RAID 10 mirrors data first (RAID 1), then stripes across the mirrored pairs (RAID 0). Minimum 4 disks. Combines the performance of striping with the redundancy of mirroring. Can survive one failure per mirrored pair \u2014 potentially multiple disk failures.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "RAID 10",
+            "Mirroring",
+            "Striping"
+          ]
         },
         {
-          "id": "z3-n4-008", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-008",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A load balancer performs health checks on backend servers and removes failing servers from the pool. This is an example of:",
-          "options": ["Traffic shaping", "Active-active high availability with automatic failover", "RAID-based storage redundancy", "NIC teaming"],
+          "options": [
+            "Traffic shaping",
+            "Active-active high availability with automatic failover",
+            "RAID-based storage redundancy",
+            "NIC teaming"
+          ],
           "correct_index": 1,
-          "explanation": "An active-active load balancer distributes traffic across multiple servers, continuously health-checks them, and automatically removes any server that fails a health check — maintaining availability without administrator intervention.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Load Balancer", "Active-Active", "HA"]
+          "explanation": "An active-active load balancer distributes traffic across multiple servers, continuously health-checks them, and automatically removes any server that fails a health check \u2014 maintaining availability without administrator intervention.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Load Balancer",
+            "Active-Active",
+            "HA"
+          ]
         },
         {
-          "id": "z3-n4-009", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-009",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Multipathing in a SAN (Storage Area Network) environment provides:",
-          "options": ["Higher storage capacity", "Multiple physical paths to storage — if one path fails, traffic uses an alternate path automatically", "RAID-level redundancy for storage data", "Encryption for data in transit to storage"],
+          "options": [
+            "Higher storage capacity",
+            "Multiple physical paths to storage \u2014 if one path fails, traffic uses an alternate path automatically",
+            "RAID-level redundancy for storage data",
+            "Encryption for data in transit to storage"
+          ],
           "correct_index": 1,
-          "explanation": "SAN multipathing uses multiple HBAs (Host Bus Adapters) and switches to create redundant paths between a server and storage. If one HBA, cable, or switch fails, I/O automatically fails over to an alternate path — no data loss, no downtime.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Multipathing", "SAN", "Storage HA"]
+          "explanation": "SAN multipathing uses multiple HBAs (Host Bus Adapters) and switches to create redundant paths between a server and storage. If one HBA, cable, or switch fails, I/O automatically fails over to an alternate path \u2014 no data loss, no downtime.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Multipathing",
+            "SAN",
+            "Storage HA"
+          ]
         },
         {
-          "id": "z3-n4-010", "zone": 3, "node": 3.4, "difficulty": "hard", "type": "mob",
+          "id": "z3-n4-010",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "RAID 6 is preferred over RAID 5 for large disk arrays. Why?",
-          "options": ["RAID 6 has better read performance", "RAID 6 tolerates two simultaneous disk failures — large disks have long rebuild times that expose RAID 5 to a second failure", "RAID 6 is cheaper to implement", "RAID 6 does not require a rebuild process"],
+          "options": [
+            "RAID 6 has better read performance",
+            "RAID 6 tolerates two simultaneous disk failures \u2014 large disks have long rebuild times that expose RAID 5 to a second failure",
+            "RAID 6 is cheaper to implement",
+            "RAID 6 does not require a rebuild process"
+          ],
           "correct_index": 1,
-          "explanation": "Modern large drives (4TB+) can take 12–24 hours to rebuild a RAID 5 array. During rebuild, a second disk failure destroys the array. RAID 6 uses two parity disks, tolerating two simultaneous failures — the rebuild window is still protected.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["RAID 6", "RAID 5", "Rebuild Risk"]
+          "explanation": "Modern large drives (4TB+) can take 12\u201324 hours to rebuild a RAID 5 array. During rebuild, a second disk failure destroys the array. RAID 6 uses two parity disks, tolerating two simultaneous failures \u2014 the rebuild window is still protected.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "RAID 6",
+            "RAID 5",
+            "Rebuild Risk"
+          ]
         },
         {
-          "id": "z3-n4-011", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-011",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A single point of failure (SPOF) in a network design means:",
-          "options": ["A device that monitors the entire network for failures", "Any single component whose failure takes down the entire system", "A backup configuration stored at one location", "A routing protocol that has a single path to all destinations"],
+          "options": [
+            "A device that monitors the entire network for failures",
+            "Any single component whose failure takes down the entire system",
+            "A backup configuration stored at one location",
+            "A routing protocol that has a single path to all destinations"
+          ],
           "correct_index": 1,
-          "explanation": "A SPOF is any component — switch, router, link, power supply, ISP connection — whose failure causes complete service outage. HA design eliminates SPOFs through redundancy at every layer.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["SPOF", "Redundancy", "HA"]
+          "explanation": "A SPOF is any component \u2014 switch, router, link, power supply, ISP connection \u2014 whose failure causes complete service outage. HA design eliminates SPOFs through redundancy at every layer.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "SPOF",
+            "Redundancy",
+            "HA"
+          ]
         },
         {
-          "id": "z3-n4-012", "zone": 3, "node": 3.4, "difficulty": "hard", "type": "mob",
+          "id": "z3-n4-012",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "Graceful degradation in a network context means:",
-          "options": ["The network shuts down cleanly when overloaded", "The system continues to function at reduced capacity after a partial failure", "Traffic is gradually reduced during maintenance", "Routing protocols converge slowly to prevent loops"],
+          "options": [
+            "The network shuts down cleanly when overloaded",
+            "The system continues to function at reduced capacity after a partial failure",
+            "Traffic is gradually reduced during maintenance",
+            "Routing protocols converge slowly to prevent loops"
+          ],
           "correct_index": 1,
-          "explanation": "Graceful degradation means the system keeps working — at reduced performance or capacity — after a partial failure, rather than failing completely. Example: RAID 5 operating in degraded mode after one disk fails (slower but still functional until disk is replaced).",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Graceful Degradation", "HA", "Fault Tolerance"]
+          "explanation": "Graceful degradation means the system keeps working \u2014 at reduced performance or capacity \u2014 after a partial failure, rather than failing completely. Example: RAID 5 operating in degraded mode after one disk fails (slower but still functional until disk is replaced).",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Graceful Degradation",
+            "HA",
+            "Fault Tolerance"
+          ]
         },
         {
-          "id": "z3-n4-013", "zone": 3, "node": 3.4, "difficulty": "medium", "type": "mob",
+          "id": "z3-n4-013",
+          "zone": 3,
+          "node": 3.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "RAID is NOT a substitute for backups because:",
-          "options": ["RAID is too slow for frequent backups", "RAID protects against disk failure but not against accidental deletion, ransomware, fire, or site disaster", "RAID cannot protect data larger than 2TB", "RAID requires a RAID controller that adds cost"],
+          "options": [
+            "RAID is too slow for frequent backups",
+            "RAID protects against disk failure but not against accidental deletion, ransomware, fire, or site disaster",
+            "RAID cannot protect data larger than 2TB",
+            "RAID requires a RAID controller that adds cost"
+          ],
           "correct_index": 1,
-          "explanation": "RAID provides disk-level redundancy — if a drive fails, no data is lost. But RAID does NOT protect against: accidental file deletion (deleted immediately on both mirrors), ransomware encryption (both disks encrypted), or site-level disasters (fire, flood). Backups are still essential.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["RAID", "Backup", "Limitations"]
+          "explanation": "RAID provides disk-level redundancy \u2014 if a drive fails, no data is lost. But RAID does NOT protect against: accidental file deletion (deleted immediately on both mirrors), ransomware encryption (both disks encrypted), or site-level disasters (fire, flood). Backups are still essential.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "RAID",
+            "Backup",
+            "Limitations"
+          ]
+        },
+        {
+          "id": "z3-n4-study-003",
+          "zone": 3,
+          "node": 3.4,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Sands of Time",
+          "scenario": "You reach a desert where the sands represent lost data and time. A merchant stands by a broken clock. 'When the Great Collapse happens,' he sighs, 'we must know what we can afford to lose.'\n\nHe explains two metrics: RPO (Recovery Point Objective) measures how much data loss is acceptable in terms of time\u2014how far back do we have to go to find a valid backup? RTO (Recovery Time Objective) measures the maximum amount of downtime allowed before the system must be restored for use.",
+          "question": "A company determines that it can only tolerate 2 hours of downtime during a server failure. Which metric does this describe?",
+          "options": [
+            "RPO",
+            "RTO",
+            "MTBF",
+            "SLA"
+          ],
+          "correct_index": 1,
+          "explanation": "RTO (Recovery Time Objective) measures the maximum acceptable downtime. RPO (Recovery Point Objective) measures the maximum amount of data loss in terms of time.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "disaster-recovery",
+            "rto",
+            "rpo"
+          ]
         }
       ]
     },
@@ -637,10 +1567,10 @@
           "id": "z3-n5-study-001",
           "zone": 3,
           "node": 3.5,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Save Point and the Respawn Timer: RPO vs RTO",
-          "scenario": "Think about dying in a video game. When you respawn, you reload from your last save point — and whatever progress happened AFTER that save is gone forever. The amount of progress you're willing to lose is your RPO (Recovery Point Objective): if you save every 15 minutes, your worst-case loss is 15 minutes of gameplay. RPO is measured BACKWARD from the failure — it answers 'how much data can we afford to lose?' and directly sets your backup frequency (a 15-minute RPO demands backups at least every 15 minutes). Now think about the loading screen after you respawn — how long you sit there waiting to get back into the action. That's your RTO (Recovery Time Objective): the maximum acceptable downtime, measured FORWARD from the failure to full restoration. RTO answers 'how long can we be offline?' and drives your DR site choice — a tight RTO demands a hot site with near-instant failover, while a generous RTO allows a slower cold-site rebuild. RPO and RTO are independent dials: a system can have a tiny RPO (frequent backups, almost no data loss) but a huge RTO (it takes days to physically rebuild the server room), or vice versa.",
+          "scenario": "Think about dying in a video game. When you respawn, you reload from your last save point \u2014 progress AFTER that save is gone forever. The progress you're willing to lose is your RPO (Recovery Point Objective): saving every 15 minutes means a worst-case loss of 15 minutes. RPO is measured BACKWARD from the failure \u2014 'how much data can we afford to lose?' \u2014 and sets your backup frequency. Now think about the loading screen after respawn \u2014 how long you wait to get back in. That's your RTO (Recovery Time Objective): the maximum acceptable downtime, measured FORWARD from the failure to full restoration, driving your DR site choice (hot site for tight RTO, cold site for a generous one). RPO and RTO are independent: tiny RPO with frequent backups can pair with a huge RTO if rebuilding the server room takes days, or vice versa.",
           "question": "A hospital's patient records database has an RPO of 15 minutes and an RTO of 1 hour. The server fails at 2:00 PM. The last backup completed at 1:50 PM, and restoring plus verifying that backup takes 40 minutes. Which statement correctly evaluates this incident against the targets?",
           "options": [
             "Both targets are met: 10 minutes of data loss is within the 15-minute RPO, and 40 minutes of recovery is within the 1-hour RTO.",
@@ -649,289 +1579,801 @@
             "RPO and RTO can't both apply to the same system, so the scenario is contradictory."
           ],
           "correct_index": 0,
-          "explanation": "The data loss window is the gap between the last backup (1:50 PM) and the failure (2:00 PM) = 10 minutes, which is within the 15-minute RPO — acceptable. The recovery took 40 minutes, which is within the 1-hour RTO — also acceptable. Both targets are met. Option B is wrong: an RPO of 15 minutes means up to 15 minutes of loss is the ACCEPTABLE ceiling, not that zero loss is required (that would be an RPO of 0). Option C is wrong: it compares the recovery time against the RPO figure instead of the RTO figure — RTO is the 1-hour ceiling here, and 40 minutes is well under it. Option D is wrong: every system that needs disaster recovery planning has both an RPO (data-loss tolerance) and an RTO (downtime tolerance) — they measure different axes of the same incident, not competing definitions.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["rpo", "rto", "disaster-recovery", "calculation"]
+          "explanation": "The data loss window is 1:50 PM to 2:00 PM = 10 minutes, within the 15-minute RPO \u2014 acceptable. Recovery took 40 minutes, within the 1-hour RTO \u2014 also acceptable. Both targets met. Wrong: (B) a 15-minute RPO means UP TO 15 minutes of loss is acceptable, not zero. (C) compares recovery time against the RPO figure instead of RTO \u2014 40 minutes is well under the 1-hour RTO. (D) every DR-planned system has both an RPO and an RTO \u2014 different axes of the same incident.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "rpo",
+            "rto",
+            "disaster-recovery",
+            "calculation"
+          ]
         },
         {
           "id": "z3-n5-study-002",
           "zone": 3,
           "node": 3.5,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Photographer's Contact Sheets: Differential vs Incremental Backups",
-          "scenario": "A wedding photographer shoots all weekend and backs up nightly. Friday night she runs a FULL backup — every photo taken so far, copied completely. Now she needs a way to capture 'what's new' each night without re-copying everything. Option one: INCREMENTAL — copy only the photos taken since the LAST backup of ANY kind. Saturday's incremental holds just Saturday's shots; Sunday's incremental holds just Sunday's shots. Fast and small, but to restore everything she needs the full PLUS every incremental since, applied IN ORDER — more pieces, and if one is lost or corrupted, everything after it is unusable. Option two: DIFFERENTIAL — copy everything taken since the LAST FULL backup. Saturday's differential holds Saturday's shots; but Sunday's differential holds BOTH Saturday's AND Sunday's shots, since it always reaches back to Friday's full. Each differential grows larger than the last, but to restore she needs only the full PLUS the SINGLE most recent differential — fewer pieces, simpler and more resilient restore.",
+          "scenario": "A wedding photographer shoots all weekend and backs up nightly. Friday night: a FULL backup \u2014 every photo so far, copied completely. Now she needs to capture 'what's new' each night without re-copying everything. INCREMENTAL: copy only photos taken since the LAST backup of ANY kind \u2014 Saturday's holds just Saturday's shots, Sunday's holds just Sunday's. Fast and small, but restoring needs the full PLUS every incremental since, applied IN ORDER \u2014 more pieces, and if one is lost, everything after it is unusable. DIFFERENTIAL: copy everything since the LAST FULL \u2014 Saturday's holds Saturday's shots, but Sunday's holds BOTH Saturday's AND Sunday's, since it always reaches back to the full. Each differential grows larger, but restoring needs only the full PLUS the SINGLE most recent differential.",
           "question": "A company runs a full backup every Sunday at midnight, and a differential backup every other night at midnight. The server's storage fails on Thursday at 10 AM, before that night's job has run. What is needed for a complete restore?",
           "options": [
             "Sunday's full backup plus every differential from Monday through Wednesday, restored in order.",
             "Sunday's full backup plus only Wednesday night's differential backup.",
-            "Only Wednesday night's differential backup — differentials are self-contained.",
+            "Only Wednesday night's differential backup \u2014 differentials are self-contained.",
             "Sunday's full backup plus Thursday's differential backup, since that is the most recent."
           ],
           "correct_index": 1,
-          "explanation": "Differential backups are cumulative since the last full backup, so Wednesday night's differential already contains every change from Monday, Tuesday, AND Wednesday. A complete restore needs only the Sunday full plus that single most recent differential. Option A describes how INCREMENTAL restores work — each night's piece is needed in sequence — but that's not how differentials behave. Option C is wrong because a differential only captures CHANGES since the full backup; without the full backup as the baseline, those changes have nothing to apply to. Option D is wrong because the failure happened Thursday morning, before Thursday night's backup job would have run — the most recent COMPLETED differential is Wednesday's.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["backup-types", "differential-backup", "incremental-backup", "full-backup"]
+          "explanation": "Differential backups are cumulative since the last full, so Wednesday's differential already contains Monday, Tuesday, AND Wednesday's changes. A complete restore needs only Sunday's full plus that one differential. Wrong: (A) describes how INCREMENTAL restores work \u2014 sequential pieces \u2014 not differentials. (C) a differential only captures changes since the full; without the full as baseline, those changes have nothing to apply to. (D) the failure was Thursday morning, before Thursday night's backup ran \u2014 Wednesday's is the most recent.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "backup-types",
+            "differential-backup",
+            "incremental-backup",
+            "full-backup"
+          ]
         },
         {
-          "id": "z3-n5-001", "zone": 3, "node": 3.5, "difficulty": "easy", "type": "mob",
+          "id": "z3-n5-001",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "RTO (Recovery Time Objective) defines:",
-          "options": ["How much data can be lost in a disaster", "The maximum acceptable time to restore a system or service after a disaster", "The minimum backup frequency required", "The geographic distance between primary and DR sites"],
+          "options": [
+            "How much data can be lost in a disaster",
+            "The maximum acceptable time to restore a system or service after a disaster",
+            "The minimum backup frequency required",
+            "The geographic distance between primary and DR sites"
+          ],
           "correct_index": 1,
           "explanation": "RTO = 'How long can we be down?' It's the maximum acceptable outage duration. A short RTO (e.g., 1 hour) requires a hot site. A long RTO (e.g., 1 week) allows a cold site. RTO drives DR site and HA investment decisions.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RTO", "DR", "Recovery"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RTO",
+            "DR",
+            "Recovery"
+          ]
         },
         {
-          "id": "z3-n5-002", "zone": 3, "node": 3.5, "difficulty": "easy", "type": "mob",
+          "id": "z3-n5-002",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "RPO (Recovery Point Objective) defines:",
-          "options": ["How quickly systems must be restored", "The maximum acceptable data loss measured in time (how old can backups be?)", "The physical location of the DR site", "The number of redundant power feeds required"],
+          "options": [
+            "How quickly systems must be restored",
+            "The maximum acceptable data loss measured in time (how old can backups be?)",
+            "The physical location of the DR site",
+            "The number of redundant power feeds required"
+          ],
           "correct_index": 1,
           "explanation": "RPO = 'How much data can we lose?' If RPO is 4 hours, you must back up at least every 4 hours. RPO drives backup frequency and replication decisions. An RPO of 0 requires continuous real-time replication.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RPO", "Backup", "DR"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RPO",
+            "Backup",
+            "DR"
+          ]
         },
         {
-          "id": "z3-n5-003", "zone": 3, "node": 3.5, "difficulty": "easy", "type": "mob",
+          "id": "z3-n5-003",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A cold DR site provides:",
-          "options": ["A fully operational mirror of the primary site", "Partial equipment for faster recovery than cold", "Space, power, and cooling — but no equipment installed", "Cloud-based virtual infrastructure"],
+          "options": [
+            "A fully operational mirror of the primary site",
+            "Partial equipment for faster recovery than cold",
+            "Space, power, and cooling \u2014 but no equipment installed",
+            "Cloud-based virtual infrastructure"
+          ],
           "correct_index": 2,
-          "explanation": "A cold site is just the physical space — raised floor, power, cooling, connectivity — but no hardware installed. Recovery requires shipping and installing equipment, then restoring from backups. Cheapest but slowest recovery (days to weeks).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Cold Site", "DR", "Recovery"]
+          "explanation": "A cold site is just the physical space \u2014 raised floor, power, cooling, connectivity \u2014 but no hardware installed. Recovery requires shipping and installing equipment, then restoring from backups. Cheapest but slowest recovery (days to weeks).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Cold Site",
+            "DR",
+            "Recovery"
+          ]
         },
         {
-          "id": "z3-n5-004", "zone": 3, "node": 3.5, "difficulty": "easy", "type": "mob",
+          "id": "z3-n5-004",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A full backup backs up:",
-          "options": ["Only data changed since the last backup", "Only data changed since the last full backup", "All data regardless of whether it has changed", "Only the operating system and configuration files"],
+          "options": [
+            "Only data changed since the last backup",
+            "Only data changed since the last full backup",
+            "All data regardless of whether it has changed",
+            "Only the operating system and configuration files"
+          ],
           "correct_index": 2,
-          "explanation": "A full backup copies ALL data every time — the complete data set. It takes the longest and uses the most storage, but restoration is simplest (single backup set). Typically done weekly, with incremental or differential backups in between.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Full Backup", "Backup Types"]
+          "explanation": "A full backup copies ALL data every time \u2014 the complete data set. It takes the longest and uses the most storage, but restoration is simplest (single backup set). Typically done weekly, with incremental or differential backups in between.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Full Backup",
+            "Backup Types"
+          ]
         },
         {
-          "id": "z3-n5-005", "zone": 3, "node": 3.5, "difficulty": "easy", "type": "mob",
+          "id": "z3-n5-005",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An incremental backup backs up:",
-          "options": ["All data since the last full backup", "All data changed since the last backup of any type (full OR incremental)", "The entire file system every time", "Only deleted files"],
+          "options": [
+            "All data since the last full backup",
+            "All data changed since the last backup of any type (full OR incremental)",
+            "The entire file system every time",
+            "Only deleted files"
+          ],
           "correct_index": 1,
-          "explanation": "Incremental backups capture only changes since the LAST backup — whether that last backup was a full or another incremental. Fastest to create, smallest size. Restore requires full backup + every incremental in sequence.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Incremental Backup", "Backup Types"]
+          "explanation": "Incremental backups capture only changes since the LAST backup \u2014 whether that last backup was a full or another incremental. Fastest to create, smallest size. Restore requires full backup + every incremental in sequence.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Incremental Backup",
+            "Backup Types"
+          ]
         },
         {
-          "id": "z3-n5-006", "zone": 3, "node": 3.5, "difficulty": "medium", "type": "mob",
+          "id": "z3-n5-006",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Which backup strategy is fastest to restore from (aside from a full backup alone)?",
-          "options": ["Incremental — only need the last incremental", "Differential — only need the last full + last differential", "Incremental with deduplication", "Snapshot-based backups"],
+          "options": [
+            "Incremental \u2014 only need the last incremental",
+            "Differential \u2014 only need the last full + last differential",
+            "Incremental with deduplication",
+            "Snapshot-based backups"
+          ],
           "correct_index": 1,
-          "explanation": "Differential restore requires only two backup sets: the last full backup + the most recent differential. Incremental restore requires the full backup + EVERY incremental taken since — potentially many media sets and complex restore sequencing.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Differential Backup", "Restore Speed"]
+          "explanation": "Differential restore requires only two backup sets: the last full backup + the most recent differential. Incremental restore requires the full backup + EVERY incremental taken since \u2014 potentially many media sets and complex restore sequencing.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Differential Backup",
+            "Restore Speed"
+          ]
         },
         {
-          "id": "z3-n5-007", "zone": 3, "node": 3.5, "difficulty": "medium", "type": "mob",
+          "id": "z3-n5-007",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "The 3-2-1 backup rule states:",
-          "options": ["Back up daily for 3 days, weekly for 2 weeks, monthly for 1 month", "Keep 3 copies of data, on 2 different media types, with 1 copy stored offsite", "Use 3 backup servers, 2 full backups, 1 incremental", "Retain backups for 3 years, with 2 tested annually, 1 in cold storage"],
+          "options": [
+            "Back up daily for 3 days, weekly for 2 weeks, monthly for 1 month",
+            "Keep 3 copies of data, on 2 different media types, with 1 copy stored offsite",
+            "Use 3 backup servers, 2 full backups, 1 incremental",
+            "Retain backups for 3 years, with 2 tested annually, 1 in cold storage"
+          ],
           "correct_index": 1,
           "explanation": "3-2-1: 3 copies of data (original + 2 backups), on 2 different media types (e.g., disk + tape, or disk + cloud), with 1 copy offsite (protects against site disaster). This is the gold standard for backup strategy.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["3-2-1 Rule", "Backup Strategy"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "3-2-1 Rule",
+            "Backup Strategy"
+          ]
         },
         {
-          "id": "z3-n5-008", "zone": 3, "node": 3.5, "difficulty": "medium", "type": "mob",
+          "id": "z3-n5-008",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "MTTR (Mean Time To Repair) measures:",
-          "options": ["How often a component fails on average", "The average time to repair or restore a failed system", "The geographic distance to the DR site", "The time between scheduled maintenance windows"],
+          "options": [
+            "How often a component fails on average",
+            "The average time to repair or restore a failed system",
+            "The geographic distance to the DR site",
+            "The time between scheduled maintenance windows"
+          ],
           "correct_index": 1,
           "explanation": "MTTR is the average repair/recovery time for a failed component or system. Lower MTTR = faster recovery = better availability. Drives support contract decisions (e.g., 4-hour hardware replacement SLA).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["MTTR", "Availability", "DR"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "MTTR",
+            "Availability",
+            "DR"
+          ]
         },
         {
-          "id": "z3-n5-009", "zone": 3, "node": 3.5, "difficulty": "medium", "type": "mob",
+          "id": "z3-n5-009",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A hot DR site differs from a warm site primarily because:",
-          "options": ["Hot sites are cheaper than warm sites", "Hot sites are fully operational with live data replication — failover can be immediate or near-immediate", "Hot sites only contain networking equipment, not servers", "Hot sites are located in the same building as the primary site"],
+          "options": [
+            "Hot sites are cheaper than warm sites",
+            "Hot sites are fully operational with live data replication \u2014 failover can be immediate or near-immediate",
+            "Hot sites only contain networking equipment, not servers",
+            "Hot sites are located in the same building as the primary site"
+          ],
           "correct_index": 1,
           "explanation": "Hot sites are fully operational mirrors of the primary site with continuous data replication. Failover can happen in minutes. They are the most expensive DR option. Warm sites have hardware but require data restoration (hours). Cold sites need equipment deployed (days).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Hot Site", "DR", "Failover"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Hot Site",
+            "DR",
+            "Failover"
+          ]
         },
         {
-          "id": "z3-n5-010", "zone": 3, "node": 3.5, "difficulty": "medium", "type": "mob",
+          "id": "z3-n5-010",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "MTBF (Mean Time Between Failures) is used to:",
-          "options": ["Determine how long recovery will take", "Measure how often a component fails on average — used to plan redundancy", "Calculate backup frequency requirements", "Define the maximum acceptable downtime"],
+          "options": [
+            "Determine how long recovery will take",
+            "Measure how often a component fails on average \u2014 used to plan redundancy",
+            "Calculate backup frequency requirements",
+            "Define the maximum acceptable downtime"
+          ],
           "correct_index": 1,
           "explanation": "MTBF is the average time between failures for a component. Higher MTBF = more reliable. Used to compare hardware reliability, calculate expected failure rates, and justify redundancy decisions. Availability = MTBF / (MTBF + MTTR).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["MTBF", "Reliability", "Availability"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "MTBF",
+            "Reliability",
+            "Availability"
+          ]
         },
         {
-          "id": "z3-n5-011", "zone": 3, "node": 3.5, "difficulty": "hard", "type": "mob",
+          "id": "z3-n5-011",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An organisation has an RPO of 1 hour. What is the MINIMUM backup frequency required?",
-          "options": ["Daily full backups are sufficient", "Backups every 1 hour — or continuous replication if RPO must be strictly met", "Weekly full + daily incremental", "RPO does not dictate backup frequency"],
+          "options": [
+            "Daily full backups are sufficient",
+            "Backups every 1 hour \u2014 or continuous replication if RPO must be strictly met",
+            "Weekly full + daily incremental",
+            "RPO does not dictate backup frequency"
+          ],
           "correct_index": 1,
           "explanation": "RPO of 1 hour means at most 1 hour of data can be lost. This requires backups every 1 hour or continuous replication. If the last backup was 2 hours ago when disaster strikes, you have already violated the RPO.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["RPO", "Backup Frequency", "DR"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "RPO",
+            "Backup Frequency",
+            "DR"
+          ]
         },
         {
-          "id": "z3-n5-012", "zone": 3, "node": 3.5, "difficulty": "hard", "type": "mob",
+          "id": "z3-n5-012",
+          "zone": 3,
+          "node": 3.5,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "Why should DR plans be tested regularly?",
-          "options": ["Testing is only required by compliance frameworks, not operationally necessary", "An untested DR plan may fail when needed — hardware, procedures, and team knowledge need validation", "Testing DR plans automatically updates the RTO/RPO values", "Regular testing reduces MTBF of production systems"],
+          "options": [
+            "Testing is only required by compliance frameworks, not operationally necessary",
+            "An untested DR plan may fail when needed \u2014 hardware, procedures, and team knowledge need validation",
+            "Testing DR plans automatically updates the RTO/RPO values",
+            "Regular testing reduces MTBF of production systems"
+          ],
           "correct_index": 1,
           "explanation": "DR plans fail due to: outdated procedures, hardware that no longer works, undocumented configuration changes, and staff who don't know the process. Regular tabletop exercises, failover drills, and full DR tests validate that the plan actually works before it is needed for real.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["DR Testing", "BCP", "Best Practices"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "DR Testing",
+            "BCP",
+            "Best Practices"
+          ]
+        },
+        {
+          "id": "z3-n5-study-003",
+          "zone": 3,
+          "node": 3.5,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Twin Pillars of Availability",
+          "scenario": "You stand before two massive pillars supporting the ceiling of the realm's core. One pillar is active, while the other sits in a state of readiness, waiting to take over if the first should crumble. This is 'Active-Passive'.\n\nNearby, another hall shows two pillars both glowing with equal intensity, sharing the load equally across the network. This is 'Active-Active'. While Active-Active provides better utilization and performance, it requires more complex synchronization to ensure both paths remain stable.",
+          "question": "In an active-active high availability configuration, how is traffic handled?",
+          "options": [
+            "One node handles all traffic while the second remains on standby.",
+            "Both nodes handle traffic simultaneously to provide redundancy and load sharing.",
+            "Traffic is only sent to a secondary node if the primary fails.",
+            "Only one node is active at a time, but it switches between them every hour."
+          ],
+          "correct_index": 1,
+          "explanation": "In an active-active configuration, all available nodes handle traffic simultaneously. In an active-passive configuration, only one node handles traffic while the other remains in standby to take over if the primary fails.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "high-availability",
+            "redundancy",
+            "failover"
+          ]
         }
       ]
     }
   ],
   "guardian_encounters": [
     {
-      "id": "z3-g-001", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-001",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "SNMP uses UDP 161 for queries. What port do Traps and Informs use?",
-      "options": ["UDP 160", "UDP 162", "UDP 514", "UDP 2055"],
+      "options": [
+        "UDP 160",
+        "UDP 162",
+        "UDP 514",
+        "UDP 2055"
+      ],
       "correct_index": 1,
       "explanation": "SNMP Traps and Informs are sent to UDP 162 (manager). UDP 161 = manager-to-agent queries. UDP 514 = syslog. UDP 2055 = NetFlow.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SNMP", "UDP 162", "Ports"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "SNMP",
+        "UDP 162",
+        "Ports"
+      ]
     },
     {
-      "id": "z3-g-002", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-002",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "Which syslog severity level represents 'Warning' conditions?",
-      "options": ["Level 2", "Level 3", "Level 4", "Level 5"],
+      "options": [
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5"
+      ],
       "correct_index": 2,
       "explanation": "Syslog level 4 = Warning. 0=Emergency, 1=Alert, 2=Critical, 3=Error, 4=Warning, 5=Notice, 6=Info, 7=Debug. Mnemonic: Every Awesome Cisco Engineer Will Need Daily Biscuits.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Syslog", "Warning", "Severity"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Syslog",
+        "Warning",
+        "Severity"
+      ]
     },
     {
-      "id": "z3-g-003", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-003",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "NetFlow exports traffic flow data to a collector on which default UDP port?",
-      "options": ["161", "514", "1433", "2055"],
+      "options": [
+        "161",
+        "514",
+        "1433",
+        "2055"
+      ],
       "correct_index": 3,
       "explanation": "NetFlow uses UDP 2055 by default (also common: 9555, 9995). IPFIX is the IETF standard successor. Both provide flow-level traffic visibility: who talked to whom, how much, on what port.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["NetFlow", "UDP 2055"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "NetFlow",
+        "UDP 2055"
+      ]
     },
     {
-      "id": "z3-g-004", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-004",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "RTO defines the maximum acceptable time to recover. RPO defines:",
-      "options": ["The minimum hardware requirements for a DR site", "The maximum acceptable data loss measured in time", "The physical distance between primary and DR sites", "The minimum backup media types required"],
+      "options": [
+        "The minimum hardware requirements for a DR site",
+        "The maximum acceptable data loss measured in time",
+        "The physical distance between primary and DR sites",
+        "The minimum backup media types required"
+      ],
       "correct_index": 1,
       "explanation": "RPO = Recovery Point Objective = 'How much data can we afford to lose?' measured in time. If RPO = 4 hours, backups must run every 4 hours. RTO = 'How long can we be down?'",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RPO", "RTO", "DR"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "RPO",
+        "RTO",
+        "DR"
+      ]
     },
     {
-      "id": "z3-g-005", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-005",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "Which backup type requires the most media sets for a full restore?",
-      "options": ["Full backup", "Differential backup", "Incremental backup", "Snapshot backup"],
+      "options": [
+        "Full backup",
+        "Differential backup",
+        "Incremental backup",
+        "Snapshot backup"
+      ],
       "correct_index": 2,
       "explanation": "Incremental restore requires: the last full backup + EVERY incremental taken since. Differential only needs last full + last differential. Full backup alone needs only itself.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Incremental", "Backup", "Restore"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Incremental",
+        "Backup",
+        "Restore"
+      ]
     },
     {
-      "id": "z3-g-006", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-006",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "SNMPv3 AuthPriv mode provides which two security features?",
-      "options": ["Authentication + Encryption", "Authentication + Authorisation", "Encryption + Compression", "Authorisation + Accounting"],
+      "options": [
+        "Authentication + Encryption",
+        "Authentication + Authorisation",
+        "Encryption + Compression",
+        "Authorisation + Accounting"
+      ],
       "correct_index": 0,
-      "explanation": "SNMPv3 AuthPriv = Authentication (MD5 or SHA — verifies the sender) + Privacy/Encryption (AES or DES — encrypts the payload). This is the only SNMP version that protects data in transit.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SNMPv3", "AuthPriv", "Security"]
+      "explanation": "SNMPv3 AuthPriv = Authentication (MD5 or SHA \u2014 verifies the sender) + Privacy/Encryption (AES or DES \u2014 encrypts the payload). This is the only SNMP version that protects data in transit.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "SNMPv3",
+        "AuthPriv",
+        "Security"
+      ]
     },
     {
-      "id": "z3-g-007", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-007",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "RAID 5 can tolerate one disk failure. RAID 6 can tolerate:",
-      "options": ["One disk failure", "Two disk failures", "Three disk failures", "Any number if a hot spare is present"],
+      "options": [
+        "One disk failure",
+        "Two disk failures",
+        "Three disk failures",
+        "Any number if a hot spare is present"
+      ],
       "correct_index": 1,
-      "explanation": "RAID 6 uses double distributed parity — tolerates two simultaneous disk failures. Preferred over RAID 5 for large drives where rebuild times create a second failure risk window.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RAID 6", "Fault Tolerance"]
+      "explanation": "RAID 6 uses double distributed parity \u2014 tolerates two simultaneous disk failures. Preferred over RAID 5 for large drives where rebuild times create a second failure risk window.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "RAID 6",
+        "Fault Tolerance"
+      ]
     },
     {
-      "id": "z3-g-008", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-008",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "A hot DR site differs from a warm site because a hot site:",
-      "options": ["Has no equipment installed", "Requires shipping servers before use", "Is fully operational with live data replication — immediate or near-immediate failover", "Is located in the same building"],
+      "options": [
+        "Has no equipment installed",
+        "Requires shipping servers before use",
+        "Is fully operational with live data replication \u2014 immediate or near-immediate failover",
+        "Is located in the same building"
+      ],
       "correct_index": 2,
       "explanation": "Hot site: fully staffed, equipment running, data continuously replicated. Failover in minutes. Warm site: hardware present but needs data restore (hours). Cold site: no equipment (days/weeks).",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Hot Site", "DR", "HA"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Hot Site",
+        "DR",
+        "HA"
+      ]
     },
     {
-      "id": "z3-g-009", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-009",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "DSCP EF (Expedited Forwarding) is used for which traffic type?",
-      "options": ["Best-effort web browsing", "VoIP and real-time traffic — strict priority queue", "Management traffic like SNMP", "Bulk file transfers"],
+      "options": [
+        "Best-effort web browsing",
+        "VoIP and real-time traffic \u2014 strict priority queue",
+        "Management traffic like SNMP",
+        "Bulk file transfers"
+      ],
       "correct_index": 1,
       "explanation": "DSCP EF = 46. Used for VoIP and real-time traffic requiring strict priority. It instructs routers to process these packets before all others. DSCP BE (0) = default best-effort.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["DSCP EF", "VoIP", "QoS"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "DSCP EF",
+        "VoIP",
+        "QoS"
+      ]
     },
     {
-      "id": "z3-g-010", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-010",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "A network engineer runs a change during a maintenance window and the change breaks connectivity. What should happen next?",
-      "options": ["Continue troubleshooting until fixed, regardless of time", "Execute the documented rollback plan immediately to restore service", "Escalate to the CAB for emergency approval", "Document the failure and plan a new change for next week"],
+      "options": [
+        "Continue troubleshooting until fixed, regardless of time",
+        "Execute the documented rollback plan immediately to restore service",
+        "Escalate to the CAB for emergency approval",
+        "Document the failure and plan a new change for next week"
+      ],
       "correct_index": 1,
       "explanation": "If a change breaks service, the first action is to execute the rollback plan documented in the RFC. Returning to the last known good state is always faster than unknown troubleshooting. Post-mortem analysis happens after service is restored.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Change Management", "Rollback", "RFC"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Change Management",
+        "Rollback",
+        "RFC"
+      ]
     },
     {
-      "id": "z3-g-011", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-011",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "The 3-2-1 backup rule requires: 3 copies of data, on 2 different media types, with:",
-      "options": ["1 copy tested monthly", "1 copy stored offsite", "1 copy in encrypted format", "1 copy on tape"],
+      "options": [
+        "1 copy tested monthly",
+        "1 copy stored offsite",
+        "1 copy in encrypted format",
+        "1 copy on tape"
+      ],
       "correct_index": 1,
       "explanation": "3-2-1 rule: 3 copies, 2 media types, 1 offsite. The offsite copy protects against site-level disasters (fire, flood, theft). The 2 media types protect against media-specific failures.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["3-2-1", "Backup", "Offsite"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "3-2-1",
+        "Backup",
+        "Offsite"
+      ]
     },
     {
-      "id": "z3-g-012", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-012",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "Duplex mismatch between two Ethernet devices causes which error on the full-duplex side?",
-      "options": ["Runts", "Giants", "Late collisions and CRC errors", "VLAN tagging errors"],
+      "options": [
+        "Runts",
+        "Giants",
+        "Late collisions and CRC errors",
+        "VLAN tagging errors"
+      ],
       "correct_index": 2,
-      "explanation": "Full-duplex side sees late collisions (after 512 bits — shouldn't happen in FD) and CRC errors, because the HD side uses CSMA/CD and truncates frames mid-transmission. Classic duplex mismatch signature.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Duplex Mismatch", "Late Collisions", "CRC"]
+      "explanation": "Full-duplex side sees late collisions (after 512 bits \u2014 shouldn't happen in FD) and CRC errors, because the HD side uses CSMA/CD and truncates frames mid-transmission. Classic duplex mismatch signature.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Duplex Mismatch",
+        "Late Collisions",
+        "CRC"
+      ]
     },
     {
-      "id": "z3-g-013", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-013",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "Why is RAID not a substitute for backups?",
-      "options": ["RAID is too slow to be reliable", "RAID protects against drive failure only — ransomware encryption, accidental deletion, and site disasters affect all RAID disks simultaneously", "RAID only works for disks smaller than 2TB", "RAID requires a separate controller that can fail"],
+      "options": [
+        "RAID is too slow to be reliable",
+        "RAID protects against drive failure only \u2014 ransomware encryption, accidental deletion, and site disasters affect all RAID disks simultaneously",
+        "RAID only works for disks smaller than 2TB",
+        "RAID requires a separate controller that can fail"
+      ],
       "correct_index": 1,
       "explanation": "RAID protects against physical drive failure. It does NOT protect against: ransomware (encrypts all drives), accidental deletion (instantly reflected on all mirrors), or site disasters. Backups (especially offsite) are still required.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RAID", "Backup", "Limitations"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "RAID",
+        "Backup",
+        "Limitations"
+      ]
     },
     {
-      "id": "z3-g-014", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-014",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "MTBF (Mean Time Between Failures) and MTTR (Mean Time To Repair) relate to system availability how?",
-      "options": ["Availability = MTTR / MTBF", "Availability = MTBF / (MTBF + MTTR)", "Availability = MTBF - MTTR", "They are unrelated to availability calculations"],
+      "options": [
+        "Availability = MTTR / MTBF",
+        "Availability = MTBF / (MTBF + MTTR)",
+        "Availability = MTBF - MTTR",
+        "They are unrelated to availability calculations"
+      ],
       "correct_index": 1,
       "explanation": "Availability = MTBF / (MTBF + MTTR). To improve availability: increase MTBF (more reliable hardware) or decrease MTTR (faster repairs). Five nines (99.999%) requires extremely high MTBF and very low MTTR.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["MTBF", "MTTR", "Availability"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "MTBF",
+        "MTTR",
+        "Availability"
+      ]
     },
     {
-      "id": "z3-g-015", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-015",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "SPAN (port mirroring) is used on a switch to:",
-      "options": ["Increase port bandwidth by mirroring to a faster uplink", "Copy traffic from a source port to a monitor port for packet capture and analysis", "Back up the switch configuration to an external server", "Mirror VLAN configurations to a redundant switch"],
+      "options": [
+        "Increase port bandwidth by mirroring to a faster uplink",
+        "Copy traffic from a source port to a monitor port for packet capture and analysis",
+        "Back up the switch configuration to an external server",
+        "Mirror VLAN configurations to a redundant switch"
+      ],
       "correct_index": 1,
-      "explanation": "SPAN copies all traffic from a source port (or VLAN) to a designated monitor port. A packet analyser (Wireshark) or IDS sensor connected to the monitor port can then inspect all traffic — without disrupting the monitored network.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SPAN", "Port Mirroring", "Packet Capture"]
+      "explanation": "SPAN copies all traffic from a source port (or VLAN) to a designated monitor port. A packet analyser (Wireshark) or IDS sensor connected to the monitor port can then inspect all traffic \u2014 without disrupting the monitored network.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "SPAN",
+        "Port Mirroring",
+        "Packet Capture"
+      ]
     },
     {
-      "id": "z3-g-016", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-016",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "An organisation's RPO is 2 hours but their backup system only runs daily full backups at midnight. The system fails at 11:30 PM. How much data is lost?",
-      "options": ["2 hours of data", "Approximately 23.5 hours of data — the full day since last backup", "No data — RAID protects all data", "30 minutes of data"],
+      "options": [
+        "2 hours of data",
+        "Approximately 23.5 hours of data \u2014 the full day since last backup",
+        "No data \u2014 RAID protects all data",
+        "30 minutes of data"
+      ],
       "correct_index": 1,
       "explanation": "Last backup: midnight previous night. Failure at 11:30 PM = 23.5 hours of data lost. This VIOLATES the 2-hour RPO. The fix: implement hourly incremental backups or continuous replication to meet the RPO requirement.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RPO", "Backup Frequency", "Scenario"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "RPO",
+        "Backup Frequency",
+        "Scenario"
+      ]
     },
     {
-      "id": "z3-g-017", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-017",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "Which QoS mechanism guarantees real-time (VoIP) traffic is always dequeued before other traffic?",
-      "options": ["DSCP marking", "CBWFQ (Class-Based Weighted Fair Queuing)", "LLQ (Low Latency Queuing)", "Traffic shaping"],
+      "options": [
+        "DSCP marking",
+        "CBWFQ (Class-Based Weighted Fair Queuing)",
+        "LLQ (Low Latency Queuing)",
+        "Traffic shaping"
+      ],
       "correct_index": 2,
-      "explanation": "LLQ creates a strict priority queue emptied before all other queues. DSCP marking classifies traffic (necessary but not sufficient). CBWFQ guarantees bandwidth minimums but doesn't strictly prioritise. Traffic shaping buffers — doesn't queue.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["LLQ", "QoS", "VoIP"]
+      "explanation": "LLQ creates a strict priority queue emptied before all other queues. DSCP marking classifies traffic (necessary but not sufficient). CBWFQ guarantees bandwidth minimums but doesn't strictly prioritise. Traffic shaping buffers \u2014 doesn't queue.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "LLQ",
+        "QoS",
+        "VoIP"
+      ]
     },
     {
-      "id": "z3-g-018", "zone": 3, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z3-g-018",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "medium",
+      "type": "guardian",
       "question": "An SLA that guarantees 99.99% uptime allows approximately how much downtime per year?",
-      "options": ["~8.76 hours", "~52.6 minutes", "~5.26 minutes", "~1 day"],
+      "options": [
+        "~8.76 hours",
+        "~52.6 minutes",
+        "~5.26 minutes",
+        "~1 day"
+      ],
       "correct_index": 1,
-      "explanation": "99.99% = 0.01% downtime. 0.0001 × 525,600 min/year = 52.6 minutes. 99.9% = 8.76 hours. 99.999% (five nines) = 5.26 minutes. Know these numbers for the exam.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SLA", "Uptime", "99.99%"]
+      "explanation": "99.99% = 0.01% downtime. 0.0001 \u00d7 525,600 min/year = 52.6 minutes. 99.9% = 8.76 hours. 99.999% (five nines) = 5.26 minutes. Know these numbers for the exam.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "SLA",
+        "Uptime",
+        "99.99%"
+      ]
     },
     {
-      "id": "z3-g-019", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-019",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "VoIP calls are choppy despite network utilisation being under 50%. What is the most likely cause?",
-      "options": ["Insufficient bandwidth — must upgrade the link", "No QoS implemented — voice traffic is competing in the same queue as bulk data", "DNS failures are affecting call routing", "NAT is causing one-way audio"],
+      "options": [
+        "Insufficient bandwidth \u2014 must upgrade the link",
+        "No QoS implemented \u2014 voice traffic is competing in the same queue as bulk data",
+        "DNS failures are affecting call routing",
+        "NAT is causing one-way audio"
+      ],
       "correct_index": 1,
-      "explanation": "Choppy VoIP at low utilisation = QoS problem. Without QoS, a burst of data fills the queue — voice packets wait, increasing jitter beyond the 30ms tolerance. Implement DSCP EF marking and LLQ to guarantee voice has strict priority.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["VoIP", "QoS", "Jitter", "LLQ"]
+      "explanation": "Choppy VoIP at low utilisation = QoS problem. Without QoS, a burst of data fills the queue \u2014 voice packets wait, increasing jitter beyond the 30ms tolerance. Implement DSCP EF marking and LLQ to guarantee voice has strict priority.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "VoIP",
+        "QoS",
+        "Jitter",
+        "LLQ"
+      ]
     },
     {
-      "id": "z3-g-020", "zone": 3, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z3-g-020",
+      "zone": 3,
+      "node": 3.0,
+      "difficulty": "hard",
+      "type": "guardian",
       "question": "RAID 10 uses mirroring AND striping. What is its minimum disk requirement and fault tolerance?",
-      "options": ["Minimum 2 disks — tolerates loss of any 1 disk", "Minimum 3 disks — tolerates loss of 1 disk", "Minimum 4 disks — tolerates loss of 1 disk per mirrored pair", "Minimum 4 disks — tolerates loss of any 2 disks"],
+      "options": [
+        "Minimum 2 disks \u2014 tolerates loss of any 1 disk",
+        "Minimum 3 disks \u2014 tolerates loss of 1 disk",
+        "Minimum 4 disks \u2014 tolerates loss of 1 disk per mirrored pair",
+        "Minimum 4 disks \u2014 tolerates loss of any 2 disks"
+      ],
       "correct_index": 2,
-      "explanation": "RAID 10 requires minimum 4 disks (2 mirrored pairs, then striped). It can tolerate the loss of one disk per mirrored pair — potentially 2 or more disk failures if they are in different pairs. RAID 6 also tolerates 2 failures but with better capacity efficiency.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["RAID 10", "Fault Tolerance", "Minimum Disks"]
+      "explanation": "RAID 10 requires minimum 4 disks (2 mirrored pairs, then striped). It can tolerate the loss of one disk per mirrored pair \u2014 potentially 2 or more disk failures if they are in different pairs. RAID 6 also tolerates 2 failures but with better capacity efficiency.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "RAID 10",
+        "Fault Tolerance",
+        "Minimum Disks"
+      ]
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "id": "z5-n3-primer",
+  "type": "study_encounter",
+  "title": "Tools Primer",
+  "scenario": "Welcome to Tools Primer. Before proceeding, you must master these essential networking terms. Time Domain Reflectometer (TDR): Copper cable test tool. Sends signal pulse, measures reflections to locate opens, shorts, and impedance mismatches. Reports distance to fault. Some cable certifiers include TDR functionality. Optical Time Domain Reflectometer (OTDR): Fiber optic test tool. Sends light pulse, measures reflections to locate breaks, splices, connectors. Measures distance to fault and measures insertion loss. Essential for fiber troubleshooting.",
+  "question": "What does TDR stand for?",
+  "options": [
+    "Time Domain Reflectometer",
+    "Advanced TDR Protocol",
+    "Automated TDR System",
+    "Active TDR Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "TDR stands for Time Domain Reflectometer.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "tdr",
+    "otdr",
+    "tone generator"
+  ]
+}

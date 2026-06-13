@@ -1,0 +1,23 @@
+{
+  "id": "z2-n3-primer",
+  "type": "study_encounter",
+  "title": "Wireless Primer",
+  "scenario": "Welcome to Wireless Primer. Before proceeding, you must master these essential networking terms. Service Set Identifier (SSID): Wireless network name broadcast by an AP. Hiding SSID provides minimal security (still discoverable via probe requests). Up to 32 characters. BSSID = AP's MAC address. Wi-Fi Protected Access 2 (WPA2): IEEE 802.11i. Personal (PSK) or Enterprise (802.1X/RADIUS). Uses AES-CCMP encryption. Vulnerable to PMKID/dictionary attacks on PSK. Superseded by WPA3 but still widely deployed.",
+  "question": "What does WAP stand for?",
+  "options": [
+    "WAP",
+    "Advanced WAP Protocol",
+    "Automated WAP System",
+    "Active WAP Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "WAP stands for WAP.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "wap",
+    "ssid",
+    "bssid"
+  ]
+}

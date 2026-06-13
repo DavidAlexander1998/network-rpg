@@ -1,0 +1,23 @@
+{
+  "id": "z1-n3-primer",
+  "type": "study_encounter",
+  "title": "Cloud Concepts Primer",
+  "scenario": "Welcome to Cloud Concepts Primer. Before proceeding, you must master these essential networking terms. Application Programming Interface (API): Interface for software components to communicate. REST APIs (HTTP/JSON) used for network automation and SDN. Enables programmatic device configuration vs manual CLI.",
+  "question": "What does API stand for?",
+  "options": [
+    "Application Programming Interface",
+    "Advanced API Protocol",
+    "Automated API System",
+    "Active API Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "API stands for Application Programming Interface.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "api",
+    "iaas",
+    "paas"
+  ]
+}

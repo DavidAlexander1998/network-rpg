@@ -1,0 +1,23 @@
+{
+  "id": "z3-n4-primer",
+  "type": "study_encounter",
+  "title": "Disaster Recovery Primer",
+  "scenario": "Welcome to Disaster Recovery Primer. Before proceeding, you must master these essential networking terms. Mean Time Between Failures (MTBF): Average time between hardware failures. Higher = more reliable. Used to calculate availability: MTBF / (MTBF + MTTR). Key metric for hardware procurement and HA design. Mean Time To Repair (MTTR): Average time to restore a failed component. Lower = faster recovery. Availability = MTBF / (MTBF + MTTR). Drives sparing strategy and support contract SLAs. Recovery Time Objective (RTO): Maximum acceptable downtime after a disaster \u2014 how quickly must systems be restored? Business defines this. Drives DR site type: hot (minutes), warm (hours), cold (days/weeks). Recovery Point Objective (RPO): Maximum acceptable data loss measured in time \u2014 how old can the recovered data be? RPO of 1hr means backups every hour. Drives backup frequency and replication strategy.",
+  "question": "What does MTBF stand for?",
+  "options": [
+    "Mean Time Between Failures",
+    "Advanced MTBF Protocol",
+    "Automated MTBF System",
+    "Active MTBF Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "MTBF stands for Mean Time Between Failures.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "mtbf",
+    "mttr",
+    "rto"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "z2-n2-primer",
+  "type": "study_encounter",
+  "title": "Switching Primer",
+  "scenario": "Welcome to Switching. Virtual Local Area Network (VLAN) logically segments a switch at Layer 2. Spanning Tree Protocol (STP) prevents Layer 2 loops by blocking redundant paths. Media Access Control (MAC) addresses are 48-bit Layer 2 hardware addresses. Address Resolution Protocol (ARP) resolves IP addresses to MAC addresses on local networks.",
+  "question": "Which protocol prevents Layer 2 loops in switched networks?",
+  "options": [
+    "VLAN",
+    "STP",
+    "ARP",
+    "MAC"
+  ],
+  "correct_index": 1,
+  "explanation": "Spanning Tree Protocol (STP) prevents Layer 2 loops by blocking redundant paths.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "vlan",
+    "stp",
+    "mac",
+    "arp"
+  ]
+}

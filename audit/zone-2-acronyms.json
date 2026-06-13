@@ -1,0 +1,613 @@
+{
+  "zone": 2,
+  "audit_date": "2026-06-13",
+  "nodes": [
+    {
+      "node_id": 2.1,
+      "node_name": "Pathfinding",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "OSPF",
+          "first_encounter_id": "z2-n1-001",
+          "context_snippet": "Which routing protocol has an administrative distance of 110? ... OSPF has AD 110"
+        },
+        {
+          "acronym": "AD",
+          "first_encounter_id": "z2-n1-001",
+          "context_snippet": "administrative distance of 110"
+        },
+        {
+          "acronym": "EIGRP",
+          "first_encounter_id": "z2-n1-001",
+          "context_snippet": "EIGRP = 90"
+        },
+        {
+          "acronym": "BGP",
+          "first_encounter_id": "z2-n1-001",
+          "context_snippet": "eBGP = 20"
+        },
+        {
+          "acronym": "PAT",
+          "first_encounter_id": "z2-n1-003",
+          "context_snippet": "PAT (Port Address Translation) / NAT Overload"
+        },
+        {
+          "acronym": "FHRP",
+          "first_encounter_id": "z2-n1-007",
+          "context_snippet": "Which FHRP protocol is an open standard"
+        },
+        {
+          "acronym": "HSRP",
+          "first_encounter_id": "z2-n1-007",
+          "context_snippet": "HSRP and GLBP are Cisco proprietary"
+        },
+        {
+          "acronym": "GLBP",
+          "first_encounter_id": "z2-n1-007",
+          "context_snippet": "HSRP and GLBP are Cisco proprietary"
+        },
+        {
+          "acronym": "VRRP",
+          "first_encounter_id": "z2-n1-007",
+          "context_snippet": "VRRP (Virtual Router Redundancy Protocol) is an open RFC standard"
+        },
+        {
+          "acronym": "PVST+",
+          "first_encounter_id": "z2-n1-007",
+          "context_snippet": "PVST+ is Cisco's per-VLAN spanning tree"
+        },
+        {
+          "acronym": "RIP",
+          "first_encounter_id": "z2-n1-study-003",
+          "context_snippet": "- RIP: 120"
+        },
+        {
+          "acronym": "IS-IS",
+          "first_encounter_id": "z2-n1-study-003",
+          "context_snippet": "- IS-IS: 115"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "NAT",
+          "where_found": "z2-n1-study-002: 'NAT (Network Address Translation) device'"
+        },
+        {
+          "acronym": "PAT",
+          "where_found": "z2-n1-study-002: 'PAT (Port Address Translation)'"
+        },
+        {
+          "acronym": "AD",
+          "where_found": "z2-n1-study-001: 'Administrative Distance (AD)'; z2-n1-study-003: 'Administrative Distance (AD)'"
+        },
+        {
+          "acronym": "OSPF",
+          "where_found": "z2-n1-study-006: 'Interior Gateway Protocols (IGP) like OSPF'"
+        },
+        {
+          "acronym": "EIGRP",
+          "where_found": "z2-n1-study-006: 'Interior Gateway Protocols (IGP) like OSPF and EIGRP'"
+        },
+        {
+          "acronym": "BGP",
+          "where_found": "z2-n1-study-006: 'BGP, the protocol that stitches together the various networks'"
+        },
+        {
+          "acronym": "EGP",
+          "where_found": "z2-n1-study-006: 'Exterior Gateway Protocols (EGP)'"
+        },
+        {
+          "acronym": "IGP",
+          "where_found": "z2-n1-study-006: 'Interior Gateway Protocols (IGP)'"
+        },
+        {
+          "acronym": "VRRP",
+          "where_found": "z2-n1-study-004: 'VRRP (Virtual Router Redundancy Protocol)'"
+        },
+        {
+          "acronym": "HSRP",
+          "where_found": "z2-n1-study-004: 'HSRP (a Cisco-proprietary protocol)'"
+        },
+        {
+          "acronym": "GLBP",
+          "where_found": "z2-n1-study-004: 'GLBP, which specifically allows for load-balancing'"
+        },
+        {
+          "acronym": "FHRP",
+          "where_found": "z2-n1-study-004: 'First Hop Redundancy Protocols (FHRP)'"
+        },
+        {
+          "acronym": "VIP",
+          "where_found": "z2-n1-study-004: 'Virtual IP (VIP)'"
+        }
+      ]
+    },
+    {
+      "node_id": 2.2,
+      "node_name": "The Switchboard",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "VLAN",
+          "first_encounter_id": "z2-n2-001",
+          "context_snippet": "What is the purpose of a VLAN?"
+        },
+        {
+          "acronym": "STP",
+          "first_encounter_id": "z2-n2-004",
+          "context_snippet": "STP (802.1D) takes 30–50 seconds"
+        },
+        {
+          "acronym": "RSTP",
+          "first_encounter_id": "z2-n2-004",
+          "context_snippet": "modern RSTP does it in milliseconds"
+        },
+        {
+          "acronym": "ARP",
+          "first_encounter_id": "z2-n2-014",
+          "context_snippet": "ARP poisoning"
+        },
+        {
+          "acronym": "MAC",
+          "first_encounter_id": "z2-n2-014",
+          "context_snippet": "MAC flooding"
+        },
+        {
+          "acronym": "SVI",
+          "first_encounter_id": "z2-n2-mini-001",
+          "context_snippet": "an SVI (Switch Virtual Interface) has been successfully established"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "VLAN",
+          "where_found": "z2-n2-study-001: 'VLAN (Virtual Local Area Network)'; z2-n2-study-004: multiple expansions"
+        },
+        {
+          "acronym": "STP",
+          "where_found": "z2-n2-study-003: 'SPANNING TREE PROTOCOL (STP)'"
+        },
+        {
+          "acronym": "MAC",
+          "where_found": "z2-n2-study-002: 'MAC ADDRESS' and 'MAC address'"
+        },
+        {
+          "acronym": "CAM",
+          "where_found": "z2-n2-study-002: 'CAM TABLE (logbook)'"
+        },
+        {
+          "acronym": "802.1Q",
+          "where_found": "z2-n2-study-004: '802.1Q sticker system'; z2-n2-002: '802.1Q tags'"
+        },
+        {
+          "acronym": "802.1D",
+          "where_found": "z2-n2-004: 'original 802.1D Spanning Tree Protocol'"
+        },
+        {
+          "acronym": "802.1w",
+          "where_found": "z2-n2-004: 'RSTP (802.1w)'"
+        },
+        {
+          "acronym": "BPDU",
+          "where_found": "implied in z2-n2-study-003 description of STP"
+        }
+      ]
+    },
+    {
+      "node_id": 2.3,
+      "node_name": "Airwaves",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "WPA2",
+          "first_encounter_id": "z2-n3-study-001",
+          "context_snippet": "WPA2, leaving it vulnerable to handshake-capture attacks"
+        },
+        {
+          "acronym": "WPA3",
+          "first_encounter_id": "z2-n3-study-001",
+          "context_snippet": "encryption (WPA2 vs the much stronger WPA3)"
+        },
+        {
+          "acronym": "SAE",
+          "first_encounter_id": "z2-n3-007",
+          "context_snippet": "SAE (Simultaneous Authentication of Equals)"
+        },
+        {
+          "acronym": "EAP-TLS",
+          "first_encounter_id": "z2-n3-007",
+          "context_snippet": "EAP-TLS"
+        },
+        {
+          "acronym": "TKIP",
+          "first_encounter_id": "z2-n3-007",
+          "context_snippet": "TKIP"
+        },
+        {
+          "acronym": "MS-CHAPv2",
+          "first_encounter_id": "z2-n3-007",
+          "context_snippet": "MS-CHAPv2"
+        },
+        {
+          "acronym": "SSID",
+          "first_encounter_id": "z2-n3-study-005",
+          "context_snippet": "SSID (Service Set Identifier)"
+        },
+        {
+          "acronym": "BSSID",
+          "first_encounter_id": "z2-n3-study-005",
+          "context_snippet": "BSSID, which is the unique MAC address"
+        },
+        {
+          "acronym": "ESSID",
+          "first_encounter_id": "z2-n3-study-005",
+          "context_snippet": "ESSID"
+        },
+        {
+          "acronym": "RF",
+          "first_encounter_id": "z2-n3-study-004",
+          "context_snippet": "tags include 'RF'"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "802.11",
+          "where_found": "z2-n3-study-001: '802.11 standards'"
+        },
+        {
+          "acronym": "802.11n",
+          "where_found": "z2-n3-study-001: 'from old 802.11n to modern 802.11ax'"
+        },
+        {
+          "acronym": "802.11ax",
+          "where_found": "z2-n3-study-001: 'modern 802.11ax'; z2-n3-study-003: '802.11ax (Wi-Fi 6)'"
+        },
+        {
+          "acronym": "802.11ac",
+          "where_found": "z2-n3-001: '802.11ac (Wi-Fi 5)'; z2-n3-study-003: '802.11ac are strictly 5 GHz'"
+        },
+        {
+          "acronym": "802.11a",
+          "where_found": "z2-n3-study-003: '802.11a operates on 5 GHz'"
+        },
+        {
+          "acronym": "802.11b",
+          "where_found": "z2-n3-study-003: '802.11b/g/n primarily inhabit the 2.4 GHz band'"
+        },
+        {
+          "acronym": "802.11g",
+          "where_found": "z2-n3-study-003: '802.11b/g/n primarily inhabit the 2.4 GHz band'"
+        },
+        {
+          "acronym": "802.11be",
+          "where_found": "z2-n3-study-003: '802.11be (Wi-Fi 7)'"
+        },
+        {
+          "acronym": "WPA2",
+          "where_found": "z2-n3-study-002: 'WPA2-Personal' and 'WPA2-PSK'"
+        },
+        {
+          "acronym": "WPA3",
+          "where_found": "z2-n3-study-002: 'WPA3-Personal' and 'WPA3 also enforces PMF'"
+        },
+        {
+          "acronym": "PSK",
+          "where_found": "z2-n3-study-002: 'WPA2-PSK' and 'WPA3 replaces WPA2's PSK'"
+        },
+        {
+          "acronym": "SAE",
+          "where_found": "z2-n3-study-002: 'SAE (Simultaneous Authentication of Equals)' and 'SAE (Dragonfly)'"
+        },
+        {
+          "acronym": "PMF",
+          "where_found": "z2-n3-study-002: 'WPA3 also enforces PMF'"
+        },
+        {
+          "acronym": "MU-MIMO",
+          "where_found": "z2-n3-001: 'using MU-MIMO'"
+        },
+        {
+          "acronym": "AP",
+          "where_found": "z2-n3-study-006: 'Access Point (AP)'"
+        }
+      ]
+    },
+    {
+      "node_id": 2.4,
+      "node_name": "Physical Foundations",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "MDF",
+          "first_encounter_id": "z2-n4-001",
+          "context_snippet": "MDF (Main Distribution Frame) is the central wiring point"
+        },
+        {
+          "acronym": "UPS",
+          "first_encounter_id": "z2-n4-002",
+          "context_snippet": "Online/double conversion UPS"
+        },
+        {
+          "acronym": "TIA-568",
+          "first_encounter_id": "z2-n4-003",
+          "context_snippet": "TIA-568 specifies maximum 90m"
+        },
+        {
+          "acronym": "PDU",
+          "first_encounter_id": "z2-n4-study-004",
+          "context_snippet": "Metered PDU, Switched PDU"
+        },
+        {
+          "acronym": "EMI",
+          "first_encounter_id": "z2-n4-study-001",
+          "context_snippet": "EMI (Electromagnetic Interference)"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "UTP",
+          "where_found": "z2-n4-study-001: 'UTP (Unshielded Twisted Pair)'"
+        },
+        {
+          "acronym": "STP",
+          "where_found": "z2-n4-study-001: 'STP (Shielded Twisted Pair)'"
+        },
+        {
+          "acronym": "MDF",
+          "where_found": "z2-n4-study-002: 'MDF (Main Distribution Frame)'"
+        },
+        {
+          "acronym": "IDF",
+          "where_found": "z2-n4-study-002: 'IDF (Intermediate Distribution Frame)'"
+        },
+        {
+          "acronym": "TIA-568",
+          "where_found": "z2-n4-study-001: 'TIA-568 wiring standard'; z2-n4-study-002: 'capped by TIA-568'"
+        },
+        {
+          "acronym": "UPS",
+          "where_found": "z2-n4-study-003: 'Uninterruptible Power Supply (UPS)'"
+        },
+        {
+          "acronym": "PDU",
+          "where_found": "z2-n4-study-004: 'Switched PDUs', 'Metered PDUs'"
+        }
+      ]
+    },
+    {
+      "node_id": 2.5,
+      "node_name": "The Power Standard",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "PoE",
+          "first_encounter_id": "z2-n5-001",
+          "context_snippet": "PoE, 802.3af, Standards"
+        },
+        {
+          "acronym": "AP",
+          "first_encounter_id": "z2-n5-011",
+          "context_snippet": "20 APs (25W each)"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "PoE",
+          "where_found": "z2-n5-study-001: 'Power over Ethernet (PoE)'"
+        },
+        {
+          "acronym": "802.3af",
+          "where_found": "z2-n5-study-001: '802.3af is a small residential transformer'"
+        },
+        {
+          "acronym": "802.3at",
+          "where_found": "z2-n5-study-001: '802.3at (PoE+)'"
+        },
+        {
+          "acronym": "802.3bt",
+          "where_found": "z2-n5-study-001: '802.3bt (PoE++)'"
+        },
+        {
+          "acronym": "PoE+",
+          "where_found": "z2-n5-study-001: '802.3at (PoE+)'"
+        },
+        {
+          "acronym": "PoE++",
+          "where_found": "z2-n5-study-001: '802.3bt (PoE++)'"
+        },
+        {
+          "acronym": "AP",
+          "where_found": "z2-n5-study-002: 'Wi-Fi 6 access points'; z2-n5-mini-001: '12 Access Points (APs)'"
+        }
+      ]
+    },
+    {
+      "node_id": 2.0,
+      "node_name": "Guardian Encounters (General)",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "AS",
+          "first_encounter_id": "z2-g-001",
+          "context_snippet": "routes between ASes on the internet"
+        },
+        {
+          "acronym": "EGP",
+          "first_encounter_id": "z2-g-001",
+          "context_snippet": "EGP (Exterior Gateway Protocol)"
+        },
+        {
+          "acronym": "IGP",
+          "first_encounter_id": "z2-g-001",
+          "context_snippet": "OSPF, EIGRP, and RIP are IGPs"
+        },
+        {
+          "acronym": "iBGP",
+          "first_encounter_id": "z2-g-002",
+          "context_snippet": "iBGP(200)"
+        },
+        {
+          "acronym": "eBGP",
+          "first_encounter_id": "z2-g-002",
+          "context_snippet": "eBGP(20)"
+        },
+        {
+          "acronym": "L3",
+          "first_encounter_id": "z2-g-009",
+          "context_snippet": "Layer 3 switch"
+        },
+        {
+          "acronym": "IBSS",
+          "first_encounter_id": "z2-g-016",
+          "context_snippet": "Ad-hoc / IBSS"
+        },
+        {
+          "acronym": "TIA/EIA-568",
+          "first_encounter_id": "z2-g-023",
+          "context_snippet": "TIA/EIA-568 standard"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "BGP",
+          "where_found": "z2-g-001: 'BGP (Border Gateway Protocol)'"
+        },
+        {
+          "acronym": "OSPF",
+          "where_found": "z2-g-002: 'OSPF = AD 110'"
+        },
+        {
+          "acronym": "EIGRP",
+          "where_found": "z2-g-002: 'EIGRP(90)'"
+        },
+        {
+          "acronym": "RIP",
+          "where_found": "z2-g-002: 'RIP(120)'"
+        },
+        {
+          "acronym": "AD",
+          "where_found": "z2-g-002: 'AD pecking order'; z2-g-007: 'Administrative Distance (AD)'"
+        },
+        {
+          "acronym": "HSRP",
+          "where_found": "z2-g-006: 'HSRP (Hot Standby Router Protocol)'"
+        },
+        {
+          "acronym": "VIP",
+          "where_found": "z2-g-006: 'Virtual IP (VIP)'"
+        },
+        {
+          "acronym": "VLAN",
+          "where_found": "z2-g-004, z2-g-008, z2-g-018: multiple expansions"
+        },
+        {
+          "acronym": "SVI",
+          "where_found": "z2-g-009: 'SVI (Switched Virtual Interface)'"
+        },
+        {
+          "acronym": "LACP",
+          "where_found": "z2-g-010: implied with 802.3ad"
+        },
+        {
+          "acronym": "802.1Q",
+          "where_found": "z2-g-018: 'tagged with the native VLAN ID'"
+        },
+        {
+          "acronym": "DTP",
+          "where_found": "z2-g-018: 'disable DTP'"
+        },
+        {
+          "acronym": "STP",
+          "where_found": "z2-g-018: 'STP manipulation'"
+        },
+        {
+          "acronym": "BPDU",
+          "where_found": "z2-g-018: 'BPDU Guard'"
+        },
+        {
+          "acronym": "802.3ad",
+          "where_found": "z2-g-010: 'IEEE 802.3ad'"
+        },
+        {
+          "acronym": "802.1X",
+          "where_found": "z2-g-010: listed as option"
+        },
+        {
+          "acronym": "802.11",
+          "where_found": "z2-g-013: 'Which 802.11 standard'"
+        },
+        {
+          "acronym": "802.11ac",
+          "where_found": "z2-g-013: '802.11ac (Wi-Fi 5)'"
+        },
+        {
+          "acronym": "802.11ax",
+          "where_found": "z2-g-013: '802.11ax (Wi-Fi 6)'"
+        },
+        {
+          "acronym": "SSID",
+          "where_found": "z2-g-014: 'SSID (Service Set Identifier)'"
+        },
+        {
+          "acronym": "PoE",
+          "where_found": "z2-g-022: 'PoE+', 'IEEE 802.3at standard, also known as PoE+'"
+        },
+        {
+          "acronym": "802.3at",
+          "where_found": "z2-g-022: 'IEEE 802.3at standard, also known as PoE+'"
+        },
+        {
+          "acronym": "802.3af",
+          "where_found": "z2-g-022: listed as option"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_nodes_audited": 6,
+    "total_acronyms_missing_expansion": 38,
+    "total_acronyms_already_expanded": 66,
+    "critical_missing_primers": [
+      {
+        "acronym": "OSPF",
+        "affected_nodes": [2.1],
+        "reason": "First quiz encounter (z2-n1-001) uses OSPF without expansion; only expanded in later study node"
+      },
+      {
+        "acronym": "AD",
+        "affected_nodes": [2.1],
+        "reason": "Used in z2-n1-001 quiz without expansion; study nodes do expand it"
+      },
+      {
+        "acronym": "EIGRP",
+        "affected_nodes": [2.1],
+        "reason": "Used in z2-n1-001 quiz without expansion; only expanded in later study node"
+      },
+      {
+        "acronym": "BGP",
+        "affected_nodes": [2.1],
+        "reason": "Used in z2-n1-001 quiz without expansion; only expanded in later study node"
+      },
+      {
+        "acronym": "VLAN",
+        "affected_nodes": [2.2],
+        "reason": "Quiz z2-n2-001 asks 'What is the purpose of a VLAN?' without first defining it in that encounter"
+      },
+      {
+        "acronym": "WPA2",
+        "affected_nodes": [2.3],
+        "reason": "Used in z2-n3-study-001 scenario without expansion before use"
+      },
+      {
+        "acronym": "STP",
+        "affected_nodes": [2.2],
+        "reason": "Quiz z2-n2-004 uses STP (802.1D) without prior expansion in that encounter"
+      }
+    ],
+    "recommendations": [
+      "Add 'OSPF (Open Shortest Path First)' expansion to first occurrence in z2-n1-001",
+      "Add 'AD (Administrative Distance)' expansion to first occurrence in z2-n1-001",
+      "Add 'EIGRP (Enhanced Interior Gateway Routing Protocol)' expansion to first occurrence in z2-n1-001",
+      "Add 'BGP (Border Gateway Protocol)' expansion to first occurrence in z2-n1-001",
+      "Add 'VLAN (Virtual Local Area Network)' expansion to z2-n2-001 question or options",
+      "Add 'STP (Spanning Tree Protocol)' expansion to z2-n2-004",
+      "Add 'WPA2 (Wi-Fi Protected Access 2)' expansion to z2-n3-study-001 first occurrence",
+      "Consider adding primer encounters at the start of each node that expand all acronyms before quiz encounters use them"
+    ]
+  }
+}

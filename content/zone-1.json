@@ -9,6 +9,30 @@
       "description": "The OSI model, encapsulation, and how data moves layer by layer.",
       "encounters": [
         {
+          "id": "z1-n1-primer",
+          "type": "study_encounter",
+          "title": "The Seven Layers Primer",
+          "scenario": "Welcome, initiate. To master the architecture of data flow, you must first understand the core mechanics of Layer 3 in the OSI model. In this realm, we begin with the Internet Protocol (IP), which is responsible for addressing and routing packets across disparate networks to ensure they reach their ultimate destinations. However, reliable delivery requires more than just a roadmap; it necessitates a feedback loop to handle failures. This is where the Internet Control Message Protocol (ICMP) becomes vital. While IP handles the primary task of moving data from point A to point B, ICMP functions as the diagnostic backbone, reporting errors and sending control messages\u2014such as 'Destination Unreachable' or 'Time Exceeded'\u2014back to the source. Together, these two protocols form the essential infrastructure of the Network Layer. Study them closely, for without proper addressing and status reports, your data packets would be lost in the void.",
+          "question": "Which protocol is specifically responsible for error reporting at Layer 3?",
+          "options": [
+            "TCP (Transmission Control Protocol)",
+            "IP (Internet Protocol)",
+            "ICMP (Internet Control Message Protocol)",
+            "UDP (User Datagram Protocol)"
+          ],
+          "correct_index": 2,
+          "explanation": "While IP is responsible for the actual routing of packets, ICMP is the specific protocol used by network devices to send error messages and operational information back to the source.",
+          "xp_reward": 50,
+          "bits_reward": 100,
+          "tags": [
+            "Layer3",
+            "IP",
+            "ICMP",
+            "OSI_Model",
+            "Networking_Basics"
+          ]
+        },
+        {
           "id": "z1-n1-study-001",
           "zone": 1,
           "node": 1.1,
@@ -189,6 +213,30 @@
       "name": "The Toolbox",
       "description": "Network devices and security appliances \u2014 hubs to firewalls, IDS/IPS/UTM.",
       "encounters": [
+        {
+          "id": "z1-n2-primer",
+          "type": "study_encounter",
+          "title": "Network Devices Primer",
+          "scenario": "Welcome to Network Devices. Virtual Local Area Network (VLAN) logically segments a switch at Layer 2, isolating broadcast domains. Simple Network Management Protocol (SNMP) monitors network devices via polling and traps. Wireless Access Point (WAP) connects wireless clients to the wired network. Service Set Identifier (SSID) is the wireless network name broadcast by an AP.",
+          "question": "What does VLAN stand for?",
+          "options": [
+            "Virtual Local Area Network",
+            "Virtual Layer Access Node",
+            "Virtual Link Aggregation Network",
+            "Virtual Local Access Network"
+          ],
+          "correct_index": 0,
+          "explanation": "VLAN stands for Virtual Local Area Network, which logically segments a switch at Layer 2.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "vlan",
+            "snmp",
+            "wap",
+            "ssid"
+          ]
+        },
         {
           "id": "z1-n2-study-001",
           "zone": 1,
@@ -394,6 +442,29 @@
       "name": "The Cloud",
       "description": "Cloud service & deployment models, virtualization, SDN, and modern access.",
       "encounters": [
+        {
+          "id": "z1-n3-primer",
+          "type": "study_encounter",
+          "title": "Cloud Concepts Primer",
+          "scenario": "Welcome to Cloud Concepts Primer. Before proceeding, you must master these essential networking terms. Application Programming Interface (API): Interface for software components to communicate. REST APIs (HTTP/JSON) used for network automation and SDN. Enables programmatic device configuration vs manual CLI.",
+          "question": "What does API stand for?",
+          "options": [
+            "Application Programming Interface",
+            "Advanced API Protocol",
+            "Automated API System",
+            "Active API Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "API stands for Application Programming Interface.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "api",
+            "iaas",
+            "paas"
+          ]
+        },
         {
           "id": "z1-n3-study-001",
           "zone": 1,
@@ -698,6 +769,33 @@
       "description": "Ports and protocols \u2014 TCP vs UDP and the numbers you must know cold.",
       "encounters": [
         {
+          "id": "z1-n4-primer",
+          "type": "study_encounter",
+          "title": "Ports and Protocols Primer",
+          "scenario": "Welcome to Ports and Protocols. HyperText Transfer Protocol (HTTP) is the application layer protocol for web traffic on port 80. HyperText Transfer Protocol Secure (HTTPS) encrypts web traffic on port 443 using TLS. File Transfer Protocol (FTP) transfers files on ports 20 and 21. Secure Shell (SSH) provides encrypted remote access on port 22. Simple Mail Transfer Protocol (SMTP) sends email on port 25. Post Office Protocol version 3 (POP3) retrieves email on port 110. Internet Message Access Protocol (IMAP) syncs email across devices on port 143.",
+          "question": "Which protocol uses port 443 for encrypted web traffic?",
+          "options": [
+            "HTTP",
+            "HTTPS",
+            "FTP",
+            "SSH"
+          ],
+          "correct_index": 1,
+          "explanation": "HTTPS (HyperText Transfer Protocol Secure) uses port 443 for encrypted web traffic.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "http",
+            "https",
+            "ftp",
+            "ssh",
+            "smtp",
+            "pop3",
+            "imap"
+          ]
+        },
+        {
           "id": "z1-n4-study-001",
           "zone": 1,
           "node": 1.4,
@@ -875,6 +973,29 @@
       "name": "The Physical Path",
       "description": "Copper cabling \u2014 categories, termination standards, and diagnostics.",
       "encounters": [
+        {
+          "id": "z1-n5-primer",
+          "type": "study_encounter",
+          "title": "Physical Layer Primer",
+          "scenario": "Welcome to Physical Layer Primer. Before proceeding, you must master these essential networking terms. Unshielded Twisted Pair (UTP): Most common LAN cabling. Cat5e (1 Gbps/100m), Cat6 (1 Gbps/100m or 10 Gbps/55m), Cat6A (10 Gbps/100m), Cat8 (40 Gbps/30m). TIA-568: max 90m horizontal + 10m patch = 100m total. Spanning Tree Protocol (STP): IEEE 802.1D. Prevents Layer 2 loops by blocking redundant paths. States: Blocking \u2192 Listening \u2192 Learning \u2192 Forwarding (30-50 sec). Root bridge = lowest Bridge ID. Maximum Transmission Unit (MTU): Largest Layer 3 packet size a link can carry. Ethernet default = 1500 bytes. Jumbo frames = 9000 bytes. MTU mismatch causes fragmentation or black-holing with PMTUD.",
+          "question": "What does RJ45 stand for?",
+          "options": [
+            "RJ45",
+            "Advanced RJ45 Protocol",
+            "Automated RJ45 System",
+            "Active RJ45 Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "RJ45 stands for RJ45.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "rj45",
+            "utp",
+            "stp"
+          ]
+        },
         {
           "id": "z1-n5-study-001",
           "zone": 1,
@@ -2058,6 +2179,29 @@
       "description": "IPv4 addressing, private ranges, APIPA, default gateways, and DNS.",
       "encounters": [
         {
+          "id": "z1-n7-primer",
+          "type": "study_encounter",
+          "title": "Virtualization Primer",
+          "scenario": "Welcome to Virtualization Primer. Before proceeding, you must master these essential networking terms. Virtual Local Area Network (VLAN): Logical segmentation of a switch at Layer 2. Isolates broadcast domains without physical separation. Tagged with 802.1Q on trunk ports. Native VLAN = untagged on trunk. Network Functions Virtualization (NFV): Virtualizes network appliances (firewalls, load balancers, routers) as software on commodity hardware. Reduces physical appliance costs. Often paired with SDN in modern data centers. Software-Defined Networking (SDN): Decouples control plane from data plane. Centralized controller (northbound API to apps, southbound to devices via OpenFlow). Enables programmable, automated network management.",
+          "question": "What does VLAN stand for?",
+          "options": [
+            "Virtual Local Area Network",
+            "Advanced VLAN Protocol",
+            "Automated VLAN System",
+            "Active VLAN Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "VLAN stands for Virtual Local Area Network.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "vlan",
+            "vm",
+            "nfv"
+          ]
+        },
+        {
           "id": "z1-n7-study-001",
           "zone": 1,
           "node": 1.7,
@@ -2240,6 +2384,29 @@
       "name": "The New Wave",
       "description": "SDN, SASE, Zero Trust, and IPv6 fundamentals.",
       "encounters": [
+        {
+          "id": "z1-n8-primer",
+          "type": "study_encounter",
+          "title": "Automation Primer",
+          "scenario": "Welcome to Automation Primer. Before proceeding, you must master these essential networking terms. Command Line Interface (CLI): Text-based interface for device management. Used in routers, switches, firewalls. Key commands: show ip route, show interfaces, show vlan, debug, ping, traceroute. Faster than GUI for experts. Application Programming Interface (API): Interface for software components to communicate. REST APIs (HTTP/JSON) used for network automation and SDN. Enables programmatic device configuration vs manual CLI.",
+          "question": "What does CLI stand for?",
+          "options": [
+            "Command Line Interface",
+            "Advanced CLI Protocol",
+            "Automated CLI System",
+            "Active CLI Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "CLI stands for Command Line Interface.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "cli",
+            "api",
+            "sdk"
+          ]
+        },
         {
           "id": "z1-n8-study-001",
           "zone": 1,

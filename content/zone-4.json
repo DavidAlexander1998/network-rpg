@@ -1,7 +1,7 @@
 {
   "zone": 4,
   "name": "The Security Citadel",
-  "description": "Network security — attacks, defences, encryption, VPNs, and access control.",
+  "description": "Network security \u2014 attacks, defences, encryption, VPNs, and access control.",
   "nodes": [
     {
       "id": 4.1,
@@ -9,24 +9,54 @@
       "description": "Attack types, social engineering, DDoS categories, and threat actors.",
       "encounters": [
         {
+          "id": "z4-n1-primer",
+          "type": "study_encounter",
+          "title": "Security Concepts Primer",
+          "scenario": "Welcome to Security Concepts Primer. Before proceeding, you must master these essential networking terms. Multi-Factor Authentication (MFA): Authentication using 2+ factors: something you know (password), something you have (token/phone), something you are (biometric). Significantly reduces credential-based attack success.",
+          "question": "What does MFA stand for?",
+          "options": [
+            "Multi-Factor Authentication",
+            "Advanced MFA Protocol",
+            "Automated MFA System",
+            "Active MFA Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "MFA stands for Multi-Factor Authentication.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "mfa",
+            "sso",
+            "idp"
+          ]
+        },
+        {
           "id": "z4-n1-study-001",
           "zone": 4,
           "node": 4.1,
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "The Unwanted House Guests: A Malware Taxonomy",
-          "scenario": "Malware = unwanted house guests. A VIRUS can't get in alone — YOU must run an infected file/macro — then it attaches to other files and spreads only when those are shared. A WORM picks the lock itself and self-propagates across the network with zero user action. A TROJAN shows up disguised as something desirable ('free software') so you let it in voluntarily, but it's not what it claims. A ROOTKIT doesn't just get in — it hides inside the walls at OS/kernel level, invisible to normal security tools. KEYLOGGER/SPYWARE silently photocopies everything you type, including passwords. A LOGIC BOMB plants a hidden device that does nothing until a specific date or condition triggers it.",
+          "scenario": "Malware = unwanted house guests. A VIRUS can't get in alone \u2014 YOU must run an infected file/macro \u2014 then it attaches to other files and spreads only when those are shared. A WORM picks the lock itself and self-propagates across the network with zero user action. A TROJAN shows up disguised as something desirable ('free software') so you let it in voluntarily, but it's not what it claims. A ROOTKIT doesn't just get in \u2014 it hides inside the walls at OS/kernel level, invisible to normal security tools. KEYLOGGER/SPYWARE silently photocopies everything you type, including passwords. A LOGIC BOMB plants a hidden device that does nothing until a specific date or condition triggers it.",
           "question": "An employee opens an email attachment disguised as an invoice. Nothing visibly happens, but weeks later, security analysts discover the program has been embedded in the OS kernel, hiding its own process from Task Manager and antivirus scans, while a separate hidden routine is set to wipe the file server on the date the employee's manager is scheduled to leave the company. Which TWO malware characteristics are present in this scenario?",
           "options": [
             "A worm (self-propagating across the network) and a virus (requires a host file to spread)",
             "A trojan (disguised as a legitimate file to gain initial entry) combined with a rootkit (kernel-level hiding) and a logic bomb (triggers on a future condition)",
             "Ransomware (encrypts files for payment) and spyware (logs keystrokes)",
-            "A logic bomb only — the disguised attachment and kernel hiding are both side effects of the same logic bomb mechanism"
+            "A logic bomb only \u2014 the disguised attachment and kernel hiding are both side effects of the same logic bomb mechanism"
           ],
           "correct_index": 1,
-          "explanation": "The disguised attachment = TROJAN (looks legitimate to gain entry). Hiding from Task Manager/AV at kernel level = ROOTKIT. The routine triggered by a future date = LOGIC BOMB. Wrong: (A) nothing here self-propagates to other hosts or attaches to files to spread, ruling out worm/virus. (C) no files are encrypted for ransom, and the kernel-hiding plus timed wipe described isn't keystroke logging, ruling out ransomware/spyware. (D) a logic bomb is just the trigger — it doesn't explain HOW the malware got in (trojan) or stayed hidden (rootkit); these are three separate techniques working together.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["malware", "trojan", "rootkit", "logic-bomb", "taxonomy"]
+          "explanation": "The disguised attachment = TROJAN (looks legitimate to gain entry). Hiding from Task Manager/AV at kernel level = ROOTKIT. The routine triggered by a future date = LOGIC BOMB. Wrong: (A) nothing here self-propagates to other hosts or attaches to files to spread, ruling out worm/virus. (C) no files are encrypted for ransom, and the kernel-hiding plus timed wipe described isn't keystroke logging, ruling out ransomware/spyware. (D) a logic bomb is just the trigger \u2014 it doesn't explain HOW the malware got in (trojan) or stayed hidden (rootkit); these are three separate techniques working together.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "malware",
+            "trojan",
+            "rootkit",
+            "logic-bomb",
+            "taxonomy"
+          ]
         },
         {
           "id": "z4-n1-study-002",
@@ -35,151 +65,394 @@
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "Who's Casing the Building? Profiling Threat Actors",
-          "scenario": "Different people 'casing' a building reveal different threat actors. A SCRIPT KIDDIE is a teenager rattling door handles with a borrowed crowbar — low skill, using downloaded tools they barely understand, often just to see what happens. A HACKTIVIST spray-paints a slogan in broad daylight — the goal is the MESSAGE and VISIBILITY (defacement, leaked documents, a DDoS with a press release), not staying hidden. ORGANISED CRIME is a professional burglary crew — methodical and financially motivated, after something sellable (data, ransomware payouts, fraud). An INSIDER THREAT already has a key — a current/former employee misusing legitimate access, which is why they're hard to detect. An ADVANCED PERSISTENT THREAT (often nation-state) doesn't break in loudly — it rents the apartment next door for years, tunnelling through slowly, prioritizing long-term undetected access over a quick score.",
+          "scenario": "Different people 'casing' a building reveal different threat actors. A SCRIPT KIDDIE is a teenager rattling door handles with a borrowed crowbar \u2014 low skill, using downloaded tools they barely understand, often just to see what happens. A HACKTIVIST spray-paints a slogan in broad daylight \u2014 the goal is the MESSAGE and VISIBILITY (defacement, leaked documents, a DDoS with a press release), not staying hidden. ORGANISED CRIME is a professional burglary crew \u2014 methodical and financially motivated, after something sellable (data, ransomware payouts, fraud). An INSIDER THREAT already has a key \u2014 a current/former employee misusing legitimate access, which is why they're hard to detect. An ADVANCED PERSISTENT THREAT (often nation-state) doesn't break in loudly \u2014 it rents the apartment next door for years, tunnelling through slowly, prioritizing long-term undetected access over a quick score.",
           "question": "A forensic investigation traces a breach to a phishing email opened 14 months ago by an employee in the accounts department. Since that initial access, an external attacker has maintained undetected access to the file server, exfiltrating small amounts of data during normal business hours specifically to blend in with regular traffic, with no public statement or visible disruption at any point. Which threat actor category does this MOST likely describe?",
           "options": [
-            "Script kiddie — using a phishing email is the hallmark of a low-skill, off-the-shelf attack",
-            "Hacktivist — the long-term campaign shows a clear ideological commitment",
-            "Advanced Persistent Threat (APT) — the long dwell time, stealth, and low-and-slow exfiltration designed to blend in are the defining characteristics",
-            "Insider threat — only someone with existing employee credentials could access the file server for 14 months"
+            "Script kiddie \u2014 using a phishing email is the hallmark of a low-skill, off-the-shelf attack",
+            "Hacktivist \u2014 the long-term campaign shows a clear ideological commitment",
+            "Advanced Persistent Threat (APT) \u2014 the long dwell time, stealth, and low-and-slow exfiltration designed to blend in are the defining characteristics",
+            "Insider threat \u2014 only someone with existing employee credentials could access the file server for 14 months"
           ],
           "correct_index": 2,
-          "explanation": "APT's name says it all: ADVANCED (evaded detection over a year by mimicking normal traffic), PERSISTENT (14 months of access), THREAT (ongoing exfiltration). Wrong: (A) script kiddies are noisy and short-lived — sustaining 14+ months of stealth takes far more discipline than 'borrowed tools.' (B) hacktivism is defined by visibility (manifesto, defacement, public DDoS); the scenario explicitly says there was none. (D) the initial access came via an EXTERNAL attacker phishing the employee — the employee was a victim, not the perpetrator; an outsider patiently operating for a year is the textbook APT pattern.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["threat-actors", "apt", "insider-threat", "hacktivist"]
+          "explanation": "APT's name says it all: ADVANCED (evaded detection over a year by mimicking normal traffic), PERSISTENT (14 months of access), THREAT (ongoing exfiltration). Wrong: (A) script kiddies are noisy and short-lived \u2014 sustaining 14+ months of stealth takes far more discipline than 'borrowed tools.' (B) hacktivism is defined by visibility (manifesto, defacement, public DDoS); the scenario explicitly says there was none. (D) the initial access came via an EXTERNAL attacker phishing the employee \u2014 the employee was a victim, not the perpetrator; an outsider patiently operating for a year is the textbook APT pattern.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "threat-actors",
+            "apt",
+            "insider-threat",
+            "hacktivist"
+          ]
         },
         {
-          "id": "z4-n1-001", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-001",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An attacker sends thousands of SYN packets to a server without completing the TCP handshake. What attack is this?",
-          "options": ["UDP flood", "SYN flood (DoS — protocol attack)", "DNS amplification", "Ping of Death"],
+          "options": [
+            "UDP flood",
+            "SYN flood (DoS \u2014 protocol attack)",
+            "DNS amplification",
+            "Ping of Death"
+          ],
           "correct_index": 1,
-          "explanation": "SYN flood: attacker sends SYN but never completes the 3-way handshake. The server allocates state for each half-open connection until its table fills — legitimate connections are refused. Mitigation: SYN cookies (server doesn't allocate state until handshake complete).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SYN Flood", "DoS", "Protocol Attack"]
+          "explanation": "SYN flood: attacker sends SYN but never completes the 3-way handshake. The server allocates state for each half-open connection until its table fills \u2014 legitimate connections are refused. Mitigation: SYN cookies (server doesn't allocate state until handshake complete).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SYN Flood",
+            "DoS",
+            "Protocol Attack"
+          ]
         },
         {
-          "id": "z4-n1-002", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-002",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Phishing, spear phishing, and whaling are all forms of which broader attack category?",
-          "options": ["DDoS", "Social engineering", "Physical intrusion", "On-path attacks"],
+          "options": [
+            "DDoS",
+            "Social engineering",
+            "Physical intrusion",
+            "On-path attacks"
+          ],
           "correct_index": 1,
-          "explanation": "All three are social engineering — manipulating humans to divulge information or perform actions. Phishing = mass/generic. Spear phishing = targeted. Whaling = specifically targets senior executives (C-suite).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Phishing", "Social Engineering", "Whaling"]
+          "explanation": "All three are social engineering \u2014 manipulating humans to divulge information or perform actions. Phishing = mass/generic. Spear phishing = targeted. Whaling = specifically targets senior executives (C-suite).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Phishing",
+            "Social Engineering",
+            "Whaling"
+          ]
         },
         {
-          "id": "z4-n1-003", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-003",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An attacker sends fraudulent ARP replies to associate their MAC address with the gateway IP. What attack is this?",
-          "options": ["DNS poisoning", "ARP poisoning", "DHCP starvation", "IP spoofing"],
+          "options": [
+            "DNS poisoning",
+            "ARP poisoning",
+            "DHCP starvation",
+            "IP spoofing"
+          ],
           "correct_index": 1,
-          "explanation": "ARP poisoning (ARP spoofing): the attacker poisons ARP caches — hosts send traffic destined for the gateway to the attacker instead, enabling man-in-the-middle interception. Mitigation: Dynamic ARP Inspection (DAI) on switches.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["ARP Poisoning", "MITM", "Layer 2"]
+          "explanation": "ARP poisoning (ARP spoofing): the attacker poisons ARP caches \u2014 hosts send traffic destined for the gateway to the attacker instead, enabling man-in-the-middle interception. Mitigation: Dynamic ARP Inspection (DAI) on switches.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "ARP Poisoning",
+            "MITM",
+            "Layer 2"
+          ]
         },
         {
-          "id": "z4-n1-004", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-004",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Vishing is a social engineering attack conducted via:",
-          "options": ["Email", "SMS text message", "Voice call or phone", "Physical impersonation in person"],
+          "options": [
+            "Email",
+            "SMS text message",
+            "Voice call or phone",
+            "Physical impersonation in person"
+          ],
           "correct_index": 2,
           "explanation": "Vishing = Voice Phishing. Attacker calls the victim impersonating IT support, a bank, government agency, etc. Smishing = SMS. Phishing = email. All exploit trust and urgency.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Vishing", "Social Engineering", "Voice"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Vishing",
+            "Social Engineering",
+            "Voice"
+          ]
         },
         {
-          "id": "z4-n1-005", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-005",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A DDoS attack differs from a DoS attack primarily because:",
-          "options": ["DDoS only targets web servers", "DDoS uses a distributed botnet of many compromised hosts — harder to block a single source", "DDoS operates at Layer 7 only", "DoS attacks are more damaging"],
+          "options": [
+            "DDoS only targets web servers",
+            "DDoS uses a distributed botnet of many compromised hosts \u2014 harder to block a single source",
+            "DDoS operates at Layer 7 only",
+            "DoS attacks are more damaging"
+          ],
           "correct_index": 1,
-          "explanation": "DoS = single source. DDoS = Distributed — botnet of thousands of compromised machines launch the attack simultaneously. DDoS is much harder to mitigate because you can't block a single source IP.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["DDoS", "DoS", "Botnet"]
+          "explanation": "DoS = single source. DDoS = Distributed \u2014 botnet of thousands of compromised machines launch the attack simultaneously. DDoS is much harder to mitigate because you can't block a single source IP.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "DDoS",
+            "DoS",
+            "Botnet"
+          ]
         },
         {
-          "id": "z4-n1-006", "zone": 4, "node": 4.1, "difficulty": "easy", "type": "mob",
+          "id": "z4-n1-006",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "An attacker sets up a Wi-Fi network with the same SSID as the corporate network to trick users into connecting. This is called:",
-          "options": ["Rogue DHCP server", "Evil twin AP", "War driving", "Deauth attack"],
+          "options": [
+            "Rogue DHCP server",
+            "Evil twin AP",
+            "War driving",
+            "Deauth attack"
+          ],
           "correct_index": 1,
-          "explanation": "Evil twin: a fake AP broadcasting the same SSID as the legitimate network. Users connect thinking it's real — attacker intercepts all traffic. Mitigation: 802.1X Enterprise authentication (rogue AP cannot present valid RADIUS credentials).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Evil Twin", "Rogue AP", "Wireless"]
+          "explanation": "Evil twin: a fake AP broadcasting the same SSID as the legitimate network. Users connect thinking it's real \u2014 attacker intercepts all traffic. Mitigation: 802.1X Enterprise authentication (rogue AP cannot present valid RADIUS credentials).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Evil Twin",
+            "Rogue AP",
+            "Wireless"
+          ]
         },
         {
-          "id": "z4-n1-007", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-007",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Password spraying differs from brute force in that password spraying:",
-          "options": ["Tries all possible passwords against one account", "Tries a few common passwords across many accounts — avoids triggering lockout policies", "Uses pre-computed hash tables", "Only targets admin accounts"],
+          "options": [
+            "Tries all possible passwords against one account",
+            "Tries a few common passwords across many accounts \u2014 avoids triggering lockout policies",
+            "Uses pre-computed hash tables",
+            "Only targets admin accounts"
+          ],
           "correct_index": 1,
-          "explanation": "Password spraying: try 'Password1', 'Spring2024', 'CompanyName1' against thousands of accounts — stays under lockout threshold per account. Brute force: try every possible password against one account — quickly triggers lockout. Spray = stealth; brute = loud.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Password Spraying", "Brute Force", "Authentication"]
+          "explanation": "Password spraying: try 'Password1', 'Spring2024', 'CompanyName1' against thousands of accounts \u2014 stays under lockout threshold per account. Brute force: try every possible password against one account \u2014 quickly triggers lockout. Spray = stealth; brute = loud.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Password Spraying",
+            "Brute Force",
+            "Authentication"
+          ]
         },
         {
-          "id": "z4-n1-008", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-008",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "DNS poisoning attacks work by:",
-          "options": ["Overloading DNS servers with requests", "Injecting forged DNS records into a resolver's cache to redirect users to malicious sites", "Brute-forcing DNS zone transfer credentials", "Intercepting HTTPS traffic to DNS servers"],
+          "options": [
+            "Overloading DNS servers with requests",
+            "Injecting forged DNS records into a resolver's cache to redirect users to malicious sites",
+            "Brute-forcing DNS zone transfer credentials",
+            "Intercepting HTTPS traffic to DNS servers"
+          ],
           "correct_index": 1,
-          "explanation": "DNS cache poisoning: attacker injects forged DNS responses into a recursive resolver's cache. Users querying that resolver get malicious IPs for legitimate domains — redirected without knowing. Mitigation: DNSSEC (cryptographically signs DNS records).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DNS Poisoning", "DNS", "Cache"]
+          "explanation": "DNS cache poisoning: attacker injects forged DNS responses into a recursive resolver's cache. Users querying that resolver get malicious IPs for legitimate domains \u2014 redirected without knowing. Mitigation: DNSSEC (cryptographically signs DNS records).",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "DNS Poisoning",
+            "DNS",
+            "Cache"
+          ]
         },
         {
-          "id": "z4-n1-009", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-009",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "An on-path attack (formerly MITM) positions the attacker between two communicating hosts. Which technology BEST prevents this on encrypted connections?",
-          "options": ["Firewall ACLs", "Certificate validation + mutual TLS authentication", "Port security on switches", "VLAN segmentation"],
+          "options": [
+            "Firewall ACLs",
+            "Certificate validation + mutual TLS authentication",
+            "Port security on switches",
+            "VLAN segmentation"
+          ],
           "correct_index": 1,
-          "explanation": "TLS with proper certificate validation prevents MITM — the client verifies the server's certificate is signed by a trusted CA and matches the intended hostname. Mutual TLS (client + server certificates) provides bi-directional authentication. An attacker cannot forge a valid certificate.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["MITM", "On-Path", "TLS", "Certificates"]
+          "explanation": "TLS with proper certificate validation prevents MITM \u2014 the client verifies the server's certificate is signed by a trusted CA and matches the intended hostname. Mutual TLS (client + server certificates) provides bi-directional authentication. An attacker cannot forge a valid certificate.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "MITM",
+            "On-Path",
+            "TLS",
+            "Certificates"
+          ]
         },
         {
-          "id": "z4-n1-010", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-010",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A rogue DHCP server attack can be mitigated by which switch feature?",
-          "options": ["Port security", "DHCP snooping", "Dynamic ARP Inspection", "Storm control"],
+          "options": [
+            "Port security",
+            "DHCP snooping",
+            "Dynamic ARP Inspection",
+            "Storm control"
+          ],
           "correct_index": 1,
-          "explanation": "DHCP snooping designates switch ports as trusted (uplink to real DHCP server) or untrusted (client ports). DHCP OFFER and ACK messages on untrusted ports are dropped — preventing rogue DHCP servers from distributing malicious gateway/DNS settings.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DHCP Snooping", "Rogue DHCP", "Layer 2 Security"]
+          "explanation": "DHCP snooping designates switch ports as trusted (uplink to real DHCP server) or untrusted (client ports). DHCP OFFER and ACK messages on untrusted ports are dropped \u2014 preventing rogue DHCP servers from distributing malicious gateway/DNS settings.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "DHCP Snooping",
+            "Rogue DHCP",
+            "Layer 2 Security"
+          ]
         },
         {
-          "id": "z4-n1-011", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-011",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Which attack uses pre-computed hash tables to crack password hashes, and what defeats it?",
-          "options": ["Brute force — defeated by complexity requirements", "Rainbow table attack — defeated by salting password hashes before storage", "SYN flood — defeated by SYN cookies", "Dictionary attack — defeated by lockout policies"],
+          "options": [
+            "Brute force \u2014 defeated by complexity requirements",
+            "Rainbow table attack \u2014 defeated by salting password hashes before storage",
+            "SYN flood \u2014 defeated by SYN cookies",
+            "Dictionary attack \u2014 defeated by lockout policies"
+          ],
           "correct_index": 1,
-          "explanation": "Rainbow tables are pre-computed plaintext→hash mappings. An attacker with a stolen password hash database can look up hashes to find passwords instantly. Salting adds a unique random value to each password before hashing — same password produces different hashes, defeating pre-computed tables.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Rainbow Table", "Salt", "Password Security"]
+          "explanation": "Rainbow tables are pre-computed plaintext\u2192hash mappings. An attacker with a stolen password hash database can look up hashes to find passwords instantly. Salting adds a unique random value to each password before hashing \u2014 same password produces different hashes, defeating pre-computed tables.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Rainbow Table",
+            "Salt",
+            "Password Security"
+          ]
         },
         {
-          "id": "z4-n1-012", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-012",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "An employee receives a text message claiming their package is delayed and asks them to click a link to reschedule. This is:",
-          "options": ["Phishing", "Vishing", "Smishing", "Pretexting"],
+          "options": [
+            "Phishing",
+            "Vishing",
+            "Smishing",
+            "Pretexting"
+          ],
           "correct_index": 2,
           "explanation": "Smishing = SMS phishing. Text messages (SMS) used to deliver a malicious link or extract information. The package delivery pretense is a common smishing lure. Vishing = voice call. Phishing = email.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Smishing", "SMS Phishing", "Social Engineering"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Smishing",
+            "SMS Phishing",
+            "Social Engineering"
+          ]
         },
         {
-          "id": "z4-n1-013", "zone": 4, "node": 4.1, "difficulty": "hard", "type": "mob",
+          "id": "z4-n1-013",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A DNS amplification attack is a volumetric DDoS technique. How does the amplification work?",
           "options": [
             "Attacker directly sends massive DNS queries to the victim",
-            "Attacker sends small DNS queries with the victim's spoofed IP as source — open resolvers send large responses to the victim",
+            "Attacker sends small DNS queries with the victim's spoofed IP as source \u2014 open resolvers send large responses to the victim",
             "Attacker poisons DNS cache to redirect victims to malicious IPs",
             "Attacker intercepts DNS responses and replaces them with malicious entries"
           ],
           "correct_index": 1,
-          "explanation": "DNS amplification: attacker spoofs victim's IP and sends small DNS queries (requesting large record types like ANY or TXT) to open recursive resolvers. Resolvers send large responses to the victim's IP. Amplification factor can be 50x — small query creates large attack traffic aimed at victim.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["DNS Amplification", "DDoS", "Volumetric"]
+          "explanation": "DNS amplification: attacker spoofs victim's IP and sends small DNS queries (requesting large record types like ANY or TXT) to open recursive resolvers. Resolvers send large responses to the victim's IP. Amplification factor can be 50x \u2014 small query creates large attack traffic aimed at victim.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "DNS Amplification",
+            "DDoS",
+            "Volumetric"
+          ]
         },
         {
-          "id": "z4-n1-014", "zone": 4, "node": 4.1, "difficulty": "hard", "type": "mob",
+          "id": "z4-n1-014",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A deauthentication attack against wireless clients is best mitigated by:",
-          "options": ["WPA2 PSK with a strong passphrase", "802.11w (Management Frame Protection) and WPA3", "Disabling SSID broadcasting", "Using channels 1, 6, or 11"],
+          "options": [
+            "WPA2 PSK with a strong passphrase",
+            "802.11w (Management Frame Protection) and WPA3",
+            "Disabling SSID broadcasting",
+            "Using channels 1, 6, or 11"
+          ],
           "correct_index": 1,
-          "explanation": "Deauth attacks send spoofed management frames (deauthentication) to force clients off the AP — enabling MITM or forcing WPA2 handshake capture. 802.11w (MFP) adds cryptographic protection to management frames, preventing spoofing. WPA3 also requires MFP.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Deauth Attack", "802.11w", "MFP", "WPA3"]
+          "explanation": "Deauth attacks send spoofed management frames (deauthentication) to force clients off the AP \u2014 enabling MITM or forcing WPA2 handshake capture. 802.11w (MFP) adds cryptographic protection to management frames, preventing spoofing. WPA3 also requires MFP.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Deauth Attack",
+            "802.11w",
+            "MFP",
+            "WPA3"
+          ]
         },
         {
-          "id": "z4-n1-015", "zone": 4, "node": 4.1, "difficulty": "medium", "type": "mob",
+          "id": "z4-n1-015",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Tailgating (piggybacking) is a physical security attack where:",
-          "options": ["An attacker monitors network traffic from a nearby location", "An attacker follows an authorised person through a secured door without using their own credentials", "An attacker installs a keylogger on a target's computer", "An attacker uses social media to gather target information"],
+          "options": [
+            "An attacker monitors network traffic from a nearby location",
+            "An attacker follows an authorised person through a secured door without using their own credentials",
+            "An attacker installs a keylogger on a target's computer",
+            "An attacker uses social media to gather target information"
+          ],
           "correct_index": 1,
-          "explanation": "Tailgating: attacker physically follows an authorised employee through badge-access doors — exploiting courtesy (holding the door). Mitigations: mantraps/airlocks (only one person per cycle), security awareness training, security guards.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Tailgating", "Physical Security", "Social Engineering"]
+          "explanation": "Tailgating: attacker physically follows an authorised employee through badge-access doors \u2014 exploiting courtesy (holding the door). Mitigations: mantraps/airlocks (only one person per cycle), security awareness training, security guards.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Tailgating",
+            "Physical Security",
+            "Social Engineering"
+          ]
         },
         {
-          "id": "z4-n1-016", "zone": 4, "node": 4.1, "difficulty": "hard", "type": "mob",
+          "id": "z4-n1-016",
+          "zone": 4,
+          "node": 4.1,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An APT (Advanced Persistent Threat) is distinguished from other attacks by:",
-          "options": ["Using only volumetric DDoS techniques", "Long-term, stealthy access — often nation-state sponsored — focused on espionage rather than immediate disruption", "Targeting only financial institutions", "Requiring physical access to the target"],
+          "options": [
+            "Using only volumetric DDoS techniques",
+            "Long-term, stealthy access \u2014 often nation-state sponsored \u2014 focused on espionage rather than immediate disruption",
+            "Targeting only financial institutions",
+            "Requiring physical access to the target"
+          ],
           "correct_index": 1,
-          "explanation": "APT = long-term, stealthy, targeted. Nation-state actors often run APTs to maintain persistent access for intelligence gathering — staying hidden for months or years. Contrast with script kiddies (noisy, opportunistic) or ransomware gangs (quick financial payoff).",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["APT", "Nation-State", "Threat Actors"]
+          "explanation": "APT = long-term, stealthy, targeted. Nation-state actors often run APTs to maintain persistent access for intelligence gathering \u2014 staying hidden for months or years. Contrast with script kiddies (noisy, opportunistic) or ransomware gangs (quick financial payoff).",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "APT",
+            "Nation-State",
+            "Threat Actors"
+          ]
         }
       ]
     },
@@ -189,25 +462,52 @@
       "description": "Firewalls, IDS/IPS, DMZ, network segmentation, and Zero Trust architecture.",
       "encounters": [
         {
+          "id": "z4-n2-primer",
+          "type": "study_encounter",
+          "title": "Threats Primer",
+          "scenario": "Welcome to Threats Primer. Before proceeding, you must master these essential networking terms. Advanced Persistent Threat (APT): Sophisticated, long-term targeted attack, typically nation-state sponsored. Stealth over speed \u2014 establish foothold, maintain persistence, exfiltrate data over months/years. Hard to detect. Distributed Denial of Service (DDoS): DoS using many compromised systems (botnet). Categories: Volumetric (DNS amplification), Protocol (SYN flood), Application (HTTP flood). Mitigated by scrubbing centers and rate limiting. Man-in-the-Middle (MITM): Attacker intercepts communication between two parties. Methods: ARP poisoning, rogue AP, DNS spoofing. Mitigated by encryption (TLS), certificate pinning, DAI, and 802.1X. Denial of Service (DoS): Attack overwhelming a target to make it unavailable. Single attacker. Types: volumetric (bandwidth), protocol (SYN flood), application (HTTP flood). DDoS = distributed (botnet).",
+          "question": "What does APT stand for?",
+          "options": [
+            "Advanced Persistent Threat",
+            "Advanced APT Protocol",
+            "Automated APT System",
+            "Active APT Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "APT stands for Advanced Persistent Threat.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "apt",
+            "ddos",
+            "mitm"
+          ]
+        },
+        {
           "id": "z4-n2-study-001",
           "zone": 4,
           "node": 4.2,
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "Badge at the Door vs Badge at Every Door: Zero Trust",
-          "scenario": "A traditional office has ONE checkpoint at the front door — badge in once, then walk to any floor, office, or cabinet with no further checks. This is PERIMETER-BASED security: a strong wall around a 'trusted' inside and an 'untrusted' outside. The flaw: if an employee's badge is stolen (or their laptop is phished), the attacker is INSIDE with full freedom of movement and nothing else will catch them. ZERO TRUST flips this: now EVERY door — every office, cabinet, server room — has its OWN badge reader, regardless of whether you already badged in at the front. Every access request is independently authenticated and authorized: 'never trust, always verify.' A stolen badge still gets past the front door, but it won't open the server room or finance database — those check credentials again, every time.",
-          "question": "An employee's laptop is compromised via a phishing email while connected to the internal corporate Wi-Fi. In a traditional PERIMETER-based security model, what is the most significant immediate risk — and how would a Zero Trust architecture change that outcome?",
+          "scenario": "A traditional office has ONE checkpoint at the front door \u2014 badge in once, then walk to any floor, office, or cabinet with no further checks. This is PERIMETER-BASED security: a strong wall around a 'trusted' inside and an 'untrusted' outside. The flaw: if an employee's badge is stolen (or their laptop is phished), the attacker is INSIDE with full freedom of movement and nothing else will catch them. ZERO TRUST flips this: now EVERY door \u2014 every office, cabinet, server room \u2014 has its OWN badge reader, regardless of whether you already badged in at the front. Every access request is independently authenticated and authorized: 'never trust, always verify.' A stolen badge still gets past the front door, but it won't open the server room or finance database \u2014 those check credentials again, every time.",
+          "question": "An employee's laptop is compromised via a phishing email while connected to the internal corporate Wi-Fi. In a traditional PERIMETER-based security model, what is the most significant immediate risk \u2014 and how would a Zero Trust architecture change that outcome?",
           "options": [
             "Traditional: the firewall would have already blocked the phishing email, so this scenario couldn't happen under either model.",
             "Traditional: because the laptop is already 'inside' the trusted network, the attacker likely has broad lateral access to internal resources with no further checks; Zero Trust requires every resource access to be re-authenticated and authorized regardless of network location, sharply limiting lateral movement.",
-            "Traditional and Zero Trust behave identically once a device is connected to the internal network — the security model only affects external/remote connections.",
+            "Traditional and Zero Trust behave identically once a device is connected to the internal network \u2014 the security model only affects external/remote connections.",
             "Zero Trust would have prevented the phishing email from being delivered in the first place, since it inspects all inbound email content."
           ],
           "correct_index": 1,
-          "explanation": "This is Zero Trust's core motivation: in a perimeter model, 'inside the network' is treated as trustworthy, so one compromised device can move laterally with little friction. Zero Trust removes that assumption — every resource access requires its own check, containing the blast radius to only what that session was explicitly granted. Wrong: (A) phishing routinely bypasses filters — that's why this scenario is common. (C) Zero Trust applies scrutiny INSIDE the network too, the opposite of perimeter models. (D) Zero Trust governs resource access, not email filtering — it doesn't claim to stop phishing delivery."
-,
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["zero-trust", "perimeter-security", "lateral-movement"]
+          "explanation": "This is Zero Trust's core motivation: in a perimeter model, 'inside the network' is treated as trustworthy, so one compromised device can move laterally with little friction. Zero Trust removes that assumption \u2014 every resource access requires its own check, containing the blast radius to only what that session was explicitly granted. Wrong: (A) phishing routinely bypasses filters \u2014 that's why this scenario is common. (C) Zero Trust applies scrutiny INSIDE the network too, the opposite of perimeter models. (D) Zero Trust governs resource access, not email filtering \u2014 it doesn't claim to stop phishing delivery.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "zero-trust",
+            "perimeter-security",
+            "lateral-movement"
+          ]
         },
         {
           "id": "z4-n2-study-002",
@@ -216,139 +516,367 @@
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "The Broken Turnstile: Fail-Open vs Fail-Closed",
-          "scenario": "A subway turnstile breaks two possible ways. FAIL-OPEN: the arm springs open and stays open — everyone walks through freely, ticket or not. Commuters keep moving (availability preserved), but ticket-checking has stopped (security is gone) until it's fixed. FAIL-CLOSED: the arm locks rigidly — NOBODY gets through, valid ticket or not, until repaired. Security is preserved, but availability is completely lost. An inline IPS sits directly in the traffic path, like that turnstile — and when it crashes or loses power, it must be built (often via a hardware bypass/TAP) to do ONE of these two things. Neither is universally 'correct'; it's a deliberate availability-vs-security tradeoff.",
+          "scenario": "A subway turnstile breaks two possible ways. FAIL-OPEN: the arm springs open and stays open \u2014 everyone walks through freely, ticket or not. Commuters keep moving (availability preserved), but ticket-checking has stopped (security is gone) until it's fixed. FAIL-CLOSED: the arm locks rigidly \u2014 NOBODY gets through, valid ticket or not, until repaired. Security is preserved, but availability is completely lost. An inline IPS sits directly in the traffic path, like that turnstile \u2014 and when it crashes or loses power, it must be built (often via a hardware bypass/TAP) to do ONE of these two things. Neither is universally 'correct'; it's a deliberate availability-vs-security tradeoff.",
           "question": "A company deploys an inline IPS between its core switch and edge router. During a software update, the IPS crashes unexpectedly. Network monitoring shows that traffic continued flowing between the LAN and the internet throughout the crash, completely uninspected, until the IPS came back online 10 minutes later. Which failure mode was this IPS configured for, and what is the security implication?",
           "options": [
-            "Fail-closed — all traffic was blocked until the IPS recovered, which is why the outage lasted 10 minutes.",
-            "Fail-open — traffic passed through uninspected during the outage, prioritizing availability over security; this represents a real (if temporary) security gap with zero intrusion detection/prevention active.",
-            "Active-active clustering — the IPS automatically failed over to a redundant unit with no service interruption or security gap.",
-            "This is impossible — an inline device that crashes must always stop all traffic through it, regardless of configuration."
+            "Fail-closed \u2014 all traffic was blocked until the IPS recovered, which is why the outage lasted 10 minutes.",
+            "Fail-open \u2014 traffic passed through uninspected during the outage, prioritizing availability over security; this represents a real (if temporary) security gap with zero intrusion detection/prevention active.",
+            "Active-active clustering \u2014 the IPS automatically failed over to a redundant unit with no service interruption or security gap.",
+            "This is impossible \u2014 an inline device that crashes must always stop all traffic through it, regardless of configuration."
           ],
           "correct_index": 1,
-          "explanation": "Traffic 'continued flowing... completely uninspected' during the crash — that's the definition of fail-open. The 10-minute window is a real security gap: no IPS signatures were checked, so attack traffic would have passed freely. Wrong: (A) fail-CLOSED means total connectivity loss during the crash, the opposite of what's described. (C) nothing indicates a redundant unit or automatic failover — 'uninspected' rules out a seamless handoff to a working IPS. (D) this is exactly why fail-open hardware bypass exists — many inline appliances include a physical bypass (relay/optical switch) that connects the wire pairs directly when the inspection engine fails, keeping the link up."
-,
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["ips", "fail-open", "fail-closed", "inline-security"]
+          "explanation": "Traffic 'continued flowing... completely uninspected' during the crash \u2014 that's the definition of fail-open. The 10-minute window is a real security gap: no IPS signatures were checked, so attack traffic would have passed freely. Wrong: (A) fail-CLOSED means total connectivity loss during the crash, the opposite of what's described. (C) nothing indicates a redundant unit or automatic failover \u2014 'uninspected' rules out a seamless handoff to a working IPS. (D) this is exactly why fail-open hardware bypass exists \u2014 many inline appliances include a physical bypass (relay/optical switch) that connects the wire pairs directly when the inspection engine fails, keeping the link up.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "ips",
+            "fail-open",
+            "fail-closed",
+            "inline-security"
+          ]
         },
         {
-          "id": "z4-n2-001", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
+          "id": "z4-n2-001",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "The key difference between a stateless and stateful firewall is:",
-          "options": ["Stateless firewalls are faster but inspect application payloads", "Stateful firewalls track connection state — return traffic is automatically permitted without explicit rules", "Stateless firewalls only work at Layer 7", "Stateful firewalls cannot filter by port number"],
+          "options": [
+            "Stateless firewalls are faster but inspect application payloads",
+            "Stateful firewalls track connection state \u2014 return traffic is automatically permitted without explicit rules",
+            "Stateless firewalls only work at Layer 7",
+            "Stateful firewalls cannot filter by port number"
+          ],
           "correct_index": 1,
-          "explanation": "Stateful firewalls maintain a connection state table. When an internal host initiates a TCP connection outbound, the returning traffic is automatically allowed because the firewall recognizes it belongs to an established session. Stateless firewalls evaluate every packet independently — you need explicit rules for return traffic.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Stateful Firewall", "Stateless", "Connection Tracking"]
+          "explanation": "Stateful firewalls maintain a connection state table. When an internal host initiates a TCP connection outbound, the returning traffic is automatically allowed because the firewall recognizes it belongs to an established session. Stateless firewalls evaluate every packet independently \u2014 you need explicit rules for return traffic.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Stateful Firewall",
+            "Stateless",
+            "Connection Tracking"
+          ]
         },
         {
-          "id": "z4-n2-002", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
+          "id": "z4-n2-002",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "IDS differs from IPS in that IDS:",
-          "options": ["Blocks malicious traffic inline", "Detects and alerts only — does NOT block traffic", "Is always host-based", "Requires a RADIUS server"],
+          "options": [
+            "Blocks malicious traffic inline",
+            "Detects and alerts only \u2014 does NOT block traffic",
+            "Is always host-based",
+            "Requires a RADIUS server"
+          ],
           "correct_index": 1,
-          "explanation": "IDS (Intrusion Detection System) = passive — monitors traffic and generates alerts. It does NOT block. IPS (Intrusion Prevention System) = active/inline — sits in the traffic path and can DROP malicious traffic in real time.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["IDS", "IPS", "Intrusion Detection"]
+          "explanation": "IDS (Intrusion Detection System) = passive \u2014 monitors traffic and generates alerts. It does NOT block. IPS (Intrusion Prevention System) = active/inline \u2014 sits in the traffic path and can DROP malicious traffic in real time.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "IDS",
+            "IPS",
+            "Intrusion Detection"
+          ]
         },
         {
-          "id": "z4-n2-003", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
+          "id": "z4-n2-003",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A DMZ (Demilitarized Zone) is used to:",
-          "options": ["Isolate management traffic from user traffic", "Place public-facing servers between the untrusted internet and the trusted internal network", "Create a separate VLAN for guest users", "Encrypt traffic between branch offices"],
+          "options": [
+            "Isolate management traffic from user traffic",
+            "Place public-facing servers between the untrusted internet and the trusted internal network",
+            "Create a separate VLAN for guest users",
+            "Encrypt traffic between branch offices"
+          ],
           "correct_index": 1,
-          "explanation": "The DMZ (screened subnet) is a buffer zone for public-facing services — web, email, DNS. Internet users can reach DMZ servers, but DMZ servers cannot initiate connections to the internal LAN. If a DMZ server is compromised, the attacker is still blocked from the internal network.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["DMZ", "Network Segmentation", "Screened Subnet"]
+          "explanation": "The DMZ (screened subnet) is a buffer zone for public-facing services \u2014 web, email, DNS. Internet users can reach DMZ servers, but DMZ servers cannot initiate connections to the internal LAN. If a DMZ server is compromised, the attacker is still blocked from the internal network.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "DMZ",
+            "Network Segmentation",
+            "Screened Subnet"
+          ]
         },
         {
-          "id": "z4-n2-004", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
+          "id": "z4-n2-004",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A WAF (Web Application Firewall) is specifically designed to protect against:",
-          "options": ["Network-layer DDoS attacks", "Web application attacks such as SQL injection, XSS, and CSRF (OWASP Top 10)", "Brute force against SSH services", "BGP hijacking at the routing layer"],
+          "options": [
+            "Network-layer DDoS attacks",
+            "Web application attacks such as SQL injection, XSS, and CSRF (OWASP Top 10)",
+            "Brute force against SSH services",
+            "BGP hijacking at the routing layer"
+          ],
           "correct_index": 1,
-          "explanation": "WAF specifically inspects HTTP/HTTPS traffic for web application attacks — SQL injection, cross-site scripting (XSS), CSRF, path traversal, etc. (OWASP Top 10). A standard firewall cannot detect these attacks because they are hidden within legitimate HTTP requests.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["WAF", "Web Application Firewall", "OWASP"]
+          "explanation": "WAF specifically inspects HTTP/HTTPS traffic for web application attacks \u2014 SQL injection, cross-site scripting (XSS), CSRF, path traversal, etc. (OWASP Top 10). A standard firewall cannot detect these attacks because they are hidden within legitimate HTTP requests.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "WAF",
+            "Web Application Firewall",
+            "OWASP"
+          ]
         },
         {
-          "id": "z4-n2-005", "zone": 4, "node": 4.2, "difficulty": "easy", "type": "mob",
+          "id": "z4-n2-005",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A honeypot in network security is:",
-          "options": ["An encrypted password vault for storing credentials", "A decoy system designed to attract attackers and log their techniques", "A backup DNS server", "A type of IPS signature database"],
+          "options": [
+            "An encrypted password vault for storing credentials",
+            "A decoy system designed to attract attackers and log their techniques",
+            "A backup DNS server",
+            "A type of IPS signature database"
+          ],
           "correct_index": 1,
-          "explanation": "A honeypot is a fake, deliberately vulnerable system with no legitimate traffic. Any access to it is suspicious. It logs attacker techniques, tools, and IPs — providing threat intelligence. A honeynet is a network of multiple honeypots.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Honeypot", "Deception", "Threat Intelligence"]
+          "explanation": "A honeypot is a fake, deliberately vulnerable system with no legitimate traffic. Any access to it is suspicious. It logs attacker techniques, tools, and IPs \u2014 providing threat intelligence. A honeynet is a network of multiple honeypots.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Honeypot",
+            "Deception",
+            "Threat Intelligence"
+          ]
         },
         {
-          "id": "z4-n2-006", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-006",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Zero Trust security is based on which core principle?",
-          "options": ["Trust all internal traffic; verify external traffic only", "Never trust, always verify — every access request requires authentication and authorisation regardless of network location", "Trust is granted once per user per session", "Only external connections need encryption"],
+          "options": [
+            "Trust all internal traffic; verify external traffic only",
+            "Never trust, always verify \u2014 every access request requires authentication and authorisation regardless of network location",
+            "Trust is granted once per user per session",
+            "Only external connections need encryption"
+          ],
           "correct_index": 1,
           "explanation": "Zero Trust: no implicit trust based on network location (even being inside the corporate network). Every user, device, and application must authenticate and be authorised for every resource. Microsegmentation and continuous verification are core Zero Trust controls.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Zero Trust", "Security Architecture"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Zero Trust",
+            "Security Architecture"
+          ]
         },
         {
-          "id": "z4-n2-007", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-007",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Defense in depth means:",
-          "options": ["Placing the firewall deep in the network", "Layering multiple overlapping security controls so compromise of one layer doesn't lead to full breach", "Using deep packet inspection on all traffic", "Encrypting data at multiple OSI layers"],
+          "options": [
+            "Placing the firewall deep in the network",
+            "Layering multiple overlapping security controls so compromise of one layer doesn't lead to full breach",
+            "Using deep packet inspection on all traffic",
+            "Encrypting data at multiple OSI layers"
+          ],
           "correct_index": 1,
-          "explanation": "Defense in depth (castle model): multiple layers of security — perimeter firewall, IPS, network segmentation, endpoint protection, DLP, encryption, MFA, etc. An attacker who bypasses one layer faces the next. No single control is sufficient.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Defense in Depth", "Security Layers"]
+          "explanation": "Defense in depth (castle model): multiple layers of security \u2014 perimeter firewall, IPS, network segmentation, endpoint protection, DLP, encryption, MFA, etc. An attacker who bypasses one layer faces the next. No single control is sufficient.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Defense in Depth",
+            "Security Layers"
+          ]
         },
         {
-          "id": "z4-n2-008", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-008",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "An IPS generates a false positive. What is the impact?",
-          "options": ["A real attack is not detected", "Legitimate traffic is blocked — potential service disruption", "The IPS stops monitoring", "Alerts are sent to the wrong destination"],
+          "options": [
+            "A real attack is not detected",
+            "Legitimate traffic is blocked \u2014 potential service disruption",
+            "The IPS stops monitoring",
+            "Alerts are sent to the wrong destination"
+          ],
           "correct_index": 1,
-          "explanation": "A false positive on an IPS means the system incorrectly identifies legitimate traffic as malicious and DROPS it. This can block users, services, or applications. False positives are a key operational challenge with IPS — signatures must be carefully tuned.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["IPS", "False Positive", "Tuning"]
+          "explanation": "A false positive on an IPS means the system incorrectly identifies legitimate traffic as malicious and DROPS it. This can block users, services, or applications. False positives are a key operational challenge with IPS \u2014 signatures must be carefully tuned.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "IPS",
+            "False Positive",
+            "Tuning"
+          ]
         },
         {
-          "id": "z4-n2-009", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-009",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A jump server (bastion host) is used for:",
-          "options": ["Routing traffic between DMZ and internal network", "Providing a hardened, audited single access point to manage sensitive internal systems remotely", "Hosting public web applications in the DMZ", "Accelerating encrypted VPN connections"],
+          "options": [
+            "Routing traffic between DMZ and internal network",
+            "Providing a hardened, audited single access point to manage sensitive internal systems remotely",
+            "Hosting public web applications in the DMZ",
+            "Accelerating encrypted VPN connections"
+          ],
           "correct_index": 1,
           "explanation": "A bastion host/jump server is a hardened gateway: admins connect to it first (typically via SSH or RDP), then access internal servers from there. All commands are logged for audit. It reduces the attack surface by limiting direct external access to internal management interfaces.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Bastion Host", "Jump Server", "Admin Access"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Bastion Host",
+            "Jump Server",
+            "Admin Access"
+          ]
         },
         {
-          "id": "z4-n2-010", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-010",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Microsegmentation in a data centre applies firewall policies at:",
-          "options": ["The perimeter only", "Per-workload or per-VM level — controls East-West traffic inside the data centre", "Only between DMZ and internal LAN", "The ISP edge router"],
+          "options": [
+            "The perimeter only",
+            "Per-workload or per-VM level \u2014 controls East-West traffic inside the data centre",
+            "Only between DMZ and internal LAN",
+            "The ISP edge router"
+          ],
           "correct_index": 1,
-          "explanation": "Microsegmentation applies granular firewall rules between individual workloads or VMs inside the data centre — controlling East-West (lateral) traffic. Traditional firewalls only control North-South (in/out) traffic. Microsegmentation limits lateral movement if one VM is compromised.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Microsegmentation", "East-West", "Zero Trust"]
+          "explanation": "Microsegmentation applies granular firewall rules between individual workloads or VMs inside the data centre \u2014 controlling East-West (lateral) traffic. Traditional firewalls only control North-South (in/out) traffic. Microsegmentation limits lateral movement if one VM is compromised.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Microsegmentation",
+            "East-West",
+            "Zero Trust"
+          ]
         },
         {
-          "id": "z4-n2-011", "zone": 4, "node": 4.2, "difficulty": "hard", "type": "mob",
+          "id": "z4-n2-011",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A NGFW identifies application traffic regardless of port number. What capability enables this?",
-          "options": ["Deep packet inspection with App-ID (application identification)", "Stateful connection tracking", "Certificate revocation checking", "MAC address filtering"],
+          "options": [
+            "Deep packet inspection with App-ID (application identification)",
+            "Stateful connection tracking",
+            "Certificate revocation checking",
+            "MAC address filtering"
+          ],
           "correct_index": 0,
-          "explanation": "NGFW App-ID uses deep packet inspection, protocol decoders, and behavioral analysis to identify applications regardless of port — e.g., BitTorrent on port 80 is still identified as BitTorrent, not HTTP. This is impossible with traditional port-based firewalls.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["NGFW", "App-ID", "Deep Packet Inspection"]
+          "explanation": "NGFW App-ID uses deep packet inspection, protocol decoders, and behavioral analysis to identify applications regardless of port \u2014 e.g., BitTorrent on port 80 is still identified as BitTorrent, not HTTP. This is impossible with traditional port-based firewalls.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "NGFW",
+            "App-ID",
+            "Deep Packet Inspection"
+          ]
         },
         {
-          "id": "z4-n2-012", "zone": 4, "node": 4.2, "difficulty": "hard", "type": "mob",
+          "id": "z4-n2-012",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A company's web server in the DMZ is compromised. With a proper two-firewall DMZ design, what is the attacker's next obstacle?",
-          "options": ["The compromised web server's local firewall", "The inner firewall separating the DMZ from the internal LAN — which blocks DMZ-initiated connections inbound", "The ISP's edge router", "The RADIUS server"],
+          "options": [
+            "The compromised web server's local firewall",
+            "The inner firewall separating the DMZ from the internal LAN \u2014 which blocks DMZ-initiated connections inbound",
+            "The ISP's edge router",
+            "The RADIUS server"
+          ],
           "correct_index": 1,
-          "explanation": "Proper DMZ design: outer firewall (internet→DMZ) + inner firewall (DMZ→LAN). The inner firewall blocks unsolicited connections from the DMZ to the LAN. A compromised DMZ server cannot directly reach internal systems — the inner firewall limits blast radius.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["DMZ", "Two-Firewall", "Defense in Depth"]
+          "explanation": "Proper DMZ design: outer firewall (internet\u2192DMZ) + inner firewall (DMZ\u2192LAN). The inner firewall blocks unsolicited connections from the DMZ to the LAN. A compromised DMZ server cannot directly reach internal systems \u2014 the inner firewall limits blast radius.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "DMZ",
+            "Two-Firewall",
+            "Defense in Depth"
+          ]
         },
         {
-          "id": "z4-n2-013", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-013",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "UTM (Unified Threat Management) is best described as:",
-          "options": ["A routing protocol for secure networks", "A single appliance combining firewall, IPS, antivirus, web filter, VPN, and DLP", "A type of honeypot deployment", "A wireless security framework"],
+          "options": [
+            "A routing protocol for secure networks",
+            "A single appliance combining firewall, IPS, antivirus, web filter, VPN, and DLP",
+            "A type of honeypot deployment",
+            "A wireless security framework"
+          ],
           "correct_index": 1,
-          "explanation": "UTM consolidates multiple security functions into one device — reducing cost and complexity for small/medium businesses. Downside: single point of failure, potential performance bottleneck, and less flexibility than best-of-breed individual solutions.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["UTM", "Unified Threat Management"]
+          "explanation": "UTM consolidates multiple security functions into one device \u2014 reducing cost and complexity for small/medium businesses. Downside: single point of failure, potential performance bottleneck, and less flexibility than best-of-breed individual solutions.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "UTM",
+            "Unified Threat Management"
+          ]
         },
         {
-          "id": "z4-n2-014", "zone": 4, "node": 4.2, "difficulty": "medium", "type": "mob",
+          "id": "z4-n2-014",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "The implicit deny rule at the end of every firewall ACL means:",
-          "options": ["Traffic matching the last explicit rule is denied", "Any traffic not matched by a permit rule above is automatically dropped", "The firewall denies all traffic until a permit rule is added", "Only outbound traffic is implicitly denied"],
+          "options": [
+            "Traffic matching the last explicit rule is denied",
+            "Any traffic not matched by a permit rule above is automatically dropped",
+            "The firewall denies all traffic until a permit rule is added",
+            "Only outbound traffic is implicitly denied"
+          ],
           "correct_index": 1,
           "explanation": "Implicit deny: the last (invisible) rule at the bottom of every ACL drops ALL traffic not explicitly permitted above. You don't see it, but it's always there. This is why forgetting to add a needed permit rule causes mysterious connectivity issues.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Implicit Deny", "ACL", "Firewall"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Implicit Deny",
+            "ACL",
+            "Firewall"
+          ]
         },
         {
-          "id": "z4-n2-015", "zone": 4, "node": 4.2, "difficulty": "hard", "type": "mob",
+          "id": "z4-n2-015",
+          "zone": 4,
+          "node": 4.2,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An IDS is deployed in tap/SPAN mode. If it detects a serious attack, what limitation exists?",
-          "options": ["It cannot generate alerts", "It cannot block the attack — it can only alert. Traffic has already passed before detection.", "It will automatically update firewall rules", "It will terminate the attacker's connection directly"],
+          "options": [
+            "It cannot generate alerts",
+            "It cannot block the attack \u2014 it can only alert. Traffic has already passed before detection.",
+            "It will automatically update firewall rules",
+            "It will terminate the attacker's connection directly"
+          ],
           "correct_index": 1,
-          "explanation": "IDS in tap/SPAN mode receives a copy of traffic — it is out-of-band. By the time it generates an alert, the attack traffic has already been forwarded to the target. IDS can log and alert but CANNOT block. An IPS deployed inline can drop packets before they reach the destination.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["IDS", "SPAN", "Limitation", "Out-of-Band"]
+          "explanation": "IDS in tap/SPAN mode receives a copy of traffic \u2014 it is out-of-band. By the time it generates an alert, the attack traffic has already been forwarded to the target. IDS can log and alert but CANNOT block. An IPS deployed inline can drop packets before they reach the destination.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "IDS",
+            "SPAN",
+            "Limitation",
+            "Out-of-Band"
+          ]
         }
       ]
     },
@@ -358,24 +886,54 @@
       "description": "VPN technologies, IPsec modes, SSL/TLS, PKI, and cryptographic concepts.",
       "encounters": [
         {
+          "id": "z4-n3-primer",
+          "type": "study_encounter",
+          "title": "Hardening Primer",
+          "scenario": "Welcome to Hardening Primer. Before proceeding, you must master these essential networking terms. Network Access Control (NAC): Controls which devices can connect to the network based on posture (patch level, AV status, certificates). Uses 802.1X, RADIUS, and agents to enforce health checks before granting access. Extensible Authentication Protocol (EAP): Authentication framework used with 802.1X. Multiple methods: EAP-TLS (certificate-based, most secure), PEAP (password in TLS tunnel), EAP-TTLS. Transported over RADIUS. Remote Authentication Dial-In User Service (RADIUS): AAA protocol. UDP 1812 (auth) / 1813 (accounting). Encrypts only password in packet. Used for network access control (Wi-Fi 802.1X, VPN). Open standard. Terminal Access Controller Access Control System Plus (TACACS+): Cisco AAA protocol. TCP 49. Encrypts entire payload (not just password). Separates A/A/A functions independently. Used for device administration. More secure and flexible than RADIUS.",
+          "question": "What does NAC stand for?",
+          "options": [
+            "Network Access Control",
+            "Advanced NAC Protocol",
+            "Automated NAC System",
+            "Active NAC Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "NAC stands for Network Access Control.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "nac",
+            "eap",
+            "radius"
+          ]
+        },
+        {
           "id": "z4-n3-study-001",
           "zone": 4,
           "node": 4.3,
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "The Locked Box and the Key Courier: Hybrid Encryption in TLS",
-          "scenario": "You need to send a friend a heavy locked strongbox, but you've never met and share no secret. ASYMMETRIC encryption solves the 'never met' problem: your friend mails you their open PADLOCK (public key) — anyone can click it shut, but only their matching private key opens it. The catch: this lock-and-key math is far too slow for an entire strongbox of documents. So you use the padlock to secure a tiny envelope containing a SHARED COMBINATION (a symmetric session key) — one small, slow operation. Once your friend opens that envelope, you BOTH hold the same combination, and every document afterward is locked/unlocked with fast SYMMETRIC encryption (like AES) — thousands of times faster.",
+          "scenario": "You need to send a friend a heavy locked strongbox, but you've never met and share no secret. ASYMMETRIC encryption solves the 'never met' problem: your friend mails you their open PADLOCK (public key) \u2014 anyone can click it shut, but only their matching private key opens it. The catch: this lock-and-key math is far too slow for an entire strongbox of documents. So you use the padlock to secure a tiny envelope containing a SHARED COMBINATION (a symmetric session key) \u2014 one small, slow operation. Once your friend opens that envelope, you BOTH hold the same combination, and every document afterward is locked/unlocked with fast SYMMETRIC encryption (like AES) \u2014 thousands of times faster.",
           "question": "A packet capture of a TLS handshake shows the client and server using RSA or ECDHE to agree on a 'pre-master secret,' but the bulk of the session's traffic is encrypted with AES-256-GCM. Why does TLS use TWO different types of encryption instead of just one?",
           "options": [
             "AES is considered insecure for key exchange, so RSA must always run first as a security upgrade",
-            "Asymmetric encryption (RSA/ECDHE) solves the problem of securely agreeing on a secret with no prior shared key, but it's computationally expensive; once both sides share a symmetric session key, fast AES handles the bulk data — this combination is called hybrid encryption",
+            "Asymmetric encryption (RSA/ECDHE) solves the problem of securely agreeing on a secret with no prior shared key, but it's computationally expensive; once both sides share a symmetric session key, fast AES handles the bulk data \u2014 this combination is called hybrid encryption",
             "RSA encrypts the connection metadata while AES encrypts only the TCP headers",
             "The handshake uses AES first to establish the connection, and RSA only encrypts the final few packets for extra protection"
           ],
           "correct_index": 1,
-          "explanation": "Asymmetric encryption (RSA/ECDHE) is the only practical way for two parties with no prior shared secret to agree on one, but it's far too slow for bulk data. Symmetric AES is fast but needs a shared key first. TLS combines both: use the slow asymmetric step ONCE to establish a session key, then fast AES for everything else — HYBRID encryption. Wrong: (A) AES isn't 'insecure' for key exchange, it's USELESS for it — symmetric algorithms require the key to already be shared. (C) RSA/ECDHE establishes the session key, not metadata; AES encrypts the whole payload, not just headers. (D) reverses the order — asymmetric happens FIRST, then AES handles the bulk session.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["TLS", "hybrid-encryption", "symmetric", "asymmetric", "key-exchange"]
+          "explanation": "Asymmetric encryption (RSA/ECDHE) is the only practical way for two parties with no prior shared secret to agree on one, but it's far too slow for bulk data. Symmetric AES is fast but needs a shared key first. TLS combines both: use the slow asymmetric step ONCE to establish a session key, then fast AES for everything else \u2014 HYBRID encryption. Wrong: (A) AES isn't 'insecure' for key exchange, it's USELESS for it \u2014 symmetric algorithms require the key to already be shared. (C) RSA/ECDHE establishes the session key, not metadata; AES encrypts the whole payload, not just headers. (D) reverses the order \u2014 asymmetric happens FIRST, then AES handles the bulk session.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "TLS",
+            "hybrid-encryption",
+            "symmetric",
+            "asymmetric",
+            "key-exchange"
+          ]
         },
         {
           "id": "z4-n3-study-002",
@@ -384,130 +942,349 @@
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "The Notarized Letter vs the Letter You Wrote Yourself: Certificate Trust Chains",
-          "scenario": "A digital certificate is a letter of introduction: 'I certify this server really is hr.internal.corp.' The question is always WHO certifies it, and do you already trust THEM? A cert signed by a public CA (DigiCert, Let's Encrypt) is like a letter notarized by a notary your browser already recognizes — its root cert ships pre-installed, so the chain is unbroken. A SELF-SIGNED cert is a letter you wrote and signed yourself — it might say all the right things, but nobody trusts YOUR signature, since no chain leads to a recognized notary. Browsers flag this 'untrusted' not because encryption is broken, but because identity can't be verified. Many ORGANIZATIONS run an INTERNAL CA and push its root cert to managed devices (via Group Policy/MDM) — to those devices, internally-signed certs are fully trusted.",
+          "scenario": "A digital certificate is a letter of introduction: 'I certify this server really is hr.internal.corp.' The question is always WHO certifies it, and do you already trust THEM? A cert signed by a public CA (DigiCert, Let's Encrypt) is like a letter notarized by a notary your browser already recognizes \u2014 its root cert ships pre-installed, so the chain is unbroken. A SELF-SIGNED cert is a letter you wrote and signed yourself \u2014 it might say all the right things, but nobody trusts YOUR signature, since no chain leads to a recognized notary. Browsers flag this 'untrusted' not because encryption is broken, but because identity can't be verified. Many ORGANIZATIONS run an INTERNAL CA and push its root cert to managed devices (via Group Policy/MDM) \u2014 to those devices, internally-signed certs are fully trusted.",
           "question": "An employee visiting https://hr.internal.corp on their personal laptop gets a 'Your connection is not private (NET::ERR_CERT_AUTHORITY_INVALID)' warning. A coworker visiting the exact same URL on a company-managed laptop sees no warning at all. What is the MOST likely explanation?",
           "options": [
             "The connection is unencrypted on the personal laptop but encrypted on the company laptop",
-            "The HR portal uses a certificate signed by the company's internal CA. The managed laptop has that internal CA's root certificate in its trusted store and can build a complete chain; the personal laptop doesn't, so the chain is broken — the connection may still be encrypted, but the identity can't be verified",
+            "The HR portal uses a certificate signed by the company's internal CA. The managed laptop has that internal CA's root certificate in its trusted store and can build a complete chain; the personal laptop doesn't, so the chain is broken \u2014 the connection may still be encrypted, but the identity can't be verified",
             "The certificate has expired, but only according to the personal laptop's clock",
             "This always indicates an active man-in-the-middle attack targeting the personal laptop specifically"
           ],
           "correct_index": 1,
-          "explanation": "'Untrusted CA' means the browser couldn't build a chain back to a root it trusts — it does NOT mean the connection is unencrypted (TLS can succeed even when identity verification fails). The classic cause: a private CA. The managed laptop has the org's internal root pre-installed and validates the chain; the personal laptop never received that root, so the same cert looks 'untrusted.' Wrong: (A) encryption and identity verification are separate checks. (C) clock-skew gives a different error (CERT_DATE_INVALID) and would affect both devices equally. (D) one device erroring while another doesn't, on an internal site, points to a missing root CA, not an active attack.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["PKI", "certificates", "trust-chain", "self-signed", "internal-CA"]
+          "explanation": "'Untrusted CA' means the browser couldn't build a chain back to a root it trusts \u2014 it does NOT mean the connection is unencrypted (TLS can succeed even when identity verification fails). The classic cause: a private CA. The managed laptop has the org's internal root pre-installed and validates the chain; the personal laptop never received that root, so the same cert looks 'untrusted.' Wrong: (A) encryption and identity verification are separate checks. (C) clock-skew gives a different error (CERT_DATE_INVALID) and would affect both devices equally. (D) one device erroring while another doesn't, on an internal site, points to a missing root CA, not an active attack.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "PKI",
+            "certificates",
+            "trust-chain",
+            "self-signed",
+            "internal-CA"
+          ]
         },
         {
-          "id": "z4-n3-001", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
+          "id": "z4-n3-001",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "IPsec ESP (Encapsulating Security Payload) provides:",
-          "options": ["Authentication only — no encryption", "Encryption, integrity, and authentication of the payload", "Only IP header authentication", "NAT traversal capability"],
+          "options": [
+            "Authentication only \u2014 no encryption",
+            "Encryption, integrity, and authentication of the payload",
+            "Only IP header authentication",
+            "NAT traversal capability"
+          ],
           "correct_index": 1,
-          "explanation": "ESP (IP protocol 50) provides confidentiality (encryption), integrity, and authentication of the payload. AH (IP protocol 51) provides only integrity and authentication — NO encryption. Almost all deployments use ESP.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["IPsec", "ESP", "Encryption"]
+          "explanation": "ESP (IP protocol 50) provides confidentiality (encryption), integrity, and authentication of the payload. AH (IP protocol 51) provides only integrity and authentication \u2014 NO encryption. Almost all deployments use ESP.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "IPsec",
+            "ESP",
+            "Encryption"
+          ]
         },
         {
-          "id": "z4-n3-002", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
+          "id": "z4-n3-002",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "SSL/TLS VPN has an advantage over IPsec VPN because:",
-          "options": ["It uses stronger encryption", "It operates over HTTPS (port 443) — usually not blocked by firewalls; easier for remote users", "It is faster than IPsec", "It requires no client software"],
+          "options": [
+            "It uses stronger encryption",
+            "It operates over HTTPS (port 443) \u2014 usually not blocked by firewalls; easier for remote users",
+            "It is faster than IPsec",
+            "It requires no client software"
+          ],
           "correct_index": 1,
-          "explanation": "SSL/TLS VPN uses port 443 (HTTPS) — rarely blocked because it's the same port used for all web traffic. IPsec uses UDP 500/4500, which can be blocked by strict firewalls. SSL VPN is also available clientless via browser (for portal access).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["SSL VPN", "TLS VPN", "Port 443"]
+          "explanation": "SSL/TLS VPN uses port 443 (HTTPS) \u2014 rarely blocked because it's the same port used for all web traffic. IPsec uses UDP 500/4500, which can be blocked by strict firewalls. SSL VPN is also available clientless via browser (for portal access).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "SSL VPN",
+            "TLS VPN",
+            "Port 443"
+          ]
         },
         {
-          "id": "z4-n3-003", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
+          "id": "z4-n3-003",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "IPsec Tunnel mode vs Transport mode: which one is used for site-to-site VPNs?",
-          "options": ["Transport mode — encrypts only the payload", "Tunnel mode — encrypts the entire original packet and adds a new outer IP header", "Both are equivalent for site-to-site", "Neither — site-to-site uses GRE only"],
+          "options": [
+            "Transport mode \u2014 encrypts only the payload",
+            "Tunnel mode \u2014 encrypts the entire original packet and adds a new outer IP header",
+            "Both are equivalent for site-to-site",
+            "Neither \u2014 site-to-site uses GRE only"
+          ],
           "correct_index": 1,
           "explanation": "Tunnel mode encrypts the ENTIRE original IP packet (header + payload) and wraps it in a new outer IP header with the VPN gateway addresses. This is required for site-to-site VPNs because the original private IPs need to be hidden and transported across the internet.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["IPsec", "Tunnel Mode", "Site-to-Site"]
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "IPsec",
+            "Tunnel Mode",
+            "Site-to-Site"
+          ]
         },
         {
-          "id": "z4-n3-004", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
+          "id": "z4-n3-004",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "AES is classified as which type of encryption algorithm?",
-          "options": ["Asymmetric", "Symmetric", "Hashing", "Elliptic curve"],
+          "options": [
+            "Asymmetric",
+            "Symmetric",
+            "Hashing",
+            "Elliptic curve"
+          ],
           "correct_index": 1,
-          "explanation": "AES (Advanced Encryption Standard) is a symmetric block cipher — same key encrypts and decrypts. It is the standard for bulk data encryption (VPN tunnels, disk encryption, TLS session data). RSA and ECC are asymmetric algorithms.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["AES", "Symmetric Encryption"]
+          "explanation": "AES (Advanced Encryption Standard) is a symmetric block cipher \u2014 same key encrypts and decrypts. It is the standard for bulk data encryption (VPN tunnels, disk encryption, TLS session data). RSA and ECC are asymmetric algorithms.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "AES",
+            "Symmetric Encryption"
+          ]
         },
         {
-          "id": "z4-n3-005", "zone": 4, "node": 4.3, "difficulty": "easy", "type": "mob",
+          "id": "z4-n3-005",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "A digital certificate's primary purpose is to:",
-          "options": ["Encrypt all network traffic automatically", "Bind a public key to a verified identity, signed by a trusted Certificate Authority", "Replace the need for passwords", "Enable faster routing between networks"],
+          "options": [
+            "Encrypt all network traffic automatically",
+            "Bind a public key to a verified identity, signed by a trusted Certificate Authority",
+            "Replace the need for passwords",
+            "Enable faster routing between networks"
+          ],
           "correct_index": 1,
-          "explanation": "A digital certificate (X.509) contains a public key, the identity it belongs to, validity period, and is digitally signed by a CA. Anyone trusting that CA can verify the certificate is authentic — enabling TLS/HTTPS, email signing, VPN authentication.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Certificate", "PKI", "CA"]
+          "explanation": "A digital certificate (X.509) contains a public key, the identity it belongs to, validity period, and is digitally signed by a CA. Anyone trusting that CA can verify the certificate is authentic \u2014 enabling TLS/HTTPS, email signing, VPN authentication.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Certificate",
+            "PKI",
+            "CA"
+          ]
         },
         {
-          "id": "z4-n3-006", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-006",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Split tunneling in a VPN means:",
-          "options": ["Two VPN tunnels run simultaneously for redundancy", "Only corporate/private traffic routes through the VPN — internet traffic goes directly via the local ISP", "The VPN connection is divided into authentication and data channels", "Traffic is split evenly across two VPN gateways"],
+          "options": [
+            "Two VPN tunnels run simultaneously for redundancy",
+            "Only corporate/private traffic routes through the VPN \u2014 internet traffic goes directly via the local ISP",
+            "The VPN connection is divided into authentication and data channels",
+            "Traffic is split evenly across two VPN gateways"
+          ],
           "correct_index": 1,
           "explanation": "Split tunneling: only traffic destined for corporate networks goes through the VPN tunnel. Internet traffic (YouTube, social media) exits locally via the user's ISP. This reduces VPN gateway load but means internet traffic is NOT protected by corporate security controls.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Split Tunneling", "VPN", "Remote Access"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Split Tunneling",
+            "VPN",
+            "Remote Access"
+          ]
         },
         {
-          "id": "z4-n3-007", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-007",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "IKE Phase 1 in IPsec negotiation establishes:",
-          "options": ["The actual IPsec data tunnel (ESP/AH parameters)", "A secure management channel (ISAKMP SA) used to protect Phase 2 negotiations", "The symmetric session key directly", "The routing table entries for VPN traffic"],
+          "options": [
+            "The actual IPsec data tunnel (ESP/AH parameters)",
+            "A secure management channel (ISAKMP SA) used to protect Phase 2 negotiations",
+            "The symmetric session key directly",
+            "The routing table entries for VPN traffic"
+          ],
           "correct_index": 1,
-          "explanation": "IKE Phase 1 creates the ISAKMP SA (Security Association) — a secure, authenticated channel between the two VPN endpoints using Diffie-Hellman key exchange. Phase 2 then negotiates the actual IPsec SA (ESP/AH parameters) within this protected channel.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["IKE Phase 1", "ISAKMP", "IPsec"]
+          "explanation": "IKE Phase 1 creates the ISAKMP SA (Security Association) \u2014 a secure, authenticated channel between the two VPN endpoints using Diffie-Hellman key exchange. Phase 2 then negotiates the actual IPsec SA (ESP/AH parameters) within this protected channel.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "IKE Phase 1",
+            "ISAKMP",
+            "IPsec"
+          ]
         },
         {
-          "id": "z4-n3-008", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-008",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "CRL vs OCSP: when checking if a certificate has been revoked, OCSP is preferred because:",
-          "options": ["OCSP is encrypted; CRL is not", "OCSP provides real-time per-certificate status without downloading an entire revocation list", "CRL requires a RADIUS server", "OCSP is cheaper to implement"],
+          "options": [
+            "OCSP is encrypted; CRL is not",
+            "OCSP provides real-time per-certificate status without downloading an entire revocation list",
+            "CRL requires a RADIUS server",
+            "OCSP is cheaper to implement"
+          ],
           "correct_index": 1,
-          "explanation": "CRL (Certificate Revocation List) requires downloading the entire list of revoked certificates — slow and potentially stale (updated periodically). OCSP (Online Certificate Status Protocol) allows a client to query the revocation status of a single certificate in real time. Much more efficient.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["OCSP", "CRL", "Certificate Revocation"]
+          "explanation": "CRL (Certificate Revocation List) requires downloading the entire list of revoked certificates \u2014 slow and potentially stale (updated periodically). OCSP (Online Certificate Status Protocol) allows a client to query the revocation status of a single certificate in real time. Much more efficient.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "OCSP",
+            "CRL",
+            "Certificate Revocation"
+          ]
         },
         {
-          "id": "z4-n3-009", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-009",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "PFS (Perfect Forward Secrecy) in IPsec/TLS ensures that:",
-          "options": ["The VPN never disconnects", "If long-term keys are compromised, previously recorded encrypted sessions cannot be decrypted", "All traffic is always encrypted with AES-256", "Certificates are automatically renewed"],
+          "options": [
+            "The VPN never disconnects",
+            "If long-term keys are compromised, previously recorded encrypted sessions cannot be decrypted",
+            "All traffic is always encrypted with AES-256",
+            "Certificates are automatically renewed"
+          ],
           "correct_index": 1,
-          "explanation": "PFS generates a unique ephemeral Diffie-Hellman key pair for each session. Even if the long-term private key is later compromised, past session recordings cannot be decrypted — each session used a different key that was never stored.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["PFS", "Perfect Forward Secrecy", "Cryptography"]
+          "explanation": "PFS generates a unique ephemeral Diffie-Hellman key pair for each session. Even if the long-term private key is later compromised, past session recordings cannot be decrypted \u2014 each session used a different key that was never stored.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "PFS",
+            "Perfect Forward Secrecy",
+            "Cryptography"
+          ]
         },
         {
-          "id": "z4-n3-010", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-010",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "RSA is classified as which type of algorithm, and what is it primarily used for in TLS?",
-          "options": ["Symmetric — bulk encryption of session data", "Asymmetric — key exchange and digital signatures (not bulk encryption)", "Hashing — verifying data integrity", "Block cipher — encrypting blocks of data"],
+          "options": [
+            "Symmetric \u2014 bulk encryption of session data",
+            "Asymmetric \u2014 key exchange and digital signatures (not bulk encryption)",
+            "Hashing \u2014 verifying data integrity",
+            "Block cipher \u2014 encrypting blocks of data"
+          ],
           "correct_index": 1,
-          "explanation": "RSA is asymmetric (public/private key pair). In TLS it is used for key exchange (encrypting the pre-master secret) and digital signatures. It is NOT used for bulk data encryption — that's AES (symmetric, much faster). TLS uses RSA/ECDH to establish the session key, then AES for data.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["RSA", "Asymmetric", "TLS", "Key Exchange"]
+          "explanation": "RSA is asymmetric (public/private key pair). In TLS it is used for key exchange (encrypting the pre-master secret) and digital signatures. It is NOT used for bulk data encryption \u2014 that's AES (symmetric, much faster). TLS uses RSA/ECDH to establish the session key, then AES for data.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "RSA",
+            "Asymmetric",
+            "TLS",
+            "Key Exchange"
+          ]
         },
         {
-          "id": "z4-n3-011", "zone": 4, "node": 4.3, "difficulty": "hard", "type": "mob",
+          "id": "z4-n3-011",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "IPsec AH (Authentication Header) provides which security service that ESP also provides?",
-          "options": ["Confidentiality (encryption)", "Data origin authentication and integrity — but NOT encryption", "NAT traversal support", "Key management"],
+          "options": [
+            "Confidentiality (encryption)",
+            "Data origin authentication and integrity \u2014 but NOT encryption",
+            "NAT traversal support",
+            "Key management"
+          ],
           "correct_index": 1,
-          "explanation": "AH (IP protocol 51) provides authentication and integrity only — it signs the entire IP packet but does NOT encrypt. ESP also provides authentication and integrity (plus encryption). The key difference: AH = no encryption; ESP = encryption. Use ESP.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["IPsec", "AH", "Authentication Header"]
+          "explanation": "AH (IP protocol 51) provides authentication and integrity only \u2014 it signs the entire IP packet but does NOT encrypt. ESP also provides authentication and integrity (plus encryption). The key difference: AH = no encryption; ESP = encryption. Use ESP.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "IPsec",
+            "AH",
+            "Authentication Header"
+          ]
         },
         {
-          "id": "z4-n3-012", "zone": 4, "node": 4.3, "difficulty": "hard", "type": "mob",
+          "id": "z4-n3-012",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A web browser displays a certificate error saying the certificate is not trusted. The most likely cause is:",
-          "options": ["The website is down", "The certificate was not signed by a CA trusted in the browser's trust store (self-signed or unknown CA)", "The TLS version is outdated", "The website is using the wrong port"],
+          "options": [
+            "The website is down",
+            "The certificate was not signed by a CA trusted in the browser's trust store (self-signed or unknown CA)",
+            "The TLS version is outdated",
+            "The website is using the wrong port"
+          ],
           "correct_index": 1,
           "explanation": "Browser trust is based on the certificate chain back to a trusted Root CA in the OS/browser trust store. If the certificate is self-signed or signed by an unknown CA (not in the trust store), the browser cannot verify authenticity and shows a trust error.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Certificate Trust", "PKI", "CA", "TLS"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Certificate Trust",
+            "PKI",
+            "CA",
+            "TLS"
+          ]
         },
         {
-          "id": "z4-n3-013", "zone": 4, "node": 4.3, "difficulty": "medium", "type": "mob",
+          "id": "z4-n3-013",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "What IPsec ports/protocols must be permitted through a firewall for an IPsec VPN to function?",
-          "options": ["TCP 443 and TCP 1194", "UDP 500 (IKE), UDP 4500 (NAT traversal), and IP protocol 50 (ESP)", "TCP 1723 and GRE protocol 47", "UDP 161 and UDP 162"],
+          "options": [
+            "TCP 443 and TCP 1194",
+            "UDP 500 (IKE), UDP 4500 (NAT traversal), and IP protocol 50 (ESP)",
+            "TCP 1723 and GRE protocol 47",
+            "UDP 161 and UDP 162"
+          ],
           "correct_index": 1,
-          "explanation": "IPsec requires: UDP 500 for IKE (key exchange/negotiation), UDP 4500 for NAT-T (NAT traversal — encapsulates ESP in UDP when NAT is present), and IP protocol 50 (ESP) for the actual encrypted data. If a firewall blocks these, the VPN fails.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["IPsec", "UDP 500", "UDP 4500", "ESP"]
+          "explanation": "IPsec requires: UDP 500 for IKE (key exchange/negotiation), UDP 4500 for NAT-T (NAT traversal \u2014 encapsulates ESP in UDP when NAT is present), and IP protocol 50 (ESP) for the actual encrypted data. If a firewall blocks these, the VPN fails.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "IPsec",
+            "UDP 500",
+            "UDP 4500",
+            "ESP"
+          ]
         },
         {
-          "id": "z4-n3-014", "zone": 4, "node": 4.3, "difficulty": "hard", "type": "mob",
+          "id": "z4-n3-014",
+          "zone": 4,
+          "node": 4.3,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "GRE (Generic Routing Encapsulation) alone is insufficient for secure site-to-site tunnels. Why, and what is the solution?",
-          "options": ["GRE is too slow — use MPLS instead", "GRE provides no encryption or authentication — combine with IPsec (GRE over IPsec) for security", "GRE only supports IPv4 — use 6in4 instead", "GRE cannot carry routing protocol updates"],
+          "options": [
+            "GRE is too slow \u2014 use MPLS instead",
+            "GRE provides no encryption or authentication \u2014 combine with IPsec (GRE over IPsec) for security",
+            "GRE only supports IPv4 \u2014 use 6in4 instead",
+            "GRE cannot carry routing protocol updates"
+          ],
           "correct_index": 1,
-          "explanation": "GRE (IP protocol 47) creates a tunnel that can carry any Layer 3 protocol including multicast/broadcast and routing protocol updates — but it is completely unencrypted and unauthenticated. GRE over IPsec = GRE tunnel wrapped in IPsec encryption for both flexibility and security.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["GRE", "IPsec", "GRE over IPsec"]
+          "explanation": "GRE (IP protocol 47) creates a tunnel that can carry any Layer 3 protocol including multicast/broadcast and routing protocol updates \u2014 but it is completely unencrypted and unauthenticated. GRE over IPsec = GRE tunnel wrapped in IPsec encryption for both flexibility and security.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "GRE",
+            "IPsec",
+            "GRE over IPsec"
+          ]
         }
       ]
     },
@@ -517,24 +1294,55 @@
       "description": "AAA, RADIUS, TACACS+, 802.1X, NAC, port security, DHCP snooping, DAI, and ACLs.",
       "encounters": [
         {
+          "id": "z4-n4-primer",
+          "type": "study_encounter",
+          "title": "Network Hardening Primer",
+          "scenario": "Welcome to Network Hardening. Multi-Factor Authentication (MFA) requires two or more verification factors. Single Sign-On (SSO) allows one set of credentials to access multiple applications. Identity Provider (IdP) manages identity information and provides authentication services. Service Provider (SP) relies on an IdP for authentication. Public Key Infrastructure (PKI) manages digital certificates and public-key encryption. Transport Layer Security (TLS) encrypts data in transit. Secure Sockets Layer (SSL) is the predecessor to TLS.",
+          "question": "What does MFA stand for?",
+          "options": [
+            "Multi-Factor Authentication",
+            "Multi-Function Access",
+            "Managed Firewall Architecture",
+            "Main Frame Authentication"
+          ],
+          "correct_index": 0,
+          "explanation": "MFA stands for Multi-Factor Authentication, requiring two or more verification factors.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "mfa",
+            "sso",
+            "pki",
+            "tls"
+          ]
+        },
+        {
           "id": "z4-n4-study-001",
           "zone": 4,
           "node": 4.4,
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "Showing ID at the Door: 802.1X EAP Types",
-          "scenario": "802.1X can use different EAP methods — different ways of proving identity at a guarded door. With EAP-TLS, BOTH you and the guard show ID badges — mutual certificate authentication. Strongest option, but every visitor needs a badge issued in advance (a client cert from a PKI) — a heavy administrative lift. With PEAP, only the GUARD shows ID first (a server cert), creating a private encrypted booth; once inside, YOU prove identity the easy way — username and password (MSCHAPv2). No visitor badges needed, making PEAP far easier to roll out at scale. EAP-FAST is Cisco's lighter alternative, using a pre-shared 'Protected Access Credential' instead of a server cert. LEAP, Cisco's old method, skips the secure tunnel entirely and is crackable with offline tools — deprecated, never use it.",
+          "scenario": "802.1X can use different EAP methods \u2014 different ways of proving identity at a guarded door. With EAP-TLS, BOTH you and the guard show ID badges \u2014 mutual certificate authentication. Strongest option, but every visitor needs a badge issued in advance (a client cert from a PKI) \u2014 a heavy administrative lift. With PEAP, only the GUARD shows ID first (a server cert), creating a private encrypted booth; once inside, YOU prove identity the easy way \u2014 username and password (MSCHAPv2). No visitor badges needed, making PEAP far easier to roll out at scale. EAP-FAST is Cisco's lighter alternative, using a pre-shared 'Protected Access Credential' instead of a server cert. LEAP, Cisco's old method, skips the secure tunnel entirely and is crackable with offline tools \u2014 deprecated, never use it.",
           "question": "A company wants strong, certificate-based MUTUAL authentication for a small number of high-security lab devices, while a separate department wants to roll out 802.1X to thousands of BYOD laptops WITHOUT installing a client certificate on each one. Which EAP types fit these two needs, respectively?",
           "options": [
             "EAP-FAST for the high-security devices; LEAP for the BYOD laptops",
-            "EAP-TLS for the high-security devices (mutual certificate auth — strongest available, but requires a client cert per device); PEAP for the BYOD laptops (server certificate builds an encrypted tunnel, then username/password authenticates inside it — no client cert needed)",
+            "EAP-TLS for the high-security devices (mutual certificate auth \u2014 strongest available, but requires a client cert per device); PEAP for the BYOD laptops (server certificate builds an encrypted tunnel, then username/password authenticates inside it \u2014 no client cert needed)",
             "LEAP for both, since it requires no certificates anywhere and works on any device",
             "PEAP for the high-security devices (because it uses a tunnel) and EAP-TLS for the BYOD laptops (because it doesn't need a server certificate)"
           ],
           "correct_index": 1,
-          "explanation": "EAP-TLS needs a cert on BOTH client and server — strongest mutual auth, but requires a PKI to issue/distribute/revoke a cert per device, suiting a small pool of high-security endpoints. PEAP wraps username/password (MSCHAPv2) inside a TLS tunnel built from ONLY a server cert — clients need none, ideal for thousands of BYOD devices. Wrong: (A) EAP-FAST is roughly comparable to PEAP, not stronger than EAP-TLS, and LEAP is insecure everywhere. (C) LEAP's vulnerability to offline dictionary attacks rules it out entirely. (D) reverses the requirements — PEAP has no client cert, and EAP-TLS demands a server cert, the worst fit for 'no certificates at all.'",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["802.1X", "EAP", "EAP-TLS", "PEAP", "authentication"]
+          "explanation": "EAP-TLS needs a cert on BOTH client and server \u2014 strongest mutual auth, but requires a PKI to issue/distribute/revoke a cert per device, suiting a small pool of high-security endpoints. PEAP wraps username/password (MSCHAPv2) inside a TLS tunnel built from ONLY a server cert \u2014 clients need none, ideal for thousands of BYOD devices. Wrong: (A) EAP-FAST is roughly comparable to PEAP, not stronger than EAP-TLS, and LEAP is insecure everywhere. (C) LEAP's vulnerability to offline dictionary attacks rules it out entirely. (D) reverses the requirements \u2014 PEAP has no client cert, and EAP-TLS demands a server cert, the worst fit for 'no certificates at all.'",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "802.1X",
+            "EAP",
+            "EAP-TLS",
+            "PEAP",
+            "authentication"
+          ]
         },
         {
           "id": "z4-n4-study-002",
@@ -543,312 +1351,831 @@
           "type": "study_encounter",
           "difficulty": "medium",
           "title": "The Echo Chamber: Broadcast Storms and Storm Control",
-          "scenario": "Picture two people each holding a megaphone pointed at each other — if one shouts, the other repeats it back, louder and louder, forever. This is a Layer 2 LOOP: if two switch ports connect to each other (directly or via a redundant path with no loop prevention), a broadcast frame gets forwarded back and forth endlessly, since Ethernet frames have NO TTL to expire. Within seconds this BROADCAST STORM consumes 100% of bandwidth and CPU on every switch in the loop. Spanning Tree Protocol normally PREVENTS loops by blocking redundant paths — but if STP is disabled or misconfigured, nothing stops it. STORM CONTROL is the safety net: a port feature that monitors what percentage of traffic is broadcast/multicast/unknown-unicast, and drops excess or err-disables the port once a threshold is exceeded.",
+          "scenario": "Picture two people each holding a megaphone pointed at each other \u2014 if one shouts, the other repeats it back, louder and louder, forever. This is a Layer 2 LOOP: if two switch ports connect to each other (directly or via a redundant path with no loop prevention), a broadcast frame gets forwarded back and forth endlessly, since Ethernet frames have NO TTL to expire. Within seconds this BROADCAST STORM consumes 100% of bandwidth and CPU on every switch in the loop. Spanning Tree Protocol normally PREVENTS loops by blocking redundant paths \u2014 but if STP is disabled or misconfigured, nothing stops it. STORM CONTROL is the safety net: a port feature that monitors what percentage of traffic is broadcast/multicast/unknown-unicast, and drops excess or err-disables the port once a threshold is exceeded.",
           "question": "A junior tech accidentally connects both ends of a spare patch cable into two access ports on the same switch. STP has been globally disabled on this switch for unrelated troubleshooting. Within seconds, every device on the switch loses connectivity and CPU utilization spikes to 100%. Which feature, if configured on those access ports, would have limited the damage even with STP disabled?",
           "options": [
-            "DHCP snooping — it would have blocked the looped traffic since it arrived on an untrusted port",
-            "Storm control — configured to monitor the percentage of broadcast traffic on each port and drop excess traffic or err-disable the port once a threshold is exceeded, capping the storm's impact regardless of why the loop exists",
-            "Port security — limiting MAC addresses per port would have stopped the broadcast storm, since loops generate excessive new MAC addresses",
-            "An extended ACL blocking broadcast traffic — ACLs are the standard mechanism switches use to limit broadcast storms"
+            "DHCP snooping \u2014 it would have blocked the looped traffic since it arrived on an untrusted port",
+            "Storm control \u2014 configured to monitor the percentage of broadcast traffic on each port and drop excess traffic or err-disable the port once a threshold is exceeded, capping the storm's impact regardless of why the loop exists",
+            "Port security \u2014 limiting MAC addresses per port would have stopped the broadcast storm, since loops generate excessive new MAC addresses",
+            "An extended ACL blocking broadcast traffic \u2014 ACLs are the standard mechanism switches use to limit broadcast storms"
           ],
           "correct_index": 1,
-          "explanation": "Storm control is a rate-based safety net for excessive broadcast/multicast/unknown-unicast traffic on a port — exactly the symptom of a Layer 2 loop, regardless of why it exists. It doesn't prevent the loop, but caps the damage. Wrong: (A) DHCP snooping filters DHCP messages and builds a binding table — unrelated to broadcast storms. (C) port security limits distinct MAC addresses per port; a storm is the SAME frame looping, not new MACs. (D) ACLs filter routed traffic by IP/port/protocol — not the rate-based Layer-2 tool for loop-induced storms.",
-          "xp_reward": 60, "bits_reward": 30,
-          "tags": ["storm-control", "layer2-loop", "broadcast-storm", "stp"]
+          "explanation": "Storm control is a rate-based safety net for excessive broadcast/multicast/unknown-unicast traffic on a port \u2014 exactly the symptom of a Layer 2 loop, regardless of why it exists. It doesn't prevent the loop, but caps the damage. Wrong: (A) DHCP snooping filters DHCP messages and builds a binding table \u2014 unrelated to broadcast storms. (C) port security limits distinct MAC addresses per port; a storm is the SAME frame looping, not new MACs. (D) ACLs filter routed traffic by IP/port/protocol \u2014 not the rate-based Layer-2 tool for loop-induced storms.",
+          "xp_reward": 60,
+          "bits_reward": 30,
+          "tags": [
+            "storm-control",
+            "layer2-loop",
+            "broadcast-storm",
+            "stp"
+          ]
         },
         {
-          "id": "z4-n4-001", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
+          "id": "z4-n4-001",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "RADIUS uses which transport protocol and ports for authentication?",
-          "options": ["TCP 49", "UDP 1812 (auth) and UDP 1813 (accounting)", "TCP 1812 and TCP 1813", "UDP 514"],
+          "options": [
+            "TCP 49",
+            "UDP 1812 (auth) and UDP 1813 (accounting)",
+            "TCP 1812 and TCP 1813",
+            "UDP 514"
+          ],
           "correct_index": 1,
-          "explanation": "RADIUS uses UDP 1812 for authentication/authorization and UDP 1813 for accounting. Legacy ports 1645/1646 also appear on exams. RADIUS uses UDP (connectionless) — compare with TACACS+ which uses TCP 49.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["RADIUS", "UDP 1812", "AAA"]
+          "explanation": "RADIUS uses UDP 1812 for authentication/authorization and UDP 1813 for accounting. Legacy ports 1645/1646 also appear on exams. RADIUS uses UDP (connectionless) \u2014 compare with TACACS+ which uses TCP 49.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "RADIUS",
+            "UDP 1812",
+            "AAA"
+          ]
         },
         {
-          "id": "z4-n4-002", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
+          "id": "z4-n4-002",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "TACACS+ uses which protocol and port?",
-          "options": ["UDP 1812", "TCP 49", "UDP 162", "TCP 443"],
+          "options": [
+            "UDP 1812",
+            "TCP 49",
+            "UDP 162",
+            "TCP 443"
+          ],
           "correct_index": 1,
-          "explanation": "TACACS+ (Terminal Access Controller Access Control System Plus) uses TCP port 49. TCP ensures reliable delivery — important for device administration sessions. It also encrypts the ENTIRE payload (unlike RADIUS which only encrypts the password).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["TACACS+", "TCP 49", "AAA"]
+          "explanation": "TACACS+ (Terminal Access Controller Access Control System Plus) uses TCP port 49. TCP ensures reliable delivery \u2014 important for device administration sessions. It also encrypts the ENTIRE payload (unlike RADIUS which only encrypts the password).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "TACACS+",
+            "TCP 49",
+            "AAA"
+          ]
         },
         {
-          "id": "z4-n4-003", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
+          "id": "z4-n4-003",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "In the 802.1X framework, what role does the network switch play?",
-          "options": ["Supplicant — provides credentials", "Authenticator — forwards EAP between the client and RADIUS server", "Authentication Server — verifies credentials", "Certificate Authority — issues client certificates"],
+          "options": [
+            "Supplicant \u2014 provides credentials",
+            "Authenticator \u2014 forwards EAP between the client and RADIUS server",
+            "Authentication Server \u2014 verifies credentials",
+            "Certificate Authority \u2014 issues client certificates"
+          ],
           "correct_index": 1,
-          "explanation": "802.1X roles: Supplicant (client/endpoint providing credentials), Authenticator (switch or AP — forwards EAP messages between supplicant and RADIUS), Authentication Server (RADIUS — verifies credentials and returns Accept/Reject). The switch itself does not validate credentials.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["802.1X", "Authenticator", "EAP"]
+          "explanation": "802.1X roles: Supplicant (client/endpoint providing credentials), Authenticator (switch or AP \u2014 forwards EAP messages between supplicant and RADIUS), Authentication Server (RADIUS \u2014 verifies credentials and returns Accept/Reject). The switch itself does not validate credentials.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "802.1X",
+            "Authenticator",
+            "EAP"
+          ]
         },
         {
-          "id": "z4-n4-004", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
+          "id": "z4-n4-004",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "The three components of AAA stand for:",
-          "options": ["Administration, Auditing, Accountability", "Authentication, Authorisation, Accounting", "Access, Authorisation, Auditing", "Attestation, Authorisation, Accounting"],
+          "options": [
+            "Administration, Auditing, Accountability",
+            "Authentication, Authorisation, Accounting",
+            "Access, Authorisation, Auditing",
+            "Attestation, Authorisation, Accounting"
+          ],
           "correct_index": 1,
-          "explanation": "AAA: Authentication (who are you? — verify identity), Authorisation (what can you do? — permissions/access rights), Accounting (what did you do? — logging for audit/billing). RADIUS and TACACS+ both provide AAA services.",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["AAA", "Authentication", "Authorisation", "Accounting"]
+          "explanation": "AAA: Authentication (who are you? \u2014 verify identity), Authorisation (what can you do? \u2014 permissions/access rights), Accounting (what did you do? \u2014 logging for audit/billing). RADIUS and TACACS+ both provide AAA services.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "AAA",
+            "Authentication",
+            "Authorisation",
+            "Accounting"
+          ]
         },
         {
-          "id": "z4-n4-005", "zone": 4, "node": 4.4, "difficulty": "easy", "type": "mob",
+          "id": "z4-n4-005",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "easy",
+          "type": "mob",
           "question": "Port security on a switch can be configured to allow only a specific number of MAC addresses per port. When a violation occurs, the default violation mode is:",
-          "options": ["Protect — silently drops frames from unknown MACs", "Restrict — drops frames + sends SNMP alert", "Shutdown — disables the port (err-disabled state)", "Ignore — logs only, does not drop"],
+          "options": [
+            "Protect \u2014 silently drops frames from unknown MACs",
+            "Restrict \u2014 drops frames + sends SNMP alert",
+            "Shutdown \u2014 disables the port (err-disabled state)",
+            "Ignore \u2014 logs only, does not drop"
+          ],
           "correct_index": 2,
-          "explanation": "The default port security violation mode is Shutdown — the port is placed in err-disabled state and must be manually re-enabled. Protect = silent drop. Restrict = drop + log/SNMP. Shutdown = port goes down (most disruptive but most obvious).",
-          "xp_reward": 20, "bits_reward": 10, "tags": ["Port Security", "Violation Mode", "Shutdown"]
+          "explanation": "The default port security violation mode is Shutdown \u2014 the port is placed in err-disabled state and must be manually re-enabled. Protect = silent drop. Restrict = drop + log/SNMP. Shutdown = port goes down (most disruptive but most obvious).",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "Port Security",
+            "Violation Mode",
+            "Shutdown"
+          ]
         },
         {
-          "id": "z4-n4-006", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-006",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Dynamic ARP Inspection (DAI) relies on which other Layer 2 security feature to validate ARP packets?",
-          "options": ["Port security MAC table", "DHCP snooping binding table", "802.1X authentication state", "IP Source Guard whitelist"],
+          "options": [
+            "Port security MAC table",
+            "DHCP snooping binding table",
+            "802.1X authentication state",
+            "IP Source Guard whitelist"
+          ],
           "correct_index": 1,
-          "explanation": "DAI uses the DHCP snooping binding table — which maps MAC addresses to IP addresses based on legitimate DHCP transactions. When an ARP reply arrives on an untrusted port, DAI checks if the source MAC/IP pair matches the binding table. Mismatches = ARP poisoning → packet dropped.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DAI", "Dynamic ARP Inspection", "DHCP Snooping"]
+          "explanation": "DAI uses the DHCP snooping binding table \u2014 which maps MAC addresses to IP addresses based on legitimate DHCP transactions. When an ARP reply arrives on an untrusted port, DAI checks if the source MAC/IP pair matches the binding table. Mismatches = ARP poisoning \u2192 packet dropped.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "DAI",
+            "Dynamic ARP Inspection",
+            "DHCP Snooping"
+          ]
         },
         {
-          "id": "z4-n4-007", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-007",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "A standard ACL vs an extended ACL: what additional matching criteria does an extended ACL provide?",
-          "options": ["VLAN membership", "Destination IP, transport protocol (TCP/UDP), and source/destination port numbers", "MAC address", "ToS/DSCP values only"],
+          "options": [
+            "VLAN membership",
+            "Destination IP, transport protocol (TCP/UDP), and source/destination port numbers",
+            "MAC address",
+            "ToS/DSCP values only"
+          ],
           "correct_index": 1,
-          "explanation": "Standard ACL: matches source IP only (numbered 1–99). Extended ACL: matches source IP + destination IP + protocol (TCP/UDP/ICMP/etc.) + source/destination port numbers (numbered 100–199). Extended ACLs allow precise traffic control.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["Extended ACL", "Standard ACL", "Access Control"]
+          "explanation": "Standard ACL: matches source IP only (numbered 1\u201399). Extended ACL: matches source IP + destination IP + protocol (TCP/UDP/ICMP/etc.) + source/destination port numbers (numbered 100\u2013199). Extended ACLs allow precise traffic control.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "Extended ACL",
+            "Standard ACL",
+            "Access Control"
+          ]
         },
         {
-          "id": "z4-n4-008", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-008",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "Extended ACLs should be placed as close to the SOURCE as possible. Why?",
-          "options": ["To reduce the number of ACL entries needed", "To block traffic as early as possible — preventing unwanted traffic from traversing the network", "To avoid affecting the destination router", "Because extended ACLs only work at ingress interfaces near the source"],
+          "options": [
+            "To reduce the number of ACL entries needed",
+            "To block traffic as early as possible \u2014 preventing unwanted traffic from traversing the network",
+            "To avoid affecting the destination router",
+            "Because extended ACLs only work at ingress interfaces near the source"
+          ],
           "correct_index": 1,
-          "explanation": "Extended ACLs applied near the source drop unwanted traffic immediately — preventing it from wasting bandwidth traversing the network to be dropped later. Standard ACLs (source IP only) go near the destination to avoid over-blocking traffic from reaching other destinations.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["ACL Placement", "Extended ACL", "Source"]
+          "explanation": "Extended ACLs applied near the source drop unwanted traffic immediately \u2014 preventing it from wasting bandwidth traversing the network to be dropped later. Standard ACLs (source IP only) go near the destination to avoid over-blocking traffic from reaching other destinations.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "ACL Placement",
+            "Extended ACL",
+            "Source"
+          ]
         },
         {
-          "id": "z4-n4-009", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-009",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "RADIUS vs TACACS+: which encrypts the entire packet payload (not just the password)?",
-          "options": ["RADIUS — full packet encryption", "TACACS+ — encrypts entire payload", "Both encrypt the entire payload equally", "Neither — both use plaintext"],
+          "options": [
+            "RADIUS \u2014 full packet encryption",
+            "TACACS+ \u2014 encrypts entire payload",
+            "Both encrypt the entire payload equally",
+            "Neither \u2014 both use plaintext"
+          ],
           "correct_index": 1,
-          "explanation": "TACACS+ encrypts the entire packet body — credentials, authorisation data, accounting records. RADIUS only encrypts the password field in the Access-Request. This is why TACACS+ is preferred for device administration where commands are also logged.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["TACACS+", "RADIUS", "Encryption"]
+          "explanation": "TACACS+ encrypts the entire packet body \u2014 credentials, authorisation data, accounting records. RADIUS only encrypts the password field in the Access-Request. This is why TACACS+ is preferred for device administration where commands are also logged.",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "TACACS+",
+            "RADIUS",
+            "Encryption"
+          ]
         },
         {
-          "id": "z4-n4-010", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-010",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "NAC (Network Access Control) performs which function before granting network access?",
-          "options": ["Assigns VLANs based on SSID", "Assesses endpoint posture (antivirus up-to-date, patches current, compliant with policy) before allowing access", "Encrypts all traffic from the endpoint", "Provides 802.1X RADIUS authentication only"],
+          "options": [
+            "Assigns VLANs based on SSID",
+            "Assesses endpoint posture (antivirus up-to-date, patches current, compliant with policy) before allowing access",
+            "Encrypts all traffic from the endpoint",
+            "Provides 802.1X RADIUS authentication only"
+          ],
           "correct_index": 1,
           "explanation": "NAC evaluates endpoint health/posture: is antivirus running and current? Are patches applied? Does it have a corporate certificate? Non-compliant endpoints are quarantined to a remediation VLAN where they can download updates, then re-assessed.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["NAC", "Posture Assessment", "Quarantine"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "NAC",
+            "Posture Assessment",
+            "Quarantine"
+          ]
         },
         {
-          "id": "z4-n4-011", "zone": 4, "node": 4.4, "difficulty": "hard", "type": "mob",
+          "id": "z4-n4-011",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "A user connects to a switch port with a new device. Port security with sticky MAC is enabled. What happens?",
-          "options": ["The port shuts down — sticky MAC only allows pre-configured MACs", "The device's MAC is dynamically learned and saved to the running-config as the allowed MAC — only that device can use that port going forward", "Any device is allowed — sticky MAC only logs MACs", "The device must authenticate via 802.1X first"],
+          "options": [
+            "The port shuts down \u2014 sticky MAC only allows pre-configured MACs",
+            "The device's MAC is dynamically learned and saved to the running-config as the allowed MAC \u2014 only that device can use that port going forward",
+            "Any device is allowed \u2014 sticky MAC only logs MACs",
+            "The device must authenticate via 802.1X first"
+          ],
           "correct_index": 1,
           "explanation": "Sticky MAC: the first MAC address learned on the port is dynamically added to the port security configuration as the allowed MAC. If a different MAC tries to use that port, it triggers a violation. The sticky MAC is saved to running-config and persists across reboots if saved to startup-config.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Sticky MAC", "Port Security", "Dynamic Learning"]
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Sticky MAC",
+            "Port Security",
+            "Dynamic Learning"
+          ]
         },
         {
-          "id": "z4-n4-012", "zone": 4, "node": 4.4, "difficulty": "hard", "type": "mob",
+          "id": "z4-n4-012",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "Why is TACACS+ preferred over RADIUS for network device administration (managing routers/switches via CLI)?",
-          "options": ["TACACS+ supports more users", "TACACS+ separates AAA services, encrypts the full payload, and supports per-command authorisation — critical for auditing admin CLI activity", "RADIUS cannot authenticate network devices", "TACACS+ is faster due to UDP transport"],
+          "options": [
+            "TACACS+ supports more users",
+            "TACACS+ separates AAA services, encrypts the full payload, and supports per-command authorisation \u2014 critical for auditing admin CLI activity",
+            "RADIUS cannot authenticate network devices",
+            "TACACS+ is faster due to UDP transport"
+          ],
           "correct_index": 1,
-          "explanation": "TACACS+ advantages for device admin: (1) full payload encryption — commands are private; (2) separated AAA — fine-grained per-command authorisation (restrict engineers to show commands only); (3) per-command accounting — complete audit trail of all CLI commands. RADIUS is better suited for network access auth (users connecting to Wi-Fi or VPN).",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["TACACS+", "RADIUS", "Device Administration"]
+          "explanation": "TACACS+ advantages for device admin: (1) full payload encryption \u2014 commands are private; (2) separated AAA \u2014 fine-grained per-command authorisation (restrict engineers to show commands only); (3) per-command accounting \u2014 complete audit trail of all CLI commands. RADIUS is better suited for network access auth (users connecting to Wi-Fi or VPN).",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "TACACS+",
+            "RADIUS",
+            "Device Administration"
+          ]
         },
         {
-          "id": "z4-n4-013", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-013",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "IP Source Guard on a switch port prevents:",
-          "options": ["ARP poisoning attacks", "Hosts from sending traffic with a source IP address not assigned to them via DHCP", "Rogue DHCP server attacks", "MAC flooding attacks"],
+          "options": [
+            "ARP poisoning attacks",
+            "Hosts from sending traffic with a source IP address not assigned to them via DHCP",
+            "Rogue DHCP server attacks",
+            "MAC flooding attacks"
+          ],
           "correct_index": 1,
           "explanation": "IP Source Guard filters traffic on untrusted ports using the DHCP snooping binding table. Only packets with source IPs matching the binding table are forwarded. Hosts cannot spoof another host's IP address on the same segment.",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["IP Source Guard", "IP Spoofing", "Layer 2 Security"]
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "IP Source Guard",
+            "IP Spoofing",
+            "Layer 2 Security"
+          ]
         },
         {
-          "id": "z4-n4-014", "zone": 4, "node": 4.4, "difficulty": "medium", "type": "mob",
+          "id": "z4-n4-014",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "medium",
+          "type": "mob",
           "question": "DHCP snooping must be configured with trusted and untrusted ports. Which port should be marked as trusted?",
-          "options": ["All access ports connected to end users", "The uplink port connecting to the legitimate DHCP server or core switch", "Any port with a static IP configured", "Only wireless AP ports"],
+          "options": [
+            "All access ports connected to end users",
+            "The uplink port connecting to the legitimate DHCP server or core switch",
+            "Any port with a static IP configured",
+            "Only wireless AP ports"
+          ],
           "correct_index": 1,
-          "explanation": "DHCP snooping trusted = ports that are allowed to send DHCP server messages (OFFER, ACK). Only uplink ports leading to the actual DHCP server should be trusted. All client-facing access ports are untrusted — DHCP OFFERs from those ports are dropped (prevents rogue DHCP).",
-          "xp_reward": 30, "bits_reward": 12, "tags": ["DHCP Snooping", "Trusted Port", "Untrusted Port"]
+          "explanation": "DHCP snooping trusted = ports that are allowed to send DHCP server messages (OFFER, ACK). Only uplink ports leading to the actual DHCP server should be trusted. All client-facing access ports are untrusted \u2014 DHCP OFFERs from those ports are dropped (prevents rogue DHCP).",
+          "xp_reward": 30,
+          "bits_reward": 12,
+          "tags": [
+            "DHCP Snooping",
+            "Trusted Port",
+            "Untrusted Port"
+          ]
         },
         {
-          "id": "z4-n4-015", "zone": 4, "node": 4.4, "difficulty": "hard", "type": "mob",
+          "id": "z4-n4-015",
+          "zone": 4,
+          "node": 4.4,
+          "difficulty": "hard",
+          "type": "mob",
           "question": "An engineer configures a standard ACL to block traffic from 10.1.1.0/24 from reaching a file server at 192.168.10.5. Where should this ACL be applied?",
-          "options": ["On the router interface closest to the source (10.1.1.0/24 subnet)", "On the router interface closest to the destination (192.168.10.5) — standard ACLs near destination", "On the file server's NIC directly", "On the core switch as a VACL"],
+          "options": [
+            "On the router interface closest to the source (10.1.1.0/24 subnet)",
+            "On the router interface closest to the destination (192.168.10.5) \u2014 standard ACLs near destination",
+            "On the file server's NIC directly",
+            "On the core switch as a VACL"
+          ],
           "correct_index": 1,
-          "explanation": "Standard ACLs match source IP only — if placed near the source, they would block traffic to ALL destinations from that subnet, not just the file server. Placed near the destination, they only block traffic headed to that specific interface/subnet. Always place standard ACLs close to the destination.",
-          "xp_reward": 40, "bits_reward": 15, "tags": ["Standard ACL", "ACL Placement", "Destination"]
+          "explanation": "Standard ACLs match source IP only \u2014 if placed near the source, they would block traffic to ALL destinations from that subnet, not just the file server. Placed near the destination, they only block traffic headed to that specific interface/subnet. Always place standard ACLs close to the destination.",
+          "xp_reward": 40,
+          "bits_reward": 15,
+          "tags": [
+            "Standard ACL",
+            "ACL Placement",
+            "Destination"
+          ]
         }
       ]
     }
   ],
   "guardian_encounters": [
     {
-      "id": "z4-g-001", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-001",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "ARP poisoning is mitigated by which Layer 2 switch feature?",
-      "options": ["Port security", "DHCP snooping", "Dynamic ARP Inspection (DAI)", "Storm control"],
+      "options": [
+        "Port security",
+        "DHCP snooping",
+        "Dynamic ARP Inspection (DAI)",
+        "Storm control"
+      ],
       "correct_index": 2,
-      "explanation": "DAI validates ARP packets on untrusted ports against the DHCP snooping binding table. Invalid ARP replies (where MAC/IP doesn't match a known DHCP lease) are dropped — preventing ARP poisoning MITM attacks.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["DAI", "ARP Poisoning", "Layer 2 Security"]
+      "explanation": "DAI validates ARP packets on untrusted ports against the DHCP snooping binding table. Invalid ARP replies (where MAC/IP doesn't match a known DHCP lease) are dropped \u2014 preventing ARP poisoning MITM attacks.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "DAI",
+        "ARP Poisoning",
+        "Layer 2 Security"
+      ]
     },
     {
-      "id": "z4-g-002", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-002",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "TACACS+ uses which transport protocol and port?",
-      "options": ["UDP 1812", "UDP 1813", "TCP 49", "TCP 443"],
+      "options": [
+        "UDP 1812",
+        "UDP 1813",
+        "TCP 49",
+        "TCP 443"
+      ],
       "correct_index": 2,
       "explanation": "TACACS+ uses TCP 49. TCP ensures reliable delivery for device management sessions. RADIUS uses UDP 1812 (auth) / 1813 (accounting).",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["TACACS+", "TCP 49"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "TACACS+",
+        "TCP 49"
+      ]
     },
     {
-      "id": "z4-g-003", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-003",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "IPsec ESP (protocol 50) vs AH (protocol 51): which provides encryption?",
-      "options": ["AH provides encryption; ESP provides authentication only", "ESP provides encryption + authentication; AH provides authentication only (no encryption)", "Both provide encryption equally", "Neither — they rely on GRE for encryption"],
+      "options": [
+        "AH provides encryption; ESP provides authentication only",
+        "ESP provides encryption + authentication; AH provides authentication only (no encryption)",
+        "Both provide encryption equally",
+        "Neither \u2014 they rely on GRE for encryption"
+      ],
       "correct_index": 1,
-      "explanation": "ESP (IP protocol 50) = encryption + authentication + integrity. AH (IP protocol 51) = authentication + integrity ONLY — no encryption. In practice, always use ESP.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["IPsec", "ESP", "AH"]
+      "explanation": "ESP (IP protocol 50) = encryption + authentication + integrity. AH (IP protocol 51) = authentication + integrity ONLY \u2014 no encryption. In practice, always use ESP.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "IPsec",
+        "ESP",
+        "AH"
+      ]
     },
     {
-      "id": "z4-g-004", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-004",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "IDS vs IPS: which one can actively block malicious traffic?",
-      "options": ["IDS — detects and blocks", "IPS — detects and blocks (inline)", "Both can block equally", "Neither — both only alert"],
+      "options": [
+        "IDS \u2014 detects and blocks",
+        "IPS \u2014 detects and blocks (inline)",
+        "Both can block equally",
+        "Neither \u2014 both only alert"
+      ],
       "correct_index": 1,
-      "explanation": "IPS is deployed inline and can drop/block malicious traffic. IDS is passive (tap/SPAN mode) — detects and alerts only. IDS cannot block because traffic has already passed before detection.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["IDS", "IPS", "Blocking"]
+      "explanation": "IPS is deployed inline and can drop/block malicious traffic. IDS is passive (tap/SPAN mode) \u2014 detects and alerts only. IDS cannot block because traffic has already passed before detection.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "IDS",
+        "IPS",
+        "Blocking"
+      ]
     },
     {
-      "id": "z4-g-005", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-005",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "Zero Trust security operates on which core principle?",
-      "options": ["Trust internal users; verify external users only", "Never trust, always verify — all access requests require authentication regardless of network location", "Trust is granted after initial MFA", "Only cloud resources require Zero Trust"],
+      "options": [
+        "Trust internal users; verify external users only",
+        "Never trust, always verify \u2014 all access requests require authentication regardless of network location",
+        "Trust is granted after initial MFA",
+        "Only cloud resources require Zero Trust"
+      ],
       "correct_index": 1,
-      "explanation": "Zero Trust: no implicit trust — even inside the network perimeter. Every user and device must authenticate and be authorised for every resource, every time. Assumes breach has already occurred.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Zero Trust", "Security Architecture"]
+      "explanation": "Zero Trust: no implicit trust \u2014 even inside the network perimeter. Every user and device must authenticate and be authorised for every resource, every time. Assumes breach has already occurred.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Zero Trust",
+        "Security Architecture"
+      ]
     },
     {
-      "id": "z4-g-006", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z4-g-006",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "Password spraying avoids account lockout by:",
-      "options": ["Using a dictionary of complex passwords against one account", "Trying a small number of common passwords across many accounts — staying under the per-account lockout threshold", "Using GPU acceleration to try billions of passwords per second", "Targeting only accounts with expired passwords"],
+      "options": [
+        "Using a dictionary of complex passwords against one account",
+        "Trying a small number of common passwords across many accounts \u2014 staying under the per-account lockout threshold",
+        "Using GPU acceleration to try billions of passwords per second",
+        "Targeting only accounts with expired passwords"
+      ],
       "correct_index": 1,
-      "explanation": "Spraying: try 'Password1' against 10,000 accounts — each account only sees 1 attempt (under lockout threshold). Brute force: try millions of passwords against 1 account — immediately triggers lockout. Spray = stealthy, slow, distributed.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Password Spraying", "Brute Force", "Authentication"]
+      "explanation": "Spraying: try 'Password1' against 10,000 accounts \u2014 each account only sees 1 attempt (under lockout threshold). Brute force: try millions of passwords against 1 account \u2014 immediately triggers lockout. Spray = stealthy, slow, distributed.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Password Spraying",
+        "Brute Force",
+        "Authentication"
+      ]
     },
     {
-      "id": "z4-g-007", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-007",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "A WAF (Web Application Firewall) specifically protects against:",
-      "options": ["Volumetric DDoS attacks", "SQL injection, XSS, and other OWASP Top 10 web application attacks", "ARP poisoning on the LAN", "BGP route hijacking"],
+      "options": [
+        "Volumetric DDoS attacks",
+        "SQL injection, XSS, and other OWASP Top 10 web application attacks",
+        "ARP poisoning on the LAN",
+        "BGP route hijacking"
+      ],
       "correct_index": 1,
       "explanation": "WAF inspects HTTP/HTTPS application layer traffic for web-specific attacks (SQLi, XSS, CSRF, path traversal). Standard firewalls cannot detect these because they're embedded in legitimate-looking HTTP requests.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["WAF", "OWASP", "Web Application Security"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "WAF",
+        "OWASP",
+        "Web Application Security"
+      ]
     },
     {
-      "id": "z4-g-008", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z4-g-008",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "DHCP snooping must be configured before enabling DAI. Why?",
-      "options": ["DHCP snooping provides the certificate authority for DAI", "DAI uses the DHCP snooping binding table (MAC-to-IP mappings) to validate ARP packets — without it, DAI has no reference data", "DHCP snooping assigns VLAN membership used by DAI", "DAI uses DHCP snooping port trust settings only"],
+      "options": [
+        "DHCP snooping provides the certificate authority for DAI",
+        "DAI uses the DHCP snooping binding table (MAC-to-IP mappings) to validate ARP packets \u2014 without it, DAI has no reference data",
+        "DHCP snooping assigns VLAN membership used by DAI",
+        "DAI uses DHCP snooping port trust settings only"
+      ],
       "correct_index": 1,
       "explanation": "DAI validates ARP by checking the source MAC/IP against the DHCP snooping binding table. If DHCP snooping isn't running (no binding table), DAI cannot validate anything and will either pass or drop all traffic. DHCP snooping must populate the binding table first.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["DHCP Snooping", "DAI", "Dependency"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "DHCP Snooping",
+        "DAI",
+        "Dependency"
+      ]
     },
     {
-      "id": "z4-g-009", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-009",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "The implicit deny at the end of an ACL means:",
-      "options": ["The last explicit rule blocks all traffic", "All traffic not matched by an explicit permit rule above is automatically dropped", "Traffic is denied only on outbound interfaces", "The deny applies to management traffic only"],
+      "options": [
+        "The last explicit rule blocks all traffic",
+        "All traffic not matched by an explicit permit rule above is automatically dropped",
+        "Traffic is denied only on outbound interfaces",
+        "The deny applies to management traffic only"
+      ],
       "correct_index": 1,
-      "explanation": "Every ACL has an invisible implicit deny all at the bottom. Any traffic reaching this rule (not matched above) is dropped silently. This is the most common cause of unexpected ACL blocking — forgetting to include a needed permit.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Implicit Deny", "ACL"]
+      "explanation": "Every ACL has an invisible implicit deny all at the bottom. Any traffic reaching this rule (not matched above) is dropped silently. This is the most common cause of unexpected ACL blocking \u2014 forgetting to include a needed permit.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Implicit Deny",
+        "ACL"
+      ]
     },
     {
-      "id": "z4-g-010", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z4-g-010",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "802.1X port-based access: what state is the port in before authentication completes?",
-      "options": ["Authorised — all traffic permitted", "Unauthorised — only EAP/802.1X traffic allowed; all other traffic blocked", "Forwarding — same as standard switch port", "Err-disabled — requires manual recovery"],
+      "options": [
+        "Authorised \u2014 all traffic permitted",
+        "Unauthorised \u2014 only EAP/802.1X traffic allowed; all other traffic blocked",
+        "Forwarding \u2014 same as standard switch port",
+        "Err-disabled \u2014 requires manual recovery"
+      ],
       "correct_index": 1,
-      "explanation": "802.1X port starts unauthorised — only EAPOL (EAP over LAN) authentication frames pass. No IP traffic permitted until RADIUS returns Access-Accept. Then the port moves to authorised state. Guest VLAN can be configured for devices that fail 802.1X.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["802.1X", "Port State", "Unauthorised"]
+      "explanation": "802.1X port starts unauthorised \u2014 only EAPOL (EAP over LAN) authentication frames pass. No IP traffic permitted until RADIUS returns Access-Accept. Then the port moves to authorised state. Guest VLAN can be configured for devices that fail 802.1X.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "802.1X",
+        "Port State",
+        "Unauthorised"
+      ]
     },
     {
-      "id": "z4-g-011", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-011",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "DNS poisoning is best mitigated by:",
-      "options": ["Enabling HTTPS-only on web servers", "DNSSEC — cryptographically signs DNS responses so forged records are detected and rejected", "Increasing DNS TTL values", "Using RADIUS for DNS authentication"],
+      "options": [
+        "Enabling HTTPS-only on web servers",
+        "DNSSEC \u2014 cryptographically signs DNS responses so forged records are detected and rejected",
+        "Increasing DNS TTL values",
+        "Using RADIUS for DNS authentication"
+      ],
       "correct_index": 1,
-      "explanation": "DNSSEC adds cryptographic signatures to DNS records. Resolvers verify the signature chain — forged or modified DNS responses fail signature validation and are rejected. Also: use encrypted DNS (DoH/DoT) to prevent interception.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["DNSSEC", "DNS Poisoning", "Mitigation"]
+      "explanation": "DNSSEC adds cryptographic signatures to DNS records. Resolvers verify the signature chain \u2014 forged or modified DNS responses fail signature validation and are rejected. Also: use encrypted DNS (DoH/DoT) to prevent interception.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "DNSSEC",
+        "DNS Poisoning",
+        "Mitigation"
+      ]
     },
     {
-      "id": "z4-g-012", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-012",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "RADIUS encrypts only the password in authentication packets. TACACS+ encrypts:",
-      "options": ["Only the username", "The entire packet payload", "Only accounting records", "Nothing — TACACS+ uses TLS externally"],
+      "options": [
+        "Only the username",
+        "The entire packet payload",
+        "Only accounting records",
+        "Nothing \u2014 TACACS+ uses TLS externally"
+      ],
       "correct_index": 1,
-      "explanation": "TACACS+ encrypts the entire body of every packet — credentials, commands, authorization, accounting data. RADIUS only encrypts the password field. This makes TACACS+ more secure for device management where command history is sensitive.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["TACACS+", "RADIUS", "Encryption"]
+      "explanation": "TACACS+ encrypts the entire body of every packet \u2014 credentials, commands, authorization, accounting data. RADIUS only encrypts the password field. This makes TACACS+ more secure for device management where command history is sensitive.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "TACACS+",
+        "RADIUS",
+        "Encryption"
+      ]
     },
     {
-      "id": "z4-g-013", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z4-g-013",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "PFS (Perfect Forward Secrecy) protects against which specific threat?",
-      "options": ["Brute force of current session keys", "Decryption of previously recorded traffic if long-term private keys are later compromised", "Certificate revocation failures", "Replay attacks"],
+      "options": [
+        "Brute force of current session keys",
+        "Decryption of previously recorded traffic if long-term private keys are later compromised",
+        "Certificate revocation failures",
+        "Replay attacks"
+      ],
       "correct_index": 1,
-      "explanation": "Without PFS, an attacker who records encrypted traffic and later obtains the server's private key can decrypt all past sessions. PFS generates a unique ephemeral key per session (Diffie-Hellman) — past sessions remain protected even if the long-term key is compromised.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["PFS", "Perfect Forward Secrecy", "Key Compromise"]
+      "explanation": "Without PFS, an attacker who records encrypted traffic and later obtains the server's private key can decrypt all past sessions. PFS generates a unique ephemeral key per session (Diffie-Hellman) \u2014 past sessions remain protected even if the long-term key is compromised.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "PFS",
+        "Perfect Forward Secrecy",
+        "Key Compromise"
+      ]
     },
     {
-      "id": "z4-g-014", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-014",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "A DMZ (screened subnet) in a two-firewall design restricts traffic how?",
-      "options": ["Internet → DMZ allowed. DMZ → internal LAN blocked by inner firewall. Internal → DMZ allowed.", "Internet → DMZ blocked. DMZ → internal LAN allowed.", "All traffic between all zones is blocked by default.", "DMZ and internal LAN are the same security zone."],
+      "options": [
+        "Internet \u2192 DMZ allowed. DMZ \u2192 internal LAN blocked by inner firewall. Internal \u2192 DMZ allowed.",
+        "Internet \u2192 DMZ blocked. DMZ \u2192 internal LAN allowed.",
+        "All traffic between all zones is blocked by default.",
+        "DMZ and internal LAN are the same security zone."
+      ],
       "correct_index": 0,
       "explanation": "Two-firewall DMZ: outer firewall allows internet to reach DMZ servers (web, mail, DNS). Inner firewall blocks DMZ from initiating connections to the internal LAN. Internal users can reach DMZ. A compromised DMZ server cannot reach internal systems.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["DMZ", "Two-Firewall", "Segmentation"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "DMZ",
+        "Two-Firewall",
+        "Segmentation"
+      ]
     },
     {
-      "id": "z4-g-015", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-015",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "Whaling is a specific type of spear phishing that targets:",
-      "options": ["Maritime organisations", "Senior executives and C-suite (CEO, CFO, COO)", "Network administrators specifically", "Employees with database access"],
+      "options": [
+        "Maritime organisations",
+        "Senior executives and C-suite (CEO, CFO, COO)",
+        "Network administrators specifically",
+        "Employees with database access"
+      ],
       "correct_index": 1,
-      "explanation": "Whaling = 'going after the big fish' — highly targeted spear phishing against senior executives. Attackers research the target thoroughly. Common themes: fake legal subpoenas, wire transfer requests (BEC — Business Email Compromise), regulatory notices.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Whaling", "Spear Phishing", "BEC"]
+      "explanation": "Whaling = 'going after the big fish' \u2014 highly targeted spear phishing against senior executives. Attackers research the target thoroughly. Common themes: fake legal subpoenas, wire transfer requests (BEC \u2014 Business Email Compromise), regulatory notices.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Whaling",
+        "Spear Phishing",
+        "BEC"
+      ]
     },
     {
-      "id": "z4-g-016", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
+      "id": "z4-g-016",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
       "question": "A standard ACL should be placed close to the DESTINATION. An extended ACL should be placed close to the SOURCE. Why the difference?",
       "options": [
         "Standard ACLs are more complex and require more processing near the destination",
-        "Standard ACLs only match source IP — placing near source would block all traffic from that source to ALL destinations. Near destination = only blocks traffic to that specific destination. Extended ACLs match src+dst so can safely filter near source.",
+        "Standard ACLs only match source IP \u2014 placing near source would block all traffic from that source to ALL destinations. Near destination = only blocks traffic to that specific destination. Extended ACLs match src+dst so can safely filter near source.",
         "Extended ACLs use more memory and need to be near the source to conserve resources",
-        "There is no difference — both should be placed near the source"
+        "There is no difference \u2014 both should be placed near the source"
       ],
       "correct_index": 1,
       "explanation": "Standard ACL near source = blocks ALL traffic from that source to everywhere (too broad). Near destination = only affects traffic going to that specific subnet. Extended ACL near source = precise enough (knows src+dst+port) to block only intended traffic, and kills it early before it wastes bandwidth.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["ACL Placement", "Standard ACL", "Extended ACL"]
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "ACL Placement",
+        "Standard ACL",
+        "Extended ACL"
+      ]
     },
     {
-      "id": "z4-g-017", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-017",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "An evil twin AP differs from a rogue AP in that:",
-      "options": ["Evil twin uses stronger encryption than the legitimate AP", "Evil twin broadcasts the same SSID as the legitimate AP to trick users into connecting — enabling MITM", "Rogue AP is set up outside the building; evil twin is inside", "They are the same thing"],
-      "correct_index": 1,
-      "explanation": "Rogue AP: any unauthorised AP connected to the corporate network. Evil twin: a rogue AP that mimics a legitimate AP's SSID to deceive users — it may not even be connected to the corporate network. Users connect thinking it's real; attacker intercepts traffic.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Evil Twin", "Rogue AP", "MITM"]
-    },
-    {
-      "id": "z4-g-018", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "A SYN flood is a Protocol DDoS attack. What mechanism does it exploit, and what is the primary mitigation?",
       "options": [
-        "It exploits DNS cache — mitigated by DNSSEC",
-        "It exploits TCP 3-way handshake — sends many SYN packets but never completes handshake, exhausting server state tables. Mitigated by SYN cookies.",
-        "It exploits ICMP echo — mitigated by blocking ICMP",
-        "It exploits BGP — mitigated by route filtering"
+        "Evil twin uses stronger encryption than the legitimate AP",
+        "Evil twin broadcasts the same SSID as the legitimate AP to trick users into connecting \u2014 enabling MITM",
+        "Rogue AP is set up outside the building; evil twin is inside",
+        "They are the same thing"
       ],
       "correct_index": 1,
-      "explanation": "SYN flood fills the server's half-open connection table — server reserves resources for each SYN waiting for the final ACK that never comes. SYN cookies: server encodes session state in the SYN-ACK sequence number — no state allocated until ACK received with valid cookie.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["SYN Flood", "TCP", "SYN Cookies", "DDoS"]
+      "explanation": "Rogue AP: any unauthorised AP connected to the corporate network. Evil twin: a rogue AP that mimics a legitimate AP's SSID to deceive users \u2014 it may not even be connected to the corporate network. Users connect thinking it's real; attacker intercepts traffic.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Evil Twin",
+        "Rogue AP",
+        "MITM"
+      ]
     },
     {
-      "id": "z4-g-019", "zone": 4, "node": 0, "difficulty": "medium", "type": "boss",
+      "id": "z4-g-018",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
+      "question": "A SYN flood is a Protocol DDoS attack. What mechanism does it exploit, and what is the primary mitigation?",
+      "options": [
+        "It exploits DNS cache \u2014 mitigated by DNSSEC",
+        "It exploits TCP 3-way handshake \u2014 sends many SYN packets but never completes handshake, exhausting server state tables. Mitigated by SYN cookies.",
+        "It exploits ICMP echo \u2014 mitigated by blocking ICMP",
+        "It exploits BGP \u2014 mitigated by route filtering"
+      ],
+      "correct_index": 1,
+      "explanation": "SYN flood fills the server's half-open connection table \u2014 server reserves resources for each SYN waiting for the final ACK that never comes. SYN cookies: server encodes session state in the SYN-ACK sequence number \u2014 no state allocated until ACK received with valid cookie.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "SYN Flood",
+        "TCP",
+        "SYN Cookies",
+        "DDoS"
+      ]
+    },
+    {
+      "id": "z4-g-019",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "medium",
+      "type": "boss",
       "question": "Defense in depth differs from Zero Trust in that defense in depth:",
-      "options": ["Replaces perimeter security with identity-based access", "Layers multiple overlapping security controls — perimeter, internal, host, data — so one failure doesn't mean full compromise", "Assumes breach has already occurred", "Eliminates trust for all internal traffic"],
+      "options": [
+        "Replaces perimeter security with identity-based access",
+        "Layers multiple overlapping security controls \u2014 perimeter, internal, host, data \u2014 so one failure doesn't mean full compromise",
+        "Assumes breach has already occurred",
+        "Eliminates trust for all internal traffic"
+      ],
       "correct_index": 1,
-      "explanation": "Defense in depth = multiple security layers (network, host, application, data). Zero Trust = authentication/authorisation model: no implicit trust regardless of location, continuous verification. They are complementary — Zero Trust is a subset principle that fits within defense in depth.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["Defense in Depth", "Zero Trust", "Security Architecture"]
+      "explanation": "Defense in depth = multiple security layers (network, host, application, data). Zero Trust = authentication/authorisation model: no implicit trust regardless of location, continuous verification. They are complementary \u2014 Zero Trust is a subset principle that fits within defense in depth.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "Defense in Depth",
+        "Zero Trust",
+        "Security Architecture"
+      ]
     },
     {
-      "id": "z4-g-020", "zone": 4, "node": 0, "difficulty": "hard", "type": "boss",
-      "question": "IPsec tunnel mode vs transport mode — which is used for remote access VPN (laptop → corporate HQ)?",
-      "options": ["Transport mode — encrypts payload only, IP header preserved", "Tunnel mode — encrypts entire original packet with new outer IP header", "Both modes work equally for remote access", "Neither — remote access VPN uses GRE only"],
+      "id": "z4-g-020",
+      "zone": 4,
+      "node": 0,
+      "difficulty": "hard",
+      "type": "boss",
+      "question": "IPsec tunnel mode vs transport mode \u2014 which is used for remote access VPN (laptop \u2192 corporate HQ)?",
+      "options": [
+        "Transport mode \u2014 encrypts payload only, IP header preserved",
+        "Tunnel mode \u2014 encrypts entire original packet with new outer IP header",
+        "Both modes work equally for remote access",
+        "Neither \u2014 remote access VPN uses GRE only"
+      ],
       "correct_index": 1,
-      "explanation": "Remote access VPN (laptop → corporate HQ) typically uses tunnel mode — the client's private IP is encapsulated inside the VPN tunnel with a new outer IP header containing the client's public IP and VPN gateway IP. The original private-addressed packet is fully encrypted inside.",
-      "xp_reward": 50, "bits_reward": 20, "tags": ["IPsec Tunnel Mode", "Remote Access VPN"]
+      "explanation": "Remote access VPN (laptop \u2192 corporate HQ) typically uses tunnel mode \u2014 the client's private IP is encapsulated inside the VPN tunnel with a new outer IP header containing the client's public IP and VPN gateway IP. The original private-addressed packet is fully encrypted inside.",
+      "xp_reward": 50,
+      "bits_reward": 20,
+      "tags": [
+        "IPsec Tunnel Mode",
+        "Remote Access VPN"
+      ]
     }
   ]
 }

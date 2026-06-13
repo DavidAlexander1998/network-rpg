@@ -1,0 +1,23 @@
+{
+  "id": "z1-n5-primer",
+  "type": "study_encounter",
+  "title": "Physical Layer Primer",
+  "scenario": "Welcome to Physical Layer Primer. Before proceeding, you must master these essential networking terms. Unshielded Twisted Pair (UTP): Most common LAN cabling. Cat5e (1 Gbps/100m), Cat6 (1 Gbps/100m or 10 Gbps/55m), Cat6A (10 Gbps/100m), Cat8 (40 Gbps/30m). TIA-568: max 90m horizontal + 10m patch = 100m total. Spanning Tree Protocol (STP): IEEE 802.1D. Prevents Layer 2 loops by blocking redundant paths. States: Blocking \u2192 Listening \u2192 Learning \u2192 Forwarding (30-50 sec). Root bridge = lowest Bridge ID. Maximum Transmission Unit (MTU): Largest Layer 3 packet size a link can carry. Ethernet default = 1500 bytes. Jumbo frames = 9000 bytes. MTU mismatch causes fragmentation or black-holing with PMTUD.",
+  "question": "What does RJ45 stand for?",
+  "options": [
+    "RJ45",
+    "Advanced RJ45 Protocol",
+    "Automated RJ45 System",
+    "Active RJ45 Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "RJ45 stands for RJ45.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "rj45",
+    "utp",
+    "stp"
+  ]
+}

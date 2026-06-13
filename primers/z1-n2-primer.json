@@ -1,0 +1,24 @@
+{
+  "id": "z1-n2-primer",
+  "type": "study_encounter",
+  "title": "Network Devices Primer",
+  "scenario": "Welcome to Network Devices. Virtual Local Area Network (VLAN) logically segments a switch at Layer 2, isolating broadcast domains. Simple Network Management Protocol (SNMP) monitors network devices via polling and traps. Wireless Access Point (WAP) connects wireless clients to the wired network. Service Set Identifier (SSID) is the wireless network name broadcast by an AP.",
+  "question": "What does VLAN stand for?",
+  "options": [
+    "Virtual Local Area Network",
+    "Virtual Layer Access Node",
+    "Virtual Link Aggregation Network",
+    "Virtual Local Access Network"
+  ],
+  "correct_index": 0,
+  "explanation": "VLAN stands for Virtual Local Area Network, which logically segments a switch at Layer 2.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "vlan",
+    "snmp",
+    "wap",
+    "ssid"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "z3-n5-primer",
+  "type": "study_encounter",
+  "title": "Documentation Primer",
+  "scenario": "Welcome to Documentation Primer. Before proceeding, you must master these essential networking terms. Service Level Agreement (SLA): Contract defining minimum service standards. Common metric: uptime percentage. 99.9% = 8.76 hr/yr downtime. 99.99% = 52.6 min/yr. 99.999% (five nines) = 5.26 min/yr.",
+  "question": "What does SOP stand for?",
+  "options": [
+    "SOP",
+    "Advanced SOP Protocol",
+    "Automated SOP System",
+    "Active SOP Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "SOP stands for SOP.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "sop",
+    "sla",
+    "ola"
+  ]
+}

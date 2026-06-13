@@ -1,0 +1,23 @@
+{
+  "id": "z3-n3-primer",
+  "type": "study_encounter",
+  "title": "Monitoring Primer",
+  "scenario": "Welcome to Monitoring Primer. Before proceeding, you must master these essential networking terms. IP Flow Information Export (IPFIX): IETF standard (RFC 7011) for exporting IP flow data. Successor to Cisco NetFlow v9. Sends flow records to a collector on UDP 4739 (or 2055 for NetFlow compatibility). Switched Port Analyzer (SPAN): Port mirroring \u2014 copies traffic from source port(s) or VLAN to a monitor port for analysis (IDS/packet capture). Local to one switch. RSPAN extends mirroring across multiple switches.",
+  "question": "What does NetFlow stand for?",
+  "options": [
+    "NetFlow",
+    "Advanced NetFlow Protocol",
+    "Automated NetFlow System",
+    "Active NetFlow Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "NetFlow stands for NetFlow.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "netflow",
+    "sflow",
+    "ipfix"
+  ]
+}

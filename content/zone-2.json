@@ -9,6 +9,30 @@
       "description": "Routing protocols, admin distance, NAT, and first-hop redundancy.",
       "encounters": [
         {
+          "id": "z2-n1-primer",
+          "type": "study_encounter",
+          "title": "Pathfinding Primer",
+          "scenario": "Welcome to Pathfinding. You must understand Administrative Distance (AD) - the router's trust ranking for routing sources. Lower AD = more trusted. Open Shortest Path First (OSPF) is a link-state protocol with AD 110. Enhanced Interior Gateway Routing Protocol (EIGRP) is a Cisco hybrid protocol with AD 90. Border Gateway Protocol (BGP) routes between autonomous systems with AD 20 (eBGP) or 200 (iBGP).",
+          "question": "Which routing protocol has the lowest default AD (most trusted)?",
+          "options": [
+            "EIGRP (AD 90)",
+            "OSPF (AD 110)",
+            "RIP (AD 120)",
+            "BGP external (AD 20)"
+          ],
+          "correct_index": 3,
+          "explanation": "External BGP (eBGP) has AD 20, making it the most trusted among these options.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "ad",
+            "ospf",
+            "bgp",
+            "eigrp"
+          ]
+        },
+        {
           "id": "z2-n1-study-001",
           "zone": 2,
           "node": 2.1,
@@ -301,6 +325,30 @@
       "description": "VLANs, 802.1Q trunking, Spanning Tree, and link aggregation.",
       "encounters": [
         {
+          "id": "z2-n2-primer",
+          "type": "study_encounter",
+          "title": "Switching Primer",
+          "scenario": "Welcome to Switching. Virtual Local Area Network (VLAN) logically segments a switch at Layer 2. Spanning Tree Protocol (STP) prevents Layer 2 loops by blocking redundant paths. Media Access Control (MAC) addresses are 48-bit Layer 2 hardware addresses. Address Resolution Protocol (ARP) resolves IP addresses to MAC addresses on local networks.",
+          "question": "Which protocol prevents Layer 2 loops in switched networks?",
+          "options": [
+            "VLAN",
+            "STP",
+            "ARP",
+            "MAC"
+          ],
+          "correct_index": 1,
+          "explanation": "Spanning Tree Protocol (STP) prevents Layer 2 loops by blocking redundant paths.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "vlan",
+            "stp",
+            "mac",
+            "arp"
+          ]
+        },
+        {
           "id": "z2-n2-study-001",
           "zone": 2,
           "node": 2.2,
@@ -575,6 +623,29 @@
       "description": "Wireless standards, security protocols, channel planning, and AP architecture.",
       "encounters": [
         {
+          "id": "z2-n3-primer",
+          "type": "study_encounter",
+          "title": "Wireless Primer",
+          "scenario": "Welcome to Wireless Primer. Before proceeding, you must master these essential networking terms. Service Set Identifier (SSID): Wireless network name broadcast by an AP. Hiding SSID provides minimal security (still discoverable via probe requests). Up to 32 characters. BSSID = AP's MAC address. Wi-Fi Protected Access 2 (WPA2): IEEE 802.11i. Personal (PSK) or Enterprise (802.1X/RADIUS). Uses AES-CCMP encryption. Vulnerable to PMKID/dictionary attacks on PSK. Superseded by WPA3 but still widely deployed.",
+          "question": "What does WAP stand for?",
+          "options": [
+            "WAP",
+            "Advanced WAP Protocol",
+            "Automated WAP System",
+            "Active WAP Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "WAP stands for WAP.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "wap",
+            "ssid",
+            "bssid"
+          ]
+        },
+        {
           "id": "z2-n3-study-001",
           "zone": 2,
           "node": 2.3,
@@ -829,6 +900,29 @@
       "description": "Data center infrastructure, MDF/IDF, UPS types, and environmental considerations.",
       "encounters": [
         {
+          "id": "z2-n4-primer",
+          "type": "study_encounter",
+          "title": "Infrastructure Primer",
+          "scenario": "Welcome to Infrastructure Primer. Before proceeding, you must master these essential networking terms. Power over Ethernet (PoE): IEEE 802.3af (15.4W), 802.3at/PoE+ (30W), 802.3bt/PoE++ (60-100W). Delivers power over UTP to APs, IP phones, cameras. PSE (switch) provides power; PD (device) receives it. Protocol Data Unit (PDU): Generic term for data at each OSI layer. Layer 7-5: Data, Layer 4: Segment (TCP) / Datagram (UDP), Layer 3: Packet, Layer 2: Frame, Layer 1: Bit/Symbol. Uninterruptible Power Supply (UPS): Battery backup for power outages. Types: Offline/standby (5-25ms switchover), Line-interactive (AVR, <4ms), Online/Double-conversion (0ms, cleanest power). Sized by VA/watts and runtime. Main Distribution Frame (MDF): Core network room \u2014 primary termination point for building cabling. Houses core switches, routers, servers, and WAN connections. IDFs connect back to MDF via vertical/backbone cabling.",
+          "question": "What does PoE stand for?",
+          "options": [
+            "Power over Ethernet",
+            "Advanced PoE Protocol",
+            "Automated PoE System",
+            "Active PoE Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "PoE stands for Power over Ethernet.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "poe",
+            "pdu",
+            "ups"
+          ]
+        },
+        {
           "id": "z2-n4-study-001",
           "zone": 2,
           "node": 2.4,
@@ -1033,6 +1127,29 @@
       "name": "The Power Standard",
       "description": "Power over Ethernet standards, power negotiation, and cable considerations for PoE deployments.",
       "encounters": [
+        {
+          "id": "z2-n5-primer",
+          "type": "study_encounter",
+          "title": "Network Virtualization Primer",
+          "scenario": "Welcome to Network Virtualization Primer. Before proceeding, you must master these essential networking terms. Virtual Extensible LAN (VXLAN): Layer 2 overlay over Layer 3 network. Uses UDP 4789. Extends VLANs across routed networks (data centers, cloud). Supports 16 million VNIs vs 4094 VLAN limit. Used in SDN/overlay networks.",
+          "question": "What does VXLAN stand for?",
+          "options": [
+            "Virtual Extensible LAN",
+            "Advanced VXLAN Protocol",
+            "Automated VXLAN System",
+            "Active VXLAN Technology"
+          ],
+          "correct_index": 0,
+          "explanation": "VXLAN stands for Virtual Extensible LAN.",
+          "xp_reward": 20,
+          "bits_reward": 10,
+          "tags": [
+            "primer",
+            "vxlan",
+            "nvgre",
+            "vrf"
+          ]
+        },
         {
           "id": "z2-n5-study-001",
           "zone": 2,

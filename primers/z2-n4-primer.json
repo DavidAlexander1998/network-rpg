@@ -1,0 +1,23 @@
+{
+  "id": "z2-n4-primer",
+  "type": "study_encounter",
+  "title": "Infrastructure Primer",
+  "scenario": "Welcome to Infrastructure Primer. Before proceeding, you must master these essential networking terms. Power over Ethernet (PoE): IEEE 802.3af (15.4W), 802.3at/PoE+ (30W), 802.3bt/PoE++ (60-100W). Delivers power over UTP to APs, IP phones, cameras. PSE (switch) provides power; PD (device) receives it. Protocol Data Unit (PDU): Generic term for data at each OSI layer. Layer 7-5: Data, Layer 4: Segment (TCP) / Datagram (UDP), Layer 3: Packet, Layer 2: Frame, Layer 1: Bit/Symbol. Uninterruptible Power Supply (UPS): Battery backup for power outages. Types: Offline/standby (5-25ms switchover), Line-interactive (AVR, <4ms), Online/Double-conversion (0ms, cleanest power). Sized by VA/watts and runtime. Main Distribution Frame (MDF): Core network room \u2014 primary termination point for building cabling. Houses core switches, routers, servers, and WAN connections. IDFs connect back to MDF via vertical/backbone cabling.",
+  "question": "What does PoE stand for?",
+  "options": [
+    "Power over Ethernet",
+    "Advanced PoE Protocol",
+    "Automated PoE System",
+    "Active PoE Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "PoE stands for Power over Ethernet.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "poe",
+    "pdu",
+    "ups"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "z5-n4-primer",
+  "type": "study_encounter",
+  "title": "Wi-Fi Standards Primer",
+  "scenario": "Welcome to Wi-Fi Standards Primer. Before proceeding, you must master these essential networking terms. Wi-Fi Protected Access 2 (WPA2): IEEE 802.11i. Personal (PSK) or Enterprise (802.1X/RADIUS). Uses AES-CCMP encryption. Vulnerable to PMKID/dictionary attacks on PSK. Superseded by WPA3 but still widely deployed. Wi-Fi Protected Access 3 (WPA3): Latest Wi-Fi security standard. Replaces PSK with SAE (Simultaneous Authentication of Equals) \u2014 protects against offline dictionary attacks. Mandatory for Wi-Fi 6 (802.11ax) devices.",
+  "question": "What does WPA2 stand for?",
+  "options": [
+    "Wi-Fi Protected Access 2",
+    "Advanced WPA2 Protocol",
+    "Automated WPA2 System",
+    "Active WPA2 Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "WPA2 stands for Wi-Fi Protected Access 2.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "wpa2",
+    "wpa3",
+    "mimo"
+  ]
+}

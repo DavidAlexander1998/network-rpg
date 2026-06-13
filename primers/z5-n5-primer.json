@@ -1,0 +1,23 @@
+{
+  "id": "z5-n5-primer",
+  "type": "study_encounter",
+  "title": "Troubleshooting Primer",
+  "scenario": "Welcome to Troubleshooting Primer. Before proceeding, you must master these essential networking terms. Dynamic Host Configuration Protocol (DHCP): Ports 67 (server) / 68 (client). UDP. Assigns IP, subnet mask, gateway, DNS via DORA (Discover, Offer, Request, Acknowledge). Option 3 = gateway, Option 6 = DNS. Address Resolution Protocol (ARP): Resolves IP addresses to MAC addresses on a local network. Broadcast request, unicast reply. ARP cache stores mappings. Vulnerable to ARP poisoning \u2014 mitigated by DAI. Domain Name System (DNS): Port 53 (UDP for queries, TCP for zone transfers). Resolves hostnames to IP addresses. NXDOMAIN = name doesn't exist. Poisoning mitigated by DNSSEC. Internet Control Message Protocol (ICMP): Layer 3 protocol for error reporting and diagnostics. Used by ping (echo request/reply) and traceroute (TTL exceeded). Not for data transfer. ICMP redirect, unreachable, time exceeded messages.",
+  "question": "What does DHCP stand for?",
+  "options": [
+    "Dynamic Host Configuration Protocol",
+    "Advanced DHCP Protocol",
+    "Automated DHCP System",
+    "Active DHCP Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "DHCP stands for Dynamic Host Configuration Protocol.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "dhcp",
+    "arp",
+    "dns"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "z2-n0-primer",
+  "type": "study_encounter",
+  "title": "Pathfinding Guardian Primer",
+  "scenario": "Welcome to Pathfinding Guardian Primer. Before proceeding, you must master these essential networking terms. Administrative Distance (AD): Router's trust ranking for routing protocol sources. Lower = more trusted. Connected=0, Static=1, eBGP=20, EIGRP=90, OSPF=110, RIP=120, iBGP=200. Used when multiple protocols know same route. Open Shortest Path First (OSPF): Link-state routing protocol. AD = 110. Uses Dijkstra's SPF algorithm. Scales with areas (Area 0 = backbone). Multicast 224.0.0.5/224.0.0.6. Classless, fast convergence. Border Gateway Protocol (BGP): Port 179. TCP. Exterior Gateway Protocol (EGP) \u2014 routes between autonomous systems on the internet. Path-vector protocol. AD = 20 (eBGP), 200 (iBGP). Enhanced Interior Gateway Routing Protocol (EIGRP): Cisco hybrid (distance-vector + link-state) routing protocol. AD = 90 (internal), 170 (external). Uses DUAL algorithm. Classless, fast convergence, multicast 224.0.0.10.",
+  "question": "What does AD stand for?",
+  "options": [
+    "Administrative Distance",
+    "Advanced AD Protocol",
+    "Automated AD System",
+    "Active AD Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "AD stands for Administrative Distance.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "ad",
+    "ospf",
+    "bgp"
+  ]
+}

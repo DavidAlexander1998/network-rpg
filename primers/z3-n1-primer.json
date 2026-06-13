@@ -1,0 +1,23 @@
+{
+  "id": "z3-n1-primer",
+  "type": "study_encounter",
+  "title": "Network Operations Primer",
+  "scenario": "Welcome to Network Operations Primer. Before proceeding, you must master these essential networking terms. Network Management System (NMS): Platform for monitoring and managing network devices. Collects data via SNMP, NetFlow, syslog. Provides dashboards, alerts, trending. Examples: SolarWinds, PRTG, Nagios, Zabbix. Simple Network Management Protocol (SNMP): Port 161 (polling) / 162 (traps). UDP. Monitors network devices. v1/v2c use cleartext community strings. v3 adds authentication and AES encryption (AuthPriv). MIB stores OIDs. Management Information Base (MIB): SNMP database structure. Hierarchical tree of OIDs (Object Identifiers) each representing a manageable object on a device (e.g., interface stats, CPU usage). Defined in RFC/vendor MIBs. Object Identifier (OID): Unique numeric path in the SNMP MIB tree identifying a specific managed object. Example: 1.3.6.1.2.1.1.1 = sysDescr. SNMP manager polls OIDs to get device metrics.",
+  "question": "What does NMS stand for?",
+  "options": [
+    "Network Management System",
+    "Advanced NMS Protocol",
+    "Automated NMS System",
+    "Active NMS Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "NMS stands for Network Management System.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "nms",
+    "snmp",
+    "mib"
+  ]
+}

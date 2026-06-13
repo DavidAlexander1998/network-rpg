@@ -1,0 +1,23 @@
+{
+  "id": "z1-n7-primer",
+  "type": "study_encounter",
+  "title": "Virtualization Primer",
+  "scenario": "Welcome to Virtualization Primer. Before proceeding, you must master these essential networking terms. Virtual Local Area Network (VLAN): Logical segmentation of a switch at Layer 2. Isolates broadcast domains without physical separation. Tagged with 802.1Q on trunk ports. Native VLAN = untagged on trunk. Network Functions Virtualization (NFV): Virtualizes network appliances (firewalls, load balancers, routers) as software on commodity hardware. Reduces physical appliance costs. Often paired with SDN in modern data centers. Software-Defined Networking (SDN): Decouples control plane from data plane. Centralized controller (northbound API to apps, southbound to devices via OpenFlow). Enables programmable, automated network management.",
+  "question": "What does VLAN stand for?",
+  "options": [
+    "Virtual Local Area Network",
+    "Advanced VLAN Protocol",
+    "Automated VLAN System",
+    "Active VLAN Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "VLAN stands for Virtual Local Area Network.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "vlan",
+    "vm",
+    "nfv"
+  ]
+}

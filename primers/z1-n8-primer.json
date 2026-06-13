@@ -1,0 +1,23 @@
+{
+  "id": "z1-n8-primer",
+  "type": "study_encounter",
+  "title": "Automation Primer",
+  "scenario": "Welcome to Automation Primer. Before proceeding, you must master these essential networking terms. Command Line Interface (CLI): Text-based interface for device management. Used in routers, switches, firewalls. Key commands: show ip route, show interfaces, show vlan, debug, ping, traceroute. Faster than GUI for experts. Application Programming Interface (API): Interface for software components to communicate. REST APIs (HTTP/JSON) used for network automation and SDN. Enables programmatic device configuration vs manual CLI.",
+  "question": "What does CLI stand for?",
+  "options": [
+    "Command Line Interface",
+    "Advanced CLI Protocol",
+    "Automated CLI System",
+    "Active CLI Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "CLI stands for Command Line Interface.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "cli",
+    "api",
+    "sdk"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "z4-n4-primer",
+  "type": "study_encounter",
+  "title": "Network Hardening Primer",
+  "scenario": "Welcome to Network Hardening. Multi-Factor Authentication (MFA) requires two or more verification factors. Single Sign-On (SSO) allows one set of credentials to access multiple applications. Identity Provider (IdP) manages identity information and provides authentication services. Service Provider (SP) relies on an IdP for authentication. Public Key Infrastructure (PKI) manages digital certificates and public-key encryption. Transport Layer Security (TLS) encrypts data in transit. Secure Sockets Layer (SSL) is the predecessor to TLS.",
+  "question": "What does MFA stand for?",
+  "options": [
+    "Multi-Factor Authentication",
+    "Multi-Function Access",
+    "Managed Firewall Architecture",
+    "Main Frame Authentication"
+  ],
+  "correct_index": 0,
+  "explanation": "MFA stands for Multi-Factor Authentication, requiring two or more verification factors.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "mfa",
+    "sso",
+    "pki",
+    "tls"
+  ]
+}

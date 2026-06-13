@@ -1,0 +1,23 @@
+{
+  "id": "z4-n3-primer",
+  "type": "study_encounter",
+  "title": "Hardening Primer",
+  "scenario": "Welcome to Hardening Primer. Before proceeding, you must master these essential networking terms. Network Access Control (NAC): Controls which devices can connect to the network based on posture (patch level, AV status, certificates). Uses 802.1X, RADIUS, and agents to enforce health checks before granting access. Extensible Authentication Protocol (EAP): Authentication framework used with 802.1X. Multiple methods: EAP-TLS (certificate-based, most secure), PEAP (password in TLS tunnel), EAP-TTLS. Transported over RADIUS. Remote Authentication Dial-In User Service (RADIUS): AAA protocol. UDP 1812 (auth) / 1813 (accounting). Encrypts only password in packet. Used for network access control (Wi-Fi 802.1X, VPN). Open standard. Terminal Access Controller Access Control System Plus (TACACS+): Cisco AAA protocol. TCP 49. Encrypts entire payload (not just password). Separates A/A/A functions independently. Used for device administration. More secure and flexible than RADIUS.",
+  "question": "What does NAC stand for?",
+  "options": [
+    "Network Access Control",
+    "Advanced NAC Protocol",
+    "Automated NAC System",
+    "Active NAC Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "NAC stands for Network Access Control.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "nac",
+    "eap",
+    "radius"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "z5-n1-primer",
+  "type": "study_encounter",
+  "title": "Cabling Primer",
+  "scenario": "Welcome to Cabling Primer. Before proceeding, you must master these essential networking terms.",
+  "question": "What does CAT5e stand for?",
+  "options": [
+    "CAT5e",
+    "Advanced CAT5e Protocol",
+    "Automated CAT5e System",
+    "Active CAT5e Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "CAT5e stands for CAT5e.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "cat5e",
+    "cat6",
+    "rj45"
+  ]
+}

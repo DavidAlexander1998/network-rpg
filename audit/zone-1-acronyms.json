@@ -1,0 +1,293 @@
+{
+  "zone": 1,
+  "audit_date": "2026-06-13",
+  "nodes": [
+    {
+      "node_id": 1.1,
+      "node_name": "The Seven Layers",
+      "acronyms_missing_expansion": [
+        {"acronym": "IP", "first_encounter_id": "z1-n1-study-002", "context_snippet": "scenario: 'Layer 3 - NETWORK: IP addressing' - IP not expanded (Internet Protocol)"},
+        {"acronym": "ICMP", "first_encounter_id": "z1-n1-study-006", "context_snippet": "explanation: 'IP and ICMP both operate at Layer 3' - ICMP not expanded (Internet Control Message Protocol)"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "OSI", "first_encounter_id": "z1-n1-study-001", "where_found": "scenario: 'OSI MODEL (a 7-layer framework)'"},
+        {"acronym": "PDU", "first_encounter_id": "z1-n1-study-001", "where_found": "scenario: 'PROTOCOL DATA UNIT (PDU)'"},
+        {"acronym": "MAC", "first_encounter_id": "z1-n1-study-001", "where_found": "scenario: 'MAC ADDRESS (Media Access Control)'"},
+        {"acronym": "NIC", "first_encounter_id": "z1-n1-study-001", "where_found": "scenario: 'network interface card (NIC)'"},
+        {"acronym": "TCP", "first_encounter_id": "z1-n1-study-002", "where_found": "scenario: 'TRANSPORT: TCP/UDP' - appears with UDP"},
+        {"acronym": "UDP", "first_encounter_id": "z1-n1-study-002", "where_found": "scenario: 'TRANSPORT: TCP/UDP' - appears with TCP"},
+        {"acronym": "LLC", "first_encounter_id": "z1-n1-study-004", "where_found": "scenario: 'LLC (Logical Link Control)'"},
+        {"acronym": "VoIP", "first_encounter_id": "z1-n1-study-006", "where_found": "question: 'VoIP (Voice over IP)'"}
+      ]
+    },
+    {
+      "node_id": 1.2,
+      "node_name": "The Toolbox",
+      "acronyms_missing_expansion": [
+        {"acronym": "VLAN", "first_encounter_id": "z1-n2-study-002", "context_snippet": "scenario: 'VLANs act like invisible partitions' - VLAN not expanded (Virtual Local Area Network)"},
+        {"acronym": "WAP", "first_encounter_id": "z1-n2-study-005", "context_snippet": "title mentions 'Wireless Access Point' but scenario uses 'WAP' without prior acronym expansion"},
+        {"acronym": "SNMP", "first_encounter_id": "z1-n2-study-008", "context_snippet": "scenario: 'SNMP Trap' and 'SNMP agent' without expansion (Simple Network Management Protocol)"},
+        {"acronym": "UDP", "first_encounter_id": "z1-n2-study-008", "context_snippet": "scenario: 'UDP port' - UDP was expanded in node 1.1 but first occurrence in this node"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "MAC", "first_encounter_id": "z1-n2-study-002", "where_found": "scenario references MAC addresses"},
+        {"acronym": "CAM", "first_encounter_id": "z1-n2-study-002", "where_found": "scenario: 'MAC ADDRESS TABLE (or CAM TABLE)'"},
+        {"acronym": "NAT", "first_encounter_id": "z1-n2-study-003", "where_found": "scenario: 'NAT (Network Address Translation)'"},
+        {"acronym": "DMZ", "first_encounter_id": "z1-n2-study-004", "where_found": "scenario: 'DMZ (Demilitarized Zone)'"},
+        {"acronym": "ACL", "first_encounter_id": "z1-n2-study-004", "where_found": "scenario: 'ACCESS CONTROL LIST (ACL)'"},
+        {"acronym": "SSID", "first_encounter_id": "z1-n2-study-005", "where_found": "scenario: 'SSID (Service Set Identifier)'"},
+        {"acronym": "BSS", "first_encounter_id": "z1-n2-study-005", "where_found": "scenario: 'BSS (Basic Service Set)'"},
+        {"acronym": "ESS", "first_encounter_id": "z1-n2-study-005", "where_found": "scenario: 'ESS (Extended Service Set)'"},
+        {"acronym": "WLAN", "first_encounter_id": "z1-n2-study-005", "where_found": "scenario: 'WLAN (Wireless LAN)'"},
+        {"acronym": "IDS", "first_encounter_id": "z1-n2-study-006", "where_found": "scenario: 'IDS (INTRUSION DETECTION SYSTEM)'"},
+        {"acronym": "IPS", "first_encounter_id": "z1-n2-study-006", "where_found": "scenario: 'IPS (INTRUSION PREVENTION SYSTEM)'"},
+        {"acronym": "UTM", "first_encounter_id": "z1-n2-study-006", "where_found": "scenario: 'UTM (UNIFIED THREAT MANAGEMENT)'"}
+      ]
+    },
+    {
+      "node_id": 1.3,
+      "node_name": "The Cloud",
+      "acronyms_missing_expansion": [
+        {"acronym": "API", "first_encounter_id": "z1-n3-study-009", "context_snippet": "scenario: 'Programmable via APIs' and 'northbound API' without expansion (Application Programming Interface)"},
+        {"acronym": "MFA", "first_encounter_id": "z1-n3-study-011", "context_snippet": "scenario: 'Multi-factor authentication (MFA)' - actually this IS expanded"},
+        {"acronym": "ZTNA", "first_encounter_id": "z1-n3-study-012", "context_snippet": "scenario: 'Zero Trust Network Access (ZTNA)' - actually this IS expanded"},
+        {"acronym": "SDP", "first_encounter_id": "z1-n3-study-012", "context_snippet": "scenario: 'Software-Defined Perimeter (SDP)' - actually this IS expanded"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "IaaS", "first_encounter_id": "z1-n3-study-001", "where_found": "question option: 'IaaS (Infrastructure as a Service)'"},
+        {"acronym": "PaaS", "first_encounter_id": "z1-n3-study-001", "where_found": "question option: 'PaaS (Platform as a Service)'"},
+        {"acronym": "SaaS", "first_encounter_id": "z1-n3-study-001", "where_found": "question option: 'SaaS (Software as a Service)'"},
+        {"acronym": "FaaS", "first_encounter_id": "z1-n3-study-001", "where_found": "question option: 'FaaS (Function as a Service)'"},
+        {"acronym": "VPC", "first_encounter_id": "z1-n3-study-002", "where_found": "scenario: 'VPC (VIRTUAL PRIVATE CLOUD)'"},
+        {"acronym": "NFV", "first_encounter_id": "z1-n3-study-002", "where_found": "scenario: 'NFV (NETWORK FUNCTIONS VIRTUALIZATION)'"},
+        {"acronym": "AWS", "first_encounter_id": "z1-n3-study-004", "where_found": "scenario mentions AWS as example (Amazon Web Services)"},
+        {"acronym": "NIST", "first_encounter_id": "z1-n3-study-005", "where_found": "scenario mentions NIST (National Institute of Standards and Technology)"},
+        {"acronym": "CAPEX", "first_encounter_id": "z1-n3-study-007", "where_found": "scenario: 'CAPEX (Capital Expenditure)'"},
+        {"acronym": "OPEX", "first_encounter_id": "z1-n3-study-007", "where_found": "scenario: 'OPEX (Operational Expenditure)'"},
+        {"acronym": "DR", "first_encounter_id": "z1-n3-study-007", "where_found": "scenario: 'DISASTER RECOVERY (DR)'"},
+        {"acronym": "DBaaS", "first_encounter_id": "z1-n3-study-007", "where_found": "scenario: 'database-as-a-service (DBaaS)'"},
+        {"acronym": "SDN", "first_encounter_id": "z1-n3-study-009", "where_found": "scenario: 'SDN (Software Defined Networking)'"},
+        {"acronym": "JSON", "first_encounter_id": "z1-n3-study-010", "where_found": "scenario: 'JSON (JavaScript Object Notation)'"},
+        {"acronym": "XML", "first_encounter_id": "z1-n3-study-010", "where_found": "scenario: 'XML (eXtensible Markup Language)'"},
+        {"acronym": "YAML", "first_encounter_id": "z1-n3-study-010", "where_found": "scenario: 'YAML (YAML Ain't Markup Language)'"},
+        {"acronym": "IaC", "first_encounter_id": "z1-n3-study-010", "where_found": "scenario: 'IaC (Infrastructure as Code)'"},
+        {"acronym": "VPN", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'VPN (Virtual Private Network)'"},
+        {"acronym": "RDP", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'RDP (Remote Desktop Protocol)'"},
+        {"acronym": "SSH", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'SSH (Secure Shell)'"},
+        {"acronym": "VNC", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'VNC (Virtual Network Computing)'"},
+        {"acronym": "MFA", "first_encounter_id": "z1-n3-study-011", "where_found": "scenario: 'Multi-factor authentication (MFA)'"},
+        {"acronym": "ZTNA", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'Zero Trust Network Access (ZTNA)'"},
+        {"acronym": "SDP", "first_encounter_id": "z1-n3-study-012", "where_found": "scenario: 'Software-Defined Perimeter (SDP)'"}
+      ]
+    },
+    {
+      "node_id": 1.4,
+      "node_name": "The Secret Codes",
+      "acronyms_missing_expansion": [
+        {"acronym": "HTTP", "first_encounter_id": "z1-n4-study-003", "context_snippet": "scenario: 'HTTP (Port 80) serves unencrypted web traffic' - port given but acronym not expanded (HyperText Transfer Protocol)"},
+        {"acronym": "HTTPS", "first_encounter_id": "z1-n4-study-003", "context_snippet": "scenario: 'HTTPS (Port 443) provides encrypted' - port given but acronym not expanded (HyperText Transfer Protocol Secure)"},
+        {"acronym": "FTP", "first_encounter_id": "z1-n4-study-003", "context_snippet": "scenario: 'FTP (Port 21) moves files' - port given but acronym not expanded (File Transfer Protocol)"},
+        {"acronym": "SSH", "first_encounter_id": "z1-n4-study-003", "context_snippet": "scenario: 'SSH (Port 22) provides secure' - port given but acronym not expanded (Secure Shell)"},
+        {"acronym": "TLS", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'HTTPS adds TLS/SSL ENCRYPTION' - TLS not expanded (Transport Layer Security)"},
+        {"acronym": "SSL", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'HTTPS adds TLS/SSL ENCRYPTION' - SSL not expanded (Secure Sockets Layer)"},
+        {"acronym": "SMTP", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'SMTP sends mail' - SMTP not expanded (Simple Mail Transfer Protocol)"},
+        {"acronym": "POP3", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'POP3 or IMAP' - POP3 not expanded (Post Office Protocol v3)"},
+        {"acronym": "IMAP", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'POP3 or IMAP' - IMAP not expanded (Internet Message Access Protocol)"},
+        {"acronym": "SFTP", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'SFTP (over SSH)' - partial context but SFTP not explicitly expanded (SSH File Transfer Protocol)"},
+        {"acronym": "FTPS", "first_encounter_id": "z1-n4-study-006", "context_snippet": "scenario: 'FTPS (over TLS/SSL)' - partial context but FTPS not explicitly expanded (File Transfer Protocol Secure)"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "IP", "first_encounter_id": "z1-n4-study-003", "where_found": "scenario: 'IP ADDRESS is the street address'"},
+        {"acronym": "TCP", "first_encounter_id": "z1-n4-study-003", "where_found": "scenario: 'TCP is CONNECTION-ORIENTED'"},
+        {"acronym": "UDP", "first_encounter_id": "z1-n4-study-004", "where_found": "scenario: 'UDP (User Datagram Protocol)'"},
+        {"acronym": "DNS", "first_encounter_id": "z1-n4-study-004", "where_found": "scenario: 'DNS (Port 53)'"},
+        {"acronym": "DHCP", "first_encounter_id": "z1-n4-study-004", "where_found": "scenario: 'DHCP (Ports 67/68)'"},
+        {"acronym": "TFTP", "first_encounter_id": "z1-n4-study-004", "where_found": "scenario: 'TFTP (Port 69)'"},
+        {"acronym": "SNMP", "first_encounter_id": "z1-n4-study-004", "where_found": "scenario: 'SNMP (Port 161)'"},
+        {"acronym": "NTP", "first_encounter_id": "z1-n4-study-004", "where_found": "explanation: 'NTP (Network Time Protocol)'"},
+        {"acronym": "ICMP", "first_encounter_id": "z1-n4-study-007", "where_found": "scenario: 'ICMP (Internet Control Message Protocol)'"},
+        {"acronym": "DHCP", "first_encounter_id": "z1-n4-study-007", "where_found": "scenario: 'DHCP (Dynamic Host Configuration Protocol)'"},
+        {"acronym": "DNS", "first_encounter_id": "z1-n4-study-007", "where_found": "scenario: 'DNS (Domain Name System)'"}
+      ]
+    },
+    {
+      "node_id": 1.5,
+      "node_name": "The Physical Path",
+      "acronyms_missing_expansion": [
+        {"acronym": "EMI", "first_encounter_id": "z1-n5-study-001", "context_snippet": "question: 'electromagnetic interference (EMI)' - actually expanded in question"},
+        {"acronym": "RJ45", "first_encounter_id": "z1-n5-study-012", "context_snippet": "scenario uses 'RJ45 connector' without expansion (Registered Jack 45)"},
+        {"acronym": "OTDR", "first_encounter_id": "z1-n5-study-032", "context_snippet": "scenario uses 'OTDR' extensively without expansion (Optical Time Domain Reflectometer)"},
+        {"acronym": "VFL", "first_encounter_id": "z1-n5-study-038", "context_snippet": "scenario: 'Visual Fault Locator (VFL)' - actually expanded"},
+        {"acronym": "OPM", "first_encounter_id": "z1-n5-study-038", "context_snippet": "scenario: 'Optical Power Meter (OPM)' - actually expanded"},
+        {"acronym": "LED", "first_encounter_id": "z1-n5-study-023", "context_snippet": "scenario uses LED without expansion (Light Emitting Diode)"},
+        {"acronym": "VCSEL", "first_encounter_id": "z1-n5-study-024", "context_snippet": "scenario: 'LEDs/VCSELs' - VCSEL not expanded (Vertical-Cavity Surface-Emitting Laser)"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "UTP", "first_encounter_id": "z1-n5-study-001", "where_found": "scenario: 'UTP (Unshielded Twisted Pair)'"},
+        {"acronym": "STP", "first_encounter_id": "z1-n5-study-001", "where_found": "scenario: 'STP (Shielded Twisted Pair)'"},
+        {"acronym": "PoE", "first_encounter_id": "z1-n5-study-003", "where_found": "scenario: 'PoE (Power over Ethernet)'"},
+        {"acronym": "EMI", "first_encounter_id": "z1-n5-study-001", "where_found": "question: 'electromagnetic interference (EMI)'"},
+        {"acronym": "TDR", "first_encounter_id": "z1-n5-study-004", "where_found": "scenario: 'TIME DOMAIN REFLECTOMETER (TDR)'"},
+        {"acronym": "SMF", "first_encounter_id": "z1-n5-study-021", "where_found": "scenario: 'SMF (SINGLE-MODE FIBER)'"},
+        {"acronym": "MMF", "first_encounter_id": "z1-n5-study-021", "where_found": "scenario: 'MMF (MULTI-MODE FIBER)'"},
+        {"acronym": "SFP", "first_encounter_id": "z1-n5-study-022", "where_found": "scenario: 'SFP (SMALL FORM-FACTOR PLUGGABLE)'"},
+        {"acronym": "NEXT", "first_encounter_id": "z1-n5-study-013", "where_found": "scenario: 'NEXT (Near-End Crosstalk)'"},
+        {"acronym": "FEXT", "first_encounter_id": "z1-n5-study-015", "where_found": "scenario: 'FEXT (Far-End Crosstalk)'"},
+        {"acronym": "VFL", "first_encounter_id": "z1-n5-study-038", "where_found": "scenario: 'Visual Fault Locator (VFL)'"},
+        {"acronym": "OPM", "first_encounter_id": "z1-n5-study-038", "where_found": "scenario: 'Optical Power Meter (OPM)'"}
+      ]
+    },
+    {
+      "node_id": 1.6,
+      "node_name": "The Layout",
+      "acronyms_missing_expansion": [],
+      "acronyms_already_expanded": [
+        {"acronym": "LAN", "first_encounter_id": "z1-n6-study-006", "where_found": "question: 'local area networks (LANs)'"}
+      ]
+    },
+    {
+      "node_id": 1.7,
+      "node_name": "The Address Book",
+      "acronyms_missing_expansion": [
+        {"acronym": "CIDR", "first_encounter_id": "z1-n7-study-006", "context_snippet": "scenario mentions 'CIDR notation' without expansion (Classless Inter-Domain Routing)"},
+        {"acronym": "NDP", "first_encounter_id": "z1-n7-study-007", "context_snippet": "question option mentions NDP without expansion (Neighbor Discovery Protocol)"},
+        {"acronym": "IGMP", "first_encounter_id": "z1-n7-study-007", "context_snippet": "question option only - no expansion (Internet Group Management Protocol)"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "APIPA", "first_encounter_id": "z1-n7-study-003", "where_found": "scenario: 'APIPA (Automatic Private IP Addressing)'"},
+        {"acronym": "DHCP", "first_encounter_id": "z1-n7-study-003", "where_found": "scenario references DHCP (expanded in node 1.4)"},
+        {"acronym": "DNS", "first_encounter_id": "z1-n7-study-005", "where_found": "scenario references DNS (expanded in node 1.4)"},
+        {"acronym": "NAT", "first_encounter_id": "z1-n7-study-002", "where_found": "scenario: 'NAT (Network Address Translation)'"},
+        {"acronym": "IPv4", "first_encounter_id": "z1-n7-study-001", "where_found": "scenario explicitly about IPv4"},
+        {"acronym": "IPv6", "first_encounter_id": "z1-n7-study-007", "where_found": "scenario explicitly about IPv6"},
+        {"acronym": "ARP", "first_encounter_id": "z1-n7-study-007", "where_found": "scenario: 'ARP (Address Resolution Protocol)'"}
+      ]
+    },
+    {
+      "node_id": 1.8,
+      "node_name": "The New Wave",
+      "acronyms_missing_expansion": [
+        {"acronym": "SD-WAN", "first_encounter_id": "z1-n8-study-002", "context_snippet": "scenario: 'combines SD-WAN with security' - SD-WAN not expanded (Software-Defined Wide Area Network)"},
+        {"acronym": "SWG", "first_encounter_id": "z1-n8-study-002", "context_snippet": "scenario: 'SWG' without expansion (Secure Web Gateway)"},
+        {"acronym": "CASB", "first_encounter_id": "z1-n8-study-002", "context_snippet": "scenario: 'CASB' without expansion (Cloud Access Security Broker)"},
+        {"acronym": "ZTNA", "first_encounter_id": "z1-n8-study-002", "context_snippet": "scenario: 'ZTNA' without expansion (Zero Trust Network Access)"},
+        {"acronym": "FWaaS", "first_encounter_id": "z1-n8-study-002", "context_snippet": "scenario: 'FWaaS' without expansion (Firewall-as-a-Service)"}
+      ],
+      "acronyms_already_expanded": [
+        {"acronym": "SDN", "first_encounter_id": "z1-n8-study-001", "where_found": "scenario: 'Software-Defined Networking (SDN)'"},
+        {"acronym": "SASE", "first_encounter_id": "z1-n8-study-002", "where_found": "scenario: 'SASE (Secure Access Service Edge)'"}
+      ]
+    }
+  ],
+  "summary": {
+    "total_nodes_audited": 8,
+    "acronyms_missing_expansion_count": 22,
+    "acronyms_properly_expanded_count": 52,
+    "acronyms_by_node": {
+      "1.1": {"missing": 2, "expanded": 8},
+      "1.2": {"missing": 4, "expanded": 12},
+      "1.3": {"missing": 1, "expanded": 24},
+      "1.4": {"missing": 11, "expanded": 10},
+      "1.5": {"missing": 4, "expanded": 12},
+      "1.6": {"missing": 0, "expanded": 1},
+      "1.7": {"missing": 3, "expanded": 8},
+      "1.8": {"missing": 5, "expanded": 2}
+    }
+  },
+  "critical_missing_primers": [
+    {
+      "acronym": "API",
+      "full_expansion": "Application Programming Interface",
+      "first_occurrence": "z1-n3-study-009",
+      "context": "scenario mentions 'APIs' multiple times without expansion"
+    },
+    {
+      "acronym": "CIDR",
+      "full_expansion": "Classless Inter-Domain Routing",
+      "first_occurrence": "z1-n7-study-006",
+      "context": "scenario mentions 'CIDR notation' without expansion"
+    },
+    {
+      "acronym": "HTTP",
+      "full_expansion": "HyperText Transfer Protocol",
+      "first_occurrence": "z1-n4-study-003",
+      "context": "scenario lists 'HTTP (Port 80)' but no expansion"
+    },
+    {
+      "acronym": "HTTPS",
+      "full_expansion": "HyperText Transfer Protocol Secure",
+      "first_occurrence": "z1-n4-study-003",
+      "context": "scenario lists 'HTTPS (Port 443)' but no expansion"
+    },
+    {
+      "acronym": "IMAP",
+      "full_expansion": "Internet Message Access Protocol",
+      "first_occurrence": "z1-n4-study-006",
+      "context": "scenario mentions 'POP3 or IMAP' without expansion"
+    },
+    {
+      "acronym": "NDP",
+      "full_expansion": "Neighbor Discovery Protocol",
+      "first_occurrence": "z1-n7-study-007",
+      "context": "question option mentions NDP without expansion"
+    },
+    {
+      "acronym": "OTDR",
+      "full_expansion": "Optical Time Domain Reflectometer",
+      "first_occurrence": "z1-n5-study-032",
+      "context": "scenario uses 'OTDR' extensively without expansion"
+    },
+    {
+      "acronym": "POP3",
+      "full_expansion": "Post Office Protocol version 3",
+      "first_occurrence": "z1-n4-study-006",
+      "context": "scenario mentions 'POP3 or IMAP' without expansion"
+    },
+    {
+      "acronym": "RJ45",
+      "full_expansion": "Registered Jack 45",
+      "first_occurrence": "z1-n5-study-012",
+      "context": "scenario uses 'RJ45 connector' without expansion"
+    },
+    {
+      "acronym": "SASE-components",
+      "full_expansion": "SD-WAN, SWG, CASB, ZTNA, FWaaS",
+      "first_occurrence": "z1-n8-study-002",
+      "context": "scenario mentions multiple SASE components without individual expansion"
+    },
+    {
+      "acronym": "SMTP",
+      "full_expansion": "Simple Mail Transfer Protocol",
+      "first_occurrence": "z1-n4-study-006",
+      "context": "scenario mentions 'SMTP sends mail' without expansion"
+    },
+    {
+      "acronym": "TLS/SSL",
+      "full_expansion": "Transport Layer Security / Secure Sockets Layer",
+      "first_occurrence": "z1-n4-study-006",
+      "context": "scenario mentions 'TLS/SSL' without expansion"
+    },
+    {
+      "acronym": "VLAN",
+      "full_expansion": "Virtual Local Area Network",
+      "first_occurrence": "z1-n2-study-002",
+      "context": "scenario mentions 'VLANs' without expansion"
+    }
+  ],
+  "recommendations": [
+    "Node 1.1: Add primer for IP (Internet Protocol) in first OSI layer encounter",
+    "Node 1.1: Add primer for ICMP (Internet Control Message Protocol) in TCP/UDP encounter",
+    "Node 1.2: Add primer for VLAN (Virtual Local Area Network) in switch encounter",
+    "Node 1.2: Add primer for SNMP (Simple Network Management Protocol) in z1-n2-study-008",
+    "Node 1.3: Add primer for API (Application Programming Interface) in z1-n3-study-009",
+    "Node 1.4: Add primers for HTTP, HTTPS, FTP, SSH in port listings",
+    "Node 1.4: Add primers for SMTP, POP3, IMAP in email protocol encounter",
+    "Node 1.4: Add primers for TLS and SSL in security context",
+    "Node 1.5: Add primer for RJ45 in connector encounter",
+    "Node 1.5: Add primer for OTDR in fiber troubleshooting encounter",
+    "Node 1.7: Add primer for CIDR in subnetting encounter",
+    "Node 1.7: Add primer for NDP (Neighbor Discovery Protocol)",
+    "Node 1.7: Add primer for IGMP (Internet Group Management Protocol)",
+    "Node 1.8: Add primers for SD-WAN, SWG, CASB, ZTNA, FWaaS in SASE encounter"
+  ]
+}

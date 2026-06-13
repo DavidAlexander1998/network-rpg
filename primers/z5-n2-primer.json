@@ -1,0 +1,23 @@
+{
+  "id": "z5-n2-primer",
+  "type": "study_encounter",
+  "title": "Fiber Primer",
+  "scenario": "Welcome to Fiber Primer. Before proceeding, you must master these essential networking terms. Multi-Mode Fiber (MMF): Fiber with larger core (50 or 62.5 micron). Uses LED or VCSEL light source. Shorter distances (up to ~550m at 10G). Less expensive than SMF. OM1/OM2/OM3/OM4/OM5 grades. Single-Mode Fiber (SMF): Fiber with small core (9 micron). Uses laser light source. Long distances (up to 100km+). Used for WAN/backbone/service provider links. More expensive than MMF. OS1/OS2 grades. Small Form-factor Pluggable (SFP): Hot-swappable transceiver module for fiber or copper interfaces. SFP = 1 Gbps. SFP+ = 10 Gbps. QSFP = 40 Gbps. QSFP28 = 100 Gbps. Allows flexible media type selection.",
+  "question": "What does MMF stand for?",
+  "options": [
+    "Multi-Mode Fiber",
+    "Advanced MMF Protocol",
+    "Automated MMF System",
+    "Active MMF Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "MMF stands for Multi-Mode Fiber.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "mmf",
+    "smf",
+    "sfp"
+  ]
+}

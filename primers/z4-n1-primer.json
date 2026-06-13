@@ -1,0 +1,23 @@
+{
+  "id": "z4-n1-primer",
+  "type": "study_encounter",
+  "title": "Security Concepts Primer",
+  "scenario": "Welcome to Security Concepts Primer. Before proceeding, you must master these essential networking terms. Multi-Factor Authentication (MFA): Authentication using 2+ factors: something you know (password), something you have (token/phone), something you are (biometric). Significantly reduces credential-based attack success.",
+  "question": "What does MFA stand for?",
+  "options": [
+    "Multi-Factor Authentication",
+    "Advanced MFA Protocol",
+    "Automated MFA System",
+    "Active MFA Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "MFA stands for Multi-Factor Authentication.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "mfa",
+    "sso",
+    "idp"
+  ]
+}

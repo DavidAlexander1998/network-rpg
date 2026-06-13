@@ -1,0 +1,512 @@
+{
+  "zone": 4,
+  "audit_date": "2026-06-13",
+  "nodes": [
+    {
+      "node_id": 4.1,
+      "node_name": "The Threat Landscape",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "DDoS",
+          "first_encounter_id": "z4-n1-study-002",
+          "context_snippet": "defacement, leaked documents, a DDoS with a press release"
+        },
+        {
+          "acronym": "SYN",
+          "first_encounter_id": "z4-n1-001",
+          "context_snippet": "An attacker sends thousands of SYN packets to a server"
+        },
+        {
+          "acronym": "DoS",
+          "first_encounter_id": "z4-n1-001",
+          "context_snippet": "SYN flood (DoS — protocol attack)"
+        },
+        {
+          "acronym": "ARP",
+          "first_encounter_id": "z4-n1-003",
+          "context_snippet": "An attacker sends fraudulent ARP replies to associate their MAC address"
+        },
+        {
+          "acronym": "DHCP",
+          "first_encounter_id": "z4-n1-003",
+          "context_snippet": "DHCP starvation"
+        },
+        {
+          "acronym": "IP",
+          "first_encounter_id": "z4-n1-003",
+          "context_snippet": "associate their MAC address with the gateway IP"
+        },
+        {
+          "acronym": "SSID",
+          "first_encounter_id": "z4-n1-006",
+          "context_snippet": "An attacker sets up a Wi-Fi network with the same SSID as the corporate network"
+        },
+        {
+          "acronym": "AP",
+          "first_encounter_id": "z4-n1-006",
+          "context_snippet": "Evil twin AP"
+        },
+        {
+          "acronym": "DNS",
+          "first_encounter_id": "z4-n1-008",
+          "context_snippet": "DNS poisoning attacks work by"
+        },
+        {
+          "acronym": "DNSSEC",
+          "first_encounter_id": "z4-n1-008",
+          "context_snippet": "Mitigation: DNSSEC (cryptographically signs DNS records)"
+        },
+        {
+          "acronym": "VLAN",
+          "first_encounter_id": "z4-n1-010",
+          "context_snippet": "VLAN segmentation"
+        },
+        {
+          "acronym": "WPA3",
+          "first_encounter_id": "z4-n1-014",
+          "context_snippet": "Mitigation: 802.11w (Management Frame Protection) and WPA3"
+        },
+        {
+          "acronym": "APT",
+          "first_encounter_id": "z4-n1-016",
+          "context_snippet": "An APT (Advanced Persistent Threat) is distinguished"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "APT",
+          "where_found": "z4-n1-study-002: 'An ADVANCED PERSISTENT THREAT (often nation-state)'"
+        },
+        {
+          "acronym": "MITM",
+          "where_found": "z4-n1-009: 'on-path attack (formerly MITM)'"
+        },
+        {
+          "acronym": "TLS",
+          "where_found": "z4-n1-009: 'Certificate validation + mutual TLS authentication' (expanded in explanation as 'Transport Layer Security')"
+        },
+        {
+          "acronym": "CA",
+          "where_found": "z4-n1-009: 'signed by a trusted CA' (expanded in explanation as 'Certificate Authority')"
+        },
+        {
+          "acronym": "DHCP",
+          "where_found": "z4-n1-010: 'Rogue DHCP server attack' (expanded in explanation as 'Dynamic Host Configuration Protocol')"
+        },
+        {
+          "acronym": "MFP",
+          "where_found": "z4-n1-014: '802.11w (Management Frame Protection)'"
+        }
+      ]
+    },
+    {
+      "node_id": 4.2,
+      "node_name": "The Perimeter Wall",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "IPS",
+          "first_encounter_id": "z4-n2-study-002",
+          "context_snippet": "An inline IPS sits directly in the traffic path"
+        },
+        {
+          "acronym": "ISAKMP",
+          "first_encounter_id": "z4-n2-study-002",
+          "context_snippet": "creates the ISAKMP SA (Security Association)"
+        },
+        {
+          "acronym": "LAN",
+          "first_encounter_id": "z4-n2-003",
+          "context_snippet": "DMZ servers cannot initiate connections to the internal LAN"
+        },
+        {
+          "acronym": "WAF",
+          "first_encounter_id": "z4-n2-004",
+          "context_snippet": "A WAF (Web Application Firewall) is specifically designed"
+        },
+        {
+          "acronym": "OWASP",
+          "first_encounter_id": "z4-n2-004",
+          "context_snippet": "OWASP Top 10"
+        },
+        {
+          "acronym": "XSS",
+          "first_encounter_id": "z4-n2-004",
+          "context_snippet": "SQL injection, XSS, and CSRF"
+        },
+        {
+          "acronym": "CSRF",
+          "first_encounter_id": "z4-n2-004",
+          "context_snippet": "SQL injection, XSS, and CSRF"
+        },
+        {
+          "acronym": "SQL",
+          "first_encounter_id": "z4-n2-004",
+          "context_snippet": "SQL injection, XSS, and CSRF"
+        },
+        {
+          "acronym": "VM",
+          "first_encounter_id": "z4-n2-010",
+          "context_snippet": "per-workload or per-VM level"
+        },
+        {
+          "acronym": "DMZ",
+          "first_encounter_id": "z4-n2-012",
+          "context_snippet": "A company's web server in the DMZ is compromised"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "IDS",
+          "where_found": "z4-n2-002: 'IDS (Intrusion Detection System)'"
+        },
+        {
+          "acronym": "IPS",
+          "where_found": "z4-n2-002: 'IPS (Intrusion Prevention System)'"
+        },
+        {
+          "acronym": "DMZ",
+          "where_found": "z4-n2-003: 'DMZ (Demilitarized Zone)'"
+        },
+        {
+          "acronym": "SSH",
+          "where_found": "z4-n2-009: 'SSH or RDP' (context implies SSH is Secure Shell, not explicitly expanded)"
+        },
+        {
+          "acronym": "RDP",
+          "where_found": "z4-n2-009: 'SSH or RDP' (expanded in explanation as 'Remote Desktop Protocol')"
+        },
+        {
+          "acronym": "NGFW",
+          "where_found": "z4-n2-011: 'NGFW identifies application traffic' (expanded in explanation as 'Next-Generation Firewall')"
+        },
+        {
+          "acronym": "UTM",
+          "where_found": "z4-n2-013: 'UTM (Unified Threat Management)'"
+        },
+        {
+          "acronym": "ACL",
+          "where_found": "z4-n2-014: 'implicit deny rule at the end of every firewall ACL' (expanded in explanation as 'Access Control List')"
+        },
+        {
+          "acronym": "SPAN",
+          "where_found": "z4-n2-015: 'IDS is deployed in tap/SPAN mode' (expanded in explanation as 'Switched Port Analyzer')"
+        }
+      ]
+    },
+    {
+      "node_id": 4.3,
+      "node_name": "The Secret Tunnels",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "ECDHE",
+          "first_encounter_id": "z4-n3-study-001",
+          "context_snippet": "using RSA or ECDHE to agree on a 'pre-master secret'"
+        },
+        {
+          "acronym": "MDM",
+          "first_encounter_id": "z4-n3-study-002",
+          "context_snippet": "via Group Policy/MDM"
+        },
+        {
+          "acronym": "AH",
+          "first_encounter_id": "z4-n3-001",
+          "context_snippet": "AH (IP protocol 51) provides only integrity and authentication"
+        },
+        {
+          "acronym": "ISP",
+          "first_encounter_id": "z4-n3-006",
+          "context_snippet": "internet traffic goes directly via the local ISP"
+        },
+        {
+          "acronym": "SA",
+          "first_encounter_id": "z4-n3-007",
+          "context_snippet": "creates the ISAKMP SA (Security Association)"
+        },
+        {
+          "acronym": "MPLS",
+          "first_encounter_id": "z4-n3-014",
+          "context_snippet": "GRE is too slow — use MPLS instead"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "AES",
+          "where_found": "z4-n3-study-001: 'AES-256-GCM' (expanded in explanation as 'Advanced Encryption Standard')"
+        },
+        {
+          "acronym": "CA",
+          "where_found": "z4-n3-study-002: 'signed by a public CA' and 'internal CA' (expanded in explanation as 'Certificate Authority')"
+        },
+        {
+          "acronym": "ESP",
+          "where_found": "z4-n3-001: 'IPsec ESP (Encapsulating Security Payload)'"
+        },
+        {
+          "acronym": "VPN",
+          "where_found": "z4-n3-002: 'SSL/TLS VPN' (expanded in explanation as 'Virtual Private Network')"
+        },
+        {
+          "acronym": "IKE",
+          "where_found": "z4-n3-007: 'IKE Phase 1' (expanded in explanation as 'Internet Key Exchange')"
+        },
+        {
+          "acronym": "ISAKMP",
+          "where_found": "z4-n3-007: 'ISAKMP SA' (expanded in explanation as 'Internet Security Association and Key Management Protocol')"
+        },
+        {
+          "acronym": "CRL",
+          "where_found": "z4-n3-008: 'CRL (Certificate Revocation List)'"
+        },
+        {
+          "acronym": "OCSP",
+          "where_found": "z4-n3-008: 'OCSP (Online Certificate Status Protocol)'"
+        },
+        {
+          "acronym": "PFS",
+          "where_found": "z4-n3-009: 'PFS (Perfect Forward Secrecy)'"
+        },
+        {
+          "acronym": "RSA",
+          "where_found": "z4-n3-010: 'RSA is asymmetric' (expanded in explanation)"
+        },
+        {
+          "acronym": "NAT",
+          "where_found": "z4-n3-013: 'UDP 4500 (NAT traversal)' (expanded in explanation as 'Network Address Translation')"
+        },
+        {
+          "acronym": "GRE",
+          "where_found": "z4-n3-014: 'GRE (Generic Routing Encapsulation)'"
+        }
+      ]
+    },
+    {
+      "node_id": 4.4,
+      "node_name": "The Gatehouse",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "EAP",
+          "first_encounter_id": "z4-n4-study-001",
+          "context_snippet": "802.1X can use different EAP methods"
+        },
+        {
+          "acronym": "MSCHAPv2",
+          "first_encounter_id": "z4-n4-study-001",
+          "context_snippet": "username and password (MSCHAPv2)"
+        },
+        {
+          "acronym": "PKI",
+          "first_encounter_id": "z4-n4-study-001",
+          "context_snippet": "client cert from a PKI"
+        },
+        {
+          "acronym": "BYOD",
+          "first_encounter_id": "z4-n4-study-001",
+          "context_snippet": "roll out 802.1X to thousands of BYOD laptops"
+        },
+        {
+          "acronym": "TTL",
+          "first_encounter_id": "z4-n4-study-002",
+          "context_snippet": "Ethernet frames have NO TTL to expire"
+        },
+        {
+          "acronym": "RADIUS",
+          "first_encounter_id": "z4-n4-001",
+          "context_snippet": "RADIUS uses which transport protocol"
+        },
+        {
+          "acronym": "AAA",
+          "first_encounter_id": "z4-n4-001",
+          "context_snippet": "tags: ['RADIUS', 'UDP 1812', 'AAA']"
+        },
+        {
+          "acronym": "EAP",
+          "first_encounter_id": "z4-n4-003",
+          "context_snippet": "forwards EAP between the client and RADIUS server"
+        },
+        {
+          "acronym": "TCP",
+          "first_encounter_id": "z4-n4-007",
+          "context_snippet": "Destination IP, transport protocol (TCP/UDP)"
+        },
+        {
+          "acronym": "UDP",
+          "first_encounter_id": "z4-n4-007",
+          "context_snippet": "Destination IP, transport protocol (TCP/UDP)"
+        },
+        {
+          "acronym": "VLAN",
+          "first_encounter_id": "z4-n4-010",
+          "context_snippet": "quarantined to a remediation VLAN"
+        },
+        {
+          "acronym": "MAC",
+          "first_encounter_id": "z4-n4-011",
+          "context_snippet": "Port security with sticky MAC"
+        },
+        {
+          "acronym": "AAA",
+          "first_encounter_id": "z4-n4-012",
+          "context_snippet": "separates AAA services"
+        },
+        {
+          "acronym": "IP",
+          "first_encounter_id": "z4-n4-013",
+          "context_snippet": "IP Source Guard"
+        },
+        {
+          "acronym": "DHCP",
+          "first_encounter_id": "z4-n4-014",
+          "context_snippet": "DHCP snooping must be configured"
+        },
+        {
+          "acronym": "IP",
+          "first_encounter_id": "z4-n4-015",
+          "context_snippet": "block traffic from 10.1.1.0/24"
+        },
+        {
+          "acronym": "VACL",
+          "first_encounter_id": "z4-n4-015",
+          "context_snippet": "On the core switch as a VACL"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "EAP",
+          "where_found": "z4-n4-study-001: 'EAP methods — different ways of proving identity' (expanded as 'Extensible Authentication Protocol')"
+        },
+        {
+          "acronym": "STP",
+          "where_found": "z4-n4-study-002: 'Spanning Tree Protocol normally PREVENTS loops'"
+        },
+        {
+          "acronym": "TACACS+",
+          "where_found": "z4-n4-002: 'TACACS+ (Terminal Access Controller Access Control System Plus)'"
+        },
+        {
+          "acronym": "AAA",
+          "where_found": "z4-n4-004: 'AAA: Authentication, Authorization, and Accounting'"
+        },
+        {
+          "acronym": "DAI",
+          "where_found": "z4-n4-006: 'Dynamic ARP Inspection (DAI)'"
+        },
+        {
+          "acronym": "ARP",
+          "where_found": "z4-n4-006: 'ARP packets' (expanded in explanation as 'Address Resolution Protocol')"
+        },
+        {
+          "acronym": "ACL",
+          "where_found": "z4-n4-007: 'standard ACL vs an extended ACL' (expanded in explanation as 'Access Control List')"
+        },
+        {
+          "acronym": "NAC",
+          "where_found": "z4-n4-010: 'NAC (Network Access Control)'"
+        }
+      ]
+    }
+  ],
+  "guardian_encounters": {
+    "note": "Guardian encounters (z4-g-*) are supplementary and not tied to specific nodes. Listed here for completeness.",
+    "acronyms_missing_expansion": [
+      {
+        "acronym": "TACACS+",
+        "first_encounter_id": "z4-g-002",
+        "context_snippet": "TACACS+ uses which transport protocol"
+      },
+      {
+        "acronym": "RADIUS",
+        "first_encounter_id": "z4-g-002",
+        "context_snippet": "RADIUS uses UDP 1812"
+      },
+      {
+        "acronym": "MFA",
+        "first_encounter_id": "z4-g-005",
+        "context_snippet": "Trust is granted after initial MFA"
+      },
+      {
+        "acronym": "OWASP",
+        "first_encounter_id": "z4-g-007",
+        "context_snippet": "other OWASP Top 10 web application attacks"
+      },
+      {
+        "acronym": "XSS",
+        "first_encounter_id": "z4-g-007",
+        "context_snippet": "SQL injection, XSS, and other OWASP Top 10"
+      },
+      {
+        "acronym": "CSRF",
+        "first_encounter_id": "z4-g-007",
+        "context_snippet": "SQL injection, XSS, and CSRF"
+      },
+      {
+        "acronym": "SQL",
+        "first_encounter_id": "z4-g-007",
+        "context_snippet": "SQL injection, XSS, and CSRF"
+      },
+      {
+        "acronym": "BEC",
+        "first_encounter_id": "z4-g-015",
+        "context_snippet": "Common themes: fake legal subpoenas, wire transfer requests (BEC"
+      }
+    ],
+    "acronyms_already_expanded": [
+      {
+        "acronym": "DAI",
+        "where_found": "z4-g-001: 'Dynamic ARP Inspection (DAI)'"
+      },
+      {
+        "acronym": "ARP",
+        "where_found": "z4-g-001: 'ARP poisoning' (expanded in explanation)"
+      },
+      {
+        "acronym": "IDS",
+        "where_found": "z4-g-004: 'IDS vs IPS' (expanded in explanation as 'Intrusion Detection System')"
+      },
+      {
+        "acronym": "IPS",
+        "where_found": "z4-g-004: 'IPS — detects and blocks (inline)' (expanded in explanation as 'Intrusion Prevention System')"
+      },
+      {
+        "acronym": "DNSSEC",
+        "where_found": "z4-g-011: 'DNSSEC — cryptographically signs DNS responses' (expanded in explanation as 'Domain Name System Security Extensions')"
+      },
+      {
+        "acronym": "PFS",
+        "where_found": "z4-g-013: 'PFS (Perfect Forward Secrecy)'"
+      },
+      {
+        "acronym": "DMZ",
+        "where_found": "z4-g-014: 'DMZ (screened subnet)' (expanded in explanation as 'Demilitarized Zone')"
+      },
+      {
+        "acronym": "LAN",
+        "where_found": "z4-g-014: 'DMZ → internal LAN blocked' (expanded in explanation as 'Local Area Network')"
+      }
+    ]
+  },
+  "summary": {
+    "total_nodes_audited": 4,
+    "total_guardian_encounters": 20,
+    "acronyms_missing_expansion_by_node": {
+      "4.1": 13,
+      "4.2": 10,
+      "4.3": 6,
+      "4.4": 17
+    },
+    "most_common_missing": [
+      "IP (appears in nodes 4.1, 4.4)",
+      "DHCP (appears in nodes 4.1, 4.4)",
+      "EAP (appears in node 4.4)",
+      "AAA (appears in node 4.4)",
+      "RADIUS (appears in node 4.4 + guardians)",
+      "TACACS+ (appears in node 4.4 + guardians)"
+    ],
+    "recommendations": [
+      "Node 4.1: Add expansion for DDoS, SYN, DoS, ARP, DHCP, IP, SSID, AP, DNS, DNSSEC, VLAN, WPA3, APT in their first encounters",
+      "Node 4.2: Add expansion for IPS, ISAKMP, LAN, WAF, OWASP, XSS, CSRF, SQL, VM, DMZ in their first encounters",
+      "Node 4.3: Add expansion for ECDHE, MDM, AH, ISP, SA, MPLS in their first encounters",
+      "Node 4.4: Add expansion for EAP, MSCHAPv2, PKI, BYOD, TTL, RADIUS, AAA, TCP, UDP, VLAN, MAC, IP, DHCP, VACL in their first encounters",
+      "Consider adding a zone-4 specific acronyms primer that covers commonly reused acronyms like IP, DHCP, VLAN, DNS, TLS/SSL, VPN, IPsec, RADIUS, TACACS+, AAA, EAP"
+    ]
+  }
+}

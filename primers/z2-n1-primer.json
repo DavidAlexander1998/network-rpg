@@ -1,0 +1,24 @@
+{
+  "id": "z2-n1-primer",
+  "type": "study_encounter",
+  "title": "Pathfinding Primer",
+  "scenario": "Welcome to Pathfinding. You must understand Administrative Distance (AD) - the router's trust ranking for routing sources. Lower AD = more trusted. Open Shortest Path First (OSPF) is a link-state protocol with AD 110. Enhanced Interior Gateway Routing Protocol (EIGRP) is a Cisco hybrid protocol with AD 90. Border Gateway Protocol (BGP) routes between autonomous systems with AD 20 (eBGP) or 200 (iBGP).",
+  "question": "Which routing protocol has the lowest default AD (most trusted)?",
+  "options": [
+    "EIGRP (AD 90)",
+    "OSPF (AD 110)",
+    "RIP (AD 120)",
+    "BGP external (AD 20)"
+  ],
+  "correct_index": 3,
+  "explanation": "External BGP (eBGP) has AD 20, making it the most trusted among these options.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "ad",
+    "ospf",
+    "bgp",
+    "eigrp"
+  ]
+}

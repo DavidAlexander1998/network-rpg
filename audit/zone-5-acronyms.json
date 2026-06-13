@@ -1,0 +1,440 @@
+{
+  "zone": 5,
+  "audit_date": "2026-06-13",
+  "summary": {
+    "total_nodes": 5,
+    "total_guardian_encounters": 20,
+    "acronyms_missing_expansion": 23,
+    "acronyms_already_expanded": 15
+  },
+  "nodes": [
+    {
+      "node_id": 5.1,
+      "node_name": "The Methodology",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "NIC",
+          "first_encounter_id": "z5-n1-study-001",
+          "context_snippet": "SUBSTITUTION means physically swapping a suspect cable, NIC, port, or transceiver..."
+        },
+        {
+          "acronym": "ACL",
+          "first_encounter_id": "z5-n1-study-002",
+          "context_snippet": "Checking the change management log (RFC history) for anything touching the affected system..."
+        },
+        {
+          "acronym": "CA",
+          "first_encounter_id": "z5-n1-study-002",
+          "context_snippet": "...any changes to the HR portal's certificate, the internal CA, or related infrastructure..."
+        },
+        {
+          "acronym": "CAB",
+          "first_encounter_id": "z5-n1-003",
+          "context_snippet": "...satisfies the change management requirement for the CAB"
+        },
+        {
+          "acronym": "IOS",
+          "first_encounter_id": "z5-n1-011",
+          "context_snippet": "...classic Cisco IOS show interface output pattern"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "OSI",
+          "where_found": "z5-n1-004 question: 'divide and conquer' troubleshooting approach at which OSI layer; z5-n1-007 question: Bottom-up follows OSI model"
+        }
+      ]
+    },
+    {
+      "node_id": 5.2,
+      "node_name": "The Cable Lab",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "MMF",
+          "first_encounter_id": "z5-n2-study-001",
+          "context_snippet": "Multimode fiber (MMF) is a wide hallway where light bounces..."
+        },
+        {
+          "acronym": "SMF",
+          "first_encounter_id": "z5-n2-study-001",
+          "context_snippet": "Single-mode fiber (SMF) is a narrow hallway where light travels..."
+        },
+        {
+          "acronym": "SFP",
+          "first_encounter_id": "z5-n2-study-001",
+          "context_snippet": "...an SFP/transceiver is built for a SPECIFIC wavelength and fiber type"
+        },
+        {
+          "acronym": "OM3",
+          "first_encounter_id": "z5-n2-study-001",
+          "context_snippet": "...up to ~550m on OM3/OM4 for 10GbE"
+        },
+        {
+          "acronym": "OM4",
+          "first_encounter_id": "z5-n2-study-001",
+          "context_snippet": "...up to ~550m on OM3/OM4 for 10GbE"
+        },
+        {
+          "acronym": "PoE",
+          "first_encounter_id": "z5-n2-study-002",
+          "context_snippet": "Copper Ethernet cables carrying PoE work the same way..."
+        },
+        {
+          "acronym": "DC",
+          "first_encounter_id": "z5-n2-study-002",
+          "context_snippet": "...each cable's conductors warm slightly from the DC current powering devices"
+        },
+        {
+          "acronym": "OTDR",
+          "first_encounter_id": "z5-n2-002",
+          "context_snippet": "OTDR (Optical Time Domain Reflectometer) sends a light pulse into fiber..."
+        },
+        {
+          "acronym": "MDI",
+          "first_encounter_id": "z5-n2-003",
+          "context_snippet": "MDI/MDIX on modern equipment auto-corrects this"
+        },
+        {
+          "acronym": "MDIX",
+          "first_encounter_id": "z5-n2-003",
+          "context_snippet": "MDI/MDIX on modern equipment auto-corrects this"
+        },
+        {
+          "acronym": "TX",
+          "first_encounter_id": "z5-n2-005",
+          "context_snippet": "A loopback adapter connects the transmit (TX) pin to the receive pin"
+        },
+        {
+          "acronym": "RX",
+          "first_encounter_id": "z5-n2-005",
+          "context_snippet": "A loopback adapter connects the transmit (TX) pin to the receive (RX) pin"
+        },
+        {
+          "acronym": "NEXT",
+          "first_encounter_id": "z5-n2-006",
+          "context_snippet": "...untwisted wires generate high crosstalk (NEXT) at Gigabit speeds"
+        },
+        {
+          "acronym": "CRC",
+          "first_encounter_id": "z5-n2-007",
+          "context_snippet": "CRC errors are increasing on a switch interface..."
+        },
+        {
+          "acronym": "IDC",
+          "first_encounter_id": "z5-n2-013",
+          "context_snippet": "...seats individual wires into IDC (Insulation Displacement Connector) slots"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "T568A",
+          "where_found": "z5-n2-004 question explains: 'Orange and green pairs are swapped between the two standards'"
+        },
+        {
+          "acronym": "T568B",
+          "where_found": "z5-n2-004 question explains: 'Orange and green pairs are swapped between the two standards'"
+        },
+        {
+          "acronym": "Cat5e",
+          "where_found": "z5-n2-008 explanation: 'For copper Ethernet (Cat5e/6), the limit is 100m'"
+        },
+        {
+          "acronym": "Cat6",
+          "where_found": "z5-n2-008 explanation: 'For copper Ethernet (Cat5e/6), the limit is 100m'"
+        },
+        {
+          "acronym": "Cat6A",
+          "where_found": "z5-n2-study-002 scenario: 'Using Cat6A (better heat dissipation)'"
+        },
+        {
+          "acronym": "EMI",
+          "where_found": "z5-n2-012 question: 'EMI (Electromagnetic Interference) on a copper cable run...'"
+        },
+        {
+          "acronym": "STP",
+          "where_found": "z5-n2-012 options: 'Using shielded cable (STP/FTP)'"
+        },
+        {
+          "acronym": "FTP",
+          "where_found": "z5-n2-012 options: 'Using shielded cable (STP/FTP)'"
+        }
+      ]
+    },
+    {
+      "node_id": 5.3,
+      "node_name": "The Command Post",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "TCP",
+          "first_encounter_id": "z5-n3-study-001",
+          "context_snippet": "A TCP RST (reset) is exactly that: one side immediately tears down the connection..."
+        },
+        {
+          "acronym": "RST",
+          "first_encounter_id": "z5-n3-study-001",
+          "context_snippet": "A TCP RST (reset) is exactly that: one side immediately tears down the connection..."
+        },
+        {
+          "acronym": "MAC",
+          "first_encounter_id": "z5-n3-study-002",
+          "context_snippet": "A switch's MAC ADDRESS TABLE is a guest list at a building's front desk..."
+        },
+        {
+          "acronym": "CDP",
+          "first_encounter_id": "z5-n3-study-002",
+          "context_snippet": "CDP/LLDP is a directory shared between adjacent buildings' front desks"
+        },
+        {
+          "acronym": "LLDP",
+          "first_encounter_id": "z5-n3-study-002",
+          "context_snippet": "CDP/LLDP is a directory shared between adjacent buildings' front desks"
+        },
+        {
+          "acronym": "IP",
+          "first_encounter_id": "z5-n3-004",
+          "context_snippet": "'ping 127.0.0.1' tests the local TCP/IP stack"
+        },
+        {
+          "acronym": "ICMP",
+          "first_encounter_id": "z5-n3-006",
+          "context_snippet": "...does not respond to ICMP TTL-exceeded messages"
+        },
+        {
+          "acronym": "TTL",
+          "first_encounter_id": "z5-n3-006",
+          "context_snippet": "...does not respond to ICMP TTL-exceeded messages"
+        },
+        {
+          "acronym": "Gi0/1",
+          "first_encounter_id": "z5-n3-009",
+          "context_snippet": "'show interface Gi0/1' shows 'input errors: 1240, CRC: 1240'"
+        },
+        {
+          "acronym": "UDP",
+          "first_encounter_id": "z5-n3-014",
+          "context_snippet": "...firewall rules for UDP 53"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "APIPA",
+          "where_found": "z5-n3-001 explanation: '169.254.x.x is APIPA (Automatic Private IP Addressing)'"
+        },
+        {
+          "acronym": "DNS",
+          "where_found": "z5-n3-003 question: 'test DNS resolution'; explanation mentions 'DNS troubleshooting'"
+        },
+        {
+          "acronym": "ARP",
+          "where_found": "z5-n3-005 question: 'The arp -a command displays'; explanation: 'shows the ARP cache'"
+        },
+        {
+          "acronym": "TCP",
+          "where_found": "z5-n3-010 explanation: 'netstat -an shows all active connections (ESTABLISHED) and listening ports' - implies TCP/UDP"
+        }
+      ]
+    },
+    {
+      "node_id": 5.4,
+      "node_name": "The Signal Tower",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "AP",
+          "first_encounter_id": "z5-n4-study-001",
+          "context_snippet": "...neighboring APs crowd onto it, with only 3 non-overlapping channels"
+        },
+        {
+          "acronym": "MHz",
+          "first_encounter_id": "z5-n4-study-001",
+          "context_snippet": "...wider channels (40/80/160MHz)"
+        },
+        {
+          "acronym": "RSSI",
+          "first_encounter_id": "z5-n4-006",
+          "context_snippet": "Weak signal / low RSSI — AP too far away"
+        },
+        {
+          "acronym": "MCS",
+          "first_encounter_id": "z5-n4-006",
+          "context_snippet": "...client transmits at low MCS rate to compensate for weak signal"
+        },
+        {
+          "acronym": "CA",
+          "first_encounter_id": "z5-n4-007",
+          "context_snippet": "...or the CA is not in the device's trust store"
+        },
+        {
+          "acronym": "LWAP",
+          "first_encounter_id": "z5-n4-008",
+          "context_snippet": "After deploying a new LWAP, it won't appear in the WLC"
+        },
+        {
+          "acronym": "WLC",
+          "first_encounter_id": "z5-n4-008",
+          "context_snippet": "After deploying a new LWAP, it won't appear in the WLC"
+        },
+        {
+          "acronym": "PSK",
+          "first_encounter_id": "z5-n4-005",
+          "context_snippet": "...correct PSK (case-sensitive), correct security type (WPA2-PSK vs WPA3-SAE)"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "SSID",
+          "where_found": "z5-n4-003 question: 'cannot find their corporate Wi-Fi SSID'; explanation explains it's the network name"
+        },
+        {
+          "acronym": "WPA2",
+          "where_found": "z5-n4-005 question mentions 'WPA2 vs WPA3'; explanation covers WPA2-PSK vs WPA3-SAE"
+        },
+        {
+          "acronym": "WPA3",
+          "where_found": "z5-n4-005 question mentions 'WPA2 vs WPA3'; explanation covers WPA2-PSK vs WPA3-SAE"
+        },
+        {
+          "acronym": "EAP",
+          "where_found": "z5-n4-007 question: 'WPA2 Enterprise with PEAP or EAP-TLS'"
+        },
+        {
+          "acronym": "RADIUS",
+          "where_found": "z5-n4-007 question: 'RADIUS server certificate'; explanation mentions RADIUS"
+        },
+        {
+          "acronym": "SAE",
+          "where_found": "z5-n4-005 explanation: 'WPA2-PSK vs WPA3-SAE vs WPA2-Enterprise'"
+        }
+      ]
+    },
+    {
+      "node_id": 5.5,
+      "node_name": "The Service Desk",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "MX",
+          "first_encounter_id": "z5-n5-study-001",
+          "context_snippet": "MX (Mail Exchanger) = 'for THIS domain's email, deliver to THIS mail server'"
+        },
+        {
+          "acronym": "TXT",
+          "first_encounter_id": "z5-n5-study-001",
+          "context_snippet": "TXT = a free-form notes field, used for ownership verification..."
+        },
+        {
+          "acronym": "NS",
+          "first_encounter_id": "z5-n5-study-001",
+          "context_snippet": "NS = 'THESE servers are authoritative for this domain'"
+        },
+        {
+          "acronym": "PTR",
+          "first_encounter_id": "z5-n5-study-001",
+          "context_snippet": "PTR = a REVERSE lookup, IP → name"
+        },
+        {
+          "acronym": "SRV",
+          "first_encounter_id": "z5-n5-study-001",
+          "context_snippet": "SRV = 'for THIS service, connect to THIS host on THIS port'"
+        },
+        {
+          "acronym": "GIADDR",
+          "first_encounter_id": "z5-n5-study-002",
+          "context_snippet": "...stamping its own interface IP into the GIADDR field"
+        },
+        {
+          "acronym": "SVI",
+          "first_encounter_id": "z5-n5-study-002",
+          "context_snippet": "...configured via 'ip helper-address <server IP>' on the VLAN 30 SVI"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "DHCP",
+          "where_found": "z5-n5-study-002 scenario and question explain DHCP DISCOVER, relay agent, ip helper-address"
+        },
+        {
+          "acronym": "NTP",
+          "where_found": "z5-n5-005 question: 'NTP (Network Time Protocol) time synchronisation failure'"
+        },
+        {
+          "acronym": "DNS",
+          "where_found": "z5-n5-study-001 scenario: 'DNS is a phonebook with different PAGE TYPES'"
+        },
+        {
+          "acronym": "APIPA",
+          "where_found": "z5-n5-001 question; z5-n5-011 explanation: 'APIPA after manual release/renew'"
+        }
+      ]
+    }
+  ],
+  "guardian_encounters": {
+    "note": "Guardian encounters (boss fights) at zone level are repeats of concepts from nodes. Key missing expansions: IP (z5-g-010, z5-g-014), ARP (z5-g-010), UDP (z5-g-008), IOS (z5-g-012), GHz (z5-g-013), LWAP/WLC/CAPWAP (z5-g-020). Most guardian acronyms are already expanded in their questions/explanations.",
+    "acronyms_missing_expansion": [
+      {
+        "acronym": "IP",
+        "first_encounter_id": "z5-g-010",
+        "context_snippet": "Duplicate IP → ARP conflict"
+      },
+      {
+        "acronym": "ARP",
+        "first_encounter_id": "z5-g-010",
+        "context_snippet": "Duplicate IP → ARP conflict: both machines respond to ARP requests"
+      },
+      {
+        "acronym": "IOS",
+        "first_encounter_id": "z5-g-012",
+        "context_snippet": "A Cisco switch port shows 'FastEthernet0/1 is up, line protocol is down'"
+      }
+    ],
+    "acronyms_already_expanded": [
+      {
+        "acronym": "APIPA",
+        "where_found": "z5-g-002 question and explanation expanded"
+      },
+      {
+        "acronym": "OTDR",
+        "where_found": "z5-g-003 explanation expanded"
+      },
+      {
+        "acronym": "DNS",
+        "where_found": "z5-g-004 question and explanation expanded"
+      },
+      {
+        "acronym": "NTP",
+        "where_found": "z5-g-008 question and explanation expanded"
+      },
+      {
+        "acronym": "DHCP",
+        "where_found": "z5-g-015 and z5-g-018 expanded"
+      },
+      {
+        "acronym": "T568A",
+        "where_found": "z5-g-007 explanation expanded"
+      },
+      {
+        "acronym": "T568B",
+        "where_found": "z5-g-007 explanation expanded"
+      }
+    ]
+  },
+  "recommendations": [
+    "Node 5.1: Add primer for NIC (Network Interface Card) before first encounter",
+    "Node 5.1: Add primer for ACL (Access Control List) before study-002",
+    "Node 5.1: Add primer for CA (Certificate Authority) before study-002",
+    "Node 5.1: Add primer for CAB (Change Advisory Board) before mob-003",
+    "Node 5.1: Add primer for IOS (Cisco Internetwork Operating System) before mob-011",
+    "Node 5.2: Add primer for MMF/SMF/SFP/OM3/OM4 in fiber study encounter",
+    "Node 5.2: Add primer for PoE (Power over Ethernet) before study-002",
+    "Node 5.2: Add primer for DC (Direct Current) if not commonly known",
+    "Node 5.2: Add primer for MDI/MDIX before mob-003",
+    "Node 5.2: Add primer for NEXT (Near-End Crosstalk) before mob-006",
+    "Node 5.2: Add primer for IDC before mob-013",
+    "Node 5.3: Add primer for TCP/RST in study-001",
+    "Node 5.3: Add primer for CDP/LLDP in study-002",
+    "Node 5.4: Add primer for AP (Access Point) before study-001",
+    "Node 5.4: Add primer for RSSI (Received Signal Strength Indicator) before mob-006",
+    "Node 5.4: Add primer for MCS (Modulation and Coding Scheme) before mob-006",
+    "Node 5.4: Add primer for LWAP/WLC before mob-008",
+    "Node 5.5: Add primer for DNS record types (MX, TXT, NS, PTR, SRV) in study-001",
+    "Node 5.5: Add primer for GIADDR/SVI in study-002"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "z1-n1-primer",
+  "type": "lesson",
+  "title": "The Seven Layers Primer",
+  "scenario": "Welcome, initiate. To master the architecture of data flow, you must first understand the core mechanics of Layer 3 in the OSI model. In this realm, we begin with the Internet Protocol (IP), which is responsible for addressing and routing packets across disparate networks to ensure they reach their ultimate destinations. However, reliable delivery requires more than just a roadmap; it necessitates a feedback loop to handle failures. This is where the Internet Control Message Protocol (ICMP) becomes vital. While IP handles the primary task of moving data from point A to point B, ICMP functions as the diagnostic backbone, reporting errors and sending control messages—such as 'Destination Unreachable' or 'Time Exceeded'—back to the source. Together, these two protocols form the essential infrastructure of the Network Layer. Study them closely, for without proper addressing and status reports, your data packets would be lost in the void.",
+  "question": "Which protocol is specifically responsible for error reporting at Layer 3?",
+  "options": [
+    "TCP (Transmission Control Protocol)",
+    "IP (Internet Protocol)",
+    "ICMP (Internet Control Message Protocol)",
+    "UDP (User Datagram Protocol)"
+  ],
+  "correct_index": 2,
+  "explanation": "While IP is responsible for the actual routing of packets, ICMP is the specific protocol used by network devices to send error messages and operational information back to the source.",
+  "xp_reward": 50,
+  "bits_reward": 100,
+  "tags": [
+    "Layer3",
+    "IP",
+    "ICMP",
+    "OSI_Model",
+    "Networking_Basics"
+  ]
+}

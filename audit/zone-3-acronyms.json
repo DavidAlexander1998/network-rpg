@@ -1,0 +1,405 @@
+{
+  "audit_date": "2026-06-13",
+  "zone": 3,
+  "summary": {
+    "total_nodes": 5,
+    "total_acronyms_found": 58,
+    "acronyms_missing_expansion": 34,
+    "acronyms_already_expanded": 24
+  },
+  "nodes": [
+    {
+      "node_id": 3.1,
+      "node_name": "The Watchtower",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "UDP",
+          "first_encounter_id": "z3-n1-002",
+          "context_snippet": "SNMP uses UDP 161 for manager-to-agent queries..."
+        },
+        {
+          "acronym": "TCP",
+          "first_encounter_id": "z3-n1-002",
+          "context_snippet": "UDP 514 is syslog. UDP 2055 is NetFlow."
+        },
+        {
+          "acronym": "ICMP",
+          "first_encounter_id": "z3-n1-001",
+          "context_snippet": "Option C (Ping) only tests reachability..."
+        },
+        {
+          "acronym": "ARP",
+          "first_encounter_id": "z3-n1-001",
+          "context_snippet": "Option D is used for MAC address discovery."
+        },
+        {
+          "acronym": "IP",
+          "first_encounter_id": "z3-n1-study-002",
+          "context_snippet": "NetFlow provides metadata about traffic flows (who, where, when, and how much data)."
+        },
+        {
+          "acronym": "NMS",
+          "first_encounter_id": "z3-n1-001",
+          "context_snippet": "SNMP Traps are asynchronous notifications sent from an agent to the NMS..."
+        },
+        {
+          "acronym": "VLAN",
+          "first_encounter_id": "z3-n1-012",
+          "context_snippet": "traffic is tagged with a special RSPAN VLAN..."
+        },
+        {
+          "acronym": "IDS",
+          "first_encounter_id": "z3-n1-009",
+          "context_snippet": "allowing a network analyser (Wireshark) or IDS sensor connected to the monitor port..."
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "SNMP",
+          "where_found": "z3-n1-study-001 (title: 'SNMP: Traps vs. Polls' + scenario explains Simple Network Management Protocol)"
+        },
+        {
+          "acronym": "MIB",
+          "where_found": "z3-n1-006: 'MIB (Management Information Base) is a hierarchical database...'"
+        },
+        {
+          "acronym": "OID",
+          "where_found": "z3-n1-006: 'unique OID (Object Identifier) like 1.3.6.1.2.1.2.2.1.10'"
+        },
+        {
+          "acronym": "SPAN",
+          "where_found": "z3-n1-009: 'SPAN (Switched Port Analyzer) copies all traffic from a source port...'"
+        },
+        {
+          "acronym": "RSPAN",
+          "where_found": "z3-n1-012: 'RSPAN (Remote SPAN) extends port mirroring across multiple switches...'"
+        },
+        {
+          "acronym": "SNMPv3",
+          "where_found": "z3-n1-007: 'SNMPv3 with AuthPriv mode provides: Both authentication and encryption (AES/DES)'"
+        },
+        {
+          "acronym": "SIEM",
+          "where_found": "z3-n1-study-003: 'SIEM—the 'Security Information and Event Management' hub'"
+        },
+        {
+          "acronym": "RTO",
+          "where_found": "z3-n1-study-003: mentions RTO but does NOT expand (in options only)"
+        },
+        {
+          "acronym": "RPO",
+          "where_found": "z3-n1-study-003: mentions RPO but does NOT expand (in options only)"
+        },
+        {
+          "acronym": "IPFIX",
+          "where_found": "z3-n1-014: 'IPFIX (the IETF standard successor to NetFlow)'"
+        }
+      ]
+    },
+    {
+      "node_id": 3.2,
+      "node_name": "The Metrics Chamber",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "VoIP",
+          "first_encounter_id": "z3-n2-003",
+          "context_snippet": "VoIP quality degrades when which three metrics are poor?"
+        },
+        {
+          "acronym": "DSCP",
+          "first_encounter_id": "z3-n2-004",
+          "context_snippet": "DSCP EF (Expedited Forwarding) has a value of:"
+        },
+        {
+          "acronym": "FCS",
+          "first_encounter_id": "z3-n2-005",
+          "context_snippet": "CRC (Cyclic Redundancy Check) errors occur when the FCS on a received frame doesn't match"
+        },
+        {
+          "acronym": "QoS",
+          "first_encounter_id": "z3-n2-006",
+          "context_snippet": "Traffic shaping vs traffic policing: what is the key difference?"
+        },
+        {
+          "acronym": "CSMA/CD",
+          "first_encounter_id": "z3-n2-007",
+          "context_snippet": "the HD device uses CSMA/CD and detects collisions"
+        },
+        {
+          "acronym": "STP",
+          "first_encounter_id": "z3-n2-007",
+          "context_snippet": "STP topology changes"
+        },
+        {
+          "acronym": "SFP",
+          "first_encounter_id": "z3-n2-011",
+          "context_snippet": "damaged SFP, or EMI interference"
+        },
+        {
+          "acronym": "LLQ",
+          "first_encounter_id": "z3-n2-012",
+          "context_snippet": "Fix: implement DSCP EF + LLQ for voice"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "VoIP",
+          "where_found": "z3-n2-study-001: scenario expands VoIP in context 'VoIP deliberately uses UDP'"
+        },
+        {
+          "acronym": "DSCP",
+          "where_found": "z3-n2-study-002: 'DSCP (Differentiated Services Code Point) is a code printed on your boarding pass'"
+        },
+        {
+          "acronym": "CoS",
+          "where_found": "z3-n2-study-002: 'CoS (802.1p) is different — a wristband sticker valid only within ONE terminal' AND z3-n2-008: 'CoS (Class of Service / 802.1p)'"
+        },
+        {
+          "acronym": "CRC",
+          "where_found": "z3-n2-005: 'CRC (Cyclic Redundancy Check) errors occur when the FCS...'"
+        },
+        {
+          "acronym": "LLQ",
+          "where_found": "z3-n2-010: 'LLQ (Low Latency Queuing) guarantees what for real-time traffic?'"
+        },
+        {
+          "acronym": "MTU",
+          "where_found": "z3-n2-003: appears in option 'Bandwidth, MTU, VLAN tagging' — NOT expanded"
+        },
+        {
+          "acronym": "VLAN",
+          "where_found": "z3-n2-003: appears in option 'Bandwidth, MTU, VLAN tagging' — NOT expanded"
+        },
+        {
+          "acronym": "DNS",
+          "where_found": "z3-n2-012: appears in option 'DNS resolution delays affecting call setup' — NOT expanded"
+        },
+        {
+          "acronym": "SIEM",
+          "where_found": "z3-n2-study-003: 'SIEM—the 'Security Information and Event Management' hub'"
+        }
+      ]
+    },
+    {
+      "node_id": 3.3,
+      "node_name": "The Archives",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "SNMP",
+          "first_encounter_id": "z3-n3-004",
+          "context_snippet": "An SNMP baseline report"
+        },
+        {
+          "acronym": "VLAN",
+          "first_encounter_id": "z3-n3-007",
+          "context_snippet": "place personal devices on an isolated guest VLAN/network"
+        },
+        {
+          "acronym": "PII",
+          "first_encounter_id": "z3-n3-008",
+          "context_snippet": "PII, credit card numbers (PCI), medical records (HIPAA)"
+        },
+        {
+          "acronym": "PCI",
+          "first_encounter_id": "z3-n3-008",
+          "context_snippet": "PII, credit card numbers (PCI), medical records (HIPAA)"
+        },
+        {
+          "acronym": "HIPAA",
+          "first_encounter_id": "z3-n3-008",
+          "context_snippet": "PII, credit card numbers (PCI), medical records (HIPAA)"
+        },
+        {
+          "acronym": "RTO",
+          "first_encounter_id": "z3-n3-study-003",
+          "context_snippet": "RTO and RPO (in options only, no expansion)"
+        },
+        {
+          "acronym": "RPO",
+          "first_encounter_id": "z3-n3-study-003",
+          "context_snippet": "RTO and RPO (in options only, no expansion)"
+        },
+        {
+          "acronym": "SIEM",
+          "first_encounter_id": "z3-n3-study-003",
+          "context_snippet": "SIEM and IDS (in options only, no expansion)"
+        },
+        {
+          "acronym": "IDS",
+          "first_encounter_id": "z3-n3-study-003",
+          "context_snippet": "SIEM and IDS (in options only, no expansion)"
+        },
+        {
+          "acronym": "SFP",
+          "first_encounter_id": "z3-n3-study-001",
+          "context_snippet": "Replace the core switch's failing uplink SFP module"
+        },
+        {
+          "acronym": "CRC",
+          "first_encounter_id": "z3-n3-study-001",
+          "context_snippet": "rising CRC error counts on that interface"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "RFC",
+          "where_found": "z3-n3-study-001: 'RFC (Request for Change)'"
+        },
+        {
+          "acronym": "CAB",
+          "where_found": "z3-n3-study-001: 'CAB (Change Advisory Board)' AND z3-n3-006"
+        },
+        {
+          "acronym": "IPAM",
+          "where_found": "z3-n3-study-002: 'IPAM (IP Address Management)' AND z3-n3-005"
+        },
+        {
+          "acronym": "AUP",
+          "where_found": "z3-n3-002: 'AUP (Acceptable Use Policy) is:'"
+        },
+        {
+          "acronym": "SLA",
+          "where_found": "z3-n3-003: 'An SLA of 99.9% uptime allows approximately how much downtime per year?'"
+        },
+        {
+          "acronym": "BYOD",
+          "where_found": "z3-n3-007: 'A BYOD policy should address which security concern'"
+        },
+        {
+          "acronym": "DLP",
+          "where_found": "z3-n3-008: 'DLP (Data Loss Prevention) technology monitor and prevent?'"
+        },
+        {
+          "acronym": "NDA",
+          "where_found": "z3-n3-010: 'NDA (Non-Disclosure Agreement) with a network vendor'"
+        },
+        {
+          "acronym": "MDM",
+          "where_found": "z3-n3-013: 'MDM (Mobile Device Management) is used in BYOD environments'"
+        },
+        {
+          "acronym": "SNMP",
+          "where_found": "z3-n3-study-003: 'Simple Network Management Protocol' in scenario"
+        }
+      ]
+    },
+    {
+      "node_id": 3.4,
+      "node_name": "The Vault",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "RAID",
+          "first_encounter_id": "z3-n4-study-001",
+          "context_snippet": "RAID 0 (striping only) splits the book into chapters"
+        },
+        {
+          "acronym": "NIC",
+          "first_encounter_id": "z3-n4-004",
+          "context_snippet": "What does NIC teaming provide?"
+        },
+        {
+          "acronym": "LACP",
+          "first_encounter_id": "z3-n4-004",
+          "context_snippet": "LACP/802.3ad (both active — redundancy + bandwidth aggregation)"
+        },
+        {
+          "acronym": "HA",
+          "first_encounter_id": "z3-n4-005",
+          "context_snippet": "In an active-passive cluster, the passive node sits idle"
+        },
+        {
+          "acronym": "SAN",
+          "first_encounter_id": "z3-n4-009",
+          "context_snippet": "Multipathing in a SAN (Storage Area Network) environment provides"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "SPOF",
+          "where_found": "z3-n4-study-002: 'SINGLE POINT OF FAILURE (SPOF)' AND 'A SPOF is ANY single component'"
+        },
+        {
+          "acronym": "HA",
+          "where_found": "z3-n4-study-002: 'ACTIVE-ACTIVE HA is two chefs cooking simultaneously' AND 'ACTIVE-PASSIVE is a second chef sitting idle'"
+        },
+        {
+          "acronym": "HBA",
+          "where_found": "z3-n4-009: 'multiple HBAs (Host Bus Adapters) and switches'"
+        },
+        {
+          "acronym": "RTO",
+          "where_found": "z3-n4-study-003: 'RTO (Recovery Time Objective) measures the maximum amount of downtime'"
+        },
+        {
+          "acronym": "RPO",
+          "where_found": "z3-n4-study-003: 'RPO (Recovery Point Objective) measures the maximum amount of data loss'"
+        }
+      ]
+    },
+    {
+      "node_id": 3.5,
+      "node_name": "The Recovery Room",
+      "acronyms_missing_expansion": [
+        {
+          "acronym": "DR",
+          "first_encounter_id": "z3-n5-003",
+          "context_snippet": "A cold DR site provides"
+        }
+      ],
+      "acronyms_already_expanded": [
+        {
+          "acronym": "RTO",
+          "where_found": "z3-n5-study-001: extensively explained + z3-n5-001: 'RTO (Recovery Time Objective) defines'"
+        },
+        {
+          "acronym": "RPO",
+          "where_found": "z3-n5-study-001: extensively explained + z3-n5-002: 'RPO (Recovery Point Objective) defines'"
+        },
+        {
+          "acronym": "MTBF",
+          "where_found": "z3-n5-010: 'MTBF (Mean Time Between Failures) is used to'"
+        },
+        {
+          "acronym": "MTTR",
+          "where_found": "z3-n5-008: 'MTTR (Mean Time To Repair) measures'"
+        },
+        {
+          "acronym": "BCP",
+          "where_found": "z3-n5-012: 'DR Testing, BCP, Best Practices' — tag only, NOT expanded in content"
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "node_id": 3.1,
+      "acronyms": ["NMS", "UDP", "TCP", "ICMP", "ARP", "IP", "VLAN", "IDS"],
+      "note": "Core networking acronyms used without expansion. NMS appears early without expansion; UDP/TCP critical for SNMP understanding."
+    },
+    {
+      "priority": "high",
+      "node_id": 3.2,
+      "acronyms": ["DSCP", "VoIP", "QoS", "LLQ", "SFP"],
+      "note": "DSCP appears in question z3-n2-004 without expansion despite being defined in study. QoS and LLQ appear without expansion in hard question."
+    },
+    {
+      "priority": "medium",
+      "node_id": 3.3,
+      "acronyms": ["SNMP", "VLAN", "SFP", "CRC", "PII", "PCI", "HIPAA"],
+      "note": "Compliance acronyms (PII, PCI, HIPAA) appear without expansion in DLP question."
+    },
+    {
+      "priority": "medium",
+      "node_id": 3.4,
+      "acronyms": ["RAID", "NIC", "SAN"],
+      "note": "RAID is central to this node but never expanded. SAN appears without expansion in multipathing question."
+    },
+    {
+      "priority": "low",
+      "node_id": 3.5,
+      "acronyms": ["DR", "BCP"],
+      "note": "DR appears without expansion in cold site question; BCP only appears as a tag."
+    }
+  ]
+}

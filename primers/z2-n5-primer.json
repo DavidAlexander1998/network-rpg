@@ -1,0 +1,23 @@
+{
+  "id": "z2-n5-primer",
+  "type": "study_encounter",
+  "title": "Network Virtualization Primer",
+  "scenario": "Welcome to Network Virtualization Primer. Before proceeding, you must master these essential networking terms. Virtual Extensible LAN (VXLAN): Layer 2 overlay over Layer 3 network. Uses UDP 4789. Extends VLANs across routed networks (data centers, cloud). Supports 16 million VNIs vs 4094 VLAN limit. Used in SDN/overlay networks.",
+  "question": "What does VXLAN stand for?",
+  "options": [
+    "Virtual Extensible LAN",
+    "Advanced VXLAN Protocol",
+    "Automated VXLAN System",
+    "Active VXLAN Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "VXLAN stands for Virtual Extensible LAN.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "vxlan",
+    "nvgre",
+    "vrf"
+  ]
+}

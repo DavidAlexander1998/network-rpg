@@ -1,0 +1,23 @@
+{
+  "id": "z4-n2-primer",
+  "type": "study_encounter",
+  "title": "Threats Primer",
+  "scenario": "Welcome to Threats Primer. Before proceeding, you must master these essential networking terms. Advanced Persistent Threat (APT): Sophisticated, long-term targeted attack, typically nation-state sponsored. Stealth over speed \u2014 establish foothold, maintain persistence, exfiltrate data over months/years. Hard to detect. Distributed Denial of Service (DDoS): DoS using many compromised systems (botnet). Categories: Volumetric (DNS amplification), Protocol (SYN flood), Application (HTTP flood). Mitigated by scrubbing centers and rate limiting. Man-in-the-Middle (MITM): Attacker intercepts communication between two parties. Methods: ARP poisoning, rogue AP, DNS spoofing. Mitigated by encryption (TLS), certificate pinning, DAI, and 802.1X. Denial of Service (DoS): Attack overwhelming a target to make it unavailable. Single attacker. Types: volumetric (bandwidth), protocol (SYN flood), application (HTTP flood). DDoS = distributed (botnet).",
+  "question": "What does APT stand for?",
+  "options": [
+    "Advanced Persistent Threat",
+    "Advanced APT Protocol",
+    "Automated APT System",
+    "Active APT Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "APT stands for Advanced Persistent Threat.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "apt",
+    "ddos",
+    "mitm"
+  ]
+}

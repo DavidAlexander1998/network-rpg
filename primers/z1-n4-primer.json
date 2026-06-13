@@ -1,0 +1,27 @@
+{
+  "id": "z1-n4-primer",
+  "type": "study_encounter",
+  "title": "Ports and Protocols Primer",
+  "scenario": "Welcome to Ports and Protocols. HyperText Transfer Protocol (HTTP) is the application layer protocol for web traffic on port 80. HyperText Transfer Protocol Secure (HTTPS) encrypts web traffic on port 443 using TLS. File Transfer Protocol (FTP) transfers files on ports 20 and 21. Secure Shell (SSH) provides encrypted remote access on port 22. Simple Mail Transfer Protocol (SMTP) sends email on port 25. Post Office Protocol version 3 (POP3) retrieves email on port 110. Internet Message Access Protocol (IMAP) syncs email across devices on port 143.",
+  "question": "Which protocol uses port 443 for encrypted web traffic?",
+  "options": [
+    "HTTP",
+    "HTTPS",
+    "FTP",
+    "SSH"
+  ],
+  "correct_index": 1,
+  "explanation": "HTTPS (HyperText Transfer Protocol Secure) uses port 443 for encrypted web traffic.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "http",
+    "https",
+    "ftp",
+    "ssh",
+    "smtp",
+    "pop3",
+    "imap"
+  ]
+}

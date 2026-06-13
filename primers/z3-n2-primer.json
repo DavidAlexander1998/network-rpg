@@ -1,0 +1,23 @@
+{
+  "id": "z3-n2-primer",
+  "type": "study_encounter",
+  "title": "Performance Primer",
+  "scenario": "Welcome to Performance Primer. Before proceeding, you must master these essential networking terms. Quality of Service (QoS): Mechanisms to prioritize traffic types. VoIP needs: latency <150ms, jitter <30ms, loss <1%. Tools: DSCP marking, CoS, LLQ (strict priority), shaping, policing. Differentiated Services Code Point (DSCP): 6-bit field in IP header for Layer 3 QoS marking. EF (Expedited Forwarding) = 46 for VoIP. BE (Best Effort) = 0 default. Enables per-hop behavior (PHB) at each router. Class of Service (CoS): 3-bit PCP field in 802.1Q VLAN tag (values 0-7). Layer 2 QoS marking. Lost when traffic leaves the VLAN trunk \u2014 must map to DSCP for end-to-end QoS.",
+  "question": "What does QoS stand for?",
+  "options": [
+    "Quality of Service",
+    "Advanced QoS Protocol",
+    "Automated QoS System",
+    "Active QoS Technology"
+  ],
+  "correct_index": 0,
+  "explanation": "QoS stands for Quality of Service.",
+  "xp_reward": 20,
+  "bits_reward": 10,
+  "tags": [
+    "primer",
+    "qos",
+    "dscp",
+    "cos"
+  ]
+}

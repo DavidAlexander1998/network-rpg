@@ -1,7 +1,7 @@
 {
   "zone": 2,
   "name": "The Implementation Citadel",
-  "description": "Network implementation — routing, switching, wireless, and physical infrastructure.",
+  "description": "Network implementation \u2014 routing, switching, wireless, and physical infrastructure.",
   "nodes": [
     {
       "id": 2.1,
@@ -12,10 +12,10 @@
           "id": "z2-n1-study-001",
           "zone": 2,
           "node": 2.1,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Logistics of Routing: The GlobalRoute Express",
-          "scenario": "Imagine you are the Logistics Director for 'GlobalRoute Express.' Your job is to move packages from local neighborhoods to international destinations across a massive, complex highway system. To keep the company running, you must master three core concepts of movement.\n\nFirst, consider the Default Gateway. Every local delivery van has a single point of departure: the local sorting hub. If a driver has a package for a neighbor on their street, they deliver it directly. But if the package is for a city outside their immediate zone, the driver doesn't wander aimlessly through side streets; they head straight to the local hub. That hub acts as the 'Default Gateway'—the designated exit point for any destination that is not known within the local neighborhood. Without it, the driver is stuck in a loop.\n\nNext, how do drivers know which roads to take? You have two primary methods. Static Routing is like giving a driver a printed instruction sheet: 'To get to Warehouse A, take Highway 5.' It is reliable and requires very little 'brainpower' from the network, but if Highway 5 is closed due to a landslide, the driver is stuck because the instructions never change. Dynamic Routing is like a modern GPS. The system constantly communicates with other hubs, sharing real-time data about traffic jams or road closures. If a bridge is out, the GPS automatically recalculates a new path. It is more complex to set up but much more resilient to change.\n\nFinally, what if a driver receives two different sets of directions? One from a veteran driver (highly trusted) and one from a tourist (less trusted)? This is Administrative Distance (AD). AD is the 'trustworthiness' score. If a router hears about a path from a highly reliable source, it assigns it a low AD. If the source is less reliable, it gets a higher AD. The router always chooses the path with the lowest AD, because in the world of logistics, the most trusted source wins.",
+          "scenario": "You're the Logistics Director for GlobalRoute Express, moving packages across a vast highway network. Every local sorting hub has a DEFAULT GATEWAY \u2014 its single exit point for any destination not known locally. If a driver has a package for an unfamiliar city, they don't wander side streets; they head straight to the hub, which routes it onward. Without this gateway, the driver is stuck in a loop with no way out. Two other concepts matter for routing decisions: STATIC ROUTING is a printed instruction sheet ('take Highway 5') \u2014 reliable but unchanging even if Highway 5 closes. DYNAMIC ROUTING is a GPS that constantly shares real-time road-closure data and recalculates automatically. ADMINISTRATIVE DISTANCE is a trustworthiness score \u2014 if two sources give conflicting directions, the router trusts the one with the LOWER AD.",
           "question": "A local delivery driver has a package for a city they have never heard of. To ensure the package leaves their local area and enters the wider network, where must they go first?",
           "options": [
             "The local sorting hub (Default Gateway)",
@@ -24,19 +24,23 @@
             "A dead-end street"
           ],
           "correct_index": 0,
-          "explanation": "The Default Gateway is the 'exit point' for a local network. When a device doesn't know where to send a packet, it sends it to the Default Gateway to be routed toward the destination.",
+          "explanation": "The Default Gateway is the local network's 'exit point' \u2014 when a device doesn't recognize a destination as local, it forwards the packet here to be routed onward toward the wider network. Without it, traffic to unknown destinations has nowhere to go.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["routing", "default-gateway", "fundamentals"]
+          "tags": [
+            "routing",
+            "default-gateway",
+            "fundamentals"
+          ]
         },
         {
           "id": "z2-n1-study-002",
           "zone": 2,
           "node": 2.1,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Grand Hotel Gateway",
-          "scenario": "Imagine you are standing in the grand lobby of the 'Network Grand Hotel.' The hotel is a massive structure with hundreds of guest rooms, but it only has one official street address: 100 Connectivity Lane. This single, unique address is the hotel's Public IP. To the outside world—the postal service, delivery drivers, and the city at large—the hotel is just one single entity located at 100 Connectivity Lane.\n\nInside the hotel, however, things are different. Every guest has a room number, such as Room 302 or Room 505. These are the Private IPs. While these room numbers are vital for guests to find each other inside the building, a mail carrier from another city cannot simply address a letter to 'Room 302' and expect it to arrive; they wouldn't know which hotel in the world that room belongs to. Without the street address, the room number is meaningless to the public.\n\nThis is where the Front Desk—the NAT (Network Address Translation) device—comes in. When a guest in Room 302 wants to send a letter to a friend, they hand it to the Front Desk. The clerk takes the letter, removes the 'Room 302' label, and replaces it with the hotel's official street address, '100 Connectivity Lane.' When the reply arrives at the hotel, the clerk checks their logbook, sees that the incoming mail was intended for the guest in Room 302, and delivers it to the correct door.\n\nIf the hotel has hundreds of guests but only one phone line, they use a trick: they assign a unique 'extension number' to every outgoing call so they know who is talking. This is PAT (Port Address Translation).",
+          "scenario": "You're standing in the lobby of the 'Network Grand Hotel' \u2014 a huge building with hundreds of guest rooms, but only ONE official street address: 100 Connectivity Lane. This is the hotel's PUBLIC IP \u2014 to the outside world, the whole hotel is just one entity at that address. Inside, every guest has a room number (Room 302, Room 505) \u2014 these are PRIVATE IPs, useful for finding each other inside, but meaningless to an outside mail carrier who has no idea which hotel 'Room 302' belongs to. The FRONT DESK \u2014 the NAT (Network Address Translation) device \u2014 solves this: when a guest sends mail, the clerk swaps 'Room 302' for the hotel's public address. When a reply arrives, the clerk checks the logbook and delivers it to the right room. If hundreds of guests share one phone line, each gets a unique 'extension number' for outgoing calls \u2014 this is PAT (Port Address Translation).",
           "question": "A delivery driver has a package for 'Room 202,' but they don't know which building in the city it belongs to. Which networking concept acts like the building's front desk?",
           "options": [
             "DNS (Domain Name System)",
@@ -45,10 +49,14 @@
             "ARP (Address Resolution Protocol)"
           ],
           "correct_index": 1,
-          "explanation": "Just as a front desk uses a building's main address to route mail to specific rooms, NAT uses a single public IP to route traffic to multiple private IP addresses.",
+          "explanation": "Just as a front desk uses the building's main address to route mail to specific rooms, NAT uses a single public IP to route traffic to multiple private IP addresses inside the network.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["nat", "pat", "ip-addressing"]
+          "tags": [
+            "nat",
+            "pat",
+            "ip-addressing"
+          ]
         },
         {
           "id": "z2-n1-001",
@@ -57,12 +65,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "Which routing protocol has an administrative distance of 110?",
-          "options": ["RIP", "EIGRP", "OSPF", "BGP"],
+          "options": [
+            "RIP",
+            "EIGRP",
+            "OSPF",
+            "BGP"
+          ],
           "correct_index": 2,
           "explanation": "OSPF has AD 110. EIGRP = 90, RIP = 120, eBGP = 20. Lower AD = more trustworthy route.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["Routing", "OSPF", "Admin Distance"]
+          "tags": [
+            "Routing",
+            "OSPF",
+            "Admin Distance"
+          ]
         },
         {
           "id": "z2-n1-002",
@@ -71,12 +88,20 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "A directly connected route has an administrative distance of:",
-          "options": ["0", "1", "20", "90"],
+          "options": [
+            "0",
+            "1",
+            "20",
+            "90"
+          ],
           "correct_index": 0,
-          "explanation": "Directly connected routes have AD 0 — the most trusted source. Static routes are AD 1, eBGP is 20, EIGRP is 90.",
+          "explanation": "Directly connected routes have AD 0 \u2014 the most trusted source. Static routes are AD 1, eBGP is 20, EIGRP is 90.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["Routing", "Admin Distance"]
+          "tags": [
+            "Routing",
+            "Admin Distance"
+          ]
         },
         {
           "id": "z2-n1-003",
@@ -85,12 +110,20 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "Which type of NAT maps many private IP addresses to a single public IP using port numbers?",
-          "options": ["Static NAT", "Dynamic NAT", "PAT (NAT Overload)", "NAT64"],
+          "options": [
+            "Static NAT",
+            "Dynamic NAT",
+            "PAT (NAT Overload)",
+            "NAT64"
+          ],
           "correct_index": 2,
           "explanation": "PAT (Port Address Translation) / NAT Overload maps many internal IPs to one public IP by tracking unique port numbers. This is what home routers do.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["NAT", "PAT"]
+          "tags": [
+            "NAT",
+            "PAT"
+          ]
         },
         {
           "id": "z2-n1-007",
@@ -99,12 +132,21 @@
           "difficulty": "medium",
           "type": "mob",
           "question": "Which FHRP protocol is an open standard (non-Cisco proprietary)?",
-          "options": ["HSRP", "GLBP", "VRRP", "PVST+"],
+          "options": [
+            "HSRP",
+            "GLBP",
+            "VRRP",
+            "PVST+"
+          ],
           "correct_index": 2,
           "explanation": "VRRP (Virtual Router Redundancy Protocol) is an open RFC standard (RFC 5798). HSRP and GLBP are Cisco proprietary. PVST+ is Cisco's per-VLAN spanning tree.",
           "xp_reward": 30,
           "bits_reward": 12,
-          "tags": ["FHRP", "VRRP", "Redundancy"]
+          "tags": [
+            "FHRP",
+            "VRRP",
+            "Redundancy"
+          ]
         },
         {
           "id": "z2-n1-013",
@@ -113,12 +155,143 @@
           "difficulty": "hard",
           "type": "mob",
           "question": "A network admin wants a static route to only be used if the OSPF route fails. What technique achieves this?",
-          "options": ["Set the static route metric to 255", "Configure a floating static route with AD higher than 110", "Use OSPF redistribution", "Disable the static route by default"],
+          "options": [
+            "Set the static route metric to 255",
+            "Configure a floating static route with AD higher than 110",
+            "Use OSPF redistribution",
+            "Disable the static route by default"
+          ],
           "correct_index": 1,
-          "explanation": "A 'floating static route' has its AD set higher than the dynamic protocol (e.g., AD 150 > OSPF AD 110). The static route only appears in the routing table when the OSPF route is gone — making it a backup path.",
+          "explanation": "A 'floating static route' has its AD set higher than the dynamic protocol (e.g., AD 150 > OSPF AD 110). The static route only appears in the routing table when the OSPF route is gone \u2014 making it a backup path.",
           "xp_reward": 40,
           "bits_reward": 15,
-          "tags": ["Floating Static", "Admin Distance", "OSPF"]
+          "tags": [
+            "Floating Static",
+            "Admin Distance",
+            "OSPF"
+          ]
+        },
+        {
+          "id": "z2-n1-study-003",
+          "zone": 2,
+          "node": 2.1,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Gatekeeper's Map of Trust",
+          "scenario": "You approach the Great Crossroads where two paths lead toward the Citadel. A stone sentinel blocks your path, holding a weathered scroll. 'To pass,' the sentinel booms, 'you must decide which map is most trustworthy when the paths overlap.'\n\nThe sentinel explains that in this realm, routers use Administrative Distance (AD) to determine the reliability of a route source. A lower AD means the router trusts that source more. He shows you a table of common values:\n- Directly Connected: 0\n- Static: 1\n- EIGRP Internal: 90\n- OSPF: 110\n- IS-IS: 115\n- RIP: 120\n- EIGRP External: 170\n- BGP: 200",
+          "question": "A router receives two different paths to the same destination network: one advertised via OSPF and another via RIP. Which path will the router choose as its primary route?",
+          "options": [
+            "The OSPF route",
+            "The RIP route",
+            "Both routes equally",
+            "Neither route"
+          ],
+          "correct_index": 0,
+          "explanation": "The router chooses the path with the lower Administrative Distance (AD). Since OSPF has an AD of 110 and RIP has an AD of 120, OSPF is considered more trustworthy.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "routing",
+            "administrative-distance"
+          ]
+        },
+        {
+          "id": "z2-n1-study-004",
+          "zone": 2,
+          "node": 2.1,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Shield of the First Hop",
+          "scenario": "You reach a bridge guarded by two massive stone golems acting as gateways. A nearby scroll explains that these golems work together to provide a 'Virtual Gateway.' This ensures that if one golem falls, the travelers can still cross without interruption.\n\nThis concept is known as First Hop Redundancy Protocols (FHRP). They create a Virtual IP (VIP) that serves as the default gateway for hosts. The scroll lists three specific types: HSRP (a Cisco-proprietary protocol), VRRP (an open standard used by many vendors), and GLBP, which specifically allows for load-balancing across multiple gateways.",
+          "question": "Which of the following protocols is an open standard that provides first hop redundancy?",
+          "options": [
+            "HSRP",
+            "VRRP",
+            "GLBP",
+            "OSPF"
+          ],
+          "correct_index": 1,
+          "explanation": "VRRP (Virtual Router Redundancy Protocol) is the industry-standard open protocol. HSRP is Cisco-proprietary, and GLBP is also a Cisco-proprietary protocol that adds load balancing.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "redundancy",
+            "fhrp"
+          ]
+        },
+        {
+          "id": "z2-n1-study-005",
+          "zone": 2,
+          "node": 2.1,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Shadow Path",
+          "scenario": "You find a hidden path leading through the Whispering Woods. A mystic tells you that this is a 'Floating Static Route.' It is a clever trick used by mages to create backup paths for travelers.\n\nA floating static route works by assigning it an Administrative Distance higher than the primary route. For example, if your main road has an AD of 1 and your secret path has an AD of 100, the router will ignore the secret path as long as the main road is clear. Only when the main road collapses does the 'floating' route rise to take its place.",
+          "question": "You configure a floating static route with an AD of 150 to serve as a backup for a primary static route with an AD of 1. When will the router use the backup route?",
+          "options": [
+            "Only when network traffic exceeds a certain threshold",
+            "Always, because it is a valid static route",
+            "Only if the primary route becomes unavailable",
+            "Never, because its AD is too high"
+          ],
+          "correct_index": 2,
+          "explanation": "A floating static route stays 'hidden' (inactive) because its higher AD makes it less preferred than the primary route. It only enters the routing table if the primary route fails.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "routing",
+            "static-routes"
+          ]
+        },
+        {
+          "id": "z2-n1-study-006",
+          "zone": 2,
+          "node": 2.1,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Realms of the Great Web",
+          "scenario": "You stand before a massive map showing the interconnected kingdoms of the digital world. A scholar explains that there are two types of realms: Internal and External.\n\nInterior Gateway Protocols (IGP) like OSPF and EIGRP are used to share information within a single organization or 'Autonomous System.' Exterior Gateway Protocols (EGP) are used to pass information between different organizations. The most prominent EGP is BGP, the protocol that stitches together the various networks of the internet, allowing data to travel across the globe.",
+          "question": "Which of the following is an example of an Exterior Gateway Protocol (EGP) used to route traffic between different Autonomous Systems?",
+          "options": [
+            "OSPF",
+            "EIGRP",
+            "IS-IS",
+            "BGP"
+          ],
+          "correct_index": 3,
+          "explanation": "BGP (Border Gateway Protocol) is the standard EGP used to route data between different Autonomous Systems on the internet. OSPF, EIGRP, and IS-IS are all IGPs used for internal routing.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "routing",
+            "bgp",
+            "igp-egp"
+          ]
+        },
+        {
+          "id": "z2-n1-mini-001",
+          "zone": 2,
+          "node": 2.1,
+          "type": "mini-boss",
+          "difficulty": "boss",
+          "title": "The Weaver of the Weave",
+          "scenario": "You stand before the Great Gateway of Aetheria, where the flow of data is governed by the ancient laws of the Weaver. The Weaver, a spectral entity composed of shimmering fiber-optic threads, blocks your path. 'To pass,' she intones, 'you must prove you can discern the most specific path through the tangled web of the realm.'\n\nA caravan of packets destined for the sacred coordinates 10.0.0.50 is stalled at the gate. The Weaver presents three scrolls of navigation: one from the OSPF Order (a broad path to 10.0.0.0/8), one from the EIGRP Guild (a more focused path to 10.0.0.0/16), and a Forbidden Scroll\u2014a static route carved in stone for the precise destination of 10.0.0.0/24.\n\nThe Weaver's eyes glow with a piercing light as she demands you determine which scroll the Gatekeepers will honor to guide the packets home. She warns that many novices are fooled by the 'authority' of the scrolls, failing to see the truth of the path's specificity.",
+          "question": "A packet destined for 10.0.0.50 arrives at a router. The routing table contains three entries: 10.0.0.0/8 via OSPF (AD 110), 10.0.0.0/16 via EIGRP internal (AD 90), and 10.0.0.0/24 via a Static route (AD 1). Which path will the router select?",
+          "options": [
+            "The OSPF route, because it is the first entry in the routing table.",
+            "The EIGRP route, because it has a lower Administrative Distance than OSPF.",
+            "The Static route, because Longest Prefix Match takes precedence over Administrative Distance.",
+            "No path will be chosen because there are multiple routes for the same destination."
+          ],
+          "correct_index": 2,
+          "explanation": "In routing logic, the 'Longest Prefix Match' is the first criteria used to determine the best path. A /24 mask is more specific than a /16 or a /8 mask. Administrative Distance (AD) is only used as a tie-breaker when two different routes have the exact same prefix length. Because 10.0.0.0/24 is the most specific match for the destination 10.0.0.50, it is chosen regardless of the AD values of the other competing routes.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": [
+            "routing",
+            "longest-prefix-match",
+            "administrative-distance"
+          ]
         }
       ]
     },
@@ -131,10 +304,10 @@
           "id": "z2-n2-study-001",
           "zone": 2,
           "node": 2.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Office Building: Understanding VLANs",
-          "scenario": "Picture a multi-story office building owned by a single company. On the surface, it seems like one unified workspace, but inside, it is strictly divided. The third floor belongs entirely to the Finance department, while the fifth floor is occupied by the creative Marketing team. These two groups must remain separate for security reasons—imagine if a Marketing intern could simply walk into the Finance department and access sensitive payroll files. This separation is the essence of a VLAN (Virtual Local Area Network).\n\nA VLAN is like creating invisible walls within a building. Even though Finance and Marketing might use the same physical elevator (the switch), they operate in completely isolated logical spaces. When someone on the Finance VLAN sends a message, only other Finance members can receive it; the Marketing team remains blissfully unaware.\n\nBut why go through this trouble? The answer lies in something called a Broadcast Domain. Imagine a single computer sends out a 'Who is the printer?' announcement. On a flat, single network, this question is shouted to every single device, causing unnecessary noise and congestion. By segmenting the building into VLANs, you shrink these broadcast domains. Now, when the Finance computer asks about the printer, only the Finance devices hear it. This dramatically reduces network congestion and improves performance, all while maintaining the security isolation between departments. VLANs allow you to create order from potential chaos.",
+          "scenario": "Picture a multi-story office building owned by one company. The third floor belongs to Finance, the fifth to Marketing \u2014 and they must stay separate; a Marketing intern shouldn't access Finance's payroll files. This separation is a VLAN (Virtual Local Area Network) \u2014 invisible walls within the building. Even though Finance and Marketing share the same physical elevator (the switch), they operate in completely isolated logical spaces \u2014 a message from Finance reaches only Finance. Why bother? BROADCAST DOMAINS. If one computer shouts 'Who is the printer?', on a flat single network EVERY device hears and processes it \u2014 noise and congestion. Segmenting into VLANs shrinks broadcast domains: now only Finance devices hear Finance's question. This cuts congestion and improves performance while keeping departments isolated.",
           "question": "In a coffee shop, one customer asks 'Who has the Wi-Fi password?' loudly. If everyone in the shop hears this question and must process it, what networking concept is this demonstrating?",
           "options": [
             "A secure transmission",
@@ -146,16 +319,20 @@
           "explanation": "A broadcast domain is the area of a network where a broadcast frame is heard by all devices. VLANs break large broadcast domains into smaller, more manageable segments.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["vlan", "broadcast-domain", "segmentation"]
+          "tags": [
+            "vlan",
+            "broadcast-domain",
+            "segmentation"
+          ]
         },
         {
           "id": "z2-n2-study-002",
           "zone": 2,
           "node": 2.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Mailroom Logic: MACs and Switching",
-          "scenario": "Welcome to your new job as the Lead Mail Clerk at 'The Ethernet Apartments,' a massive residential complex. To succeed here, you must understand how mail moves. Every resident has a unique, permanent nameplate engraved on their mailbox—this is their MAC address. Unlike a room number (an IP address) which might change if a tenant moves, the MAC address is hard-coded into the device itself and never changes.\n\nWhen a resident, Alice, hands you a letter for Bob, you face a challenge. You look at your 'CAM Table'—your official logbook—but Bob isn't listed yet. Because you don't know Bob's location, you must perform a 'Broadcast.' You stand in the lobby and announce to the entire building, 'Attention: Bob, please identify your location!' Everyone hears the announcement, but only Bob responds.\n\nOnce Bob identifies himself, you immediately record his name and his specific apartment number in your logbook. This is how a switch 'learns.' Now, the next time Alice sends a letter to Bob, you don't need to shout. You simply check your logbook, see 'Bob = Apt 4B,' and perform a 'Unicast' delivery, walking directly to his door. However, if a letter arrives for a resident not in your book, you must broadcast again. As you process more mail, your logbook grows, making the building more efficient. You aren't just moving paper; you are building a map of the network, ensuring data reaches its destination without causing a noisy ruckus in the hallways.",
+          "scenario": "You're the new Lead Mail Clerk at 'The Ethernet Apartments.' Every resident has a unique, permanent nameplate on their mailbox \u2014 their MAC ADDRESS. Unlike a room number (an IP address), which can change if a tenant moves, the MAC address is hard-coded into the device and never changes. When Alice hands you a letter for Bob, you check your CAM TABLE (logbook) \u2014 but Bob isn't listed yet. So you BROADCAST: stand in the lobby and announce 'Bob, identify your location!' Everyone hears it, but only Bob responds. You record 'Bob = Apt 4B' in your logbook \u2014 the switch has LEARNED. Next time, no shouting needed: you check the logbook and UNICAST directly to his door. Unlisted residents still require a broadcast.",
           "question": "If an IP address is like your current mailing address (which changes if you move), what is a MAC address most similar to?",
           "options": [
             "Your current phone number",
@@ -167,16 +344,20 @@
           "explanation": "A MAC address is a permanent, unique identifier assigned to the hardware, much like a Social Security Number, whereas an IP address is a logical address that can change.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["mac-address", "switching", "cam-table"]
+          "tags": [
+            "mac-address",
+            "switching",
+            "cam-table"
+          ]
         },
         {
           "id": "z2-n2-study-003",
           "zone": 2,
           "node": 2.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Highway Loop Prevention Authority",
-          "scenario": "You are the lead traffic engineer for the city of Aetheria. Your job is to design the highway system connecting all neighborhoods. However, there is a dangerous phenomenon you must prevent at all costs: The Infinite Loop. Imagine three highway interchanges connected in a triangle. If a confused driver enters this triangle without exit ramps, they will drive in circles forever, burning fuel and never reaching their destination. In networking, this is a broadcast storm—packets circling endlessly and consuming all available bandwidth.\n\nTo prevent this, the city council created the Spanning Tree Protocol (STP). Think of STP as an authority that logically 'blocks' certain highway entrances. It doesn't tear down the roads—it just puts up 'Road Closed' signs at strategic points to ensure there is exactly ONE logical path between any two points.\n\nFirst, the Authority elects a 'Central Command Center' (the Root Bridge). All traffic decisions flow from this center. Then, each highway ramp is evaluated. Some are designated as 'Active' and open for traffic (Forwarding state). Others are designated as 'Closed' but monitored (Blocking state). If a main highway collapses, the Authority quickly removes the 'Closed' signs from the backup routes, allowing traffic to flow again. This process takes 30-50 seconds in older systems—long enough to cause a noticeable delay, but necessary to prevent the chaos of an infinite loop. Modern RSTP (Rapid Spanning Tree) does this in milliseconds.",
+          "scenario": "You're the lead traffic engineer for Aetheria, designing the highway system. One thing you must prevent: THE INFINITE LOOP. If three highway interchanges connect in a triangle with no exit ramps, a confused driver circles forever \u2014 in networking, this is a BROADCAST STORM, packets circling endlessly and consuming all bandwidth. SPANNING TREE PROTOCOL (STP) prevents this: it doesn't tear down roads, it puts up 'Road Closed' signs at strategic points so there's exactly ONE logical path between any two points. First, an authority elects a 'Central Command Center' (the ROOT BRIDGE) \u2014 all decisions flow from there. Each ramp is then either 'Active' (FORWARDING) or 'Closed but monitored' (BLOCKING). If a main highway collapses, the closed backup route reopens automatically. This takes 30-50 seconds in older STP; modern RSTP does it in milliseconds.",
           "question": "A city has three highway interchanges forming a perfect triangle. To prevent drivers from getting stuck in an infinite loop, traffic engineers must block one of the three connecting roads. What is this concept called in networking?",
           "options": [
             "Creating a collision domain",
@@ -188,16 +369,20 @@
           "explanation": "STP prevents loops by logically blocking redundant paths while keeping them available for failover, ensuring a single loop-free path exists between any two points.",
           "xp_reward": 75,
           "bits_reward": 35,
-          "tags": ["stp", "spanning-tree", "loop-prevention"]
+          "tags": [
+            "stp",
+            "spanning-tree",
+            "loop-prevention"
+          ]
         },
         {
           "id": "z2-n2-study-004",
           "zone": 2,
           "node": 2.2,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Grand Architect of the Great Data Highway",
-          "scenario": "Imagine you are the Grand Architect of the Great Data Highway. You have several distinct cities: Finance City, Marketing Town, and Engineering District. Each city is strictly isolated; residents of Finance City cannot drive into Marketing Town without explicit permission. To maintain this isolation, you use 'Access Roads' (Access Ports). An Access Road leads directly into one specific city. If a car is on an Access Road, it belongs to that city and nothing else.\n\nHowever, you need to connect these cities to a central hub—the Great Switch Junction. Building separate bridges for every single city would be incredibly expensive and wasteful. Instead, you build one massive 'Interstate Bridge' (Trunk Port). This bridge is designed to carry traffic from all cities simultaneously. But a problem arises: when a car from Finance City crosses the bridge, how does the destination city know it's a Finance car and not a Marketing car?\n\nThis is where the '802.1Q Sticker System' comes in. As a car enters the Interstate Bridge, a digital inspector slaps a colored sticker on the windshield (a Tag). A blue sticker means Finance, a red sticker means Marketing. When the car reaches the other side, the inspector checks the sticker and directs the car to the correct city. Finally, there is the 'Ghost Lane' (Native VLAN). This is a lane where cars travel without any stickers at all. While efficient, if an intruder uses the Ghost Lane, they might slip into a city undetected, making it a critical security point.",
+          "scenario": "You're the architect of the Great Data Highway, with separate cities \u2014 Finance City, Marketing Town, Engineering District \u2014 each strictly isolated. To connect a building to one specific city, you build an ACCESS ROAD (ACCESS PORT) \u2014 a car on it belongs to that city and nothing else. But connecting every city to the central Switch Junction with separate bridges would be wasteful, so you build one 'Interstate Bridge' (TRUNK PORT) that carries traffic from ALL cities at once. To keep cars sorted, the '802.1Q sticker system' tags each car as it enters the bridge \u2014 a blue sticker for Finance, red for Marketing \u2014 and the far end reads the sticker to route the car correctly. There's also a 'Ghost Lane' (NATIVE VLAN) where cars travel with NO sticker \u2014 efficient, but a security risk if an intruder slips into it undetected.",
           "question": "You are setting up a connection for a single desktop computer that only belongs to the HR department. Should you configure this connection as an Access Port or a Trunk Port?",
           "options": [
             "Access Port",
@@ -206,10 +391,15 @@
             "Dynamic Port"
           ],
           "correct_index": 0,
-          "explanation": "An Access Port is used to connect an end-device (like a PC) to a single, specific VLAN, much like a driveway leading to one house.",
+          "explanation": "An Access Port connects an end-device (like a PC) to a single, specific VLAN, much like a driveway leading to one house.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["vlan", "trunk", "access-port", "802.1q"]
+          "tags": [
+            "vlan",
+            "trunk",
+            "access-port",
+            "802.1q"
+          ]
         },
         {
           "id": "z2-n2-001",
@@ -218,12 +408,20 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What is the purpose of a VLAN?",
-          "options": ["Physically separate network devices", "Create logical broadcast domains on a single switch", "Route traffic between different IP subnets", "Encrypt traffic on a LAN"],
+          "options": [
+            "Physically separate network devices",
+            "Create logical broadcast domains on a single switch",
+            "Route traffic between different IP subnets",
+            "Encrypt traffic on a LAN"
+          ],
           "correct_index": 1,
           "explanation": "A VLAN (Virtual LAN) creates separate logical broadcast domains on a single physical switch. Devices in different VLANs cannot communicate without a Layer 3 device (router or L3 switch).",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["VLAN", "Broadcast Domain"]
+          "tags": [
+            "VLAN",
+            "Broadcast Domain"
+          ]
         },
         {
           "id": "z2-n2-002",
@@ -232,12 +430,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What type of switch port carries traffic for multiple VLANs using 802.1Q tags?",
-          "options": ["Access port", "Trunk port", "Native port", "Monitor port"],
+          "options": [
+            "Access port",
+            "Trunk port",
+            "Native port",
+            "Monitor port"
+          ],
           "correct_index": 1,
           "explanation": "A trunk port carries traffic for multiple VLANs simultaneously, using 802.1Q tags to identify which VLAN each frame belongs to. Access ports carry traffic for only one VLAN (untagged).",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["VLAN", "Trunk Port", "802.1Q"]
+          "tags": [
+            "VLAN",
+            "Trunk Port",
+            "802.1Q"
+          ]
         },
         {
           "id": "z2-n2-004",
@@ -246,12 +453,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What is the total convergence time for original 802.1D Spanning Tree Protocol?",
-          "options": ["< 1 second", "5–10 seconds", "30–50 seconds", "2 minutes"],
+          "options": [
+            "< 1 second",
+            "5\u201310 seconds",
+            "30\u201350 seconds",
+            "2 minutes"
+          ],
           "correct_index": 2,
-          "explanation": "STP (802.1D) takes 30–50 seconds to converge: up to 20 seconds in Blocking (Max Age) + 15 seconds Listening + 15 seconds Learning = 50 sec max. This is why RSTP (802.1w) was developed.",
+          "explanation": "STP (802.1D) takes 30\u201350 seconds to converge: up to 20 seconds in Blocking (Max Age) + 15 seconds Listening + 15 seconds Learning = 50 sec max. This is why RSTP (802.1w) was developed.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["STP", "Convergence", "802.1D"]
+          "tags": [
+            "STP",
+            "Convergence",
+            "802.1D"
+          ]
         },
         {
           "id": "z2-n2-014",
@@ -260,12 +476,96 @@
           "difficulty": "hard",
           "type": "mob",
           "question": "An attacker sends frames with a double 802.1Q tag to jump to a different VLAN. What attack is this?",
-          "options": ["ARP poisoning", "MAC flooding", "VLAN hopping (double tagging)", "STP manipulation"],
+          "options": [
+            "ARP poisoning",
+            "MAC flooding",
+            "VLAN hopping (double tagging)",
+            "STP manipulation"
+          ],
           "correct_index": 2,
           "explanation": "VLAN hopping via double tagging: attacker sends a frame with two 802.1Q tags. The first tag matches the native VLAN (stripped by first switch), and the inner tag reaches VLAN of attacker's choice on the second switch.",
           "xp_reward": 40,
           "bits_reward": 15,
-          "tags": ["VLAN Hopping", "802.1Q", "Security"]
+          "tags": [
+            "VLAN Hopping",
+            "802.1Q",
+            "Security"
+          ]
+        },
+        {
+          "id": "z2-n2-study-005",
+          "zone": 2,
+          "node": 2.2,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Ghost in the Switch",
+          "scenario": "You enter the 'Switching Sanctum' where the ethereal flow of data is guarded by a spectral entity known as the VLAN-Wraith. The Wraith feeds on misconfigured trunk ports, allowing it to leap across network segments that should be isolated.\n\nThe wraith utilizes a technique called 'Double Tagging.' By sending a frame with two 802.1Q tags\u2014the first matching the native VLAN of the first switch and the second being the target destination\u2014it tricks the infrastructure into stripping the outer layer and forwarding it to an unauthorized zone. To banish this ghost, you must ensure that the native VLAN is never set to the default (VLAN 1) and is instead assigned to a dedicated, unused ID.",
+          "question": "In a double-tagging attack, how does the first switch process a frame containing two 802.1Q tags?",
+          "options": [
+            "It ignores both tags and drops the packet immediately.",
+            "It strips the outer tag (matching the native VLAN) and forwards it to the next switch.",
+            "It replaces the inner tag with the outer tag before forwarding.",
+            "It encapsulates both tags into a new header for security."
+          ],
+          "correct_index": 1,
+          "explanation": "The correct answer is B. In double tagging, the first switch strips the outer tag because it matches its native VLAN; the second switch then sees the inner tag and forwards it to the target VLAN. Option A is incorrect because the switch doesn't recognize it as a threat initially. Option C is not how 802.1Q works. Option D describes encapsulation, which is not part of this attack vector.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "VLAN",
+            "Security",
+            "Switching"
+          ]
+        },
+        {
+          "id": "z2-n2-mini-001",
+          "zone": 2,
+          "node": 2.2,
+          "type": "mini-boss",
+          "difficulty": "boss",
+          "title": "The Gatekeeper of the Fractured Realms",
+          "scenario": "You stand before the 'Great Partition,' a shimmering wall of logic separating the Merchant District (VLAN 10) from the Archive Vault (VLAN 20). The flow of commerce has ground to a halt because the data-scrolls cannot pass through the gate. The merchants are desperate, and their trade routes are blocked by an invisible barrier.\n\nThe Gatekeeper, a towering construct of copper and fiber, hums with static as you approach. 'The bridge is broken,' it booms in a synthesized voice. 'The path for the merchants is carved into the stone, but the vault's entrance remains hidden from the Great Map. Unless you can identify why the gateway is incomplete, the realms shall remain divided.'\n\nYou consult your scrolls\u2014the configuration logs of the Layer 3 switch. You see that an SVI (Switch Virtual Interface) has been successfully established for VLAN 10, providing a valid gateway for those users. However, there is no SVI defined for VLAN 20. Because the Layer 3 switch lacks a logical interface to 'touch' the second network, it cannot route traffic between the two distinct subnets.\n\nThe Gatekeeper demands you identify the specific technical reason why packets from the Merchant District are being dropped before they can reach the Archive Vault.",
+          "question": "A technician reports that hosts in VLAN 10 cannot reach a server in VLAN 20. The Layer 3 switch has an SVI for VLAN 10, but no SVI exists for VLAN 20. What is the primary reason the traffic fails to route?",
+          "options": [
+            "The trunk links between switches are not carrying 802.1Q tagged frames.",
+            "The Layer 3 switch cannot route between subnets if it lacks a valid Layer 3 interface (SVI) for one of the participating VLANs.",
+            "The default gateway on the host in VLAN 10 is missing its subnet mask.",
+            "The Layer 3 switch is not running a dynamic routing protocol like OSPF or EIGRP."
+          ],
+          "correct_index": 1,
+          "explanation": "In Inter-VLAN routing using SVIs, the SVI acts as the default gateway for the devices in that specific VLAN. For a Layer 3 switch to route traffic between two different VLANs, it must have an active and configured SVI for both VLANs involved. If VLAN 20 lacks an SVI, the switch has no logical interface to 'enter' or 'exit' that network, meaning it cannot move packets from the SVI of VLAN 10 into the domain of VLAN 20.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": [
+            "Inter-VLAN",
+            "SVI",
+            "Layer3Switch"
+          ]
+        },
+        {
+          "id": "z2-n2-study-006",
+          "zone": 2,
+          "node": 2.2,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Gate of Segmented Realms",
+          "scenario": "You stand before a massive stone gate guarded by a spectral sentinel. The gate is divided into several chambers, each requiring its own unique magical signature to enter. To pass through the main corridor, you must configure the 'Switchport' sigils to ensure only specific travelers can reach specific rooms.\n\nTo create a new realm (VLAN), you must use the command 'vlan [ID]'. Once created, you must define the nature of the port connecting to it. For a standard traveler, you apply 'switchport mode access' and assign them to their specific domain with 'switchport access vlan [ID]'. If you need a gateway that allows multiple realms to pass through at once, you must designate it as a trunk using 'switchport mode trunk'.",
+          "question": "You need to configure a port on a Cisco switch so that it only carries traffic for VLAN 10. Which sequence of commands is correct?",
+          "options": [
+            "switchport mode trunk, switchport access vlan 10",
+            "vlan 10, switchport mode access, switchport access vlan 10",
+            "vlan 10, switchport mode trunk",
+            "switchport mode access, switchport vlan 10"
+          ],
+          "correct_index": 1,
+          "explanation": "To correctly configure an access port for a specific VLAN on a Cisco switch, you must first create the VLAN in global configuration (vlan 10), set the port to access mode (switchport mode access), and then assign that port to the specific VLAN (switchport access vlan 10). 'Switchport mode trunk' is used for ports carrying multiple VLANs.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "VLAN",
+            "Switchports",
+            "Cisco_CLI"
+          ]
         }
       ]
     },
@@ -278,10 +578,10 @@
           "id": "z2-n3-study-001",
           "zone": 2,
           "node": 2.3,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Caffeine Connection: Wireless Chaos",
-          "scenario": "You settle into a corner booth at 'The Caffeine Connection,' a bustling local coffee shop. The air is thick with the aroma of roasted espresso and the invisible, chaotic dance of radio waves. As you open your laptop, you realize the wireless environment is a mess. The 2.4GHz band is heavily congested, acting like a narrow, one-lane road packed with slow-moving trucks—microwaves, Bluetooth devices, and dozens of other patrons' smartphones are all fighting for the same space. You attempt to switch to the 5GHz band, which feels like a high-speed express lane, but you notice the signal strength drops significantly as soon as you move behind a large, heavy wooden pillar.\n\nTo make matters more stressful, you notice a stranger in the corner running a packet-sniffing tool on their tablet. The shop's router is an aging model using the WPA2 security standard, leaving your connection vulnerable to potential handshake attacks. To successfully complete your work and secure your data, you must master the nuances of 802.11 standards—from the older 802.11n to the high-efficiency 802.11ax—and understand how to leverage the superior protections of WPA3. Navigating this invisible landscape requires more than just a strong signal; it requires an understanding of how frequency, standard, and encryption interact to create a stable and secure wireless experience.",
+          "scenario": "You settle into a corner booth at 'The Caffeine Connection' coffee shop, and the wireless air is chaos. The 2.4GHz band is a narrow, one-lane road packed with slow-moving traffic \u2014 microwaves, Bluetooth devices, and dozens of phones all fighting for the same space. Switching to 5GHz feels like a high-speed express lane \u2014 but signal strength drops sharply the moment you move behind a heavy wooden pillar. A stranger nearby is running a packet-sniffing tool, and the shop's aging router still uses WPA2, leaving it vulnerable to handshake-capture attacks. Navigating this requires understanding how 802.11 standards (from old 802.11n to modern 802.11ax) and encryption (WPA2 vs the much stronger WPA3) interact with frequency to create a stable, secure connection.",
           "question": "You are trying to connect to the Wi-Fi in a crowded cafe. Which frequency is like a wide, multi-lane highway that offers much higher speeds but has a shorter range and struggles with walls?",
           "options": [
             "2.4GHz",
@@ -290,19 +590,24 @@
             "Infrared"
           ],
           "correct_index": 1,
-          "explanation": "5GHz provides higher data rates and less congestion (more 'lanes'), but its shorter wavelength means it doesn't penetrate physical obstacles as well as 2.4GHz.",
+          "explanation": "5GHz provides higher data rates and less congestion (more 'lanes'), but its shorter wavelength means it doesn't penetrate walls and obstacles as well as 2.4GHz.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["wireless", "wifi", "5ghz", "2.4ghz"]
+          "tags": [
+            "wireless",
+            "wifi",
+            "5ghz",
+            "2.4ghz"
+          ]
         },
         {
           "id": "z2-n3-study-002",
           "zone": 2,
           "node": 2.3,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Bouncer's Secret Handshake: WPA2 vs WPA3",
-          "scenario": "Picture the Wi-Fi password as the secret password whispered to a bouncer outside an exclusive club. Under WPA2-Personal, every guest whispers the SAME password, and the bouncer confirms it during a brief exchange called the 4-way handshake. Here's the problem: a person standing nearby with a recording device (a packet sniffer) can capture that entire handshake exchange. They don't need to be inside the club to do this - just close enough to overhear it. Once recorded, they can take that recording home and try millions of guessed passwords against it on their own computer, completely offline, with nobody at the club ever knowing. This is an OFFLINE DICTIONARY ATTACK, and it's WPA2-PSK's biggest weakness if the password is weak or common.\n\nWPA3-Personal fixes this with a new handshake called SAE (Simultaneous Authentication of Equals), nicknamed the 'Dragonfly' handshake. Instead of whispering the password itself, both the guest and the bouncer perform a cryptographic exchange that PROVES each side knows the password WITHOUT ever transmitting it or anything derived from it in a crackable form. It's like a secret handshake where both people prove they know the secret hand gesture without ever showing the gesture to a bystander filming them. Even if the attacker records the entire SAE exchange, that recording is useless for offline guessing - they would have to interact with the live AP for every single guess, and the AP can detect and lock out repeated failed attempts. WPA3 also forces PMF (Protected Management Frames), which prevents an attacker from forging deauthentication frames to kick clients off the network and force a fresh handshake to capture.",
+          "scenario": "Picture the Wi-Fi password as a secret whispered to a bouncer outside a club. Under WPA2-Personal, every guest whispers the SAME password during a 4-WAY HANDSHAKE \u2014 and someone nearby with a packet sniffer can capture that entire exchange without ever entering the club. Taken home, that recording can be brute-forced offline against millions of guesses, with nobody at the club ever knowing \u2014 an OFFLINE DICTIONARY ATTACK, WPA2-PSK's biggest weakness against weak passwords. WPA3-Personal fixes this with SAE ('Dragonfly') \u2014 both sides cryptographically PROVE they know the password without ever transmitting anything crackable. Even a fully-recorded SAE exchange is useless offline; every guess requires live interaction with the AP, which can detect and lock out repeated failures. WPA3 also enforces PMF, blocking forged deauth frames used to force a fresh handshake.",
           "question": "An attacker sits in a cafe's parking lot and passively records the WPA2-PSK 4-way handshake of the cafe's Wi-Fi as customers connect. They take the capture home to brute-force it overnight. If the cafe instead used WPA3-Personal (SAE), what would change about this attack?",
           "options": [
             "Nothing - SAE uses the same handshake as WPA2 and is equally vulnerable to offline cracking",
@@ -311,10 +616,15 @@
             "SAE only protects enterprise networks with a RADIUS server, so a personal/PSK cafe network gains no benefit"
           ],
           "correct_index": 1,
-          "explanation": "Correct: SAE (Simultaneous Authentication of Equals) is a Diffie-Hellman-based exchange. A passively captured SAE exchange gives an attacker nothing to brute-force offline - every guess requires a live round-trip with the AP, which can rate-limit or lock out an attacker making repeated attempts. Option A is wrong - this offline-cracking weakness is exactly what SAE was designed to fix versus WPA2-PSK's 4-way handshake. Option C is wrong - WPA3-Personal still uses a passphrase, SAE just changes how that passphrase is verified. Option D is wrong - SAE replaces PSK in WPA3-Personal (no RADIUS needed); WPA3-Enterprise is a separate, additional mode.",
+          "explanation": "SAE (Simultaneous Authentication of Equals) is a Diffie-Hellman-based exchange \u2014 a passively captured SAE exchange gives an attacker nothing to brute-force offline, since every guess needs a live round-trip the AP can rate-limit or lock out. Wrong: (A) this offline-cracking weakness is exactly what SAE fixes versus WPA2's 4-way handshake. (C) WPA3-Personal still uses a passphrase; SAE just changes how it's verified. (D) SAE replaces PSK in WPA3-Personal (no RADIUS needed) \u2014 WPA3-Enterprise is a separate mode.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["wpa3", "sae", "wireless-security", "wpa2"]
+          "tags": [
+            "wpa3",
+            "sae",
+            "wireless-security",
+            "wpa2"
+          ]
         },
         {
           "id": "z2-n3-001",
@@ -323,12 +633,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "Which 802.11 standard operates exclusively on the 5 GHz band with a maximum theoretical speed of 3.5 Gbps?",
-          "options": ["802.11n", "802.11ac", "802.11ax", "802.11g"],
+          "options": [
+            "802.11n",
+            "802.11ac",
+            "802.11ax",
+            "802.11g"
+          ],
           "correct_index": 1,
           "explanation": "802.11ac (Wi-Fi 5) operates exclusively on 5 GHz and achieves up to 3.5 Gbps using MU-MIMO and 80/160 MHz channel bonding. 802.11ax (Wi-Fi 6) supports 2.4/5/6 GHz.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["802.11ac", "Wi-Fi 5", "5GHz"]
+          "tags": [
+            "802.11ac",
+            "Wi-Fi 5",
+            "5GHz"
+          ]
         },
         {
           "id": "z2-n3-002",
@@ -337,12 +656,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "On the 2.4 GHz band, which three channels are non-overlapping?",
-          "options": ["1, 2, 3", "1, 5, 10", "1, 6, 11", "2, 7, 12"],
+          "options": [
+            "1, 2, 3",
+            "1, 5, 10",
+            "1, 6, 11",
+            "2, 7, 12"
+          ],
           "correct_index": 2,
           "explanation": "Channels 1, 6, and 11 are the only non-overlapping channels in the 2.4 GHz band (in North America). Using any other combination results in co-channel or adjacent-channel interference.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["2.4GHz", "Channels", "Non-Overlapping"]
+          "tags": [
+            "2.4GHz",
+            "Channels",
+            "Non-Overlapping"
+          ]
         },
         {
           "id": "z2-n3-007",
@@ -351,12 +679,147 @@
           "difficulty": "medium",
           "type": "mob",
           "question": "WPA3 replaces WPA2's PSK with which authentication method that prevents offline dictionary attacks?",
-          "options": ["EAP-TLS", "SAE (Simultaneous Authentication of Equals)", "TKIP", "MS-CHAPv2"],
+          "options": [
+            "EAP-TLS",
+            "SAE (Simultaneous Authentication of Equals)",
+            "TKIP",
+            "MS-CHAPv2"
+          ],
           "correct_index": 1,
-          "explanation": "WPA3 Personal uses SAE (Simultaneous Authentication of Equals) — a key exchange method that prevents offline dictionary attacks. Even if an attacker captures the 4-way handshake, they cannot crack the password offline.",
+          "explanation": "WPA3 Personal uses SAE (Simultaneous Authentication of Equals) \u2014 a key exchange method that prevents offline dictionary attacks. Even if an attacker captures the 4-way handshake, they cannot crack the password offline.",
           "xp_reward": 30,
           "bits_reward": 12,
-          "tags": ["WPA3", "SAE", "Wireless Security"]
+          "tags": [
+            "WPA3",
+            "SAE",
+            "Wireless Security"
+          ]
+        },
+        {
+          "id": "z2-n3-study-003",
+          "zone": 2,
+          "node": 2.3,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Spectrum Sieve",
+          "scenario": "You stand before the Great Antennae of the Wireless Plains. To pass, you must prove your knowledge of the ancient Wi-Fi scrolls (802.11 standards). The air is thick with signals, and you must distinguish between the frequencies used by different generations of technology.\n\nYou recall that 802.11a operates on 5 GHz, while 802.11b/g/n primarily inhabit the 2.4 GHz band. Modern standards like 802.11ac are strictly 5 GHz (with Wave 2 capable of high speeds), whereas 802.11ax (Wi-Fi 6) and 802.11be (Wi-Fi 7) are versatile, operating on both 2.4 and 5 GHz, with the latter even reaching into the 6 GHz realm.",
+          "question": "Which of the following Wi-Fi standards operates on both the 2.4 GHz and 5 GHz bands?",
+          "options": [
+            "802.11ac",
+            "802.11ax",
+            "802.11b",
+            "802.11a"
+          ],
+          "correct_index": 1,
+          "explanation": "The correct answer is B (802.11ax). 802.11ac is only 5 GHz; 802.11b is only 2.4 GHz; 802.11a is only 5 GHz. 802.11ax (Wi-Fi 6) and 802.11be are the modern standards that support both common bands.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "Wireless",
+            "802.11",
+            "Standards"
+          ]
+        },
+        {
+          "id": "z2-n3-study-004",
+          "zone": 2,
+          "node": 2.3,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Echoing Woods",
+          "scenario": "You enter a dense thicket where the 'Whispers of Interference' make communication difficult. The trees are crowded with signals overlapping in the 2.4 GHz frequency space, causing packets to collide and vanish into the void.\n\nTo navigate safely, you must identify the clear paths. In North America, the 2.4 GHz band is divided such that only three specific channels do not overlap with their neighbors. Using adjacent channels, like 1 and 2 or 5 and 6, causes significant interference because the signals bleed into one another.",
+          "question": "Which set of channels provides non-overlapping coverage in the 2.4 GHz Wi-Fi band?",
+          "options": [
+            "1, 2, 3",
+            "1, 5, 9",
+            "1, 6, 11",
+            "2, 4, 8"
+          ],
+          "correct_index": 2,
+          "explanation": "The correct answer is C. Channels 1, 6, and 11 are the standard non-overlapping channels in the 2.4 GHz band. Other combinations (like 1, 5, 9) result in overlapping signals that cause interference.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "Wireless",
+            "RF",
+            "Spectrum"
+          ]
+        },
+        {
+          "id": "z2-n3-mini-001",
+          "zone": 2,
+          "node": 2.3,
+          "type": "mini-boss",
+          "difficulty": "boss",
+          "title": "The Spectral Static of the Overlapping Realms",
+          "scenario": "You enter the 'Valley of Whispers,' where the very air vibrates with a discordant hum. A spectral guardian named Aether-Glitch manifests before you, its form flickering like a dying signal. It feeds on the chaotic overlap of waves, growing more powerful as nearby magical beacons bleed into one another's frequencies.\n\nThe guardian shrieks, 'Many voices scream in the same space! They collide and blur, creating a cacophony that weakens the weave!' You notice three distinct towers pulsing with light; however, their signals are bleeding together, causing massive packet loss for your party's communication spells. \nTo banish the entity, you must realign the magical beacons to a configuration that ensures clear, non-overlapping paths. If you fail to identify the correct frequency spacing, the interference will overwhelm your senses, and the guardian will feast on your connection.",
+          "question": "The spectral guardian demands you stabilize the local weave. To eliminate co-channel and adjacent-channel interference in the 2.4 GHz band, which set of channels should be utilized for the beacon towers?",
+          "options": [
+            "1, 4, 7, and 10",
+            "1, 6, and 11",
+            "3, 8, and 12",
+            "Any three non-consecutive numbers"
+          ],
+          "correct_index": 1,
+          "explanation": "In the 2.4 GHz Wi-Fi band, each channel is approximately 20 MHz wide, but they are spaced only 5 MHz apart. This means that many channels overlap with their neighbors (adjacent-channel interference). To provide clear, non-overlapping paths for signals, the industry standard is to use channels 1, 6, and 11. Using other combinations like 1, 4, or 7 causes signal bleed, which creates noise and degrades performance for all devices in the vicinity.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": [
+            "wireless",
+            "2.4GHz",
+            "interference",
+            "networking-basics"
+          ]
+        },
+        {
+          "id": "z2-n3-study-005",
+          "zone": 2,
+          "node": 2.3,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "Whispers in the Aether",
+          "scenario": "The air hums with invisible frequencies as you enter the Echo Chamber. To navigate the maze, you must distinguish between the different layers of wireless signals floating through the air.\n\nEvery signal has a name that humans can see and interact with; this is the SSID (Service Set Identifier). However, underneath that lies the BSSID, which is the unique MAC address of the specific Access Point or radio hardware. In larger realms where multiple towers broadcast the same human-readable name to create one seamless network, that shared logical identity is known as an ESSID.",
+          "question": "A technician identifies a wireless signal and notes its unique MAC address. Which term describes this specific identifier?",
+          "options": [
+            "SSID",
+            "ESSID",
+            "BSSID",
+            "S1ID"
+          ],
+          "correct_index": 2,
+          "explanation": "The BSSID is the unique MAC address of the specific Access Point or radio. The SSID is the human-readable name (e.g., 'Guest_WiFi'), and the ESSID is the logical name that can span multiple APs.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "Wireless",
+            "SSID",
+            "BSSID"
+          ]
+        },
+        {
+          "id": "z2-n3-study-006",
+          "zone": 2,
+          "node": 2.3,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Scout's Survey",
+          "scenario": "You are tasked with establishing a communication link across the Great Wasteland. You must choose the correct magical focus (antenna) to ensure your signals reach their destination without being lost in the void.\n\nOmnidirectional antennas are used when you need 360-degree coverage for local areas, while directional, patch, or Yagi antennas are required to focus a signal toward a specific point. Before building anything, you must perform a site survey\u2014a critical ritual to identify dead zones, potential interference from other magic, and the optimal placement of your relay towers.",
+          "question": "Which antenna type would be most appropriate for a point-to-point link between two distant towers?",
+          "options": [
+            "Omnidirectional",
+            "Directional",
+            "Broadcast",
+            "Passive"
+          ],
+          "correct_index": 1,
+          "explanation": "Directional antennas (including patch and Yagi) focus the signal in a specific direction, making them ideal for point-to-point links. Omnidirectional antennas radiate in all directions and are better for general local coverage.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "Wireless",
+            "Antennas",
+            "SiteSurvey"
+          ]
         }
       ]
     },
@@ -369,10 +832,10 @@
           "id": "z2-n4-study-001",
           "zone": 2,
           "node": 2.4,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Data Highway Project",
-          "scenario": "You are the Chief Infrastructure Engineer for the 'Data Highway Project.' You have been tasked with laying down the copper pipelines that will carry high-speed data traffic across the digital valley. The project is divided into several critical phases. First, you must choose the right grade of pipe. Some pipes are narrow and prone to interference from the heavy machinery nearby (UTP), while others are heavily armored to protect the flow from electromagnetic noise (STP).\n\nYou have different tiers of road construction to choose from. The 'Cat5e' lanes are like the old country roads—reliable for light traffic but limited in speed and capacity. The 'Cat6' lanes are the modern highways, capable of much higher speeds but requiring tighter construction standards to prevent signal bleed. Then there is the 'Cat6a' super-highway, designed for massive throughput and high-frequency performance over longer distances.\n\nHowever, there is a physical law you cannot break: the 'Signal Decay' rule. If your pipeline stretches too far without a repeater station, the pressure drops, and the data flow becomes sluggish and unreliable. Furthermore, you must ensure all your junctions follow the 'TIA-568' blueprint. If the wiring patterns at the junctions don't match perfectly, the traffic will crash at every intersection, causing a total network blackout. Your mission is to design a network that balances cost, speed, and environmental interference to ensure the valley stays connected.",
+          "scenario": "You're the Chief Infrastructure Engineer laying copper pipelines for high-speed data across a digital valley. First, choose your pipe grade: some are narrow and prone to interference from nearby heavy machinery (UTP), others are heavily armored against electromagnetic noise (STP). For tier, Cat5e is the old country road \u2014 reliable but limited speed. Cat6 is a modern highway \u2014 faster, but needs tighter construction to avoid signal bleed. Cat6a is the super-highway \u2014 massive throughput over longer distances. One unbreakable law: SIGNAL DECAY \u2014 stretch a pipeline too far without a repeater and the flow becomes sluggish and unreliable. And every junction must follow the TIA-568 wiring standard \u2014 mismatched wiring patterns cause traffic to crash at every intersection.",
           "question": "You are laying a pipeline next to a massive, vibrating power plant that generates heavy electromagnetic noise. Which type of cabling should you use?",
           "options": [
             "UTP (Unshielded Twisted Pair)",
@@ -384,16 +847,22 @@
           "explanation": "STP includes shielding to protect the signal from EMI (Electromagnetic Interference), much like an armored pipe protects fluid from external pressure or contaminants.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["ethernet", "cabling", "stp", "utp", "physical-layer"]
+          "tags": [
+            "ethernet",
+            "cabling",
+            "stp",
+            "utp",
+            "physical-layer"
+          ]
         },
         {
           "id": "z2-n4-study-002",
           "zone": 2,
           "node": 2.4,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Corporate Org Chart: MDF and IDF Wiring Hierarchy",
-          "scenario": "Think of a large company's mail system spread across a 10-story office tower. All mail to and from the outside world - the postal trucks, the courier deliveries - arrives at one central mailroom in the lobby. This central mailroom is the MDF (Main Distribution Frame): it houses the core switches, routers, the connection to the ISP (the demarc), and the main patch panels. From here, big bundles of pre-sorted mail are sent up to each floor through a pneumatic tube system - this is your BACKBONE (vertical) CABLING, almost always fiber, because a single run from the lobby to the 10th floor would be far too long for copper.\n\nEach floor has its own small mail room - this is the IDF (Intermediate Distribution Frame). The floor's mail clerk (an access-layer switch) takes the bundle that arrived via the pneumatic tube and sorts it into individual mail slots for each office door on that floor. The walk from the floor's mail room to each individual office door is the HORIZONTAL CABLING - and TIA-568 says that walk (the permanent link) cannot be longer than 90 meters, with up to another 10m of patch cable on each end for a 100m total channel. If an office is too far from its floor's mail room, the clerk simply cannot reach it with a single run.\n\nThe key insight: MDF = one central hub for the whole building. IDF = one distribution point per floor or wing, feeding off the MDF via backbone cabling, then feeding end devices via horizontal cabling.",
+          "scenario": "Picture a company's mail system across a 10-story tower. All outside mail arrives at one central mailroom in the lobby \u2014 the MDF (Main Distribution Frame): core switches, routers, the ISP demarc, and main patch panels live here. From there, big bundles travel up to each floor via pneumatic tube \u2014 your BACKBONE (vertical) cabling, almost always fiber, since a single copper run from lobby to 10th floor would be far too long. Each floor has its own small mailroom \u2014 the IDF (Intermediate Distribution Frame) \u2014 whose clerk (an access-layer switch) sorts the bundle into individual office runs. That walk from IDF to office door is HORIZONTAL CABLING, capped by TIA-568 at 90m permanent link / 100m total channel. Key insight: ONE MDF per building, ONE IDF per floor/wing, fed by backbone cabling and feeding end devices via horizontal cabling.",
           "question": "A new office is being fitted out on the 8th floor of a building whose MDF is in the basement. The office desk is 70 meters of cable away from the 8th floor's IDF, but the IDF itself is connected to the basement MDF via a 200-meter fiber backbone run. Is this a valid design?",
           "options": [
             "No - the desk's 70m run plus the 200m backbone exceeds the 100m TIA-568 limit, so the whole path is non-compliant",
@@ -402,10 +871,16 @@
             "Yes, but only if the backbone cabling is also copper to keep latency consistent"
           ],
           "correct_index": 1,
-          "explanation": "Correct: The 90m permanent link / 100m total channel limit from TIA-568 applies to HORIZONTAL copper cabling - the IDF-to-work-area run, here 70m, well within budget. The backbone (vertical) cabling between the IDF and MDF is typically fiber precisely because it often needs to span much greater distances than 100m, and fiber's distance limits are measured in kilometers. Option A incorrectly adds the two runs together as if they were one copper segment. Option C is wrong - connecting end devices is the IDF's entire purpose. Option D is backwards - fiber is preferred for long backbone runs specifically because it ISN'T limited like copper.",
+          "explanation": "The 90m/100m TIA-568 limit applies to HORIZONTAL copper cabling \u2014 the IDF-to-desk run, here 70m, well within budget. Backbone (vertical) cabling between IDF and MDF is typically fiber precisely because it often spans much further than 100m, with distance limits measured in kilometers. Wrong: (A) incorrectly adds the two runs as one copper segment. (C) connecting end devices is the IDF's entire purpose. (D) is backwards \u2014 fiber is preferred for long backbone runs specifically because it ISN'T limited like copper.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["mdf", "idf", "cabling", "tia-568", "infrastructure"]
+          "tags": [
+            "mdf",
+            "idf",
+            "cabling",
+            "tia-568",
+            "infrastructure"
+          ]
         },
         {
           "id": "z2-n4-001",
@@ -414,12 +889,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What does MDF stand for in network infrastructure?",
-          "options": ["Media Distribution Frame", "Main Distribution Frame", "Managed Data Fabric", "Multi-Domain Firewall"],
+          "options": [
+            "Media Distribution Frame",
+            "Main Distribution Frame",
+            "Managed Data Fabric",
+            "Multi-Domain Firewall"
+          ],
           "correct_index": 1,
-          "explanation": "MDF (Main Distribution Frame) is the central wiring point for a building's network — housing core switches, routers, WAN connections, and patch panels. All IDFs connect back to the MDF.",
+          "explanation": "MDF (Main Distribution Frame) is the central wiring point for a building's network \u2014 housing core switches, routers, WAN connections, and patch panels. All IDFs connect back to the MDF.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["MDF", "Infrastructure", "Wiring"]
+          "tags": [
+            "MDF",
+            "Infrastructure",
+            "Wiring"
+          ]
         },
         {
           "id": "z2-n4-002",
@@ -428,12 +912,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What type of UPS has zero transfer time because it always routes power through the inverter?",
-          "options": ["Offline/standby UPS", "Line-interactive UPS", "Online/double conversion UPS", "Feroresonant UPS"],
+          "options": [
+            "Offline/standby UPS",
+            "Line-interactive UPS",
+            "Online/double conversion UPS",
+            "Feroresonant UPS"
+          ],
           "correct_index": 2,
-          "explanation": "Online/double conversion UPS always runs through the inverter — utility power charges the battery, and the inverter powers the load 100% of the time. Zero transfer time on outage, cleanest power output.",
+          "explanation": "Online/double conversion UPS always runs through the inverter \u2014 utility power charges the battery, and the inverter powers the load 100% of the time. Zero transfer time on outage, cleanest power output.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["UPS", "Online UPS", "Power"]
+          "tags": [
+            "UPS",
+            "Online UPS",
+            "Power"
+          ]
         },
         {
           "id": "z2-n4-003",
@@ -442,12 +935,96 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "What is the maximum horizontal cable run length (permanent link) defined by TIA-568?",
-          "options": ["50 meters", "75 meters", "90 meters", "100 meters"],
+          "options": [
+            "50 meters",
+            "75 meters",
+            "90 meters",
+            "100 meters"
+          ],
           "correct_index": 2,
           "explanation": "TIA-568 specifies maximum 90m for the permanent horizontal link (wall jack to patch panel). Up to 10m is allowed for patch cables (both ends), giving a total of 100m channel length.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["TIA-568", "Horizontal Cabling", "Infrastructure"]
+          "tags": [
+            "TIA-568",
+            "Horizontal Cabling",
+            "Infrastructure"
+          ]
+        },
+        {
+          "id": "z2-n4-study-003",
+          "zone": 2,
+          "node": 2.4,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Power Vault",
+          "scenario": "Deep within the core of the fortress, you find the Mainframe. It is powered by a flickering energy source. A storm is approaching, and you must choose the correct Uninterruptible Power Supply (UPS) to protect the servers from surges and outages.\n\nYou analyze three types: Offline/Standby UPS, which only kicks in when power fails; Line-interactive, which monitors the line and switches to battery if conditions degrade; and Online/Double-conversion, which is the gold standard. The latter constantly converts power through an inverter, ensuring the load never sees a flicker or a spike from the raw grid.",
+          "question": "Which UPS topology provides the highest level of protection by continuously running the load through an inverter?",
+          "options": [
+            "Offline/Standby",
+            "Line-interactive",
+            "Online/Double-conversion",
+            "Passive-buffer"
+          ],
+          "correct_index": 2,
+          "explanation": "The correct answer is C. Online/Double-conversion UPS systems provide the best protection because they constantly convert AC to DC and back to AC, isolating the equipment from power fluctuations. Offline and Line-interactive models have a brief delay when switching to battery.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "Power",
+            "Infrastructure",
+            "UPS"
+          ]
+        },
+        {
+          "id": "z2-n4-mini-001",
+          "zone": 2,
+          "node": 2.4,
+          "type": "mini-boss",
+          "difficulty": "boss",
+          "title": "The Warden of the Eternal Current",
+          "scenario": "You stand before the Great Vault of the Core, where the primary servers pulse with a rhythmic blue light. The air hums with static electricity as a spectral figure\u2014the Warden of the Grid\u2014manifests from the humming cabinets. 'Many seekers enter this chamber,' the Warden booms, 'but few can maintain the flow. The grid is treacherous; it flickers like a dying candle. To protect the Core, you must choose the ultimate shield against the instability of the world outside.'\n\nThe Warden points toward three different power stabilization arrays. One reacts only when the lights fail; another adjusts for voltage swings but takes a fraction of a second to switch sources. The third, however, maintains a constant cycle, feeding the servers through a continuous conversion process that isolates them from every tremor in the electrical line.\n\nThe Warden's eyes glow with intensity as he poses his final riddle: 'If the Core must never falter\u2014not for a millisecond, not even during a minor sag\u2014which architecture provides the absolute sanctuary of constant isolation?'",
+          "question": "Which UPS topology is required to ensure that mission-critical servers are completely isolated from power fluctuations and experience zero transfer time during a voltage sag?",
+          "options": [
+            "Standby (Offline)",
+            "Line-Interactive",
+            "Double-Conversion (Online)",
+            "Passive Power Distribution"
+          ],
+          "correct_index": 2,
+          "explanation": "Standby (Offline) UPS systems only engage once power is lost, which can cause a reboot during the switchover. Line-Interactive systems use a transformer or regulator to handle minor sags but still have a brief delay when switching to battery. Double-conversion (Online) units constantly convert AC to DC and back to AC. This creates a continuous buffer, ensuring that the equipment is always running on 'clean' power from an inverter, making it the only choice for mission-critical systems where even a millisecond of interruption is unacceptable.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": [
+            "UPS",
+            "Power_Management",
+            "Data_Center"
+          ]
+        },
+        {
+          "id": "z2-n4-study-004",
+          "zone": 2,
+          "node": 2.4,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Forge of Power Distribution",
+          "scenario": "You enter the subterranean power vault where the realm's infrastructure is housed in massive metal racks. To keep the machines running, you must manage the distribution of energy and the physical space they occupy.\n\nStandard PDUs provide basic power, but 'Switched' PDUs allow you to toggle individual outlets remotely, while 'Metered' PDUs track how much power each device consumes. Every piece of equipment takes up a specific amount of vertical space; 1U is equal to 1.75 inches. You must also guard against the primary enemy: high temperatures, which can fry the circuits if airflow and humidity are not monitored.",
+          "question": "A technician needs to monitor the power consumption of several servers in a rack. Which type of PDU should they install?",
+          "options": [
+            "Basic PDU",
+            "Switched PDU",
+            "Metered PDU",
+            "Unmanaged PDU"
+          ],
+          "correct_index": 2,
+          "explanation": "A Metered PDU is specifically designed to show the current draw (power consumption) of the connected devices. A Switched PDU allows for remote control of outlets, and a Basic PDU provides only standard power distribution.",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "DataCenter",
+            "PDU",
+            "RackUnits"
+          ]
         }
       ]
     },
@@ -460,10 +1037,10 @@
           "id": "z2-n5-study-001",
           "zone": 2,
           "node": 2.5,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "easy",
           "title": "The Ether-Grid Engineer",
-          "scenario": "Welcome, Engineer. You have been assigned to manage the 'Ether-Grid,' a sophisticated utility system where data and electricity flow through the same conduits. In a traditional city, you would have separate pipes for water and wires for electricity. In our network, we use Power over Ethernet (PoE) to combine them into a single streamlined delivery system. However, managing this grid requires precision. Your central power plant—the PoE Switch—has a finite 'Power Budget.' If you attempt to plug in too many heavy-duty industrial machines (high-draw devices) without checking your total wattage capacity, the entire grid will suffer a brownout, leaving devices unpowered.\n\nYou must also navigate the different tiers of service provided by the standards. The 802.3af standard is like a small residential transformer, providing just enough juice for basic lights (VoIP phones). The 802.3at (PoE+) standard is an industrial-grade line for medium appliances (PTZ cameras), and the 802.3bt (PoE++) is the massive high-capacity grid for heavy machinery. Finally, you must understand the routing: 'Mode A' delivers power over the data-carrying wires, much like a multi-use highway where cars and fuel trucks share the same lanes, whereas 'Mode B' utilizes separate, dedicated auxiliary lines for the power. Master these variables, or your network will go dark.",
+          "scenario": "You're managing the 'Ether-Grid,' where data and electricity share the same conduits via Power over Ethernet (PoE). Your PoE switch is the central power plant with a finite POWER BUDGET \u2014 plug in too many high-draw devices without checking total wattage, and the grid suffers a brownout, leaving devices unpowered. Service tiers: 802.3af is a small residential transformer \u2014 just enough for basic VoIP phones. 802.3at (PoE+) is an industrial-grade line for medium devices like PTZ cameras. 802.3bt (PoE++) is the high-capacity grid for heavy equipment. For wiring: 'Mode A' delivers power over the data-carrying wires (like cars and fuel trucks sharing lanes), while 'Mode B' uses separate dedicated lines for power.",
           "question": "You are setting up a small office with basic VoIP phones that require very little power. Which 'grid standard' is the bare minimum required?",
           "options": [
             "802.3af",
@@ -472,19 +1049,23 @@
             "802.1X"
           ],
           "correct_index": 0,
-          "explanation": "802.3af is the original PoE standard, providing up to 15.4W, which is sufficient for low-power devices like basic VoIP phones.",
+          "explanation": "802.3af is the original PoE standard, providing up to 15.4W \u2014 sufficient for low-power devices like basic VoIP phones.",
           "xp_reward": 50,
           "bits_reward": 25,
-          "tags": ["poe", "802.3af", "power-over-ethernet"]
+          "tags": [
+            "poe",
+            "802.3af",
+            "power-over-ethernet"
+          ]
         },
         {
           "id": "z2-n5-study-002",
           "zone": 2,
           "node": 2.5,
-          "type": "study_encounter",
+          "type": "mob",
           "difficulty": "medium",
           "title": "The Power Plant Manager: Budgeting the Grid",
-          "scenario": "You've been promoted from grid technician to Power Plant Manager. Your PoE switch is the plant, and it has a fixed total output called the POWER BUDGET - say, 400 watts total to share across all 24 ports. Every device you plug in is a 'customer' requesting a service tier from your grid. A basic VoIP phone (802.3af, up to 15.4W) is like a small house requesting residential service. A PTZ security camera or a Wi-Fi 6 access point (802.3at / PoE+, up to 30W) is like a small business requesting commercial service - roughly double the residential allotment. The newest 802.3bt (PoE++) devices, like multi-radio APs or PTZ cameras with heaters, can request up to 60W (Type 3) or 90W (Type 4) - industrial-grade service.\n\nAs the plant manager, you cannot promise more total power than your plant can generate. If your 400W plant already has 350W reserved for existing customers, and a new industrial customer (90W) tries to connect, you simply cannot serve them - the switch will refuse to power that port (or power it at a reduced/no level) rather than risk an overload. This is why before deploying a batch of new PoE devices, you always do the math first: add up each device's CLASS-based power draw and compare it against your switch's total power budget, leaving headroom for future growth.",
+          "scenario": "As Power Plant Manager, your PoE switch has a fixed POWER BUDGET \u2014 say 400W total across 24 ports. Each connected device requests a service tier: a basic VoIP phone (802.3af, up to 15.4W) is residential service. A PTZ camera or Wi-Fi 6 AP (802.3at/PoE+, up to 30W) is commercial service \u2014 roughly double. The newest 802.3bt (PoE++) devices can request up to 60W (Type 3) or 90W (Type 4) \u2014 industrial service. You can never promise more total power than the plant generates: if 350W of your 400W is already reserved and a new 90W device connects, the switch simply can't power that port. Always add up each device's CLASS-based draw against the total budget before deploying, leaving headroom for growth.",
           "question": "A 24-port switch advertises a 400W PoE power budget. The network team plans to deploy 10 Wi-Fi 6 access points, each negotiating as 802.3at (PoE+) Class 4 devices drawing 25.5W each. After installing all 10 APs, how much of the power budget remains, and is the deployment safe?",
           "options": [
             "255W consumed, 145W remaining - safe, with headroom for a few more low-power devices like phones",
@@ -493,10 +1074,15 @@
             "510W consumed - unsafe, exceeds the 400W budget by 110W"
           ],
           "correct_index": 0,
-          "explanation": "Correct: 10 APs x 25.5W = 255W. 400W - 255W = 145W remaining - plenty of headroom for additional devices like a few VoIP phones (15.4W each) later. Option B miscounts the total as exactly 400W. Option C invents a 'double reservation' rule that doesn't exist - the switch reserves the negotiated class wattage, not double it. Option D doubles the AP count's power draw incorrectly (10 x 51W instead of 10 x 25.5W). Always do this arithmetic BEFORE a rollout - running out of power budget mid-deployment means some APs simply won't power on.",
+          "explanation": "10 APs x 25.5W = 255W. 400W - 255W = 145W remaining \u2014 plenty of headroom for a few more low-power devices like phones (15.4W each) later. Wrong: (B) miscounts the total as exactly 400W. (C) invents a 'double reservation' rule that doesn't exist \u2014 the switch reserves the negotiated class wattage, not double. (D) doubles the AP power draw incorrectly (10 x 51W instead of 10 x 25.5W). Always do this math BEFORE a rollout.",
           "xp_reward": 60,
           "bits_reward": 30,
-          "tags": ["poe", "power-budget", "802.3at", "calculation"]
+          "tags": [
+            "poe",
+            "power-budget",
+            "802.3at",
+            "calculation"
+          ]
         },
         {
           "id": "z2-n5-001",
@@ -505,12 +1091,21 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "Which IEEE standard provides 15.4W of power per port?",
-          "options": ["802.3af", "802.3at", "802.3bt", "802.3an"],
+          "options": [
+            "802.3af",
+            "802.3at",
+            "802.3bt",
+            "802.3an"
+          ],
           "correct_index": 0,
           "explanation": "802.3af (Type 1) delivers 15.4W max, with 12.95W available to the device after cable loss.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["PoE", "802.3af", "Standards"]
+          "tags": [
+            "PoE",
+            "802.3af",
+            "Standards"
+          ]
         },
         {
           "id": "z2-n5-002",
@@ -519,26 +1114,95 @@
           "difficulty": "easy",
           "type": "mob",
           "question": "Your VoIP phone needs 25W. Which PoE standard is the minimum required?",
-          "options": ["802.3af", "802.3at", "802.3bt Type 3", "802.3bt Type 4"],
+          "options": [
+            "802.3af",
+            "802.3at",
+            "802.3bt Type 3",
+            "802.3bt Type 4"
+          ],
           "correct_index": 1,
           "explanation": "802.3at (Type 2 / PoE+) provides up to 30W, supporting devices like PTZ cameras and VoIP phones.",
           "xp_reward": 20,
           "bits_reward": 10,
-          "tags": ["PoE", "802.3at", "Power Requirements"]
+          "tags": [
+            "PoE",
+            "802.3at",
+            "Power Requirements"
+          ]
         },
         {
           "id": "z2-n5-011",
           "zone": 2,
           "node": 2.5,
-          "difficulty": "hard",
+          "difficulty": "medium",
           "type": "mob",
           "question": "48-port switch with 740W budget. 20 APs (25W each) + 15 cameras (15W each). Enough power?",
-          "options": ["Yes, 215W remaining", "Yes, 15W remaining", "No, need 15W more", "No, need 85W more"],
-          "correct_index": 2,
-          "explanation": "20x25W=500W, 15x15W=225W, Total=725W. 740W-725W=15W short when using 15.4W per port minimum.",
+          "options": [
+            "Yes, 215W remaining",
+            "Yes, 15W remaining",
+            "No, need 15W more",
+            "No, need 85W more"
+          ],
+          "correct_index": 1,
+          "explanation": "20 APs \u00d7 25 W = 500 W. 15 cameras \u00d7 15 W = 225 W. Total draw = 725 W. With a 740 W budget, 740 - 725 = 15 W remains. The switch has enough power for this deployment.",
           "xp_reward": 30,
           "bits_reward": 15,
-          "tags": ["PoE", "Power Budget", "Calculation"]
+          "tags": [
+            "PoE",
+            "Power Budget",
+            "Calculation"
+          ]
+        },
+        {
+          "id": "z2-n5-mini-001",
+          "zone": 2,
+          "node": 2.5,
+          "type": "mini-boss",
+          "difficulty": "boss",
+          "title": "The Warden of the Overloaded Grid",
+          "scenario": "The air in the Command Center is thick with the smell of ozone and melting plastic. Before you stands a towering spectral entity composed of tangled copper wiring and crackling electricity\u2014the Static Wraith. It guards the primary distribution switch, its form flickering as it feeds on the unstable power fluctuations of the failing network.\n\nTo bypass the Warden, you must stabilize the local area network by correctly configuring the Power over Ethernet (PoE) parameters. The fortress's defense system relies on 12 Access Points (APs) to maintain a secure perimeter. If the switch cannot provide enough guaranteed power to these devices, the signal will collapse, and the Wraith will consume your connection.\n\nYou access the terminal and see the hardware specifications: The switch has a total PoE power budget of 370W. While each AP actually draws 25W of power during peak operation, the current infrastructure only supports the IEEE 802.3af standard. You must determine if the configuration is viable based on the guaranteed limits provided by that specific standard.",
+          "question": "Based on the technical specifications provided, does the switch have enough power to support all 12 Access Points using the per-port guarantee of the 802.3af standard?",
+          "options": [
+            "Yes, because the total guaranteed power (12 APs \u00d7 15.4W) is 184.8W, which falls well within the 370W budget.",
+            "No, because the actual draw of 25W per AP exceeds the 15.4W limit of the 802.3af standard.",
+            "Yes, because the total actual power consumption (12 APs \u00d7 25W) is 300W, which is under the 370W budget.",
+            "No, because a switch with a 370W budget can only support up to 14 devices regardless of the standard."
+          ],
+          "correct_index": 0,
+          "explanation": "The correct answer is A. In PoE calculations, when a specific standard like 802.3af is specified, you must calculate based on that standard's guaranteed power per port. Since 12 APs \u00d7 15.4W (the 802.3af guarantee) equals 184.8W, and the switch has a total budget of 370W, the requirement is met. While the actual draw is higher (300W), the question specifically asks about the calculation based on the per-port guarantee. Note: In real-world scenarios, if an AP requires 25W but only receives 15.4W from an 802.3af port, it may fail to boot; however, for this specific logic check, the guarantee is the deciding factor.",
+          "xp_reward": 150,
+          "bits_reward": 75,
+          "tags": [
+            "PoE",
+            "PowerBudget",
+            "802.3af",
+            "Networking"
+          ]
+        },
+        {
+          "id": "z2-n5-study-004",
+          "zone": 2,
+          "node": 2.5,
+          "type": "mob",
+          "difficulty": "easy",
+          "title": "The Totems of Eternal Light",
+          "scenario": "You find a series of ancient totems that need to be powered by the realm's grid. However, not all totems draw the same amount of energy; some are small lanterns, while others are massive beacons.\n\nYou must choose the correct Power over Ethernet (PoE) standard for each. 802.3af (Type 1) provides up to 15.4W\u2014enough for simple devices. 802.3at (Type 2, or PoE+) provides up to 30W for more demanding equipment. For the most powerful artifacts requiring 60W or even 100W, you must use the 802.3bt (Type 3/4) standard.",
+          "question": "Which PoE standard is required to power a high-demand device that requires up to 30 Watts of power?",
+          "options": [
+            "802.3af",
+            "802.3at",
+            "802.3bt",
+            "802.11ax"
+          ],
+          "correct_index": 1,
+          "explanation": "802.3at (Type 2, also known as PoE+) provides up to 30W of power. 802.3af only provides up to 15.4W, and 802.3bt is required for even higher demands (60W+).",
+          "xp_reward": 50,
+          "bits_reward": 25,
+          "tags": [
+            "PoE",
+            "Power",
+            "Standards"
+          ]
         }
       ]
     }
@@ -547,49 +1211,562 @@
     {
       "id": "z2-g-001",
       "zone": 2,
-      "node": 0,
+      "node": 2.0,
       "difficulty": "medium",
-      "type": "boss",
+      "type": "guardian",
       "question": "Which routing protocol is used between Autonomous Systems on the internet?",
-      "options": ["OSPF", "EIGRP", "BGP", "RIP"],
+      "options": [
+        "OSPF",
+        "EIGRP",
+        "BGP",
+        "RIP"
+      ],
       "correct_index": 2,
       "explanation": "BGP (Border Gateway Protocol) is the EGP (Exterior Gateway Protocol) that routes between ASes on the internet. OSPF, EIGRP, and RIP are IGPs used within a single AS.",
       "xp_reward": 50,
       "bits_reward": 20,
-      "tags": ["BGP", "Routing", "EGP"]
+      "tags": [
+        "BGP",
+        "Routing",
+        "EGP"
+      ]
     },
     {
       "id": "z2-g-002",
       "zone": 2,
-      "node": 0,
+      "node": 2.0,
       "difficulty": "medium",
-      "type": "boss",
+      "type": "guardian",
       "question": "OSPF has an administrative distance of:",
-      "options": ["1", "90", "110", "120"],
+      "options": [
+        "1",
+        "90",
+        "110",
+        "120"
+      ],
       "correct_index": 2,
       "explanation": "OSPF = AD 110. The AD pecking order: Connected(0) > Static(1) > eBGP(20) > EIGRP(90) > OSPF(110) > RIP(120) > iBGP(200).",
       "xp_reward": 50,
       "bits_reward": 20,
-      "tags": ["OSPF", "Admin Distance"]
+      "tags": [
+        "OSPF",
+        "Admin Distance"
+      ]
     },
     {
       "id": "z2-g-018",
       "zone": 2,
-      "node": 0,
+      "node": 2.0,
       "difficulty": "hard",
-      "type": "boss",
+      "type": "guardian",
       "question": "An attacker sends frames tagged with the native VLAN ID followed by an inner tag for VLAN 20. What attack is this, and what is the primary mitigation?",
       "options": [
-        "ARP poisoning — mitigated by dynamic ARP inspection",
-        "VLAN hopping (double tagging) — mitigated by changing native VLAN to an unused VLAN",
-        "STP manipulation — mitigated by BPDU Guard",
-        "MAC flooding — mitigated by port security"
+        "ARP poisoning \u2014 mitigated by dynamic ARP inspection",
+        "VLAN hopping (double tagging) \u2014 mitigated by changing native VLAN to an unused VLAN",
+        "STP manipulation \u2014 mitigated by BPDU Guard",
+        "MAC flooding \u2014 mitigated by port security"
       ],
       "correct_index": 1,
       "explanation": "Double tagging VLAN hopping: attacker's frame has outer tag = native VLAN (stripped by first switch) and inner tag = target VLAN (delivered by second switch). Mitigation: change native VLAN to an unused VLAN (not VLAN 1) and disable DTP.",
       "xp_reward": 50,
       "bits_reward": 20,
-      "tags": ["VLAN Hopping", "Security", "802.1Q"]
+      "tags": [
+        "VLAN Hopping",
+        "Security",
+        "802.1Q"
+      ]
+    },
+    {
+      "id": "z2-g-003",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Gate of Prefix Logic",
+      "scenario": "A spectral sentinel blocks the path to the core switch. It demands you resolve a conflict in the routing table: two paths exist for the same destination.",
+      "question": "A router learns 192.168.0.0/16 via EIGRP (AD 90) and 192.168.1.0/24 via OSPF (AD 110). Which route is installed in the routing table?",
+      "options": [
+        "192.168.0.0/16",
+        "192.168.1.0/24",
+        "Neither, as OSPF has a higher AD",
+        "Both are installed"
+      ],
+      "correct_index": 1,
+      "explanation": "The Longest Prefix Match rule takes precedence over Administrative Distance. Because /24 is a more specific subnet than /16, the router will select the OSPF route regardless of its higher AD.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "routing",
+        "prefix_match",
+        "IGP"
+      ]
+    },
+    {
+      "id": "z2-g-004",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Weaver's Subinterface",
+      "scenario": "A weaver of threads stands before a single physical cable that must carry the voices of many different kingdoms (VLANs).",
+      "question": "What is the primary purpose of configuring subinterfaces on a router?",
+      "options": [
+        "To increase the physical clock speed of the port",
+        "To allow a single physical interface to route traffic for multiple VLANs",
+        "To provide hardware-level redundancy for failed ports",
+        "To encrypt data passing between different local segments"
+      ],
+      "correct_index": 1,
+      "explanation": "Subinterfaces (often used in 'Router-on-a-Stick' configurations) allow a single physical interface to be divided into multiple logical interfaces, each assigned to a different VLAN.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "vlan",
+        "layer3",
+        "trunking"
+      ]
+    },
+    {
+      "id": "z2-g-005",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Spirit of Cost",
+      "scenario": "A spirit of the winds demands to know which path is calculated by the weight of its speed.",
+      "question": "Which routing protocol uses 'cost' as a metric based primarily on link bandwidth?",
+      "options": [
+        "RIP",
+        "EIGRP",
+        "OSPF",
+        "BGP"
+      ],
+      "correct_index": 2,
+      "explanation": "OSPF (Open Shortest Path First) uses 'cost' as its metric, which is calculated based on the bandwidth of the outgoing interface.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "routing_protocols",
+        "ospf",
+        "metrics"
+      ]
+    },
+    {
+      "id": "z2-g-006",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Twin Gate Guardians",
+      "scenario": "Two identical golems stand side-by-side. They share a single identity to provide a seamless gateway for the travelers.",
+      "question": "In an HSRP configuration, what is the term for the IP address shared by the active and standby routers?",
+      "options": [
+        "Gateway MAC",
+        "Virtual IP (VIP)",
+        "Standby Address",
+        "Proxy Gateway"
+      ],
+      "correct_index": 1,
+      "explanation": "HSRP (Hot Standby Router Protocol) provides redundancy by having multiple routers share a Virtual IP (VIP) and a virtual MAC address.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "redundancy",
+        "hsrp",
+        "gateway"
+      ]
+    },
+    {
+      "id": "z2-g-007",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Shadow Path",
+      "scenario": "A hidden path lies in the shadows; it only reveals itself when the main road is blocked by falling debris.",
+      "question": "A floating static route is configured with an Administrative Distance (AD) of 200. When does this route become active?",
+      "options": [
+        "When the physical link to the primary router fails",
+        "When the primary route's AD is manually increased",
+        "When the primary route with a lower AD is removed from the routing table",
+        "When the router receives an OSPF update for that prefix"
+      ],
+      "correct_index": 2,
+      "explanation": "A floating static route has a higher Administrative Distance than the primary route. It remains 'hidden' in the configuration until the primary (lower AD) route is removed from the routing table.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "static_routing",
+        "redundancy",
+        "ad"
+      ]
+    },
+    {
+      "id": "z2-g-008",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Gatekeeper of Segments",
+      "scenario": "A spectral wall blocks your path to the inner sanctum. To pass, you must prove your mastery over logical separation.",
+      "question": "To carve a new VLAN into the fabric of the network on a Cisco switch, which mode must you enter?",
+      "options": [
+        "VLAN Database Mode",
+        "Global Configuration Mode",
+        "Exec Mode",
+        "Interface Configuration Mode"
+      ],
+      "correct_index": 1,
+      "explanation": "To create or modify a VLAN (e.g., 'switch(config-vlan)#'), you must be in Global Configuration mode. Interface Configuration mode is used for assigning ports to existing VLANs.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "VLAN",
+        "Cisco_CLI",
+        "Switching"
+      ]
+    },
+    {
+      "id": "z2-g-009",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Nexus Sentinel",
+      "scenario": "A floating stone monolith hums with energy. It demands to know how a Layer 3 switch bridges the gap between segments.",
+      "question": "What is the primary purpose of an SVI (Switched Virtual Interface) on a Layer 3 switch?",
+      "options": [
+        "To provide a physical port for end-user devices",
+        "To provide a routed gateway interface for a VLAN",
+        "To map MAC addresses to specific IP addresses",
+        "To broadcast traffic across all available subnets"
+      ],
+      "correct_index": 1,
+      "explanation": "An SVI is a logical interface (like Interface Vlan 10) that allows a Layer 3 switch to route traffic between different VLANs by acting as the default gateway.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "L3_Switch",
+        "SVI",
+        "Routing"
+      ]
+    },
+    {
+      "id": "z2-g-010",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Weaver of Bonds",
+      "scenario": "A spider-like construct weaves multiple physical links into one logical path. It demands the name of the ancient standard.",
+      "question": "Which IEEE standard is specifically used for link aggregation and EtherChannel with LACP?",
+      "options": [
+        "802.1Q",
+        "802.11n",
+        "802.3ad",
+        "802.1X"
+      ],
+      "correct_index": 2,
+      "explanation": "IEEE 802.3ad is the standard for Link Aggregation (LAG), which allows multiple physical links to be combined into a single logical link for increased bandwidth and redundancy.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "EtherChannel",
+        "LACP",
+        "802.3ad"
+      ]
+    },
+    {
+      "id": "z2-g-011",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Voice of the Echo",
+      "scenario": "A ghostly voice echoes through the halls. To silence it, you must isolate the communication frequencies from the data stream.",
+      "question": "When connecting an IP phone to a switch port, which feature is used to separate voice traffic from data traffic?",
+      "options": [
+        "Voice VLAN",
+        "Trunking Mode",
+        "Spanning Tree Protocol",
+        "Port Security"
+      ],
+      "correct_index": 0,
+      "explanation": "A Voice VLAN allows a switch to identify and prioritize voice traffic (VoIP) over data traffic, often using a different subnet or priority level for the phone's traffic.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "VoIP",
+        "Voice_VLAN",
+        "QoS"
+      ]
+    },
+    {
+      "id": "z2-g-012",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Frame Watcher",
+      "scenario": "A mechanical eye tracks every frame passing through the switch. It demands to know how it remembers where they came from.",
+      "question": "What specific information does a switch examine to build its MAC address table?",
+      "options": [
+        "Destination IP address",
+        "Source MAC address of incoming frames",
+        "TTL (Time to Live) value",
+        "Frame Check Sequence (FCS)"
+      ],
+      "correct_index": 1,
+      "explanation": "A switch builds its MAC address table by looking at the source MAC address of an incoming frame. This allows it to know which port a specific device is connected to.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "Layer2",
+        "MAC_Table",
+        "Switching"
+      ]
+    },
+    {
+      "id": "z2-g-013",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Spectral Sentinel",
+      "scenario": "A shimmering barrier of high-frequency waves blocks the path. A spectral guardian demands you identify the correct standard to pass through the 5 GHz gate.",
+      "question": "Which 802.11 standard operates exclusively in the 5 GHz band and is also known as Wi-Fi 5?",
+      "options": [
+        "802.11g",
+        "802.11n",
+        "802.11ac",
+        "802.11ax"
+      ],
+      "correct_index": 2,
+      "explanation": "802.11ac (Wi-Fi 5) operates exclusively in the 5 GHz band. While 802.11n can operate on both 2.4 and 5 GHz, and 802.11ax (Wi-Fi 6) is the successor to ac.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "wireless",
+        "standards",
+        "802.11"
+      ]
+    },
+    {
+      "id": "z2-g-014",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Beacon of Identity",
+      "scenario": "A floating sigil flickers in the air with several names. To pass, you must identify the specific term for a wireless network's broadcast name.",
+      "question": "What is the broadcast name of a wireless network called?",
+      "options": [
+        "SSID",
+        "BSSID",
+        "MAC Address",
+        "Beacon Frame"
+      ],
+      "correct_index": 0,
+      "explanation": "SSID (Service Set Identifier) is the unique name assigned to a wireless network for identification by users.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "wireless",
+        "identification"
+      ]
+    },
+    {
+      "id": "z2-g-015",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Radiating Aegis",
+      "scenario": "A guardian stands atop a tower, its energy radiating in all directions to cover the valley. You must identify the antenna type that provides this 360-degree coverage.",
+      "question": "Which antenna type radiates signal in all directions?",
+      "options": [
+        "Directional",
+        "Patch",
+        "Omnidirectional",
+        "Yagi"
+      ],
+      "correct_index": 2,
+      "explanation": "An omnidirectional antenna radiates signals in all directions (360 degrees), making it ideal for general coverage areas.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "wireless",
+        "hardware",
+        "antennas"
+      ]
+    },
+    {
+      "id": "z2-g-016",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Peerless Pact",
+      "scenario": "Two rogue spirits are communicating directly with each other without a central hub or tower. They demand you name the mode that allows direct peer-to-peer connections.",
+      "question": "Which wireless network mode involves devices connecting directly to each other without an Access Point (AP)?",
+      "options": [
+        "Infrastructure Mode",
+        "Ad-hoc / IBSS",
+        "Mesh Mode",
+        "Repeater Mode"
+      ],
+      "correct_index": 1,
+      "explanation": "Ad-hoc mode (Independent Basic Service Set or IBSS) allows devices to communicate directly with each other without the need for a central Access Point.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "wireless",
+        "topology"
+      ]
+    },
+    {
+      "id": "z2-g-017",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Void of Silence",
+      "scenario": "You enter a cavern where the signal drops to zero and your HUD flickers red. A guardian mocks you for entering an area with no coverage.",
+      "question": "In a wireless site survey, what is the term for an area where the signal is too weak for reliable communication?",
+      "options": [
+        "Multipath",
+        "Dead zone",
+        "Attenuation",
+        "Interference"
+      ],
+      "correct_index": 1,
+      "explanation": "A dead zone (or coverage hole) is an area where the wireless signal is too weak to maintain a reliable connection due to distance or physical obstructions.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "wireless",
+        "site-survey"
+      ]
+    },
+    {
+      "id": "z2-g-019",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Remote Sentinel",
+      "scenario": "A remote outpost's server has frozen due to a logic loop. You cannot travel there physically to perform a manual reboot.",
+      "question": "What specific capability does a switched PDU provide to an administrator in this situation?",
+      "options": [
+        "Power cycle individual outlets",
+        "Increase port bandwidth",
+        "Assign static IP addresses",
+        "Configure VLAN tagging"
+      ],
+      "correct_index": 0,
+      "explanation": "A Switched Power Distribution Unit (PDU) allows administrators to remotely control and power cycle individual outlets, enabling the rebooting of equipment in remote locations without physical access.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "Power",
+        "Management"
+      ]
+    },
+    {
+      "id": "z2-g-020",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Heat of the Forge",
+      "scenario": "The server room's cooling fans are whining as the ambient temperature rises. The Guardian warns that heat is the primary enemy of silicon.",
+      "question": "Which environmental factor is most likely to cause hardware failure in a server room?",
+      "options": [
+        "High humidity",
+        "Overheating / high temperature",
+        "Dust accumulation",
+        "Electromagnetic interference"
+      ],
+      "correct_index": 1,
+      "explanation": "While dust and humidity are concerns, overheating/high temperature is the most immediate and common environmental factor leading to hardware failure in server environments.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "Environment",
+        "Hardware"
+      ]
+    },
+    {
+      "id": "z2-g-021",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Architect's Measure",
+      "scenario": "You are organizing the server racks in the central hub. You need to calculate how much vertical space each device will occupy.",
+      "question": "What is the standard unit of measurement for rack-mounted equipment height?",
+      "options": [
+        "RU",
+        "U",
+        "HU",
+        "MU"
+      ],
+      "correct_index": 1,
+      "explanation": "The 'U' (or Rack Unit) is the standard unit of measurement for the height of equipment in a rack, where 1U equals 1.75 inches.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "Infrastructure",
+        "Physical"
+      ]
+    },
+    {
+      "id": "z2-g-022",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Power Conduit",
+      "scenario": "You need to power a high-performance security camera at the gate. It requires more juice than standard PoE can provide.",
+      "question": "Which PoE standard is capable of providing up to 30W per port?",
+      "options": [
+        "802.3af",
+        "802.3at (PoE+)",
+        "802.11ax",
+        "802.3bz"
+      ],
+      "correct_index": 1,
+      "explanation": "The IEEE 802.3at standard, also known as PoE+, can provide up to 30W of power per port, making it suitable for devices like PTZ cameras or high-power VOIP phones.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "PoE",
+        "Power"
+      ]
+    },
+    {
+      "id": "z2-g-023",
+      "zone": 2,
+      "node": 2.0,
+      "type": "guardian",
+      "difficulty": "medium",
+      "title": "The Copper Path",
+      "scenario": "You are laying down the copper backbone through the tunnels. You must ensure the signal remains strong enough to reach the next hub.",
+      "question": "What is the maximum cable distance for Ethernet runs per the TIA/EIA-568 standard?",
+      "options": [
+        "100 meters (328 feet)",
+        "500 meters",
+        "1,000 meters",
+        "100 feet"
+      ],
+      "correct_index": 0,
+      "explanation": "The TIA/EIA-568 standard specifies a maximum length of 100 meters (328 feet) for Ethernet runs to ensure signal integrity and prevent degradation.",
+      "xp_reward": 100,
+      "bits_reward": 50,
+      "tags": [
+        "Cabling",
+        "Standards"
+      ]
     }
   ]
 }

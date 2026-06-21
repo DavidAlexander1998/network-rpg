@@ -1,4 +1,5 @@
 import os
+import random
 import time
 from typing import List, Optional, Dict, Any
 
@@ -13,7 +14,7 @@ from rich.columns import Columns
 
 from game.player import Player, XP_THRESHOLDS
 from game.encounter import Encounter
-from game.zone_manager import Zone, Node, ZoneManager, StudyCard
+from game.zone_manager import Zone, Node, ZoneManager, StudyCard, NODE_PASS_RATE, STREAK_REQUIRED
 from game.combat import CombatResult
 from ui.themes import GameTheme, Symbols, Styles, get_hp_color
 
@@ -95,7 +96,12 @@ def show_main_menu(player: Player) -> str:
         "Main Menu:",
         choices=[
             questionary.Choice("⚔   Story Mode     (zones unlock sequentially)", value="story"),
-            questionary.Choice("📚  Free Study      (all zones open — drill weak areas)", value="free"),
+            questionary.Choice("📚  Free Study      (all zones open — pick any node)", value="free"),
+            questionary.Choice("🎯  Weak Spot Drill (auto-targets your worst objectives)", value="drill"),
+            questionary.Choice("🧮  Subnetting Trainer (unlimited generated problems)", value="subnet"),
+            questionary.Choice("🧪  Hands-On Labs    (command terminal + drag-style PBQs)", value="labs"),
+            questionary.Choice("📝  Exam Simulator   (timed 90Q mock, scored 100-900)", value="exam"),
+            questionary.Choice("🗓   30-Day Plan     (what should I do today?)", value="plan"),
             questionary.Choice("🔤  Acronym Drill", value="acronym"),
             questionary.Choice("🖧   Field Exercises (CLI Drills & Topology)", value="field"),
             questionary.Choice("📊  Study Report", value="report"),
@@ -185,22 +191,31 @@ def show_node_map(zone: Zone, player: Player) -> Optional[float]:
         categorized[cat].append(node)
 
     choices = []
-    current_cat = None
-    
+
     for cat, nodes in categorized.items():
         # Add category header
         choices.append(questionary.Choice(f"[bold bright_blue]\n{cat}[/]", value=None, disabled=True))
-        
+
         for node in nodes:
             correct, total = node.get_completion_stats(player)
             completed = node.is_node_completed(player)
+            node_id_str = str(node.id)
 
             if completed:
                 icon = "[green]●[/]"
                 status = f"[green]DONE ({correct}/{total})[/]"
             else:
                 icon = "[bright_white]○[/]"
-                status = f"[dim]{correct}/{total} done[/]" if correct > 0 else "[dim]not started[/]"
+                if correct > 0:
+                    status = f"[dim]{correct}/{total} correct[/]"
+                    # If the pass rate is met but the streak gate isn't, say so —
+                    # otherwise a 70%+ node that won't complete looks like a bug.
+                    pass_rate_ok = total > 0 and (correct / total) >= NODE_PASS_RATE
+                    best_streak = player.node_streaks.get(node_id_str, 0)
+                    if pass_rate_ok and best_streak < STREAK_REQUIRED:
+                        status += f"  [yellow]needs {STREAK_REQUIRED}-in-a-row (best {best_streak})[/]"
+                else:
+                    status = "[dim]not started[/]"
 
             label = f"  {icon} {node.name[:45]:<45} {status}"
             choices.append(questionary.Choice(label, value=node.id))
@@ -479,6 +494,436 @@ def show_new_game_prompt() -> Optional[str]:
     return name.strip() if name else None
 
 
+# ---------------------------------------------------------------------------
+# Subnetting Trainer
+# ---------------------------------------------------------------------------
+
+def show_subnet_intro():
+    """Returns (count, mode) where mode is 'mc' or 'type', or None to cancel."""
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_cyan]🧮 SUBNETTING TRAINER[/]", style="bright_blue"))
+    console.print()
+    console.print("  [dim]Fresh randomized problems every time — network/broadcast addresses,[/]")
+    console.print("  [dim]usable hosts, masks, ranges. No HP risk. Build muscle memory.[/]")
+    console.print()
+    mode = questionary.select(
+        "Answer format?",
+        choices=[
+            questionary.Choice("⌨   Type the answer  (real calculation — recommended)", value="type"),
+            questionary.Choice("☰   Multiple choice  (recognition)", value="mc"),
+            questionary.Choice("← Back", value=None),
+        ],
+        style=_QSTYLE,
+    ).ask()
+    if mode is None:
+        return None
+    count = questionary.select(
+        "How many problems?",
+        choices=[
+            questionary.Choice("10 — quick warm-up", value=10),
+            questionary.Choice("20 — solid set", value=20),
+            questionary.Choice("50 — grind to fluency", value=50),
+            questionary.Choice("← Back", value=None),
+        ],
+        style=_QSTYLE,
+    ).ask()
+    if count is None:
+        return None
+    return (count, mode)
+
+
+def show_subnet_free(problem, num: int, total: int, hint: str) -> Optional[str]:
+    """Free-entry subnetting question. Returns the typed answer, or None to quit."""
+    clear()
+    console.print()
+    console.print(f"  [dim]Problem {num}/{total}[/]   [dim]({hint})[/]")
+    console.print()
+    console.print(Panel(
+        f"[bold bright_white]{problem.question}[/]",
+        border_style="bright_cyan", title="[bright_cyan]SUBNETTING[/]", padding=(1, 2),
+    ))
+    console.print()
+    ans = questionary.text("Your answer (or 'q' to stop):", style=_QSTYLE).ask()
+    if ans is None or ans.strip().lower() in ("q", "quit", "exit"):
+        return None
+    return ans
+
+
+def show_subnet_free_result(is_correct: bool, expected: str, explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ CORRECT[/]", border_style="green", title="[green]HIT[/]"))
+    else:
+        console.print(Panel(
+            f"[bold red]✗ NOT QUITE[/]\n\n[bright_white]Correct answer: {expected}[/]",
+            border_style="red", title="[red]MISS[/]",
+        ))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+# ---------------------------------------------------------------------------
+# Hands-On Labs: Command Lab (simulated terminal) + PBQ ordering/matching
+# ---------------------------------------------------------------------------
+
+def show_labs_menu() -> Optional[str]:
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]🧪 HANDS-ON LABS[/]", style="bright_magenta"))
+    console.print()
+    console.print("  [dim]Do the task instead of recognizing an answer — closest thing to the[/]")
+    console.print("  [dim]exam's performance-based questions (PBQs).[/]")
+    console.print()
+    return questionary.select(
+        "Choose a lab:",
+        choices=[
+            questionary.Choice("💻  Command Lab    — diagnose a broken network in a simulated terminal", value="command"),
+            questionary.Choice("🔀  PBQ Drills     — order steps / match items (drag-style)", value="pbq"),
+            questionary.Choice("← Back", value="back"),
+        ],
+        style=_QSTYLE,
+    ).ask()
+
+
+def show_command_lab_select(scenarios):
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]💻 COMMAND LAB[/]", style="bright_magenta"))
+    console.print()
+    choices = [questionary.Choice(f"{s.title}", value=s) for s in scenarios]
+    choices.append(questionary.Choice("← Back", value=None))
+    return questionary.select("Pick a scenario to troubleshoot:", choices=choices, style=_QSTYLE).ask()
+
+
+def show_command_lab_brief(scenario) -> None:
+    clear()
+    console.print()
+    console.print(Rule(f"[bold bright_magenta]💻 {scenario.title}[/]", style="bright_magenta"))
+    console.print()
+    console.print(Panel(f"[bright_white]{scenario.brief}[/]", border_style="yellow",
+                        title="[yellow]TICKET[/]", padding=(1, 2)))
+    console.print()
+    console.print("  [dim]Type commands to investigate. 'help' lists commands, "
+                  "'solve' to diagnose, 'quit' to leave.[/]")
+    console.print()
+
+
+def show_command_lab_help(scenario) -> None:
+    console.print()
+    console.print("  [bright_cyan]Commands you can try here:[/]")
+    for c in scenario.available:
+        console.print(f"    [bright_green]$[/] {c}")
+    console.print("    [dim]help · solve · quit[/]")
+    console.print()
+
+
+def command_lab_prompt(scenario) -> Optional[str]:
+    return questionary.text(f"{scenario.id}$", qmark="", style=_QSTYLE).ask()
+
+
+def show_command_output(cmd: str, output: str) -> None:
+    console.print()
+    console.print(f"  [bright_green]$ {cmd}[/]")
+    console.print(Panel(f"[white]{output}[/]", border_style="bright_black", padding=(0, 2)))
+
+
+def show_lab_question(question: str, options: List[str]) -> Optional[int]:
+    console.print()
+    console.print(Panel(f"[bold bright_white]{question}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]DIAGNOSIS[/]", padding=(1, 2)))
+    labels = ["A", "B", "C", "D", "E"]
+    choices = [questionary.Choice(f"  [{labels[i]}]  {o}", value=i) for i, o in enumerate(options)]
+    return questionary.select("Your diagnosis:", choices=choices, style=_QSTYLE).ask()
+
+
+def show_lab_answer(is_correct: bool, correct_text: str, explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ CORRECT DIAGNOSIS[/]", border_style="green", title="[green]SOLVED[/]"))
+    else:
+        console.print(Panel(f"[bold red]✗ NOT THE ROOT CAUSE[/]\n\n[bright_white]Correct: {correct_text}[/]",
+                            border_style="red", title="[red]MISS[/]"))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_pbq_menu() -> Optional[str]:
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_magenta]🔀 PBQ DRILLS[/]", style="bright_magenta"))
+    console.print()
+    return questionary.select(
+        "Task type:",
+        choices=[
+            questionary.Choice("🔢  Ordering   — put steps/layers in the right sequence", value="order"),
+            questionary.Choice("🔗  Matching   — match items to their pair", value="match"),
+            questionary.Choice("← Back", value="back"),
+        ],
+        style=_QSTYLE,
+    ).ask()
+
+
+def pick_pbq(tasks, prompt: str):
+    choices = [questionary.Choice(t.prompt, value=t) for t in tasks]
+    choices.append(questionary.Choice("← Back", value=None))
+    return questionary.select(prompt, choices=choices, style=_QSTYLE).ask()
+
+
+def run_ordering_task(task) -> Optional[List[str]]:
+    """Build an order by picking each position from the remaining items."""
+    clear()
+    console.print()
+    console.print(Panel(f"[bold bright_white]{task.prompt}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]ORDER THE STEPS[/]", padding=(1, 2)))
+    remaining = list(task.ordered)
+    random.shuffle(remaining)
+    chosen: List[str] = []
+    for position in range(1, len(task.ordered) + 1):
+        choices = [questionary.Choice(item, value=item) for item in remaining]
+        choices.append(questionary.Choice("✗ Cancel", value=None))
+        pick = questionary.select(f"Position {position}:", choices=choices, style=_QSTYLE).ask()
+        if pick is None:
+            return None
+        chosen.append(pick)
+        remaining.remove(pick)
+    return chosen
+
+
+def show_pbq_result(is_correct: bool, correct_order: List[str], explanation: str) -> None:
+    console.print()
+    if is_correct:
+        console.print(Panel("[bold bright_green]✓ PERFECT ORDER[/]", border_style="green", title="[green]CORRECT[/]"))
+    else:
+        body = "[bold red]✗ Not quite.[/] [bright_white]Correct order:[/]\n\n" + \
+            "\n".join(f"  [bright_green]{i}.[/] {s}" for i, s in enumerate(correct_order, 1))
+        console.print(Panel(body, border_style="red", title="[red]REVIEW[/]", padding=(1, 2)))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def run_matching_task(task):
+    """For each left item, pick its match from the (shuffled) right options.
+
+    Returns (all_correct, num_right, total) or None if cancelled.
+    """
+    clear()
+    console.print()
+    console.print(Panel(f"[bold bright_white]{task.prompt}[/]", border_style="bright_cyan",
+                        title="[bright_cyan]MATCH THE PAIRS[/]", padding=(1, 2)))
+    rights = [r for _l, r in task.pairs]
+    shuffled = list(rights)
+    random.shuffle(shuffled)
+    n_right = 0
+    for left, correct_right in task.pairs:
+        choices = [questionary.Choice(r, value=r) for r in shuffled]
+        choices.append(questionary.Choice("✗ Cancel", value=None))
+        pick = questionary.select(f"{left}  →", choices=choices, style=_QSTYLE).ask()
+        if pick is None:
+            return None
+        if pick == correct_right:
+            n_right += 1
+    return (n_right == len(task.pairs), n_right, len(task.pairs))
+
+
+def show_pbq_match_result(is_correct: bool, n_right: int, total: int, pairs, explanation: str) -> None:
+    console.print()
+    color = "green" if is_correct else "red"
+    head = "✓ ALL MATCHED" if is_correct else f"✗ {n_right}/{total} correct"
+    console.print(Panel(f"[bold bright_{color}]{head}[/]", border_style=color, title=f"[{color}]RESULT[/]"))
+    if not is_correct:
+        body = "[bright_white]Correct pairs:[/]\n\n" + \
+            "\n".join(f"  [bright_green]{l}[/] → {r}" for l, r in pairs)
+        console.print(Panel(body, border_style="bright_black", padding=(1, 2)))
+    console.print(Panel(f"[bright_blue]{explanation}[/]", border_style="bright_blue", padding=(1, 2)))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_subnet_summary(correct: int, total: int) -> None:
+    console.print()
+    if total == 0:
+        return
+    pct = int(correct / total * 100)
+    color = "bright_green" if pct >= 80 else ("yellow" if pct >= 60 else "red")
+    console.print(Panel(
+        f"[bold {color}]Subnetting set complete — {correct}/{total} correct ({pct}%)[/]\n"
+        f"[dim]Aim for 90%+ before exam day; subnetting points are guaranteed if you're fluent.[/]",
+        border_style=color,
+        title="[bold]🧮 RESULTS[/]",
+    ))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+# ---------------------------------------------------------------------------
+# Exam Simulator
+# ---------------------------------------------------------------------------
+
+def show_exam_intro() -> bool:
+    from game import exam
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_red]📝 EXAM SIMULATOR[/]", style="bright_red"))
+    console.print()
+    console.print(Panel(
+        f"[bright_white]{exam.EXAM_QUESTIONS} questions • {exam.EXAM_MINUTES} minute clock • "
+        f"scored {exam.SCALE_MIN}–{exam.SCALE_MAX} ({exam.PASS_SCORE} to pass)[/]\n\n"
+        "[dim]Questions are domain-weighted like the real N10-009. No answers or\n"
+        "explanations shown until the end — just like the real thing. Your answers\n"
+        "still feed weak-spot tracking. Treat it like the real exam: no notes.[/]",
+        border_style="bright_red",
+        title="[bright_red]MOCK EXAM[/]",
+    ))
+    console.print()
+    confirm = questionary.confirm("Start the timed exam now?", default=False, style=_QSTYLE).ask()
+    return bool(confirm)
+
+
+def _fmt_clock(seconds: float) -> str:
+    m, s = divmod(int(seconds), 60)
+    return f"{m:02d}:{s:02d}"
+
+
+def show_exam_question(encounter: Encounter, player: Player, num: int, total: int,
+                       seconds_remaining: float) -> Optional[int]:
+    clear()
+    time_color = "bright_green" if seconds_remaining > 600 else (
+        "yellow" if seconds_remaining > 120 else "bright_red")
+    console.print()
+    console.print(
+        f"  [dim]Question {num}/{total}[/]        "
+        f"[{time_color}]⏱  {_fmt_clock(seconds_remaining)} remaining[/]"
+    )
+    console.print()
+    console.print(Panel(
+        f"[bold bright_white]{encounter.question}[/]",
+        border_style="bright_cyan",
+        title="[bright_cyan]EXAM QUESTION[/]",
+        padding=(1, 2),
+    ))
+    console.print()
+    option_labels = ["A", "B", "C", "D"]
+    choices = [
+        questionary.Choice(f"  [{option_labels[i]}]  {opt}", value=i)
+        for i, opt in enumerate(encounter.options)
+    ]
+    return questionary.select("Your answer:", choices=choices, style=_QSTYLE).ask()
+
+
+def show_exam_result(result, zone_manager: ZoneManager) -> None:
+    from game import exam
+    clear()
+    console.print()
+    console.print(Rule("[bold bright_red]📝 EXAM RESULTS[/]", style="bright_red"))
+    console.print()
+
+    verdict_color = "bright_green" if result.passed else "red"
+    verdict = "PASS ✓" if result.passed else "FAIL ✗"
+    over = "  [bright_red](over the {0}-min limit)[/]".format(exam.EXAM_MINUTES) if result.over_time else ""
+    console.print(Panel(
+        f"[bold {verdict_color}]{verdict}   Scaled score: {result.score} / {exam.SCALE_MAX}[/]\n"
+        f"[bright_white]{result.correct}/{result.total} correct ({result.accuracy_pct:.0f}%)[/]   "
+        f"[dim]Pass line: {exam.PASS_SCORE}[/]\n"
+        f"[dim]Time: {_fmt_clock(result.seconds)}{over}[/]",
+        border_style=verdict_color,
+        title="[bold]VERDICT[/]",
+    ))
+    console.print(
+        "  [dim]Scaled score is a linear estimate of CompTIA's scale — treat it as a "
+        "guide, not a guarantee.[/]"
+    )
+    console.print()
+
+    dt = Table(title="Score by Domain", title_style="bold bright_cyan")
+    dt.add_column("Domain", style="white")
+    dt.add_column("Score", style="white")
+    dt.add_column("Bar", style="white")
+    for zone_num, d in sorted(result.per_domain.items()):
+        pct = int(d["correct"] / d["total"] * 100) if d["total"] else 0
+        c = "bright_green" if pct >= 80 else ("yellow" if pct >= 70 else "red")
+        bar = "█" * (pct // 10) + "░" * (10 - pct // 10)
+        dt.add_row(
+            exam.DOMAIN_NAMES.get(zone_num, str(zone_num)),
+            f"[{c}]{d['correct']}/{d['total']} ({pct}%)[/]",
+            f"[{c}]{bar}[/]",
+        )
+    console.print(dt)
+    console.print()
+
+    weakest = min(result.per_domain.items(),
+                  key=lambda kv: (kv[1]["correct"] / kv[1]["total"]) if kv[1]["total"] else 1.0,
+                  default=None)
+    if weakest and weakest[1]["total"]:
+        wpct = int(weakest[1]["correct"] / weakest[1]["total"] * 100)
+        if wpct < 80:
+            console.print(
+                f"  [yellow]➜ Focus next: {exam.DOMAIN_NAMES.get(weakest[0])} "
+                f"({wpct}%). Run Weak Spot Drill on it.[/]"
+            )
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_study_plan(player: Player) -> None:
+    """Show today's plan + let the player browse the full 30-day schedule."""
+    from game import study_plan
+
+    view_day = study_plan.current_day(player.start_date)
+    while True:
+        clear()
+        show_header(player)
+        console.print()
+        console.print(Rule("[bold bright_cyan]🗓  30-DAY STUDY PLAN[/]", style="bright_blue"))
+        console.print()
+
+        today = study_plan.current_day(player.start_date)
+        remaining = study_plan.days_until_exam(player.start_date)
+        if today <= study_plan.PLAN_LENGTH:
+            rc = "bright_green" if remaining > 10 else ("yellow" if remaining > 3 else "bright_red")
+            console.print(
+                f"  [dim]Today is[/] [bold]Day {today}[/] [dim]of {study_plan.PLAN_LENGTH}[/]   "
+                f"[{rc}]{max(0, remaining - 1)} days left until exam day[/]"
+            )
+        else:
+            console.print(f"  [bright_green]You're past Day {study_plan.PLAN_LENGTH} — exam time! Keep drilling weak spots.[/]")
+        console.print()
+
+        plan = study_plan.get_day(view_day)
+        if plan:
+            tag = " [bright_yellow](TODAY)[/]" if view_day == today else ""
+            console.print(Panel(
+                f"[bold bright_white]Day {plan['day']} — {plan['focus']}[/]{tag}\n"
+                f"[dim]Phase: {plan['phase']}  •  Week {study_plan.week_of(view_day)}[/]\n\n"
+                + "\n".join(f"  [bright_green]☐[/] {t}" for t in plan["tasks"]),
+                border_style="bright_cyan" if view_day == today else "bright_blue",
+                padding=(1, 2),
+            ))
+        console.print()
+
+        nav = []
+        if view_day > 1:
+            nav.append(questionary.Choice("← Previous day", value="prev"))
+        if view_day < study_plan.PLAN_LENGTH:
+            nav.append(questionary.Choice("Next day →", value="next"))
+        if view_day != today and today <= study_plan.PLAN_LENGTH:
+            nav.append(questionary.Choice("⊙  Jump to today", value="today"))
+        nav.append(questionary.Choice("↩  Back to menu", value="back"))
+
+        action = questionary.select(f"Day {view_day}:", choices=nav, style=_QSTYLE).ask()
+        if action in (None, "back"):
+            return
+        elif action == "prev":
+            view_day = max(1, view_day - 1)
+        elif action == "next":
+            view_day = min(study_plan.PLAN_LENGTH, view_day + 1)
+        elif action == "today":
+            view_day = min(study_plan.PLAN_LENGTH, today)
+
+
 def show_study_report(player: Player, zone_manager: ZoneManager) -> None:
     clear()
     show_header(player)
@@ -546,6 +991,96 @@ def show_study_report(player: Player, zone_manager: ZoneManager) -> None:
         if sr_count:
             console.print(f"  [yellow]{sr_count} questions queued for spaced repetition review[/]")
 
+    _show_mastery_breakdown(player, zone_manager)
+
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def _show_mastery_breakdown(player: Player, zone_manager: ZoneManager) -> None:
+    """Readiness summary + the objectives most in need of work."""
+    from game import mastery
+
+    rd = mastery.overall_readiness(player, zone_manager)
+    console.print()
+    m_color = "bright_green" if rd["mastery_pct"] >= 80 else ("yellow" if rd["mastery_pct"] >= 50 else "red")
+    console.print(
+        f"  [bold]Exam readiness:[/] [{m_color}]{rd['mastery_pct']:.0f}% mastered[/]  "
+        f"[dim]({rd['learned']}/{rd['total_questions']} questions learned • "
+        f"{rd['coverage_pct']:.0f}% seen • {rd['accuracy_pct']:.0f}% lifetime accuracy)[/]"
+    )
+
+    weak = mastery.weak_objectives(player, zone_manager, limit=6)
+    if not weak:
+        console.print("  [dim]Answer more questions to reveal your weak spots.[/]")
+        return
+
+    console.print()
+    wt = Table(title="🎯 Your Weakest Objectives — drill these first", title_style="bold yellow")
+    wt.add_column("Zone", style="bright_white")
+    wt.add_column("Objective", style="white")
+    wt.add_column("Accuracy", style="white")
+    wt.add_column("Mastered", style="white")
+    for s in weak:
+        acc = int(s.accuracy * 100)
+        acc_color = "red" if acc < 70 else "yellow"
+        wt.add_row(
+            f"Z{s.zone}", s.name,
+            f"[{acc_color}]{acc}%[/]",
+            f"[dim]{s.learned}/{s.total_questions}[/]",
+        )
+    console.print(wt)
+
+
+def show_drill_intro(player: Player, zone_manager: ZoneManager, count: int) -> None:
+    from game import mastery
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule("[bold yellow]🎯 WEAK SPOT DRILL[/]", style="yellow"))
+    console.print()
+    weak = mastery.weak_objectives(player, zone_manager, limit=3)
+    if weak:
+        names = ", ".join(s.name for s in weak)
+        console.print(f"  Targeting your weakest objectives: [yellow]{names}[/]")
+    console.print(
+        f"  [dim]{count} questions queued — recently-missed and not-yet-mastered first.[/]"
+    )
+    console.print(f"  [dim]No HP risk here — this is pure study.[/]")
+    console.print()
+    input("  Press Enter to begin...")
+
+
+def show_drill_empty(player: Player, zone_manager: ZoneManager) -> None:
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule("[bold yellow]🎯 WEAK SPOT DRILL[/]", style="yellow"))
+    console.print()
+    console.print(
+        "  [bright_green]Nothing to drill right now — every question you've seen is "
+        "mastered![/]\n"
+        "  [dim]Play Story or Free Study to expose new questions, then come back.[/]"
+    )
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_drill_summary(correct: int, total: int, player: Player, zone_manager: ZoneManager) -> None:
+    from game import mastery
+    console.print()
+    pct = int(correct / total * 100) if total else 0
+    color = "bright_green" if pct >= 80 else ("yellow" if pct >= 60 else "red")
+    console.print(Panel(
+        f"[bold {color}]Drill complete — {correct}/{total} correct ({pct}%)[/]",
+        border_style=color,
+        title="[bold]🎯 RESULTS[/]",
+    ))
+    rd = mastery.overall_readiness(player, zone_manager)
+    console.print(
+        f"  [dim]Overall mastery now: {rd['mastery_pct']:.0f}% "
+        f"({rd['learned']}/{rd['total_questions']} questions learned)[/]"
+    )
     console.print()
     input("  Press Enter to continue...")
 

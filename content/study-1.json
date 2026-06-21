@@ -389,6 +389,17 @@
         "Port 587 = SMTP with authentication (for email clients, not relay).",
         "IMAP keeps email on server (sync), POP3 downloads and deletes."
       ]
+    },
+    {
+      "title": "Essential Port Numbers (memorize cold)",
+      "type": "mnemonic",
+      "body": "Guaranteed exam points — drill until automatic:\n\n  20/21 FTP    22 SSH/SFTP/SCP   23 Telnet    25 SMTP\n  53 DNS       67/68 DHCP        69 TFTP      80 HTTP\n  110 POP3     123 NTP           143 IMAP     161/162 SNMP\n  389 LDAP     443 HTTPS         445 SMB      636 LDAPS\n  514 Syslog   3389 RDP          1433 MS-SQL  3306 MySQL",
+      "key_points": [
+        "SSH=22 — SFTP and SCP ride on 22 too. Telnet=23 is its insecure twin.",
+        "Secure swaps: HTTP 80->HTTPS 443, LDAP 389->LDAPS 636, FTP->FTPS 990.",
+        "DHCP: 67 server / 68 client.  SNMP: 161 queries / 162 traps.",
+        "RDP=3389 (Microsoft).  Syslog=UDP 514.  NTP=123."
+      ]
     }
   ],
   "1.4": [

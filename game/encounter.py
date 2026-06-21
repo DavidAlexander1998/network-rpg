@@ -1,3 +1,4 @@
+import random
 from typing import List, Dict, Any, Optional
 
 
@@ -39,7 +40,7 @@ class Encounter:
 
         self.id: str = id
         self.question: str = question
-        self.options: List[str] = options
+        self.options: List[str] = list(options)
         self.correct_index: int = correct_index
         self.explanation: str = explanation
         self.xp_reward: int = xp_reward
@@ -60,6 +61,18 @@ class Encounter:
 
         # topology_encounter field (rendered above a normal multiple-choice question)
         self.ascii_diagram: str = ascii_diagram
+
+    def shuffle_options(self) -> None:
+        """Randomize option order and re-point correct_index.
+
+        The source content has a heavy answer-position bias (~73% of correct
+        answers sit at index 1). Shuffling at load time forces the player to
+        read every option instead of pattern-matching a position, which is how
+        the real exam presents answers.
+        """
+        correct_answer = self.options[self.correct_index]
+        random.shuffle(self.options)
+        self.correct_index = self.options.index(correct_answer)
 
     def check_answer(self, selected_index: int) -> bool:
         if not (0 <= selected_index < len(self.options)):
@@ -97,7 +110,7 @@ class Encounter:
         return self.options[self.correct_index]
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "Encounter":
+    def from_dict(cls, data: Dict[str, Any], shuffle: bool = True) -> "Encounter":
         encounter_type = data.get("type", "mob")
         if encounter_type == CLI_ENCOUNTER:
             required = ["id", "scenario", "objective", "correct_answers", "explanation"]
@@ -106,7 +119,7 @@ class Encounter:
         for key in required:
             if key not in data:
                 raise KeyError(f"Missing required key: {key}")
-        return cls(
+        enc = cls(
             id=data["id"],
             question=data.get("question", data.get("scenario", "")),
             options=data.get("options", []),
@@ -127,6 +140,9 @@ class Encounter:
             hint=data.get("hint", ""),
             ascii_diagram=data.get("ascii_diagram", ""),
         )
+        if shuffle and encounter_type != CLI_ENCOUNTER:
+            enc.shuffle_options()
+        return enc
 
     def to_dict(self) -> Dict[str, Any]:
         base: Dict[str, Any] = {

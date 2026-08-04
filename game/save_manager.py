@@ -113,6 +113,10 @@ class SaveManager:
             "attempts": player.attempts,
             "start_date": player.start_date,
             "free_study_mode": player.free_study_mode,
+            "last_study_date": player.last_study_date,
+            "streak_days": player.streak_days,
+            "longest_streak": player.longest_streak,
+            "daily_question_cap": player.daily_question_cap,
         }
 
     def _dict_to_player(self, data: Dict[str, Any]) -> Player:
@@ -132,4 +136,8 @@ class SaveManager:
         player.attempts = data.get("attempts", {})
         player.start_date = data.get("start_date", player.start_date)
         player.free_study_mode = data.get("free_study_mode", False)
+        player.last_study_date = data.get("last_study_date", "")
+        player.streak_days = data.get("streak_days", 0)
+        player.longest_streak = data.get("longest_streak", 0)
+        player.daily_question_cap = data.get("daily_question_cap", 20)
         return player

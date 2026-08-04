@@ -69,6 +69,7 @@ def show_header(player: Player) -> None:
     xp_needed = player._xp_for_next_level()
     hp_color = get_hp_color(player.hp, player.max_hp)
     mode_tag = "[bright_yellow]FREE STUDY[/]" if player.free_study_mode else "[dim white]STORY[/]"
+    streak_tag = f"  [bright_red]🔥 Streak: {player.streak_days}[/]" if player.streak_days > 0 else ""
 
     header = (
         f"[bold bright_cyan]{player.name}[/]  "
@@ -77,6 +78,7 @@ def show_header(player: Player) -> None:
         f"XP: {_xp_bar(player.xp, xp_needed)} [bright_cyan]{player.xp}/{xp_needed}[/]  "
         f"[bright_green]💰 {player.bits} BITS[/]  "
         f"{mode_tag}"
+        f"{streak_tag}"
     )
     console.print(Panel(header, border_style="bright_blue", padding=(0, 1)))
 
@@ -95,6 +97,7 @@ def show_main_menu(player: Player) -> str:
     choice = questionary.select(
         "Main Menu:",
         choices=[
+            questionary.Choice("📅  Daily Study     (today's capped session — build your streak)", value="daily"),
             questionary.Choice("⚔   Story Mode     (zones unlock sequentially)", value="story"),
             questionary.Choice("📚  Free Study      (all zones open — pick any node)", value="free"),
             questionary.Choice("🎯  Weak Spot Drill (auto-targets your worst objectives)", value="drill"),
@@ -492,6 +495,81 @@ def show_new_game_prompt() -> Optional[str]:
         style=_QSTYLE,
     ).ask()
     return name.strip() if name else None
+
+
+# ---------------------------------------------------------------------------
+# Daily Study
+# ---------------------------------------------------------------------------
+
+def show_daily_intro(console: Console, player: Player, question_count: int) -> None:
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule("[bold bright_cyan]📅 DAILY STUDY[/]", style="bright_blue"))
+    console.print()
+    if player.streak_days > 0:
+        streak_line = (
+            f"[bright_red]🔥 Current streak: {player.streak_days} day(s)[/]  "
+            f"[dim](longest: {player.longest_streak})[/]"
+        )
+    else:
+        streak_line = "[dim]Start your streak today![/]"
+    console.print(f"  Welcome back, [bold bright_cyan]{player.name}[/]. {streak_line}")
+    console.print(
+        f"  [dim]{question_count} questions queued (daily cap: {player.daily_question_cap}).[/]"
+    )
+    console.print(
+        "  [dim]HP works like hearts — wrong answers cost HP, hitting 0 ends the session early.[/]"
+    )
+    console.print()
+    input("  Press Enter to begin today's session...")
+
+
+def show_daily_already_done(console: Console, player: Player) -> None:
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule("[bold bright_cyan]📅 DAILY STUDY[/]", style="bright_blue"))
+    console.print()
+    console.print(Panel(
+        f"[bold bright_green]✓ Already done for today![/]\n\n"
+        f"[bright_red]🔥 Streak: {player.streak_days} day(s)[/]  "
+        f"[dim](longest: {player.longest_streak})[/]\n\n"
+        f"[dim]Come back tomorrow to keep your streak alive.[/]",
+        border_style="bright_green",
+        title="[green]DAILY STUDY[/]",
+        padding=(1, 2),
+    ))
+    console.print()
+    input("  Press Enter to continue...")
+
+
+def show_daily_summary(console: Console, player: Player, results: Dict[str, Any]) -> None:
+    clear()
+    show_header(player)
+    console.print()
+    console.print(Rule("[bold bright_cyan]📅 DAILY STUDY COMPLETE[/]", style="bright_blue"))
+    console.print()
+
+    attempted = results.get("attempted", 0)
+    correct = results.get("correct", 0)
+    pct = int(correct / attempted * 100) if attempted else 0
+    color = "bright_green" if pct >= 80 else ("yellow" if pct >= 60 else "red")
+    hp_lost = results.get("hp_lost", 0)
+
+    console.print(Panel(
+        f"[bold {color}]{correct}/{attempted} correct ({pct}%)[/]\n\n"
+        f"[bright_yellow]+{results.get('xp_gained', 0)} XP[/]  "
+        f"[bright_green]+{results.get('bits_gained', 0)} BITS[/]"
+        + (f"  [red]-{hp_lost} HP[/]" if hp_lost else "")
+        + f"\n\n[bright_red]🔥 Streak: {player.streak_days} day(s)[/]  "
+        f"[dim](longest: {player.longest_streak})[/]",
+        border_style=color,
+        title="[bold]DAILY STUDY RESULTS[/]",
+        padding=(1, 2),
+    ))
+    console.print()
+    input("  Press Enter to continue...")
 
 
 # ---------------------------------------------------------------------------

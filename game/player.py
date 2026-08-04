@@ -36,6 +36,11 @@ class Player:
         # ISO date (YYYY-MM-DD) the player started — anchors the 30-day study plan.
         self.start_date: Optional[str] = date.today().isoformat()
         self.free_study_mode: bool = False
+        # ISO date (YYYY-MM-DD) of the last completed Daily Study session.
+        self.last_study_date: str = ""
+        self.streak_days: int = 0
+        self.longest_streak: int = 0
+        self.daily_question_cap: int = 20
 
     def _xp_for_next_level(self) -> int:
         idx = min(self.level - 1, len(XP_THRESHOLDS) - 1)
@@ -94,6 +99,29 @@ class Player:
     def record_node_streak(self, node_id: str, streak: int) -> None:
         if streak > self.node_streaks.get(node_id, 0):
             self.node_streaks[node_id] = streak
+
+    def record_daily_session(self, question_count: int, correct_count: int) -> None:
+        today = date.today()
+        if self.last_study_date:
+            try:
+                last = date.fromisoformat(self.last_study_date)
+                delta = (today - last).days
+            except ValueError:
+                delta = None
+        else:
+            delta = None
+
+        if delta == 1:
+            self.streak_days += 1
+        elif delta == 0:
+            pass
+        else:
+            self.streak_days = 1
+
+        if self.streak_days > self.longest_streak:
+            self.longest_streak = self.streak_days
+
+        self.last_study_date = today.isoformat()
 
     def is_alive(self) -> bool:
         return self.hp > 0

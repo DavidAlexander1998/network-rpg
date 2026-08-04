@@ -6,6 +6,7 @@ import sys
 import signal
 import json
 import random
+from datetime import date
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
@@ -301,7 +302,9 @@ def _main_loop(player: Player) -> None:
     while True:
         choice = screens.show_main_menu(player)
 
-        if choice == "story":
+        if choice == "daily":
+            _daily_study_session(player, _save_manager, _zone_manager)
+        elif choice == "story":
             _story_mode(player)
         elif choice == "free":
             _free_study_mode(player)
@@ -366,6 +369,59 @@ def _run_drill_set(player: Player, encounters: List[Encounter], label: str) -> N
             old_level = player.level
 
 
+def _run_study_queue(player: Player, queue: List[Encounter], console) -> Dict[str, Any]:
+    """Run a flat list of encounters as a single study session, tracking outcomes.
+
+    Shared by Weak Spot Drill and Daily Study — callers decide free_study_mode
+    (HP risk) before invoking this and handle saving/summary after.
+    """
+    attempted = 0
+    correct = 0
+    xp_gained = 0
+    bits_gained = 0
+    hp_lost = 0
+    old_level = player.level
+
+    for idx, encounter in enumerate(queue):
+        if not player.is_alive():
+            break
+
+        if encounter.encounter_type == "cli_encounter":
+            answer = screens.show_cli_encounter(encounter, player, question_num=idx + 1, total=len(queue))
+            if answer is None:
+                break
+            result = Combat(player, encounter).process_cli_answer(answer)
+        else:
+            selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(queue))
+            if selected is None:
+                break
+            result = Combat(player, encounter).process_answer(selected)
+
+        attempted += 1
+        xp_gained += result.xp_gained
+        bits_gained += result.bits_gained
+        hp_lost += result.hp_lost
+        if result.is_correct:
+            correct += 1
+            _sr.record_success(encounter.id)
+        else:
+            _sr.add_failed(encounter.id)
+
+        screens.show_combat_result(result, player)
+
+        if player.level > old_level:
+            screens.show_level_up(player, old_level)
+            old_level = player.level
+
+    return {
+        "attempted": attempted,
+        "correct": correct,
+        "xp_gained": xp_gained,
+        "bits_gained": bits_gained,
+        "hp_lost": hp_lost,
+    }
+
+
 def _weak_spot_drill(player: Player) -> None:
     """Adaptive drill — serves the questions the player most needs right now."""
     from game import mastery
@@ -382,30 +438,45 @@ def _weak_spot_drill(player: Player) -> None:
     # Drilling is low-stakes study: no HP damage on misses.
     prev_free = player.free_study_mode
     player.free_study_mode = True
-    correct = 0
-    old_level = player.level
     try:
-        for idx, encounter in enumerate(queue):
-            selected = screens.show_encounter(encounter, player, question_num=idx + 1, total=len(queue))
-            if selected is None:
-                break
-            result = Combat(player, encounter).process_answer(selected)
-            if result.is_correct:
-                correct += 1
-                _sr.record_success(encounter.id)
-            else:
-                _sr.add_failed(encounter.id)
-            screens.show_combat_result(result, player)
-            if player.level > old_level:
-                screens.show_level_up(player, old_level)
-                old_level = player.level
+        results = _run_study_queue(player, queue, screens.console)
     finally:
         player.free_study_mode = prev_free
 
     if _current_slot:
         _save_manager.save(player, _current_slot)
 
-    screens.show_drill_summary(correct, len(queue), player, _zone_manager)
+    screens.show_drill_summary(results["correct"], len(queue), player, _zone_manager)
+
+
+def _daily_study_session(player: Player, save_manager: SaveManager, zone_manager: ZoneManager) -> None:
+    """Capped daily session — builds a streak; HP behaves like hearts/lives (risk stays on)."""
+    from game import mastery
+
+    if player.last_study_date == date.today().isoformat():
+        screens.show_daily_already_done(screens.console, player)
+        return
+
+    queue = mastery.build_drill_queue(player, zone_manager, limit=player.daily_question_cap)
+    if not queue:
+        screens.show_drill_empty(player, zone_manager)
+        return
+
+    screens.show_daily_intro(screens.console, player, len(queue))
+
+    prev_free = player.free_study_mode
+    player.free_study_mode = False
+    try:
+        results = _run_study_queue(player, queue, screens.console)
+    finally:
+        player.free_study_mode = prev_free
+
+    player.record_daily_session(results["attempted"], results["correct"])
+
+    if _current_slot:
+        save_manager.save(player, _current_slot)
+
+    screens.show_daily_summary(screens.console, player, results)
 
 
 def _field_exercises(player: Player) -> None:
